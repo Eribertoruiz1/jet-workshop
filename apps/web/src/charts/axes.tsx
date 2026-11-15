@@ -53,6 +53,47 @@ export function niceTicks(lo: number, hi: number, approx: number): number[] {
   return out;
 }
 
+/** One sample of the model band: the lowest and highest of the parasite variants, and the model's validity there. */
+export interface BandSample {
+  min: number;
+  max: number;
+  valid: boolean;
+  /** Beyond Lock's own limit: not drawn at all */
+  beyondLock: boolean;
+}
+
+/**
+ * Split band samples into runs to draw: valid (flat fill) and outside the
+ * model's range (hatched). Samples beyond Lock's limit, or not computed, end a
+ * run and are not drawn. Neighbouring runs share their end sample, so the fill
+ * has no gap where the model leaves its range.
+ */
+export function bandRuns<T extends BandSample>(samples: T[]): { valid: boolean; points: T[] }[] {
+  const out: { valid: boolean; points: T[] }[] = [];
+  let prev: T | null = null;
+  for (const s of samples) {
+    const drawn = !s.beyondLock && Number.isFinite(s.min) && Number.isFinite(s.max);
+    if (!drawn) {
+      prev = null;
+      continue;
+    }
+    const last = out.at(-1);
+    if (prev && last && last.valid === s.valid) last.points.push(s);
+    else out.push({ valid: s.valid, points: prev ? [prev, s] : [s] });
+    prev = s;
+  }
+  return out.filter((r) => r.points.length > 1);
+}
+
+/** Diagonal hatching in the stop colour: the model drawn where it is outside its range. */
+export function HatchPattern({ id }: { id: string }) {
+  return (
+    <pattern id={id} width={6} height={6} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1={0} y1={0} x2={0} y2={6} stroke="var(--stop)" strokeWidth={1} strokeOpacity={0.55} />
+    </pattern>
+  );
+}
+
 /** Hollow measured symbol with error bars, in ink, as on a NACA figure. */
 export function MeasuredMark({ x, y, ex0, ex1, ey0, ey1, title }: { x: number; y: number; ex0?: number; ex1?: number; ey0: number; ey1: number; title: string }) {
   return (

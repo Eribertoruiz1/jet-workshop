@@ -1,17 +1,16 @@
 import { useMemo, useState } from "react";
 import {
   bielatWing,
-  kornMasonLock,
   liftCurveSlope,
   matchTestedWing,
   type TestedWingId,
   type WingBody,
 } from "@jet-workshop/physics";
-import { modelLimitMach, reliability } from "@jet-workshop/validation";
+import { kornMasonLockBand, modelLimitMach, reliability } from "@jet-workshop/validation";
 import { loadBundledData } from "./data.ts";
 import { Planform } from "./Planform.tsx";
-import { DragMachChart, type CurvePoint } from "./charts/DragMachChart.tsx";
-import { LiftChart, PolarChart, type LiftCurvePoint, type PolarCurvePoint } from "./charts/SmallCharts.tsx";
+import { DragMachChart, type MachBandPoint } from "./charts/DragMachChart.tsx";
+import { LiftChart, PolarChart, type LiftCurvePoint, type PolarBandPoint } from "./charts/SmallCharts.tsx";
 
 const DATA = loadBundledData();
 const TESTED: { id: TestedWingId; label: string }[] = [
@@ -38,35 +37,40 @@ export function App() {
   const data = DATA.ok ? DATA.data : null;
 
   const view = useMemo(() => {
-    const curve: CurvePoint[] = [];
+    const band: MachBandPoint[] = [];
     for (let m = 0.5; m <= 1.15 + 1e-9; m += 0.0025) {
-      const r = kornMasonLock(wing, { mach: m, cl });
-      curve.push({ mach: m, cd: r.cd, valid: r.valid });
+      const r = kornMasonLockBand(wing, { mach: m, cl });
+      band.push({ mach: m, min: r.min, max: r.max, valid: r.valid, beyondLock: r.beyondLock });
     }
-    const limit = modelLimitMach(kornMasonLock, wing, cl);
-    const segments = reliability(kornMasonLock, wing, tested, data, cl);
+    const limit = modelLimitMach(kornMasonLockBand, wing, cl);
+    const segments = reliability(kornMasonLockBand, wing, tested, data, cl);
     const measured = tested && data ? data.polar.filter((p) => p.wing === tested && Math.abs(p.cl - cl) <= SYMBOL_WINDOW) : [];
     const faired = tested && data && Math.abs(cl) <= 0.02 ? data.faired.filter((s) => s.wing === tested) : [];
-    return { curve, limit, segments, measured, faired };
+    return { band, limit, segments, measured, faired };
   }, [wing, cl, tested, data]);
 
   const machs = tested && data ? [...new Set(data.polar.filter((p) => p.wing === tested).map((p) => p.mach))].sort((a, b) => a - b) : UNTESTED_MACHS;
   const mach = machs.reduce((best, m) => (Math.abs(m - polarMach) < Math.abs(best - polarMach) ? m : best), machs[0] ?? 0.5);
 
   const small = useMemo(() => {
-    const polar: PolarCurvePoint[] = [];
+    const polar: PolarBandPoint[] = [];
     for (let c = -0.25; c <= 0.95 + 1e-9; c += 0.01) {
-      const r = kornMasonLock(wing, { mach, cl: c });
-      polar.push({ cl: c, cd: r.cd, valid: r.valid });
+      const r = kornMasonLockBand(wing, { mach, cl: c });
+      polar.push({ cl: c, min: r.min, max: r.max, valid: r.valid, beyondLock: r.beyondLock });
     }
+    const here = kornMasonLockBand(wing, { mach, cl });
+    const readout = here.valid
+      ? { text: `CD ${here.min.toFixed(4)} to ${here.max.toFixed(4)}`, spread: here.max - here.min }
+      : { text: "outside model range", spread: null };
+    const polarNote = polar.some((p) => !p.beyondLock) ? null : "Model not drawn: beyond the drag-rise model's limit";
     const slope = liftCurveSlope(wing, mach);
     const lift: LiftCurvePoint[] = slope.valid
       ? [-3, 14].map((a) => ({ alpha: a, cl: slope.perDeg * (a - wing.airfoil.zeroLiftAngleDeg) }))
       : [];
     const pm = tested && data ? data.polar.filter((p) => p.wing === tested && Math.abs(p.mach - mach) < 1e-6) : [];
     const lm = tested && data ? data.lift.filter((p) => p.wing === tested && Math.abs(p.mach - mach) < 1e-6) : [];
-    return { polar, lift, pm, lm, liftNote: slope.valid ? null : "Lift-curve model not defined at M ≥ 1" };
-  }, [wing, mach, tested, data]);
+    return { polar, lift, pm, lm, readout, polarNote, liftNote: slope.valid ? null : "Lift-curve model not defined at M ≥ 1" };
+  }, [wing, mach, cl, tested, data]);
 
   const disagrees = view.segments.some((s) => s.disagrees);
   const pickWing = (id: TestedWingId) => {
@@ -105,12 +109,25 @@ export function App() {
         <section className="column-right" aria-label="Results">
           <div className="figure">
             <h2 className="panel-title">Drag coefficient vs Mach</h2>
-            <DragMachChart curve={view.curve} limitMach={view.limit} measured={view.measured} faired={view.faired} segments={view.segments} clSelected={cl} />
+            <DragMachChart band={view.band} limitMach={view.limit} measured={view.measured} faired={view.faired} segments={view.segments} clSelected={cl} />
             <div className="legend">
               <span><svg width="14" height="10" aria-hidden="true"><circle cx="7" cy="5" r="3.6" fill="var(--surface)" stroke="var(--ink)" strokeWidth="1.2" /></svg>Measured (NACA, 1952)</span>
-              <span><svg width="22" height="10" aria-hidden="true"><line x1="1" x2="21" y1="5" y2="5" stroke="var(--accent)" strokeWidth="2" /></svg>Model</span>
+              <span><svg width="22" height="12" aria-hidden="true"><rect x="1" y="1" width="20" height="10" fill="var(--accent)" fillOpacity="0.18" stroke="var(--accent)" strokeWidth="0.8" /></svg>Model range</span>
+              <span>
+                <svg width="22" height="12" aria-hidden="true">
+                  <defs><HatchSwatch /></defs>
+                  <rect x="1" y="1" width="20" height="10" fill="url(#hatch-legend)" stroke="var(--stop)" strokeWidth="0.8" strokeDasharray="3 2" />
+                </svg>
+                Model outside its range
+              </span>
               <span><svg width="22" height="10" aria-hidden="true"><line x1="1" x2="21" y1="5" y2="5" stroke="var(--ink-2)" strokeWidth="1" strokeDasharray="1 3" strokeLinecap="round" /></svg>NACA faired curve (1952), at CL 0</span>
             </div>
+            <p className="band-note">Band: spread of four form-factor methods and two boundary-layer states. No method was fitted to the data.</p>
+            <p className="readout">
+              Model range at M <span className="num">{mach.toFixed(3)}</span>, CL <span className="num">{cl.toFixed(2)}</span>:{" "}
+              <span className="num">{small.readout.text}</span>
+              {small.readout.spread !== null && <> (spread <span className="num">{small.readout.spread.toFixed(4)}</span>)</>}
+            </p>
             <p className="status" role="status">
               {!tested
                 ? "No measured data for this wing. Curve shows the model only."
@@ -135,7 +152,7 @@ export function App() {
             </div>
             <div className="figure">
               <h2 className="panel-title">Drag polar</h2>
-              <PolarChart curve={small.polar} measured={small.pm} mach={mach} />
+              <PolarChart band={small.polar} measured={small.pm} mach={mach} modelNote={small.polarNote} />
             </div>
           </div>
         </section>
@@ -145,6 +162,14 @@ export function App() {
         Measured data: R. P. Bielat, NACA RM L52B08 (1952), Langley 8-foot transonic tunnel. Digitized twice from figures; error bars include digitization uncertainty. Model: Korn–Mason with Lock's fourth-power law; Oswald efficiency after Raymer. Validation bands after Gur, Mason &amp; Schetz, J. Aircraft 47(4), 2010.
       </footer>
     </main>
+  );
+}
+
+function HatchSwatch() {
+  return (
+    <pattern id="hatch-legend" width={4} height={4} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1={0} y1={0} x2={0} y2={4} stroke="var(--stop)" strokeWidth={1} strokeOpacity={0.7} />
+    </pattern>
   );
 }
 

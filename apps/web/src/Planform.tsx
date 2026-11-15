@@ -2,7 +2,7 @@ import { geometry, sweepAtDeg, type WingBody } from "@jet-workshop/physics";
 
 const DEG = Math.PI / 180;
 const W = 420;
-const H = 300;
+const H = 250;
 
 /** The wing in planform as a technical drawing: span, root chord and quarter-chord sweep dimensioned. */
 export function Planform({ wing }: { wing: WingBody }) {
@@ -13,9 +13,9 @@ export function Planform({ wing }: { wing: WingBody }) {
   const tipLE = half * tanLE;
   const extentX = g.spanIn;
   const extentY = Math.max(g.rootChordIn, tipLE + g.tipChordIn);
-  const scale = Math.min((W - 190) / extentX, (H - 90) / extentY);
-  const cx = W / 2 + 40;
-  const top = 34;
+  const scale = Math.min((W - 150) / extentX, (H - 74) / extentY);
+  const cx = (W + 110) / 2;
+  const top = 22;
   const X = (y: number) => cx + y * scale;
   const Y = (x: number) => top + x * scale;
 
