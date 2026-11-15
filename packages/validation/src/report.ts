@@ -29,9 +29,13 @@ import {
   DISTINCT_CL,
   LOW_LIFT,
   PARASITE_VARIANTS,
+  SEGMENT_EDGES,
+  SYMBOL_WINDOW,
+  VALIDATED_BAND,
   bandError,
   bandOf,
   baselineBand,
+  compare,
   criticalMachAtZeroLift,
   fairedComparison,
   kornMasonLockBand,
@@ -39,10 +43,13 @@ import {
   modelRange,
   outsideBy,
   parabolaAtZeroLift,
+  reliability,
   sampledDragRiseMach,
   scorePolarPoint,
   stats,
+  withinUval,
   type PointScore,
+  type StripRule,
 } from "./score.ts";
 
 const WINGS: TestedWingId[] = ["10.8", "35", "47"];
@@ -266,6 +273,7 @@ export function buildReport(data: Dataset, inputLabel: string, body: { points: B
   cd0Sensitivity(data, L);
   transonicBasis(data, L);
   bodyAlone(body, L);
+  validationCriterion(data, L);
   return { markdown: L.join("\n"), summary };
 }
 
@@ -489,5 +497,83 @@ function bodyAlone(body: { points: BodyPoint[]; label: string } | null, L: strin
     const b = inWingBody(m);
     L.push(`| ${f3(m)} | ${f4(a.max)} to ${f4(a.min)} | ${f4(b.max)} to ${f4(b.min)} |`);
   }
+  L.push("");
+}
+
+/** Lift coefficients at which the strip is counted for the side-by-side table: the bench's CL slider, every 0.1. */
+const STRIP_CL = [-0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5];
+
+/** 10. Decision 0001: model against measurement in the structure of ASME V&V 20, and the strip under both rules. */
+function validationCriterion(data: Dataset, L: string[]): void {
+  L.push("## 10. Comparison error and validation uncertainty (decision 0001)");
+  L.push("");
+  L.push("Structure of ASME V&V 20, as adapted in decision 0001 (our adaptation, not the standard itself): comparison error E = S - D, with S the centre of the model band and D the measured value; validation uncertainty u_val = sqrt(u_D^2 + u_input^2), with u_D the symbol's total uncertainty in CD and u_input the band's half-width; u_num is zero, the model being algebraic. This is not a pass or fail. Where |E| <= u_val the model's error cannot be told apart from the noise; where |E| is much larger, the model's error is about E.");
+  L.push("");
+  L.push(`### 10a. Measured symbols with |CL| <= ${LOW_LIFT}, per wing and Mach number`);
+  L.push("");
+  L.push("Every symbol where the model is inside its range, at its own CL and Mach number. Columns: symbols scored (of all with |CL| <= 0.3), how many have |E| <= u_val, mean signed E, largest |E|, mean u_val, largest |E| / u_val.");
+  L.push("");
+  for (const { id, band: model } of BAND_MODELS) {
+    L.push(`**${id}**`);
+    L.push("");
+    L.push("| Wing | Mach | Scored | abs(E) <= u_val | Mean E | Largest abs(E) | Mean u_val | Largest abs(E) / u_val |");
+    L.push("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |");
+    for (const wid of WINGS) {
+      const w = bielatWing(wid);
+      const machs = [...new Set(data.polar.filter((p) => p.wing === wid).map((p) => p.mach))].sort((a, b) => a - b);
+      for (const m of machs) {
+        const pts = data.polar.filter((p) => p.wing === wid && p.mach === m && Math.abs(p.cl) <= LOW_LIFT);
+        const c = pts
+          .map((p) => ({ p, band: model(w, { mach: p.mach, cl: p.cl }) }))
+          .filter((x) => x.band.valid)
+          .map((x) => compare(x.band, x.p.cd, x.p.uCd));
+        if (!c.length) {
+          L.push(`| ${wid} deg | ${f3(m)} | 0 of ${pts.length} | n/a | n/a | n/a | n/a | n/a |`);
+          continue;
+        }
+        const mean = (f: (x: (typeof c)[number]) => number): number => c.reduce((a, x) => a + f(x), 0) / c.length;
+        L.push(`| ${wid} deg | ${f3(m)} | ${c.length} of ${pts.length} | ${c.filter(withinUval).length} | ${sgn(mean((x) => x.e))} | ${f4(Math.max(...c.map((x) => Math.abs(x.e))))} | ${f4(mean((x) => x.uVal))} | ${Math.max(...c.map((x) => x.ratio)).toFixed(2)} |`);
+      }
+    }
+    L.push("");
+  }
+  L.push("Symbol by symbol (korn-mason-lock):");
+  L.push("");
+  L.push("| Wing | Mach | Point | CL | Measured CD (D) | Band centre (S) | E | u_D | u_input | u_val | abs(E) / u_val |");
+  L.push("| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |");
+  for (const wid of WINGS) {
+    const w = bielatWing(wid);
+    for (const p of data.polar.filter((q) => q.wing === wid && Math.abs(q.cl) <= LOW_LIFT)) {
+      const band = kornMasonLockBand(w, { mach: p.mach, cl: p.cl });
+      if (!band.valid) continue;
+      const c = compare(band, p.cd, p.uCd);
+      L.push(`| ${wid} deg | ${f3(p.mach)} | ${p.pointId} | ${f3(p.cl)} | ${f4(p.cd)} | ${f4((band.min + band.max) / 2)} | ${sgn(c.e)} | ${f4(c.uD)} | ${f4(c.uInput)} | ${f4(c.uVal)} | ${c.ratio.toFixed(2)} |`);
+    }
+  }
+  L.push("");
+
+  L.push("### 10b. Reliability strip: validated segments under the previous rule and under decision 0001");
+  L.push("");
+  L.push(`Shown once, side by side, as decision 0001 requires (the rule changed after the spike 1 results: \`post hoc\`). Previous rule (spike 1): every symbol within ${LOW_LIFT} of the selected CL lies inside the band. Decision 0001: every symbol the chart draws (within ${SYMBOL_WINDOW} of the selected CL) has |E| <= u_val. Both rules also require the band's half-width to be within ${VALIDATED_BAND.toFixed(4)} at each symbol. Counted on the korn-mason-lock band for the three tested wings at the selected CL values of the bench's slider, every 0.1; each strip has ${SEGMENT_EDGES.length - 1} segments. Segments with symbols: segments that hold at least one scored symbol under that rule.`);
+  L.push("");
+  L.push("| Wing | Selected CL | Previous rule: segments with symbols | Previous rule: validated | Decision 0001: segments with symbols | Decision 0001: validated |");
+  L.push("| --- | ---: | ---: | ---: | ---: | ---: |");
+  const count = (wid: TestedWingId, cl: number, rule: StripRule) => {
+    const s = reliability(kornMasonLockBand, bielatWing(wid), wid, data, cl, rule);
+    return { scored: s.filter((x) => x.n > 0).length, validated: s.filter((x) => x.state === "validated").length };
+  };
+  const total = { prevScored: 0, prev: 0, nextScored: 0, next: 0 };
+  for (const wid of WINGS) {
+    for (const cl of STRIP_CL) {
+      const a = count(wid, cl, "spike-1");
+      const b = count(wid, cl, "decision-0001");
+      total.prevScored += a.scored;
+      total.prev += a.validated;
+      total.nextScored += b.scored;
+      total.next += b.validated;
+      L.push(`| ${wid} deg | ${cl.toFixed(1)} | ${a.scored} | ${a.validated} | ${b.scored} | ${b.validated} |`);
+    }
+  }
+  L.push(`| All | | ${total.prevScored} | ${total.prev} | ${total.nextScored} | ${total.next} |`);
   L.push("");
 }

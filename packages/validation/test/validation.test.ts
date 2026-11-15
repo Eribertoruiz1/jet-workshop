@@ -154,13 +154,13 @@ describe("reliability strip", () => {
     expect(b.valid).toBe(false);
     expect(Number.isNaN(bandError(b, 0.01))).toBe(true);
   });
-  it("validated only when every symbol lies inside the band and the band's half-spread is within 0.0020", () => {
+  it("validated only when every drawn symbol has |E| <= u_val and the band's half-width is within 0.0020 (decision 0001)", () => {
     const w = bielatWing("35");
     const first = (band: BandModel, cd: number) => reliability(band, w, "35", oneSymbol(cd), 0.1)[0]!;
     expect(first(fixedBand(0.010, 0.0015), 0.011)).toMatchObject({ state: "validated", disagrees: false });
     // inside, but the band is too wide to validate anything
     expect(first(fixedBand(0.010, 0.0025), 0.011)).toMatchObject({ state: "estimate", disagrees: false });
-    // just outside the band: an estimate, not a disagreement beyond the precedent
+    // 0.0010 outside the band, |E| = 0.0025 above u_val = 0.0018: an estimate, not a disagreement beyond the precedent
     expect(first(fixedBand(0.010, 0.0015), 0.0125)).toMatchObject({ state: "estimate", disagrees: false });
     // more than 0.0020 outside the band: the disagreement text applies
     expect(first(fixedBand(0.010, 0.0015), 0.0140)).toMatchObject({ state: "estimate", disagrees: true });
