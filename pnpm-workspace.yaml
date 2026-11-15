@@ -1,3 +1,8 @@
 packages:
   - "packages/*"
   - "apps/*"
+
+# esbuild ships its binary as an optional platform package; its install script only
+# re-checks it. Declared explicitly so a frozen install (CI) does not stop on it.
+allowBuilds:
+  esbuild: false

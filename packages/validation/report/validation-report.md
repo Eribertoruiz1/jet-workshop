@@ -354,3 +354,101 @@ Model body term at the scored Mach numbers, body alone and as used inside the wi
 | 0.850 | 0.0031 to 0.0029 | 0.0030 to 0.0028 |
 | 0.900 | 0.0031 to 0.0029 | 0.0030 to 0.0027 |
 
+## 10. Comparison error and validation uncertainty (decision 0001)
+
+Structure of ASME V&V 20, as adapted in decision 0001 (our adaptation, not the standard itself): comparison error E = S - D, with S the centre of the model band and D the measured value; validation uncertainty u_val = sqrt(u_D^2 + u_input^2), with u_D the symbol's total uncertainty in CD and u_input the band's half-width; u_num is zero, the model being algebraic. This is not a pass or fail. Where |E| <= u_val the model's error cannot be told apart from the noise; where |E| is much larger, the model's error is about E.
+
+### 10a. Measured symbols with |CL| <= 0.3, per wing and Mach number
+
+Every symbol where the model is inside its range, at its own CL and Mach number. Columns: symbols scored (of all with |CL| <= 0.3), how many have |E| <= u_val, mean signed E, largest |E|, mean u_val, largest |E| / u_val.
+
+**korn-mason-lock**
+
+| Wing | Mach | Scored | abs(E) <= u_val | Mean E | Largest abs(E) | Mean u_val | Largest abs(E) / u_val |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | 0.500 | 4 of 4 | 4 | -0.0001 | 0.0012 | 0.0018 | 0.66 |
+| 10.8 deg | 0.850 | 0 of 4 | n/a | n/a | n/a | n/a | n/a |
+| 10.8 deg | 0.950 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+| 10.8 deg | 1.000 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+| 10.8 deg | 1.100 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+| 35 deg | 0.500 | 3 of 3 | 3 | +0.0008 | 0.0015 | 0.0017 | 0.86 |
+| 35 deg | 0.850 | 0 of 4 | n/a | n/a | n/a | n/a | n/a |
+| 35 deg | 0.900 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+| 35 deg | 0.950 | 0 of 2 | n/a | n/a | n/a | n/a | n/a |
+| 35 deg | 1.000 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+| 35 deg | 1.100 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+| 47 deg | 0.500 | 4 of 4 | 2 | +0.0015 | 0.0023 | 0.0016 | 1.47 |
+| 47 deg | 0.843 | 3 of 3 | 2 | +0.0011 | 0.0022 | 0.0018 | 1.26 |
+| 47 deg | 0.941 | 0 of 2 | n/a | n/a | n/a | n/a | n/a |
+| 47 deg | 0.990 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+| 47 deg | 1.112 | 0 of 3 | n/a | n/a | n/a | n/a | n/a |
+
+**baseline-incompressible**
+
+| Wing | Mach | Scored | abs(E) <= u_val | Mean E | Largest abs(E) | Mean u_val | Largest abs(E) / u_val |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | 0.500 | 4 of 4 | 4 | -0.0001 | 0.0012 | 0.0018 | 0.66 |
+| 10.8 deg | 0.850 | 4 of 4 | 2 | -0.0007 | 0.0019 | 0.0017 | 1.12 |
+| 10.8 deg | 0.950 | 3 of 3 | 0 | -0.0076 | 0.0092 | 0.0017 | 5.54 |
+| 10.8 deg | 1.000 | 3 of 3 | 0 | -0.0133 | 0.0146 | 0.0017 | 8.79 |
+| 10.8 deg | 1.100 | 3 of 3 | 0 | -0.0167 | 0.0216 | 0.0016 | 13.23 |
+| 35 deg | 0.500 | 3 of 3 | 3 | +0.0008 | 0.0015 | 0.0017 | 0.86 |
+| 35 deg | 0.850 | 4 of 4 | 4 | -0.0002 | 0.0010 | 0.0016 | 0.65 |
+| 35 deg | 0.900 | 3 of 3 | 2 | -0.0010 | 0.0016 | 0.0016 | 1.04 |
+| 35 deg | 0.950 | 2 of 2 | 0 | -0.0027 | 0.0029 | 0.0016 | 1.84 |
+| 35 deg | 1.000 | 3 of 3 | 0 | -0.0097 | 0.0115 | 0.0016 | 7.36 |
+| 35 deg | 1.100 | 3 of 3 | 0 | -0.0112 | 0.0139 | 0.0015 | 8.99 |
+| 47 deg | 0.500 | 4 of 4 | 2 | +0.0015 | 0.0023 | 0.0016 | 1.47 |
+| 47 deg | 0.843 | 3 of 3 | 2 | +0.0011 | 0.0026 | 0.0015 | 1.76 |
+| 47 deg | 0.941 | 2 of 2 | 1 | +0.0007 | 0.0023 | 0.0015 | 1.56 |
+| 47 deg | 0.990 | 3 of 3 | 0 | -0.0031 | 0.0046 | 0.0015 | 3.16 |
+| 47 deg | 1.112 | 3 of 3 | 0 | -0.0077 | 0.0083 | 0.0014 | 5.80 |
+
+Symbol by symbol (korn-mason-lock):
+
+| Wing | Mach | Point | CL | Measured CD (D) | Band centre (S) | E | u_D | u_input | u_val | abs(E) / u_val |
+| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | 0.500 | p1 | -0.075 | 0.0133 | 0.0124 | -0.0009 | 0.0010 | 0.0015 | 0.0018 | 0.49 |
+| 10.8 deg | 0.500 | p3 | 0.055 | 0.0088 | 0.0100 | +0.0012 | 0.0010 | 0.0015 | 0.0018 | 0.66 |
+| 10.8 deg | 0.500 | p2 | 0.056 | 0.0094 | 0.0100 | +0.0006 | 0.0010 | 0.0015 | 0.0018 | 0.35 |
+| 10.8 deg | 0.500 | p4 | 0.245 | 0.0135 | 0.0124 | -0.0011 | 0.0010 | 0.0015 | 0.0018 | 0.63 |
+| 35 deg | 0.500 | p1 | -0.067 | 0.0114 | 0.0120 | +0.0006 | 0.0010 | 0.0014 | 0.0017 | 0.37 |
+| 35 deg | 0.500 | p2 | 0.068 | 0.0083 | 0.0097 | +0.0015 | 0.0010 | 0.0014 | 0.0017 | 0.86 |
+| 35 deg | 0.500 | p3 | 0.189 | 0.0105 | 0.0110 | +0.0005 | 0.0010 | 0.0014 | 0.0017 | 0.27 |
+| 47 deg | 0.500 | p1 | -0.074 | 0.0106 | 0.0121 | +0.0014 | 0.0010 | 0.0012 | 0.0016 | 0.91 |
+| 47 deg | 0.500 | p2 | 0.056 | 0.0074 | 0.0095 | +0.0021 | 0.0010 | 0.0012 | 0.0016 | 1.36 |
+| 47 deg | 0.500 | p3 | 0.177 | 0.0086 | 0.0109 | +0.0023 | 0.0010 | 0.0012 | 0.0016 | 1.47 |
+| 47 deg | 0.500 | p4 | 0.277 | 0.0146 | 0.0147 | +0.0001 | 0.0010 | 0.0012 | 0.0016 | 0.04 |
+| 47 deg | 0.843 | p1 | -0.087 | 0.0127 | 0.0126 | -0.0001 | 0.0010 | 0.0014 | 0.0018 | 0.04 |
+| 47 deg | 0.843 | p2 | 0.073 | 0.0083 | 0.0093 | +0.0010 | 0.0010 | 0.0014 | 0.0018 | 0.58 |
+| 47 deg | 0.843 | p3 | 0.249 | 0.0107 | 0.0129 | +0.0022 | 0.0010 | 0.0014 | 0.0018 | 1.26 |
+
+### 10b. Reliability strip: validated segments under the previous rule and under decision 0001
+
+Shown once, side by side, as decision 0001 requires (the rule changed after the spike 1 results: `post hoc`). Previous rule (spike 1): every symbol within 0.3 of the selected CL lies inside the band. Decision 0001: every symbol the chart draws (within 0.06 of the selected CL) has |E| <= u_val. Both rules also require the band's half-width to be within 0.0020 at each symbol. Counted on the korn-mason-lock band for the three tested wings at the selected CL values of the bench's slider, every 0.1; each strip has 13 segments. Segments with symbols: segments that hold at least one scored symbol under that rule.
+
+| Wing | Selected CL | Previous rule: segments with symbols | Previous rule: validated | Decision 0001: segments with symbols | Decision 0001: validated |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | -0.1 | 1 | 1 | 1 | 1 |
+| 10.8 deg | 0.0 | 1 | 1 | 1 | 1 |
+| 10.8 deg | 0.1 | 1 | 0 | 1 | 1 |
+| 10.8 deg | 0.2 | 1 | 0 | 1 | 1 |
+| 10.8 deg | 0.3 | 1 | 0 | 1 | 0 |
+| 10.8 deg | 0.4 | 0 | 0 | 0 | 0 |
+| 10.8 deg | 0.5 | 0 | 0 | 0 | 0 |
+| 35 deg | -0.1 | 1 | 0 | 1 | 1 |
+| 35 deg | 0.0 | 1 | 0 | 0 | 0 |
+| 35 deg | 0.1 | 1 | 0 | 1 | 1 |
+| 35 deg | 0.2 | 1 | 0 | 1 | 1 |
+| 35 deg | 0.3 | 1 | 0 | 1 | 0 |
+| 35 deg | 0.4 | 0 | 0 | 0 | 0 |
+| 35 deg | 0.5 | 0 | 0 | 0 | 0 |
+| 47 deg | -0.1 | 2 | 1 | 2 | 2 |
+| 47 deg | 0.0 | 2 | 0 | 1 | 0 |
+| 47 deg | 0.1 | 2 | 0 | 2 | 1 |
+| 47 deg | 0.2 | 2 | 0 | 2 | 0 |
+| 47 deg | 0.3 | 2 | 0 | 2 | 1 |
+| 47 deg | 0.4 | 0 | 0 | 0 | 0 |
+| 47 deg | 0.5 | 0 | 0 | 0 | 0 |
+| All | | 20 | 3 | 18 | 11 |
+
