@@ -642,7 +642,7 @@ def run(spec: dict, g: np.ndarray) -> dict:
                         raise SystemExit(f"{s['id']} {p['id']}: no isolated centre dot near {x},{y}; "
                                          "move the pick or use snap 'none' with a note")
                 elif snap == "ring":
-                    d = snap_ring(g, float(x), float(y), r=int(p.get("ring_window", 20)),
+                    d = snap_ring(g, float(x), float(y), r=int(p.get("ring_window", 26)),
                                   level=float(p.get("ring_level", 100)))
                     if not d["found"]:
                         raise SystemExit(f"{s['id']} {p['id']}: no circle outline fitted near {x},{y} "

@@ -1,0 +1,839 @@
+{
+  "source": {
+    "document": "NACA RM L51K16a",
+    "author": "R. B. Robinson and C. Driver",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087888/downloads/19930087888.pdf",
+    "pdf_sha256_as_downloaded": "292d22d43283b2a2d0086e726b20ca43d5d23958b3973004254ae856be66a932",
+    "pdf_sha256_stripped": "59bbdcb18699f38fa763f61d51e5ab1ab04ff7ba686ca7964e83c8b2041bb2c2",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF; the stripped copy (bytes 437 onward) is the file read.",
+    "declared_accuracy": {
+      "CL": 0.005,
+      "CD": 0.001,
+      "Cm": 0.001,
+      "alpha": 0.1
+    },
+    "declared_accuracy_source": "RM L51K16a, PDF p. 6 (printed 5): estimated errors in the force data CL +/-0.005, CD +/-0.001, Cm +/-0.001; wing angle of attack +/-0.1 deg"
+  },
+  "figure": {
+    "id": "fig06c-drag",
+    "number": "6(c) CD",
+    "title": "Aerodynamic characteristics in pitch of the various wing-body configurations. (c) Lambda = 47 deg; t/c = 0.04. Middle plot: drag coefficient.",
+    "pdf_page": 20,
+    "printed_page": 19,
+    "x_axis": "Lift coefficient, CL (one axis, -0.2 to 0.8, common to the three plots of the panel)",
+    "y_axis": "Drag coefficient, CD (scale on the right, 0 to 0.20)",
+    "content_note": "Configuration 47deg-t04 at M 1.60, one polar. Measured points: hollow circles without a centre dot, joined by a faired curve, on fine-ruled graph paper (lines every 0.005 in CL and 0.002 in CD, heavier every 0.05 and 0.02)."
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session (lane B)",
+  "scan": {
+    "pdf_page": 20,
+    "size_px": [
+      2354,
+      3096
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image (page /Rotate 0), greyscale, upright as printed"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.05,
+        "count": 21
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.02,
+        "count": 11
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0007002205752503573,
+        3.3518523702775116e-06,
+        -0.5473058020004806
+      ],
+      [
+        7.045164659094879e-07,
+        -0.0002808693686127346,
+        0.45817754308295244
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          561,
+          995
+        ],
+        "px": [
+          563.56,
+          991.87
+        ],
+        "x": -0.15,
+        "y": 0.18,
+        "residual_data": [
+          0.0006322045047276459,
+          -1.1758302782438612e-05
+        ],
+        "residual_px": [
+          0.9,
+          0.04
+        ],
+        "mesh_residual_data": [
+          -3.103589185526889e-05,
+          -2.4324023487204416e-05
+        ]
+      },
+      {
+        "picked_px": [
+          561,
+          1494
+        ],
+        "px": [
+          560.6,
+          1490.04
+        ],
+        "x": -0.15,
+        "y": 0.04,
+        "residual_data": [
+          0.00022893256547670826,
+          6.615771312788038e-05
+        ],
+        "residual_px": [
+          0.33,
+          -0.23
+        ],
+        "mesh_residual_data": [
+          -0.00017456474444829673,
+          2.736717283987472e-05
+        ]
+      },
+      {
+        "picked_px": [
+          917,
+          995
+        ],
+        "px": [
+          919.49,
+          992.64
+        ],
+        "x": 0.1,
+        "y": 0.18,
+        "residual_data": [
+          -0.00013495326366333438,
+          2.2905502539805056e-05
+        ],
+        "residual_px": [
+          -0.19,
+          -0.08
+        ],
+        "mesh_residual_data": [
+          0.00017493468556376013,
+          2.7844862402648385e-05
+        ]
+      },
+      {
+        "picked_px": [
+          774,
+          1281
+        ],
+        "px": [
+          775.08,
+          1277.59
+        ],
+        "x": 0.0,
+        "y": 0.1,
+        "residual_data": [
+          -0.0002932495286526171,
+          -0.00011173849637483024
+        ],
+        "residual_px": [
+          -0.42,
+          0.4
+        ],
+        "mesh_residual_data": [
+          2.9019504855365474e-05,
+          2.593974932213472e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1059,
+          1209
+        ],
+        "px": [
+          1060.99,
+          1207.02
+        ],
+        "x": 0.2,
+        "y": 0.12,
+        "residual_data": [
+          -0.0003331525875034935,
+          -8.91453905707551e-05
+        ],
+        "residual_px": [
+          -0.48,
+          0.32
+        ],
+        "mesh_residual_data": [
+          -4.9100512425126475e-05,
+          -4.61874714943189e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1202,
+          1066
+        ],
+        "px": [
+          1204.45,
+          1063.97
+        ],
+        "x": 0.3,
+        "y": 0.16,
+        "residual_data": [
+          -0.00035820887505849663,
+          0.00018969966426471419
+        ],
+        "residual_px": [
+          -0.51,
+          -0.68
+        ],
+        "mesh_residual_data": [
+          -4.420345436034756e-05,
+          -3.560523983353603e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1488,
+          995
+        ],
+        "px": [
+          1490.47,
+          994.51
+        ],
+        "x": 0.5,
+        "y": 0.18,
+        "residual_data": [
+          -0.00031387284336581445,
+          -9.919118769585733e-05
+        ],
+        "residual_px": [
+          -0.45,
+          0.35
+        ],
+        "mesh_residual_data": [
+          0.0002234403191972989,
+          -3.12012587946886e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1417,
+          1565
+        ],
+        "px": [
+          1416.58,
+          1563.53
+        ],
+        "x": 0.45,
+        "y": 0.02,
+        "residual_data": [
+          -0.00014430474766696788,
+          2.8165892144955268e-05
+        ],
+        "residual_px": [
+          -0.21,
+          -0.1
+        ],
+        "mesh_residual_data": [
+          0.00035208320039170626,
+          0.0001584856689690918
+        ]
+      },
+      {
+        "picked_px": [
+          1846,
+          995
+        ],
+        "px": [
+          1848.55,
+          994.95
+        ],
+        "x": 0.75,
+        "y": 0.18,
+        "residual_data": [
+          0.0004188724613065631,
+          2.7771949624444403e-05
+        ],
+        "residual_px": [
+          0.6,
+          -0.1
+        ],
+        "mesh_residual_data": [
+          -3.7506639623208216e-05,
+          0.0001202560324489177
+        ]
+      },
+      {
+        "picked_px": [
+          1846,
+          1494
+        ],
+        "px": [
+          1845.99,
+          1493.58
+        ],
+        "x": 0.75,
+        "y": 0.04,
+        "residual_data": [
+          0.0002977323144017774,
+          -2.286734428166154e-05
+        ],
+        "residual_px": [
+          0.42,
+          0.08
+        ],
+        "mesh_residual_data": [
+          -0.0001561284750482006,
+          0.00020623318643292476
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.0003433719938164461,
+      8.566476720844801e-05
+    ],
+    "affine_max_abs_residual_data": [
+      0.0006322045047276459,
+      0.00018969966426471419
+    ],
+    "data_per_px": [
+      0.000700220575250321,
+      -0.00028086936861271283
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 236,
+        "used": 236,
+        "rms_px": 0.371,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "horizontal",
+        "value": 0.02,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.423,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "horizontal",
+        "value": 0.04,
+        "samples": 234,
+        "used": 234,
+        "rms_px": 0.368,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "horizontal",
+        "value": 0.06,
+        "samples": 235,
+        "used": 234,
+        "rms_px": 0.329,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "horizontal",
+        "value": 0.08,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.311,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "horizontal",
+        "value": 0.1,
+        "samples": 236,
+        "used": 236,
+        "rms_px": 0.348,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "horizontal",
+        "value": 0.12,
+        "samples": 236,
+        "used": 236,
+        "rms_px": 0.347,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "horizontal",
+        "value": 0.14,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.377,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "horizontal",
+        "value": 0.16,
+        "samples": 236,
+        "used": 236,
+        "rms_px": 0.351,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "horizontal",
+        "value": 0.18,
+        "samples": 236,
+        "used": 236,
+        "rms_px": 0.378,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.2,
+        "samples": 236,
+        "used": 236,
+        "rms_px": 0.384,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "vertical",
+        "value": -0.2,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.346,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": -0.15,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.358,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": -0.1,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.336,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": -0.05,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.34,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.0,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.344,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.05,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.315,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.1,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.319,
+        "max_warp_px": 0.1
+      },
+      {
+        "line": "vertical",
+        "value": 0.15,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.355,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.2,
+        "samples": 116,
+        "used": 116,
+        "rms_px": 0.312,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.25,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.303,
+        "max_warp_px": 0.08
+      },
+      {
+        "line": "vertical",
+        "value": 0.3,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.297,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.35,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.335,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.349,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.45,
+        "samples": 116,
+        "used": 116,
+        "rms_px": 0.328,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.343,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.55,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.311,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.345,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.65,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.348,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.329,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 0.75,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.299,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.337,
+        "max_warp_px": 0.11
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06c-drag-47deg-t04-M1.600",
+      "wing": "47",
+      "mach": 1.6,
+      "kind": "symbols",
+      "symbol": "circle, no centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            620,
+            1555
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.16,
+            "ring_pixels": 192,
+            "ring_rms_px": 1.0,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            617.89,
+            1556.39
+          ],
+          "data": [
+            -0.10942897070667224,
+            0.021313347019905456
+          ],
+          "affine_data": [
+            -0.10942972124846112,
+            0.021470580146899176
+          ],
+          "value": {
+            "CL": -0.10942897070667224,
+            "CD": 0.021313347019905456
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            783,
+            1575
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.23,
+            "ring_pixels": 176,
+            "ring_rms_px": 1.01,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            785.46,
+            1574.12
+          ],
+          "data": [
+            0.008438988126706121,
+            0.016492926235801474
+          ],
+          "affine_data": [
+            0.007965668888766264,
+            0.01660882206558789
+          ],
+          "value": {
+            "CL": 0.008438988126706121,
+            "CD": 0.016492926235801474
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            945,
+            1558
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.02,
+            "ring_pixels": 186,
+            "ring_rms_px": 0.94,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            945.07,
+            1559.99
+          ],
+          "data": [
+            0.12031270505335134,
+            0.020657646896066986
+          ],
+          "affine_data": [
+            0.11968051323048379,
+            0.020689954117209586
+          ],
+          "value": {
+            "CL": 0.12031270505335134,
+            "CD": 0.020657646896066986
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1097,
+            1523
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 12.84,
+            "ring_pixels": 198,
+            "ring_rms_px": 0.91,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1096.48,
+            1524.41
+          ],
+          "data": [
+            0.22602736020999276,
+            0.03084646136440629
+          ],
+          "affine_data": [
+            0.22558165162180588,
+            0.0307899570905541
+          ],
+          "value": {
+            "CL": 0.22602736020999276,
+            "CD": 0.03084646136440629
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1252,
+            1462
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 12.98,
+            "ring_pixels": 176,
+            "ring_rms_px": 0.92,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1252.5,
+            1462.7
+          ],
+          "data": [
+            0.3349390043244032,
+            0.04829182974043012
+          ],
+          "affine_data": [
+            0.33462322296259683,
+            0.0482323244866571
+          ],
+          "value": {
+            "CL": 0.3349390043244032,
+            "CD": 0.04829182974043012
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1412,
+            1367
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 12.77,
+            "ring_pixels": 190,
+            "ring_rms_px": 0.9,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1410.52,
+            1367.8
+          ],
+          "data": [
+            0.44515595130352836,
+            0.07527279058534195
+          ],
+          "affine_data": [
+            0.44495398747371895,
+            0.07499815525994868
+          ],
+          "value": {
+            "CL": 0.44515595130352836,
+            "CD": 0.07527279058534195
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1540,
+            1260
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.38,
+            "ring_pixels": 193,
+            "ring_rms_px": 0.84,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1539.92,
+            1261.78
+          ],
+          "data": [
+            0.5354508458023266,
+            0.10513547356047048
+          ],
+          "affine_data": [
+            0.5352071665228184,
+            0.10486709015095952
+          ],
+          "value": {
+            "CL": 0.5354508458023266,
+            "CD": 0.10513547356047048
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1680,
+            1120
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.33,
+            "ring_pixels": 208,
+            "ring_rms_px": 1.01,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1681.14,
+            1121.23
+          ],
+          "data": [
+            0.6338466303543951,
+            0.14429783346384867
+          ],
+          "affine_data": [
+            0.6336212133090313,
+            0.14444277172479508
+          ],
+          "value": {
+            "CL": 0.6338466303543951,
+            "CD": 0.14429783346384867
+          }
+        }
+      ]
+    }
+  ]
+}
