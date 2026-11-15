@@ -187,3 +187,92 @@ A parabola through the polar symbols with |CL| <= 0.3, evaluated at CL = 0, agai
 - 62 symbols: lift coefficient more than 0.3 from the minimum-drag lift coefficient (attached-flow polar)
 - 53 symbols: Mach number above the drag-divergence Mach number plus 0.05 : Lock's law not valid
 
+## 7. CD0 sensitivity: wing form factor and boundary-layer transition (gate 4)
+
+The model's CD0 rests on two choices that the report does not settle. The wing form factor differs between textbooks. The boundary layer is taken as fully turbulent, but the report does not say that transition was fixed (it mentions no roughness strip), so part of it was probably laminar. Each variant below is a book method used as published: four wing form factors (Raymer, Torenbeek, Hoerner, Shevell), each with a fully turbulent boundary layer and with a laminar run up to the standard critical Reynolds number of 5e5 followed by turbulent flow (Prandtl-Schlichting, A = 1700). No constant is moved. The default model, the one scored above and shown in the app, is Raymer with fully turbulent flow.
+
+### 7a. Parasite drag by component at M 0.50
+
+| Wing | Component | Reynolds number | Wetted area, in^2 | Cf, turbulent | Cf, mixed | Form factor (Raymer) | CD, turbulent | CD, mixed |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | wing | 2.00 million | 279.4 | 0.00385 | 0.00300 | 1.253 | 0.0082 | 0.0064 |
+| 10.8 deg | body | 6.39 million | 156.1 | 0.00316 | 0.00289 | 1.071 | 0.0032 | 0.0029 |
+| 35 deg | wing | 2.00 million | 279.4 | 0.00385 | 0.00300 | 1.203 | 0.0079 | 0.0061 |
+| 35 deg | body | 6.39 million | 156.1 | 0.00316 | 0.00289 | 1.071 | 0.0032 | 0.0029 |
+| 47 deg | wing | 2.00 million | 279.4 | 0.00385 | 0.00300 | 1.145 | 0.0075 | 0.0058 |
+| 47 deg | body | 6.39 million | 156.1 | 0.00316 | 0.00289 | 1.071 | 0.0032 | 0.0029 |
+
+Wing form factor by method at M 0.50:
+
+| Wing | Raymer | Torenbeek | Hoerner | Shevell |
+| --- | ---: | ---: | ---: | ---: |
+| 10.8 deg | 1.253 | 1.108 | 1.080 | 1.079 |
+| 35 deg | 1.203 | 1.108 | 1.080 | 1.063 |
+| 47 deg | 1.145 | 1.108 | 1.080 | 1.051 |
+
+Sources: Raymer: D. P. Raymer, Aircraft Design: A Conceptual Approach; Torenbeek: E. Torenbeek, Synthesis of Subsonic Airplane Design (1982); Hoerner: S. F. Hoerner, Fluid-Dynamic Drag (1965); Shevell: R. S. Shevell, Fundamentals of Flight (1989). All four are marked UNVERIFIED in the code until checked against the books.
+
+### 7b. Model at CL = 0 against the NACA faired curve (figure 9), M up to 0.90
+
+Columns: the eight variants (form factor / boundary layer), the range they span, its spread, and where the NACA curve falls. The transonic term (Korn-Mason with Lock's law) is the same in every variant; where it reaches half a drag count (0.00005) the range moves as a whole, so those rows say nothing about the parasite drag.
+
+| Wing | Mach | NACA curve | Transonic term | raymer/turbulent | torenbeek/turbulent | hoerner/turbulent | shevell/turbulent | raymer/mixed | torenbeek/mixed | hoerner/mixed | shevell/mixed | Range | Spread | NACA curve against range |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- |
+| 10.8 deg | 0.500 | 0.0101 | 0.0000 | 0.0121 | 0.0112 | 0.0110 | 0.0110 | 0.0100 | 0.0093 | 0.0091 | 0.0091 | 0.0091 to 0.0121 | 0.0030 | inside |
+| 10.8 deg | 0.700 | 0.0103 | 0.0000 | 0.0123 | 0.0109 | 0.0108 | 0.0108 | 0.0103 | 0.0092 | 0.0091 | 0.0091 | 0.0091 to 0.0123 | 0.0033 | inside |
+| 10.8 deg | 0.850 | 0.0104 | 0.0045 | 0.0170 | 0.0153 | 0.0152 | 0.0152 | 0.0150 | 0.0137 | 0.0136 | 0.0136 | 0.0136 to 0.0170 | 0.0034 | below by 0.0032 (transonic term acting) |
+| 10.8 deg | 0.900 | 0.0112 | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | outside model range | n/a | n/a |
+| 35 deg | 0.500 | 0.0096 | 0.0000 | 0.0117 | 0.0111 | 0.0109 | 0.0108 | 0.0097 | 0.0093 | 0.0091 | 0.0090 | 0.0090 to 0.0117 | 0.0027 | inside |
+| 35 deg | 0.700 | 0.0100 | 0.0000 | 0.0119 | 0.0109 | 0.0107 | 0.0106 | 0.0100 | 0.0091 | 0.0090 | 0.0089 | 0.0089 to 0.0119 | 0.0030 | inside |
+| 35 deg | 0.850 | 0.0104 | 0.0000 | 0.0120 | 0.0107 | 0.0106 | 0.0104 | 0.0101 | 0.0091 | 0.0090 | 0.0088 | 0.0088 to 0.0120 | 0.0032 | inside |
+| 35 deg | 0.900 | 0.0110 | 0.0008 | 0.0128 | 0.0114 | 0.0113 | 0.0111 | 0.0109 | 0.0098 | 0.0097 | 0.0096 | 0.0096 to 0.0128 | 0.0032 | inside (transonic term acting) |
+| 47 deg | 0.500 | 0.0085 | 0.0000 | 0.0113 | 0.0111 | 0.0109 | 0.0107 | 0.0094 | 0.0092 | 0.0091 | 0.0089 | 0.0089 to 0.0113 | 0.0024 | below by 0.0004 |
+| 47 deg | 0.696 | 0.0089 | 0.0000 | 0.0115 | 0.0108 | 0.0106 | 0.0104 | 0.0096 | 0.0090 | 0.0089 | 0.0087 | 0.0087 to 0.0115 | 0.0027 | inside |
+| 47 deg | 0.843 | 0.0093 | 0.0000 | 0.0115 | 0.0106 | 0.0104 | 0.0102 | 0.0097 | 0.0089 | 0.0088 | 0.0086 | 0.0086 to 0.0115 | 0.0029 | inside |
+| 47 deg | 0.892 | 0.0095 | 0.0000 | 0.0115 | 0.0105 | 0.0103 | 0.0101 | 0.0097 | 0.0089 | 0.0088 | 0.0086 | 0.0086 to 0.0115 | 0.0029 | inside |
+
+### 7c. Mean signed error of each variant against figure 9, M up to 0.90
+
+Model minus NACA curve, over the samples of 7b where the model is valid and its transonic term is below half a drag count, 0.00005 (number of samples in brackets). This table describes the variants; it does not pick one. Picking the closest would be a calibration, and under the brief's rule it could only be chosen on the 35 deg wing and then validated on the 10.8 and 47 deg wings.
+
+| Variant | 10.8 deg | 35 deg | 47 deg |
+| --- | ---: | ---: | ---: |
+| Raymer, fully turbulent | +0.0020 (2) | +0.0019 (3) | +0.0024 (4) |
+| Torenbeek, fully turbulent | +0.0008 (2) | +0.0009 (3) | +0.0017 (4) |
+| Hoerner, fully turbulent | +0.0006 (2) | +0.0007 (3) | +0.0015 (4) |
+| Shevell, fully turbulent | +0.0007 (2) | +0.0006 (3) | +0.0013 (4) |
+| Raymer, laminar to Re 5e5, then turbulent | -0.0000 (2) | -0.0000 (3) | +0.0005 (4) |
+| Torenbeek, laminar to Re 5e5, then turbulent | -0.0010 (2) | -0.0008 (3) | -0.0000 (4) |
+| Hoerner, laminar to Re 5e5, then turbulent | -0.0011 (2) | -0.0010 (3) | -0.0002 (4) |
+| Shevell, laminar to Re 5e5, then turbulent | -0.0011 (2) | -0.0011 (3) | -0.0004 (4) |
+
+### 7d. Measured symbols with |CL| <= 0.3, M up to 0.90, against the range
+
+Each symbol at its own CL and Mach number, counted only where the model is valid and its transonic term is below half a drag count (symbols left out for the transonic term in the last column). Inside with u: the range widened by the symbol's total uncertainty in CD.
+
+| Wing | Symbols counted | Inside the range | Inside with u | Largest distance outside the range | Mean spread of the range | Left out: transonic term acting |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | 4 of 8 | 4 | 4 | inside | 0.0030 | 3 |
+| 35 deg | 4 of 10 | 3 | 4 | below by 0.0001 | 0.0028 | 6 |
+| 47 deg | 7 of 7 | 3 | 6 | below by 0.0011 | 0.0026 | 0 |
+
+## 8. Transonic method against the data (gate 4)
+
+Korn-Mason drag-divergence Mach number at CL = 0 (kA = 0.87, t/c = 0.04, mid-chord sweep), against the drag-rise Mach number of the report (dCD/dM = 0.1). The report's text gives 0.92 for the 10.8 deg wing and 0.97 for the 47 deg wing; for the 35 deg wing only the figure 9 samples give it.
+
+| Wing | Mid-chord sweep | Korn-Mason Mdd | Drag rise, report text | Drag rise, figure 9 samples | Korn-Mason minus report |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | 0.0 deg | 0.830 | 0.92 | 0.921 | -0.090 |
+| 35 deg | 27.0 deg | 0.926 | not stated | 0.951 | -0.025 |
+| 47 deg | 41.4 deg | 1.089 | 0.97 | not reached | +0.119 |
+
+From 10.8 to 47 deg of sweep the drag-rise Mach number grows by 0.05 in the report and by 0.259 in simple sweep theory: 5.2 times the measured gain.
+
+Size of the transonic term on figure 9 (NACA faired curve):
+
+| Wing | CD0 at the highest sample up to M 0.90 | Highest CD0 on figure 9 | At Mach | Rise |
+| --- | ---: | ---: | ---: | ---: |
+| 10.8 deg | 0.0112 (M 0.900) | 0.0235 | 1.035 | +0.0123 |
+| 35 deg | 0.0110 (M 0.900) | 0.0198 | 1.035 | +0.0089 |
+| 47 deg | 0.0095 (M 0.892) | 0.0172 | 1.112 | +0.0077 |
+

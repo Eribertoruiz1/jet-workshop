@@ -9,6 +9,12 @@ import {
   baselineIncompressible,
   liftCurveSlope,
   lockRise,
+  makeKornMasonLock,
+  mixedCf,
+  parasiteDrag,
+  TRANSITIONAL_A,
+  turbulentCf,
+  WING_FORM_FACTORS,
   criticalMach,
   matchTestedWing,
   minimumDragCl,
@@ -178,5 +184,36 @@ describe("model contract", () => {
     expect(m[0]).not.toBeNull();
     expect(m[1]!).toBeGreaterThan(m[0]!);
     expect(m[2]!).toBeGreaterThan(m[1]!);
+  });
+});
+
+describe("parasite variants (gate 4 sensitivity)", () => {
+  it("mixed friction equals turbulent minus A/Re above the critical Reynolds number and is Blasius below it", () => {
+    expect(mixedCf(2e6, 0.5)).toBeCloseTo(turbulentCf(2e6, 0.5) - TRANSITIONAL_A / 2e6, 12);
+    expect(mixedCf(4e5, 0.5)).toBeCloseTo(1.328 / Math.sqrt(4e5), 12);
+    for (const re of range(1e6, 1e8, 30)) expect(mixedCf(re, 0.5)).toBeLessThan(turbulentCf(re, 0.5));
+  });
+
+  it("form factors: Torenbeek and Hoerner ignore Mach number and sweep; Shevell at M 0 and no sweep reduces to 1 + 2 t/c + 100 (t/c)^4", () => {
+    const f = { thicknessRatio: 0.04, maxThicknessX: 0.4, sweepMaxThicknessDeg: 30, sweepQuarterChordDeg: 35, mach: 0.5 };
+    expect(WING_FORM_FACTORS.torenbeek.value(f)).toBeCloseTo(1 + 2.7 * 0.04 + 100 * 0.04 ** 4, 12);
+    expect(WING_FORM_FACTORS.hoerner.value({ ...f, mach: 0.8, sweepQuarterChordDeg: 0 })).toBeCloseTo(WING_FORM_FACTORS.hoerner.value(f), 12);
+    expect(WING_FORM_FACTORS.shevell.value({ ...f, mach: 0, sweepQuarterChordDeg: 0 })).toBeCloseTo(1 + 2 * 0.04 + 100 * 0.04 ** 4, 12);
+    for (const id of Object.keys(WING_FORM_FACTORS) as (keyof typeof WING_FORM_FACTORS)[]) expect(WING_FORM_FACTORS[id].value(f)).toBeGreaterThan(1);
+  });
+
+  it("the default options reproduce the scored model exactly", () => {
+    const w = bielatWing("35");
+    for (const mach of [0.5, 0.85, 0.95]) {
+      expect(makeKornMasonLock({ wingFormFactor: "raymer", boundaryLayer: "turbulent" })(w, { mach, cl: 0.1 }).cd).toBe(kornMasonLock(w, { mach, cl: 0.1 }).cd);
+    }
+  });
+
+  it("the breakdown adds up: wing + body = total, each = Cf FF Swet / S", () => {
+    const w = bielatWing("10.8");
+    const p = parasiteDrag(w, 0.5, 0.5, { boundaryLayer: "mixed", wingFormFactor: "shevell" });
+    expect(p.wing + p.body).toBeCloseTo(p.total, 15);
+    expect(p.wing).toBeCloseTo((p.wingCf * p.wingFormFactor * p.wingWettedIn2) / w.planform.areaIn2, 15);
+    expect(p.body).toBeCloseTo((p.bodyCf * p.bodyFormFactor * p.bodyWettedIn2) / w.planform.areaIn2, 15);
   });
 });

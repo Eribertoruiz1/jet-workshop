@@ -14,7 +14,7 @@
 import type { WingBody } from "./geometry.ts";
 import { inducedDragFactor, oswaldFitValid } from "./induced.ts";
 import { minimumDragCl } from "./lift.ts";
-import { parasiteDrag } from "./parasite.ts";
+import { parasiteDrag, type ParasiteOptions } from "./parasite.ts";
 import { waveDrag } from "./transonic.ts";
 
 export interface Condition {
@@ -53,9 +53,21 @@ function polarRange(w: WingBody, cl: number, clMin: number, reasons: string[]): 
   }
 }
 
-export const kornMasonLock: DragModel = (w, c) => {
+/**
+ * The korn-mason-lock model with a choice of wing form factor and boundary
+ * layer for the parasite term. The default (Raymer, fully turbulent) is the
+ * model that is scored and shown; the other choices are reported as a
+ * sensitivity, never picked to match the data.
+ */
+export function makeKornMasonLock(options: ParasiteOptions = {}): DragModel {
+  return (w, c) => kornMasonLockWith(w, c, options);
+}
+
+export const kornMasonLock: DragModel = (w, c) => kornMasonLockWith(w, c, {});
+
+function kornMasonLockWith(w: WingBody, c: Condition, options: ParasiteOptions): ModelResult {
   const reasons: string[] = [];
-  const parasite = parasiteDrag(w, c.mach).total;
+  const parasite = parasiteDrag(w, c.mach, c.mach, options).total;
   const clMin = minimumDragCl(w, c.mach);
   const induced = inducedDragFactor(w.planform) * (c.cl - clMin) ** 2;
   const wave = waveDrag(w, c.mach, c.cl);
@@ -69,7 +81,7 @@ export const kornMasonLock: DragModel = (w, c) => {
     reasons,
     parts: { parasite, induced, wave: wave.cd, minimumDragCl: clMin },
   };
-};
+}
 
 export const BASELINE_REFERENCE_MACH = 0.5;
 

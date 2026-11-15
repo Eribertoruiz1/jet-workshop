@@ -7,8 +7,66 @@
  * never mixed into the error statistics.
  */
 
-import { bielatWing, criticalMach, waveDrag, type DragModel, type ModelResult, type TestedWingId, type WingBody } from "@jet-workshop/physics";
+import {
+  BOUNDARY_LAYERS,
+  WING_FORM_FACTORS,
+  bielatWing,
+  criticalMach,
+  makeKornMasonLock,
+  waveDrag,
+  type BoundaryLayer,
+  type Condition,
+  type DragModel,
+  type ModelResult,
+  type ParasiteOptions,
+  type TestedWingId,
+  type WingBody,
+  type WingFormFactorId,
+} from "@jet-workshop/physics";
 import type { Dataset, FairedSample, LiftPoint, PolarPoint } from "./data.ts";
+
+/**
+ * The parasite-drag variants of the gate 4 sensitivity: every textbook wing
+ * form factor with each boundary-layer state. Each is a book method used as
+ * published; none is chosen to match the data.
+ */
+export const PARASITE_VARIANTS: { id: string; label: string; options: ParasiteOptions; model: DragModel }[] = (
+  Object.keys(BOUNDARY_LAYERS) as BoundaryLayer[]
+).flatMap((bl) =>
+  (Object.keys(WING_FORM_FACTORS) as WingFormFactorId[]).map((ff) => ({
+    id: `${ff}/${bl}`,
+    label: `${WING_FORM_FACTORS[ff].label}, ${BOUNDARY_LAYERS[bl].label}`,
+    options: { wingFormFactor: ff, boundaryLayer: bl },
+    model: makeKornMasonLock({ wingFormFactor: ff, boundaryLayer: bl }),
+  })),
+);
+
+export interface ModelRange {
+  values: { id: string; cd: number }[];
+  min: number;
+  max: number;
+  /** False if any variant is outside the model's range (they share the validity rules) */
+  valid: boolean;
+}
+
+/** Drag of every parasite variant at one condition, and the range they span. */
+export function modelRange(wing: WingBody, c: Condition): ModelRange {
+  const results = PARASITE_VARIANTS.map((v) => ({ id: v.id, r: v.model(wing, c) }));
+  const cds = results.map((x) => x.r.cd);
+  return {
+    values: results.map((x) => ({ id: x.id, cd: x.r.cd })),
+    min: Math.min(...cds),
+    max: Math.max(...cds),
+    valid: results.every((x) => x.r.valid),
+  };
+}
+
+/** Signed distance from a value to a range: 0 inside, negative below, positive above. */
+export function outsideBy(value: number, lo: number, hi: number): number {
+  if (value < lo) return value - lo;
+  if (value > hi) return value - hi;
+  return 0;
+}
 
 /** CD0 bands of brief 001, check 3 (precedent: Gur, Mason & Schetz 2010). */
 export const CD0_BANDS = [

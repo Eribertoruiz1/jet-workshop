@@ -3,17 +3,33 @@
  * Never edited by hand.
  */
 
-import { bielatWing, dragRiseMach, kornMasonLock, baselineIncompressible, liftCurveSlope, type DragModel, type TestedWingId } from "@jet-workshop/physics";
+import {
+  KORN_FACTOR_NACA6,
+  WING_FORM_FACTORS,
+  baselineIncompressible,
+  bielatWing,
+  dragDivergenceMach,
+  dragRiseMach,
+  kornMasonLock,
+  liftCurveSlope,
+  parasiteDrag,
+  sweepAtDeg,
+  type DragModel,
+  type TestedWingId,
+} from "@jet-workshop/physics";
 import type { Dataset } from "./data.ts";
 import {
   ACCEPTANCE_RANGES,
   CD0_BANDS,
   DISTINCT_CL,
   LOW_LIFT,
+  PARASITE_VARIANTS,
   bandOf,
   criticalMachAtZeroLift,
   fairedComparison,
   measuredLiftSlope,
+  modelRange,
+  outsideBy,
   parabolaAtZeroLift,
   sampledDragRiseMach,
   scorePolarPoint,
@@ -217,5 +233,173 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
   if (!reasons.size) L.push("None.");
   for (const [why, n] of reasons) L.push(`- ${n} symbols: ${why}`);
   L.push("");
+
+  cd0Sensitivity(data, L);
+  transonicBasis(data, L);
   return { markdown: L.join("\n"), summary };
+}
+
+/** Upper end of the subsonic range of the CD0 sensitivity (the precedent's range). */
+const SUBSONIC_LIMIT = 0.9 + 1e-9;
+
+/** Half a drag count: a transonic term below this does not change a value printed to four decimals. */
+const TRANSONIC_SHOWN = 0.00005;
+
+const where = (d: number): string => (d === 0 ? "inside" : d < 0 ? `below by ${(-d).toFixed(4)}` : `above by ${d.toFixed(4)}`);
+
+/** 7. Gate 4: how far the textbook choices in the parasite drag move CD0. */
+function cd0Sensitivity(data: Dataset, L: string[]): void {
+  L.push("## 7. CD0 sensitivity: wing form factor and boundary-layer transition (gate 4)");
+  L.push("");
+  L.push("The model's CD0 rests on two choices that the report does not settle. The wing form factor differs between textbooks. The boundary layer is taken as fully turbulent, but the report does not say that transition was fixed (it mentions no roughness strip), so part of it was probably laminar. Each variant below is a book method used as published: four wing form factors (Raymer, Torenbeek, Hoerner, Shevell), each with a fully turbulent boundary layer and with a laminar run up to the standard critical Reynolds number of 5e5 followed by turbulent flow (Prandtl-Schlichting, A = 1700). No constant is moved. The default model, the one scored above and shown in the app, is Raymer with fully turbulent flow.");
+  L.push("");
+
+  // 7a. Components at M 0.50.
+  L.push("### 7a. Parasite drag by component at M 0.50");
+  L.push("");
+  L.push("| Wing | Component | Reynolds number | Wetted area, in^2 | Cf, turbulent | Cf, mixed | Form factor (Raymer) | CD, turbulent | CD, mixed |");
+  L.push("| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |");
+  for (const wid of WINGS) {
+    const w = bielatWing(wid);
+    const t = parasiteDrag(w, 0.5, 0.5, { boundaryLayer: "turbulent" });
+    const m = parasiteDrag(w, 0.5, 0.5, { boundaryLayer: "mixed" });
+    L.push(`| ${wid} deg | wing | ${(t.wingReynolds / 1e6).toFixed(2)} million | ${t.wingWettedIn2.toFixed(1)} | ${t.wingCf.toFixed(5)} | ${m.wingCf.toFixed(5)} | ${t.wingFormFactor.toFixed(3)} | ${t.wing.toFixed(4)} | ${m.wing.toFixed(4)} |`);
+    L.push(`| ${wid} deg | body | ${(t.bodyReynolds / 1e6).toFixed(2)} million | ${t.bodyWettedIn2.toFixed(1)} | ${t.bodyCf.toFixed(5)} | ${m.bodyCf.toFixed(5)} | ${t.bodyFormFactor.toFixed(3)} | ${t.body.toFixed(4)} | ${m.body.toFixed(4)} |`);
+  }
+  L.push("");
+  L.push("Wing form factor by method at M 0.50:");
+  L.push("");
+  const ffIds = Object.keys(WING_FORM_FACTORS) as (keyof typeof WING_FORM_FACTORS)[];
+  L.push(`| Wing | ${ffIds.map((f) => WING_FORM_FACTORS[f].label).join(" | ")} |`);
+  L.push(`| --- | ${ffIds.map(() => "---:").join(" | ")} |`);
+  for (const wid of WINGS) {
+    const w = bielatWing(wid);
+    L.push(`| ${wid} deg | ${ffIds.map((f) => parasiteDrag(w, 0.5, 0.5, { wingFormFactor: f }).wingFormFactor.toFixed(3)).join(" | ")} |`);
+  }
+  L.push("");
+  L.push(`Sources: ${ffIds.map((f) => `${WING_FORM_FACTORS[f].label}: ${WING_FORM_FACTORS[f].source}`).join("; ")}. All four are marked UNVERIFIED in the code until checked against the books.`);
+  L.push("");
+
+  // 7b. Every variant at CL = 0 against figure 9.
+  L.push("### 7b. Model at CL = 0 against the NACA faired curve (figure 9), M up to 0.90");
+  L.push("");
+  L.push("Columns: the eight variants (form factor / boundary layer), the range they span, its spread, and where the NACA curve falls. The transonic term (Korn-Mason with Lock's law) is the same in every variant; where it reaches half a drag count (0.00005) the range moves as a whole, so those rows say nothing about the parasite drag.");
+  L.push("");
+  L.push(`| Wing | Mach | NACA curve | Transonic term | ${PARASITE_VARIANTS.map((v) => v.id).join(" | ")} | Range | Spread | NACA curve against range |`);
+  L.push(`| --- | ---: | ---: | ---: | ${PARASITE_VARIANTS.map(() => "---:").join(" | ")} | --- | ---: | --- |`);
+  const signed = new Map<string, Map<TestedWingId, number[]>>();
+  for (const wid of WINGS) {
+    const w = bielatWing(wid);
+    for (const s of data.faired.filter((x) => x.wing === wid && x.mach <= SUBSONIC_LIMIT).sort((a, b) => a.mach - b.mach)) {
+      const r = modelRange(w, { mach: s.mach, cl: 0 });
+      const wave = kornMasonLock(w, { mach: s.mach, cl: 0 }).parts.wave;
+      if (!r.valid) {
+        L.push(`| ${wid} deg | ${f3(s.mach)} | ${f4(s.cd0)} | n/a | ${PARASITE_VARIANTS.map(() => "n/a").join(" | ")} | outside model range | n/a | n/a |`);
+        continue;
+      }
+      if (wave >= TRANSONIC_SHOWN) {
+        L.push(`| ${wid} deg | ${f3(s.mach)} | ${f4(s.cd0)} | ${f4(wave)} | ${r.values.map((v) => f4(v.cd)).join(" | ")} | ${f4(r.min)} to ${f4(r.max)} | ${f4(r.max - r.min)} | ${where(outsideBy(s.cd0, r.min, r.max))} (transonic term acting) |`);
+        continue;
+      }
+      for (const v of r.values) {
+        const byWing = signed.get(v.id) ?? new Map<TestedWingId, number[]>();
+        byWing.set(wid, [...(byWing.get(wid) ?? []), v.cd - s.cd0]);
+        signed.set(v.id, byWing);
+      }
+      L.push(`| ${wid} deg | ${f3(s.mach)} | ${f4(s.cd0)} | ${f4(wave)} | ${r.values.map((v) => f4(v.cd)).join(" | ")} | ${f4(r.min)} to ${f4(r.max)} | ${f4(r.max - r.min)} | ${where(outsideBy(s.cd0, r.min, r.max))} |`);
+    }
+  }
+  L.push("");
+
+  // 7c. Mean signed error of each variant.
+  L.push("### 7c. Mean signed error of each variant against figure 9, M up to 0.90");
+  L.push("");
+  L.push("Model minus NACA curve, over the samples of 7b where the model is valid and its transonic term is below half a drag count, 0.00005 (number of samples in brackets). This table describes the variants; it does not pick one. Picking the closest would be a calibration, and under the brief's rule it could only be chosen on the 35 deg wing and then validated on the 10.8 and 47 deg wings.");
+  L.push("");
+  L.push("| Variant | 10.8 deg | 35 deg | 47 deg |");
+  L.push("| --- | ---: | ---: | ---: |");
+  for (const v of PARASITE_VARIANTS) {
+    const byWing = signed.get(v.id);
+    const cell = (wid: TestedWingId): string => {
+      const e = byWing?.get(wid) ?? [];
+      return e.length ? `${sgn(e.reduce((a, b) => a + b, 0) / e.length)} (${e.length})` : "n/a";
+    };
+    L.push(`| ${v.label} | ${cell("10.8")} | ${cell("35")} | ${cell("47")} |`);
+  }
+  L.push("");
+
+  // 7d. Measured symbols against the range.
+  L.push(`### 7d. Measured symbols with |CL| <= ${LOW_LIFT}, M up to 0.90, against the range`);
+  L.push("");
+  L.push("Each symbol at its own CL and Mach number, counted only where the model is valid and its transonic term is below half a drag count (symbols left out for the transonic term in the last column). Inside with u: the range widened by the symbol's total uncertainty in CD.");
+  L.push("");
+  L.push("| Wing | Symbols counted | Inside the range | Inside with u | Largest distance outside the range | Mean spread of the range | Left out: transonic term acting |");
+  L.push("| --- | ---: | ---: | ---: | ---: | ---: | ---: |");
+  for (const wid of WINGS) {
+    const w = bielatWing(wid);
+    const pts = data.polar.filter((p) => p.wing === wid && p.mach <= SUBSONIC_LIMIT && Math.abs(p.cl) <= LOW_LIFT);
+    let n = 0;
+    let inside = 0;
+    let insideU = 0;
+    let worst = 0;
+    let spread = 0;
+    let transonic = 0;
+    for (const p of pts) {
+      const r = modelRange(w, { mach: p.mach, cl: p.cl });
+      if (!r.valid) continue;
+      if (kornMasonLock(w, { mach: p.mach, cl: p.cl }).parts.wave >= TRANSONIC_SHOWN) {
+        transonic++;
+        continue;
+      }
+      n++;
+      spread += r.max - r.min;
+      const d = outsideBy(p.cd, r.min, r.max);
+      if (d === 0) inside++;
+      if (Math.abs(d) <= p.uCd) insideU++;
+      if (Math.abs(d) > Math.abs(worst)) worst = d;
+    }
+    L.push(`| ${wid} deg | ${n} of ${pts.length} | ${inside} | ${insideU} | ${n ? where(worst) : "n/a"} | ${n ? f4(spread / n) : "n/a"} | ${transonic} |`);
+  }
+  L.push("");
+}
+
+/** Drag-rise Mach numbers stated in the report's text (p. 8, PDF page 10). */
+const NACA_TEXT_DRAG_RISE: Partial<Record<TestedWingId, number>> = { "10.8": 0.92, "47": 0.97 };
+
+/** 8. Gate 4: the transonic method against what the data show. */
+function transonicBasis(data: Dataset, L: string[]): void {
+  L.push("## 8. Transonic method against the data (gate 4)");
+  L.push("");
+  L.push("Korn-Mason drag-divergence Mach number at CL = 0 (kA = 0.87, t/c = 0.04, mid-chord sweep), against the drag-rise Mach number of the report (dCD/dM = 0.1). The report's text gives 0.92 for the 10.8 deg wing and 0.97 for the 47 deg wing; for the 35 deg wing only the figure 9 samples give it.");
+  L.push("");
+  L.push("| Wing | Mid-chord sweep | Korn-Mason Mdd | Drag rise, report text | Drag rise, figure 9 samples | Korn-Mason minus report |");
+  L.push("| --- | ---: | ---: | ---: | ---: | ---: |");
+  const mdd: Partial<Record<TestedWingId, number>> = {};
+  for (const wid of WINGS) {
+    const w = bielatWing(wid);
+    const half = sweepAtDeg(w.planform, 0.5);
+    const m = dragDivergenceMach(KORN_FACTOR_NACA6, w.planform.thicknessRatio, 0, half);
+    mdd[wid] = m;
+    const text = NACA_TEXT_DRAG_RISE[wid];
+    const sampled = sampledDragRiseMach(data.faired.filter((s) => s.wing === wid).map((s) => ({ mach: s.mach, cd: s.cd0 })));
+    const ref = text ?? sampled;
+    L.push(`| ${wid} deg | ${half.toFixed(1)} deg | ${f3(m)} | ${text !== undefined ? text.toFixed(2) : "not stated"} | ${sampled === null ? "not reached" : f3(sampled)} | ${ref === null || ref === undefined ? "n/a" : (m - ref >= 0 ? "+" : "") + (m - ref).toFixed(3)} |`);
+  }
+  L.push("");
+  const korn = mdd["47"]! - mdd["10.8"]!;
+  const naca = NACA_TEXT_DRAG_RISE["47"]! - NACA_TEXT_DRAG_RISE["10.8"]!;
+  L.push(`From 10.8 to 47 deg of sweep the drag-rise Mach number grows by ${naca.toFixed(2)} in the report and by ${korn.toFixed(3)} in simple sweep theory: ${(korn / naca).toFixed(1)} times the measured gain.`);
+  L.push("");
+  L.push("Size of the transonic term on figure 9 (NACA faired curve):");
+  L.push("");
+  L.push("| Wing | CD0 at the highest sample up to M 0.90 | Highest CD0 on figure 9 | At Mach | Rise |");
+  L.push("| --- | ---: | ---: | ---: | ---: |");
+  for (const wid of WINGS) {
+    const s = data.faired.filter((x) => x.wing === wid).sort((a, b) => a.mach - b.mach);
+    const sub = s.filter((x) => x.mach <= SUBSONIC_LIMIT).at(-1);
+    const peak = s.reduce((a, b) => (b.cd0 > a.cd0 ? b : a));
+    if (!sub) continue;
+    L.push(`| ${wid} deg | ${f4(sub.cd0)} (M ${f3(sub.mach)}) | ${f4(peak.cd0)} | ${f3(peak.mach)} | ${sgn(peak.cd0 - sub.cd0)} |`);
+  }
+  L.push("");
 }

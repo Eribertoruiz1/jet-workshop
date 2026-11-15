@@ -4,6 +4,9 @@ import {
   assemble,
   bandOf,
   measuredLiftSlope,
+  modelRange,
+  outsideBy,
+  PARASITE_VARIANTS,
   parabolaAtZeroLift,
   parseCsv,
   parseRows,
@@ -96,5 +99,26 @@ describe("reliability strip", () => {
     const s = reliability(kornMasonLock, w, "35", data, 0.1)[0]!;
     expect(s.state).toBe("estimate");
     expect(s.disagrees).toBe(true);
+  });
+});
+
+describe("CD0 sensitivity range (gate 4)", () => {
+  it("spans the eight variants, contains the default model and shares its validity", () => {
+    const w = bielatWing("35");
+    for (const c of [{ mach: 0.5, cl: 0 }, { mach: 0.85, cl: 0.2 }, { mach: 1.05, cl: 0 }]) {
+      const r = modelRange(w, c);
+      const d = kornMasonLock(w, c);
+      expect(r.values).toHaveLength(PARASITE_VARIANTS.length);
+      expect(PARASITE_VARIANTS).toHaveLength(8);
+      expect(r.min).toBeLessThanOrEqual(d.cd);
+      expect(r.max).toBeGreaterThanOrEqual(d.cd);
+      expect(r.valid).toBe(d.valid);
+    }
+  });
+
+  it("signed distance to a range is zero inside and negative below", () => {
+    expect(outsideBy(0.01, 0.009, 0.012)).toBe(0);
+    expect(outsideBy(0.008, 0.009, 0.012)).toBeCloseTo(-0.001, 12);
+    expect(outsideBy(0.013, 0.009, 0.012)).toBeCloseTo(0.001, 12);
   });
 });
