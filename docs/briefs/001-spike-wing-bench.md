@@ -304,3 +304,5 @@ Decisión del dueño para la compuerta 2, si las superposiciones del paso 0 se v
 6. Los símbolos medidos se muestran en la polar, con un selector de Mach ensayado.
 7. Dime si la pasada B recalibró la rejilla o reutilizó la calibración de la A. Si la reutilizó, que recalibre una figura por su cuenta: la diferencia entre pasadas tiene que cubrir también la calibración.
 8. Cuando entre la primera prueba, quita `--passWithNoTests` del comando de pruebas.
+
+Revisión del punto 3 (15 de noviembre de 2026, aprobada por el dueño): los símbolos de baja sustentación están en CL ≈ −0.1 (α = −2°) y CL ≈ +0.1 (α = 0°, por la curvatura), no en CL = 0, y su resistencia difiere del CD0 por la resistencia debida a la sustentación. La comprobación cruzada pasa a ser: una parábola ajustada a los símbolos de la polar con |CL| ≤ 0.3, evaluada en CL = 0, debe coincidir con la curva de la figura 9 dentro de ±0.001. Si no, hay un error de lectura. La parábola es solo una comprobación: nunca se muestra ni se guarda como dato medido.
