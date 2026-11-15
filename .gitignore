@@ -17,6 +17,7 @@ __pycache__/
 .env
 .env.*
 .claude/settings.local.json
+.claude/worktrees/
 
 # OS and editors
 .DS_Store
