@@ -2,11 +2,12 @@ import { useMemo, useState } from "react";
 import {
   bielatWing,
   liftCurveSlope,
+  liftInRange,
   matchTestedWing,
   type TestedWingId,
   type WingBody,
 } from "@jet-workshop/physics";
-import { kornMasonLockBand, modelLimitMach, reliability } from "@jet-workshop/validation";
+import { LOW_LIFT, kornMasonLockBand, reliability, transonicLimitMach } from "@jet-workshop/validation";
 import { loadBundledData } from "./data.ts";
 import { Planform } from "./Planform.tsx";
 import { DragMachChart, type MachBandPoint } from "./charts/DragMachChart.tsx";
@@ -42,7 +43,7 @@ export function App() {
       const r = kornMasonLockBand(wing, { mach: m, cl });
       band.push({ mach: m, min: r.min, max: r.max, valid: r.valid, beyondLock: r.beyondLock });
     }
-    const limit = modelLimitMach(kornMasonLockBand, wing, cl);
+    const limit = transonicLimitMach(kornMasonLockBand, wing, cl);
     const segments = reliability(kornMasonLockBand, wing, tested, data, cl);
     const measured = tested && data ? data.polar.filter((p) => p.wing === tested && Math.abs(p.cl - cl) <= SYMBOL_WINDOW) : [];
     const faired = tested && data && Math.abs(cl) <= 0.02 ? data.faired.filter((s) => s.wing === tested) : [];
@@ -64,9 +65,13 @@ export function App() {
       : { text: "outside model range", spread: null };
     const polarNote = polar.some((p) => !p.beyondLock) ? null : "Model not drawn: beyond the drag-rise model's limit";
     const slope = liftCurveSlope(wing, mach);
-    const lift: LiftCurvePoint[] = slope.valid
-      ? [-3, 14].map((a) => ({ alpha: a, cl: slope.perDeg * (a - wing.airfoil.zeroLiftAngleDeg) }))
-      : [];
+    const lift: LiftCurvePoint[] = [];
+    if (slope.valid) {
+      for (let a = -3; a <= 14 + 1e-9; a += 0.25) {
+        const c = slope.perDeg * (a - wing.airfoil.zeroLiftAngleDeg);
+        lift.push({ alpha: a, cl: c, valid: liftInRange(wing, mach, c).valid });
+      }
+    }
     const pm = tested && data ? data.polar.filter((p) => p.wing === tested && Math.abs(p.mach - mach) < 1e-6) : [];
     const lm = tested && data ? data.lift.filter((p) => p.wing === tested && Math.abs(p.mach - mach) < 1e-6) : [];
     return { polar, lift, pm, lm, readout, polarNote, liftNote: slope.valid ? null : "Lift-curve model not defined at M ≥ 1" };
@@ -109,7 +114,7 @@ export function App() {
         <section className="column-right" aria-label="Results">
           <div className="figure">
             <h2 className="panel-title">Drag coefficient vs Mach</h2>
-            <DragMachChart band={view.band} limitMach={view.limit} measured={view.measured} faired={view.faired} segments={view.segments} clSelected={cl} />
+            <DragMachChart band={view.band} limitMach={view.limit} measured={view.measured} faired={view.faired} segments={view.segments} clSelected={cl} symbolWindow={SYMBOL_WINDOW} stripWindow={LOW_LIFT} />
             <div className="legend">
               <span><svg width="14" height="10" aria-hidden="true"><circle cx="7" cy="5" r="3.6" fill="var(--surface)" stroke="var(--ink)" strokeWidth="1.2" /></svg>Measured (NACA, 1952)</span>
               <span><svg width="22" height="12" aria-hidden="true"><rect x="1" y="1" width="20" height="10" fill="var(--accent)" fillOpacity="0.18" stroke="var(--accent)" strokeWidth="0.8" /></svg>Model range</span>

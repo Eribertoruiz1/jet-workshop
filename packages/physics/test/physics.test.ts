@@ -3,6 +3,9 @@ import {
   bielatWing,
   bodyAloneDrag,
   dragDivergenceMach,
+  liftInRange,
+  modelMachLimit,
+  SUBSONIC_LIMIT_MACH,
   dragRiseMach,
   geometry,
   inducedDragFactor,
@@ -188,6 +191,24 @@ describe("model contract", () => {
     expect(kornMasonLock(w, { mach: mddMin + 0.06, cl: 0 }).beyondLock).toBe(true);
     expect(baselineIncompressible(w, { mach: 1.0, cl: 0 }).parts.wave).toBe(0);
     expect(baselineIncompressible(w, { mach: 1.0, cl: 0 }).valid).toBe(true);
+  });
+  it("stops at M 0.90 even where the wing diverges later: the transonic range stays outside the model", () => {
+    const w47 = bielatWing("47");
+    expect(waveDrag(w47, 0.9, 0).mcritMin).toBeGreaterThan(0.95);
+    expect(modelMachLimit(w47, 0)).toBe(SUBSONIC_LIMIT_MACH);
+    expect(kornMasonLock(w47, { mach: 0.9, cl: 0 }).valid).toBe(true);
+    const r = kornMasonLock(w47, { mach: 0.92, cl: 0 });
+    expect(r.valid).toBe(false);
+    expect(r.transonic).toBe(true);
+    const swept = withPlanform(bielatWing("35"), { sweepQuarterChordDeg: 55 });
+    expect(kornMasonLock(swept, { mach: 1.1, cl: 0.1 }).valid).toBe(false);
+  });
+  it("the lift curve is in range only below the model's Mach limit and in the attached-flow lift range", () => {
+    const w = bielatWing("35");
+    expect(liftInRange(w, 0.6, 0.2).valid).toBe(true);
+    expect(liftInRange(w, 0.95, 0.2).valid).toBe(false);
+    expect(liftInRange(w, 0.6, 0.9).valid).toBe(false);
+    expect(liftInRange(w, 1.0, 0.1).valid).toBe(false);
   });
   it("drag-rise Mach number of the model rises with sweep", () => {
     const m = (["10.8", "35", "47"] as const).map((id) => dragRiseMach(kornMasonLock, bielatWing(id), 0));

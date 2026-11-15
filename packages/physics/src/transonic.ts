@@ -22,7 +22,8 @@
  * 4 percent thick with aspect ratio 3.5, its drag-divergence Mach number
  * misses the measured drag rise in both directions as sweep changes. So the
  * models report every condition where the drag-rise term acts, above the
- * critical Mach number of the first strip to diverge, as outside their range.
+ * critical Mach number of the first strip to diverge, as outside their range,
+ * and never claim a Mach number above 0.90 (models.ts, SUBSONIC_LIMIT_MACH).
  */
 
 import { strips, sweepAtDeg, geometry, type WingBody } from "./geometry.ts";

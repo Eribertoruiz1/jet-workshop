@@ -8,7 +8,7 @@ Models: `korn-mason-lock` (ours) and `baseline-incompressible` (friction and ind
 
 Each model is scored as a band (brief 001, Amendment 3, point 1): the range of its eight parasite-drag variants, four textbook wing form factors (Raymer, Torenbeek, Hoerner, Shevell), each with a fully turbulent boundary layer and with a laminar run to the standard critical Reynolds number of 5e5. No variant is chosen and nothing is fitted to the data. The error at a measured value is its distance to the band, model minus measured, 0 inside; the band's spread is given next to it. The two bands share the same eight parasite variants, so they differ only in their Mach-dependent terms.
 
-Validity: ours is outside its range wherever its transonic drag rise acts, above the critical Mach number of the first strip to diverge, because the transonic method (Korn-Mason with Lock's law) is outside its demonstrated range on these wings (Amendment 3, point 4; section 8). Points there are counted, never scored. The baseline has no Mach limit below M 1.13: it is a reference, not a claim.
+Validity: ours is outside its range in the transonic range (Amendment 3, point 4): above the critical Mach number of the first strip to diverge, where its drag rise acts and the transonic method (Korn-Mason with Lock's law) is outside its demonstrated range on these wings (section 8), and in any case above M 0.90, where its body and parasite terms have no compressibility or wave drag (section 9 shows the body's own drag rising). Points there are counted, never scored. The baseline has no Mach limit below M 1.13: it is a reference, not a claim.
 
 CD0 bands (brief 001, check 3): 1 = within the declared test accuracy (0.0010); 2 = within the charter target (0.0015); 3 = matches the published precedent (0.0020); 4 = worse than the published precedent (above 0.0020). A set of points falls in the band of its largest distance to the model band.
 
@@ -16,24 +16,24 @@ CD0 bands (brief 001, check 3): 1 = within the declared test accuracy (0.0010); 
 
 Each symbol is scored at its own lift coefficient and Mach number, with no interpolation. Columns per model: symbols scored (of all), how many lie inside the band, mean and largest distance to the band, mean distance in multiples of each symbol's total uncertainty, mean width of the band. Improvement = baseline mean distance minus ours, over the symbols both score (positive means ours is closer).
 
-| Wing | Mach | Symbols | Ours: scored | Ours: inside | Ours: mean distance | Ours: max distance | Ours: mean / u | Ours: mean spread | Baseline: scored | Baseline: inside | Baseline: mean distance | Baseline: max distance | Improvement |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 10.8 deg | 0.500 | 10 | 5 | 4 | 0.0005 | 0.0024 | 0.5 | 0.0030 | 5 | 4 | 0.0005 | 0.0024 | +0.0000 |
-| 10.8 deg | 0.850 | 11 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 2 | 0.0002 | 0.0005 | n/a |
-| 10.8 deg | 0.950 | 7 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 0 | 0.0080 | 0.0129 | n/a |
-| 10.8 deg | 1.000 | 6 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 0 | 0.0136 | 0.0184 | n/a |
-| 10.8 deg | 1.100 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0154 | 0.0203 | n/a |
-| 35 deg | 0.500 | 9 | 4 | 2 | 0.0006 | 0.0022 | 0.6 | 0.0027 | 4 | 2 | 0.0006 | 0.0022 | +0.0000 |
-| 35 deg | 0.850 | 11 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 4 | 0.0000 | 0.0000 | n/a |
-| 35 deg | 0.900 | 10 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 1 | 0.0002 | 0.0004 | n/a |
-| 35 deg | 0.950 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0029 | 0.0057 | n/a |
-| 35 deg | 1.000 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0085 | 0.0103 | n/a |
-| 35 deg | 1.100 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0100 | 0.0127 | n/a |
-| 47 deg | 0.500 | 8 | 4 | 1 | 0.0006 | 0.0011 | 0.6 | 0.0024 | 4 | 1 | 0.0006 | 0.0011 | +0.0000 |
-| 47 deg | 0.843 | 8 | 3 | 2 | 0.0003 | 0.0008 | 0.3 | 0.0029 | 3 | 1 | 0.0005 | 0.0015 | +0.0003 |
-| 47 deg | 0.941 | 8 | 2 | 1 | 0.0002 | 0.0005 | 0.2 | 0.0030 | 3 | 1 | 0.0007 | 0.0012 | +0.0004 |
-| 47 deg | 0.990 | 4 | 1 | 0 | 0.0028 | 0.0028 | 2.8 | 0.0030 | 3 | 0 | 0.0020 | 0.0035 | +0.0008 |
-| 47 deg | 1.112 | 4 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0067 | 0.0073 | n/a |
+| Wing | Mach | Symbols | Ours: scored | Ours: inside | Ours: mean distance | Ours: max distance | Ours: mean / u | Ours: mean spread | Baseline: scored | Baseline: inside | Baseline: mean distance | Baseline: max distance | Baseline: mean / u | Improvement |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10.8 deg | 0.500 | 10 | 5 | 4 | 0.0005 | 0.0024 | 0.5 | 0.0030 | 5 | 4 | 0.0005 | 0.0024 | 0.5 | +0.0000 |
+| 10.8 deg | 0.850 | 11 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 2 | 0.0002 | 0.0005 | 0.2 | n/a |
+| 10.8 deg | 0.950 | 7 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 0 | 0.0080 | 0.0129 | 7.9 | n/a |
+| 10.8 deg | 1.000 | 6 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 0 | 0.0136 | 0.0184 | 13.4 | n/a |
+| 10.8 deg | 1.100 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0154 | 0.0203 | 15.3 | n/a |
+| 35 deg | 0.500 | 9 | 4 | 2 | 0.0006 | 0.0022 | 0.6 | 0.0027 | 4 | 2 | 0.0006 | 0.0022 | 0.6 | +0.0000 |
+| 35 deg | 0.850 | 11 | 0 | n/a | n/a | n/a | n/a | n/a | 4 | 4 | 0.0000 | 0.0000 | 0.0 | n/a |
+| 35 deg | 0.900 | 10 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 1 | 0.0002 | 0.0004 | 0.2 | n/a |
+| 35 deg | 0.950 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0029 | 0.0057 | 2.8 | n/a |
+| 35 deg | 1.000 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0085 | 0.0103 | 8.4 | n/a |
+| 35 deg | 1.100 | 5 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0100 | 0.0127 | 9.9 | n/a |
+| 47 deg | 0.500 | 8 | 4 | 1 | 0.0006 | 0.0011 | 0.6 | 0.0024 | 4 | 1 | 0.0006 | 0.0011 | 0.6 | +0.0000 |
+| 47 deg | 0.843 | 8 | 3 | 2 | 0.0003 | 0.0008 | 0.3 | 0.0029 | 3 | 1 | 0.0005 | 0.0015 | 0.5 | +0.0003 |
+| 47 deg | 0.941 | 8 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 1 | 0.0007 | 0.0012 | 0.7 | n/a |
+| 47 deg | 0.990 | 4 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0020 | 0.0035 | 2.0 | n/a |
+| 47 deg | 1.112 | 4 | 0 | n/a | n/a | n/a | n/a | n/a | 3 | 0 | 0.0067 | 0.0073 | 6.6 | n/a |
 
 ## 2. CD0, reported two ways
 
@@ -43,25 +43,25 @@ The figure 9 curve is NACA's 1952 crossplot of the polars, faired by hand; it is
 
 **korn-mason-lock**
 
-| Wing | Range | Samples scored | Inside the band | Largest distance | Band | Mean signed distance | Largest half-spread |
+| Wing | Range | Samples scored | Inside the band | Largest distance | Band (up to M 0.90) or target (above) | Mean signed distance | Largest half-spread |
 | --- | --- | ---: | ---: | ---: | --- | ---: | ---: |
 | 10.8 deg | M up to 0.90 | 2 of 4 | 2 | 0.0000 | 1: within the declared test accuracy (0.0010) | +0.0000 | 0.0016 |
 | 10.8 deg | M above 0.90 to 1.13 | 0 of 9 | n/a | n/a | outside model range | n/a | n/a |
 | 35 deg | M up to 0.90 | 2 of 4 | 2 | 0.0000 | 1: within the declared test accuracy (0.0010) | +0.0000 | 0.0015 |
 | 35 deg | M above 0.90 to 1.13 | 0 of 8 | n/a | n/a | outside model range | n/a | n/a |
 | 47 deg | M up to 0.90 | 4 of 4 | 3 | 0.0004 | 1: within the declared test accuracy (0.0010) | +0.0001 | 0.0015 |
-| 47 deg | M above 0.90 to 1.13 | 3 of 7 | 3 | 0.0000 | 1: within the declared test accuracy (0.0010) | +0.0000 | 0.0015 |
+| 47 deg | M above 0.90 to 1.13 | 0 of 7 | n/a | n/a | outside model range | n/a | n/a |
 
 **baseline-incompressible**
 
-| Wing | Range | Samples scored | Inside the band | Largest distance | Band | Mean signed distance | Largest half-spread |
+| Wing | Range | Samples scored | Inside the band | Largest distance | Band (up to M 0.90) or target (above) | Mean signed distance | Largest half-spread |
 | --- | --- | ---: | ---: | ---: | --- | ---: | ---: |
 | 10.8 deg | M up to 0.90 | 4 of 4 | 4 | 0.0000 | 1: within the declared test accuracy (0.0010) | +0.0000 | 0.0015 |
-| 10.8 deg | M above 0.90 to 1.13 | 9 of 9 | 0 | 0.0118 | 4: worse than the published precedent (above 0.0020) | -0.0093 | 0.0013 |
+| 10.8 deg | M above 0.90 to 1.13 | 9 of 9 | 0 | 0.0118 | outside the target of 0.003 | -0.0093 | 0.0013 |
 | 35 deg | M up to 0.90 | 4 of 4 | 4 | 0.0000 | 1: within the declared test accuracy (0.0010) | +0.0000 | 0.0014 |
-| 35 deg | M above 0.90 to 1.13 | 8 of 8 | 0 | 0.0085 | 4: worse than the published precedent (above 0.0020) | -0.0057 | 0.0012 |
+| 35 deg | M above 0.90 to 1.13 | 8 of 8 | 0 | 0.0085 | outside the target of 0.003 | -0.0057 | 0.0012 |
 | 47 deg | M up to 0.90 | 4 of 4 | 3 | 0.0004 | 1: within the declared test accuracy (0.0010) | +0.0001 | 0.0012 |
-| 47 deg | M above 0.90 to 1.13 | 7 of 7 | 2 | 0.0063 | 4: worse than the published precedent (above 0.0020) | -0.0027 | 0.0011 |
+| 47 deg | M above 0.90 to 1.13 | 7 of 7 | 2 | 0.0063 | outside the target of 0.003 | -0.0027 | 0.0011 |
 
 Sample by sample (ours):
 
@@ -96,9 +96,9 @@ Sample by sample (ours):
 | 47 deg | 0.696 | 0.0089 | 0.0087 to 0.0115 | +0.0000 | yes |
 | 47 deg | 0.843 | 0.0093 | 0.0086 to 0.0115 | +0.0000 | yes |
 | 47 deg | 0.892 | 0.0095 | 0.0086 to 0.0115 | +0.0000 | yes |
-| 47 deg | 0.916 | 0.0097 | 0.0085 to 0.0115 | +0.0000 | yes |
-| 47 deg | 0.941 | 0.0100 | 0.0085 to 0.0115 | +0.0000 | yes |
-| 47 deg | 0.965 | 0.0113 | 0.0085 to 0.0115 | +0.0000 | yes |
+| 47 deg | 0.916 | 0.0097 | 0.0085 to 0.0115 | not scored | no: Mach number above 0.90: transonic range, where the body and parasite terms have no compressibility or wave drag |
+| 47 deg | 0.941 | 0.0100 | 0.0085 to 0.0115 | not scored | no: Mach number above 0.90: transonic range, where the body and parasite terms have no compressibility or wave drag |
+| 47 deg | 0.965 | 0.0113 | 0.0085 to 0.0115 | not scored | no: Mach number above 0.90: transonic range, where the body and parasite terms have no compressibility or wave drag |
 | 47 deg | 0.990 | 0.0137 | 0.0085 to 0.0115 | not scored | no: transonic method outside its range (above the critical Mach number) |
 | 47 deg | 1.010 | 0.0155 | 0.0084 to 0.0114 | not scored | no: transonic method outside its range (above the critical Mach number) |
 | 47 deg | 1.024 | 0.0164 | 0.0085 to 0.0115 | not scored | no: transonic method outside its range (above the critical Mach number) |
@@ -108,25 +108,25 @@ Sample by sample (ours):
 
 **korn-mason-lock**
 
-| Wing | Range | Symbols scored | Inside the band | Largest distance | Band | Mean distance | Mean signed distance | Largest half-spread |
+| Wing | Range | Symbols scored | Inside the band | Largest distance | Band (up to M 0.90) or target (above) | Mean distance | Mean signed distance | Largest half-spread |
 | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
 | 10.8 deg | M up to 0.90 | 4 of 8 | 4 | 0.0000 | 1: within the declared test accuracy (0.0010) | 0.0000 | +0.0000 | 0.0015 |
 | 10.8 deg | M above 0.90 to 1.13 | 0 of 9 | n/a | n/a | outside model range | n/a | n/a | n/a |
 | 35 deg | M up to 0.90 | 3 of 10 | 2 | 0.0001 | 1: within the declared test accuracy (0.0010) | 0.0000 | +0.0000 | 0.0014 |
 | 35 deg | M above 0.90 to 1.13 | 0 of 8 | n/a | n/a | outside model range | n/a | n/a | n/a |
 | 47 deg | M up to 0.90 | 7 of 7 | 3 | 0.0011 | 2: within the charter target (0.0015) | 0.0004 | +0.0004 | 0.0014 |
-| 47 deg | M above 0.90 to 1.13 | 3 of 8 | 1 | 0.0028 | 4: worse than the published precedent (above 0.0020) | 0.0011 | -0.0008 | 0.0015 |
+| 47 deg | M above 0.90 to 1.13 | 0 of 8 | n/a | n/a | outside model range | n/a | n/a | n/a |
 
 **baseline-incompressible**
 
-| Wing | Range | Symbols scored | Inside the band | Largest distance | Band | Mean distance | Mean signed distance | Largest half-spread |
+| Wing | Range | Symbols scored | Inside the band | Largest distance | Band (up to M 0.90) or target (above) | Mean distance | Mean signed distance | Largest half-spread |
 | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
 | 10.8 deg | M up to 0.90 | 8 of 8 | 6 | 0.0005 | 1: within the declared test accuracy (0.0010) | 0.0001 | -0.0001 | 0.0015 |
-| 10.8 deg | M above 0.90 to 1.13 | 9 of 9 | 0 | 0.0203 | 4: worse than the published precedent (above 0.0020) | 0.0112 | -0.0112 | 0.0013 |
+| 10.8 deg | M above 0.90 to 1.13 | 9 of 9 | 0 | 0.0203 | outside the target of 0.003 | 0.0112 | -0.0112 | 0.0013 |
 | 35 deg | M up to 0.90 | 10 of 10 | 7 | 0.0004 | 1: within the declared test accuracy (0.0010) | 0.0001 | -0.0000 | 0.0014 |
-| 35 deg | M above 0.90 to 1.13 | 8 of 8 | 0 | 0.0127 | 4: worse than the published precedent (above 0.0020) | 0.0073 | -0.0073 | 0.0012 |
+| 35 deg | M above 0.90 to 1.13 | 8 of 8 | 0 | 0.0127 | outside the target of 0.003 | 0.0073 | -0.0073 | 0.0012 |
 | 47 deg | M up to 0.90 | 7 of 7 | 2 | 0.0015 | 3: matches the published precedent (0.0020) | 0.0005 | +0.0005 | 0.0012 |
-| 47 deg | M above 0.90 to 1.13 | 8 of 8 | 1 | 0.0073 | 4: worse than the published precedent (above 0.0020) | 0.0034 | -0.0031 | 0.0011 |
+| 47 deg | M above 0.90 to 1.13 | 8 of 8 | 1 | 0.0073 | outside the target of 0.003 | 0.0034 | -0.0031 | 0.0011 |
 
 Range targets (brief 001): up to M 0.90 the bands above; between M 0.90 and 1.12 a target of 0.003 (our proposal, no published precedent). A distance of 0 means inside the band; the band's half-spread, in the last column, is what that is worth.
 
@@ -191,6 +191,7 @@ A parabola through the polar symbols with |CL| <= 0.3, evaluated at CL = 0, agai
 - 62 symbols: lift coefficient more than 0.3 from the minimum-drag lift coefficient (attached-flow polar)
 - 82 symbols: Mach number above the critical Mach number: the transonic drag-rise method (Korn-Mason with Lock's law) is outside its demonstrated range on thin, low-aspect-ratio wings
 - 53 symbols: Mach number above the drag-divergence Mach number plus 0.05: Lock's law not valid
+- 3 symbols: Mach number above 0.90: transonic range, where the body and parasite terms have no compressibility or wave drag
 
 ## 7. CD0 sensitivity: wing form factor and boundary-layer transition (gate 4)
 

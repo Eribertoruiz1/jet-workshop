@@ -61,9 +61,11 @@ export function PolarChart({ band, measured, mach, modelNote }: { band: PolarBan
 export interface LiftCurvePoint {
   alpha: number;
   cl: number;
+  /** Inside the lift model's range (below its Mach limit, attached flow) */
+  valid: boolean;
 }
 
-/** Lift curve at one Mach number: CL against angle of attack. */
+/** Lift curve at one Mach number: CL against angle of attack; dashed red where the model is outside its range. */
 export function LiftChart({ curve, measured, mach, modelNote }: { curve: LiftCurvePoint[]; measured: LiftPoint[]; mach: number; modelNote: string | null }) {
   const aLo = Math.min(-3, ...measured.map((p) => p.alpha - 0.5));
   const aHi = Math.max(14, ...measured.map((p) => p.alpha + 0.5));
@@ -80,7 +82,11 @@ export function LiftChart({ curve, measured, mach, modelNote }: { curve: LiftCur
       <XAxis scale={x} ticks={niceTicks(aLo, aHi, 6)} format={(v) => v.toFixed(0)} at={H - M.b} gridFrom={M.t} gridTo={H - M.b} label="Angle of attack, deg" />
       <YAxis scale={y} ticks={niceTicks(clLo, clHi, 6)} format={(v) => v.toFixed(1)} at={M.l} gridFrom={M.l} gridTo={W - M.r} label="Lift coefficient, CL" />
       <g clipPath="url(#plot-lift)">
-        {curve.length > 1 && <path d={path(curve) ?? ""} fill="none" stroke="var(--accent)" strokeWidth={1.8} />}
+        {lineRuns(curve).map((r, i) => (
+          <path key={i} d={path(r.points) ?? ""} fill="none" stroke={r.valid ? "var(--accent)" : "var(--stop)"} strokeWidth={r.valid ? 1.8 : 1.4} strokeDasharray={r.valid ? undefined : "5 4"}>
+            {!r.valid && <title>Lift model outside its range</title>}
+          </path>
+        ))}
         {measured.map((p) => (
           <MeasuredMark key={`${p.series}-${p.pointId}`} x={x(p.alpha)} y={y(p.cl)} ex0={x(p.alpha - p.uAlpha)} ex1={x(p.alpha + p.uAlpha)} ey0={y(p.cl - p.uCl)} ey1={y(p.cl + p.uCl)}
             title={`Measured (NACA, 1952): M ${p.mach.toFixed(3)}, alpha ${p.alpha.toFixed(2)} deg, CL ${p.cl.toFixed(3)} ± ${p.uCl.toFixed(3)}. Figure ${p.figure}.`} />
@@ -90,4 +96,15 @@ export function LiftChart({ curve, measured, mach, modelNote }: { curve: LiftCur
       {modelNote && <text x={M.l + 8} y={M.t + 12} className="ink">{modelNote}</text>}
     </svg>
   );
+}
+
+/** Split a line into runs of equal validity; neighbouring runs share their end point. */
+function lineRuns<T extends { valid: boolean }>(points: T[]): { valid: boolean; points: T[] }[] {
+  const out: { valid: boolean; points: T[] }[] = [];
+  for (const p of points) {
+    const last = out.at(-1);
+    if (last && last.valid === p.valid) last.points.push(p);
+    else out.push({ valid: p.valid, points: last ? [last.points.at(-1)!, p] : [p] });
+  }
+  return out.filter((r) => r.points.length > 1);
 }

@@ -3,8 +3,8 @@
  *
  * Lift-curve slope: Helmbold's equation in the DATCOM form given by Raymer,
  * with Prandtl-Glauert compressibility (beta) and the fuselage lift factor.
- * It has no meaning at or above M = 1 and degrades above the critical Mach
- * number; callers get a validity flag.
+ * It has no meaning at or above M = 1 (its flag) and degrades above the
+ * critical Mach number: `liftInRange` in models.ts gives the full range.
  */
 
 import { geometry, sweepAtDeg, type WingBody } from "./geometry.ts";

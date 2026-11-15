@@ -59,6 +59,8 @@ export interface Band {
   valid: boolean;
   /** Beyond Lock's own limit: computed, but not drawn even as outside the range */
   beyondLock: boolean;
+  /** Above the model's Mach limit (the transonic range) */
+  transonic: boolean;
   /** Why the band is outside the model's range, when it is */
   reasons: string[];
 }
@@ -71,13 +73,17 @@ export function makeBand(variants: { id: string; model: DragModel }[]): BandMode
   return (wing, c) => {
     const results = variants.map((v) => ({ id: v.id, r: v.model(wing, c) }));
     const cds = results.map((x) => x.r.cd);
+    const computed = cds.every(Number.isFinite);
+    const reasons = [...new Set(results.flatMap((x) => x.r.reasons))];
+    if (!computed) reasons.push("a variant is not defined here (no finite value)");
     return {
       values: results.map((x) => ({ id: x.id, cd: x.r.cd })),
       min: Math.min(...cds),
       max: Math.max(...cds),
-      valid: results.every((x) => x.r.valid),
+      valid: computed && results.every((x) => x.r.valid),
       beyondLock: results.some((x) => x.r.beyondLock),
-      reasons: [...new Set(results.flatMap((x) => x.r.reasons))],
+      transonic: results.some((x) => x.r.transonic),
+      reasons,
     };
   };
 }
@@ -124,6 +130,7 @@ export function bandOf(absError: number): number {
 
 /** Error of a band at a measured value, as model minus measured: 0 inside, positive when the band lies above the value. */
 export function bandError(band: Band, value: number): number {
+  if (!Number.isFinite(band.min) || !Number.isFinite(band.max)) return Number.NaN;
   const d = outsideBy(value, band.min, band.max);
   return d === 0 ? 0 : -d;
 }
@@ -298,7 +305,8 @@ export const SEGMENT_EDGES = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0
  * on the model band (Amendment 3, point 1):
  *
  * - outside model range: the model is not valid somewhere in the segment
- *   (the transonic drag rise acts, or an equation is outside its range);
+ *   (above its Mach limit, the transonic range, or an equation outside its
+ *   range, such as the attached-flow lift range of the polar);
  * - validated: the geometry is a tested wing, the segment holds measured
  *   symbols within 0.3 of the selected CL, every one of them lies inside the
  *   band (each scored at its own CL and Mach), and the band's half-spread at
@@ -334,9 +342,14 @@ export function reliability(model: BandModel, wing: WingBody, tested: TestedWing
   return out;
 }
 
-/** Lowest Mach number at which the model stops being valid at a lift coefficient (where the band stops). */
-export function modelLimitMach(model: BandModel, wing: WingBody, cl: number, from = 0.5, to = 1.15, step = 0.001): number | null {
-  for (let m = from; m <= to + 1e-9; m += step) if (!model(wing, { mach: m, cl }).valid) return m;
+/**
+ * Lowest Mach number at which the model enters its transonic range at a lift
+ * coefficient: where the drag-rise note goes. The band can also leave its range
+ * for other reasons (the polar's lift range); those show as hatching and in the
+ * strip's reasons, not as this note.
+ */
+export function transonicLimitMach(model: BandModel, wing: WingBody, cl: number, from = 0.5, to = 1.15, step = 0.001): number | null {
+  for (let m = from; m <= to + 1e-9; m += step) if (model(wing, { mach: m, cl }).transonic) return m;
   return null;
 }
 

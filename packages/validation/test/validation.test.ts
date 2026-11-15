@@ -9,7 +9,8 @@ import {
   kornMasonLockBand,
   loadBodyDataset,
   measuredLiftSlope,
-  modelLimitMach,
+  makeBand,
+  transonicLimitMach,
   modelRange,
   outsideBy,
   PARASITE_VARIANTS,
@@ -113,7 +114,7 @@ describe("scoring helpers", () => {
     expect(m).toBeLessThan(0.925);
   });
   it("scores a point by its distance to the band, model minus measured, 0 inside", () => {
-    const band: Band = { values: [], min: 0.009, max: 0.011, valid: true, beyondLock: false, reasons: [] };
+    const band: Band = { values: [], min: 0.009, max: 0.011, valid: true, beyondLock: false, transonic: false, reasons: [] };
     expect(bandError(band, 0.010)).toBe(0);
     expect(bandError(band, 0.008)).toBeCloseTo(0.001, 12);
     expect(bandError(band, 0.0125)).toBeCloseTo(-0.0015, 12);
@@ -126,7 +127,7 @@ describe("scoring helpers", () => {
 });
 
 /** A band of fixed position for the strip rules: centre and half-width in CD. */
-const fixedBand = (centre: number, half: number): BandModel => () => ({ values: [], min: centre - half, max: centre + half, valid: true, beyondLock: false, reasons: [] });
+const fixedBand = (centre: number, half: number): BandModel => () => ({ values: [], min: centre - half, max: centre + half, valid: true, beyondLock: false, transonic: false, reasons: [] });
 const oneSymbol = (cd: number): Dataset => ({ rows: [], lift: [], faired: [], polar: [{ wing: "35", mach: 0.52, cl: 0.1, uCl: 0.01, cd, uCd: 0.001 } as PolarPoint] });
 
 describe("reliability strip", () => {
@@ -135,9 +136,23 @@ describe("reliability strip", () => {
     expect(segs[0]!.state).toBe("estimate");
     expect(segs.at(-1)!.state).toBe("outside model range");
     const w = bielatWing("35");
-    const limit = modelLimitMach(kornMasonLockBand, w, 0)!;
+    const limit = transonicLimitMach(kornMasonLockBand, w, 0)!;
     expect(limit).toBeCloseTo(waveDrag(w, 0.8, 0).mcritMin, 2);
     for (const s of reliability(kornMasonLockBand, w, null, null, 0)) if (s.hi > limit + 0.001) expect(s.state).toBe("outside model range");
+  });
+  it("puts the drag-rise note at the transonic limit only, not where the polar's lift range ends", () => {
+    const w = bielatWing("35");
+    // At CL 0.38 the band leaves the attached-flow lift range near M 0.50, yet the transonic limit is the critical Mach number.
+    expect(kornMasonLockBand(w, { mach: 0.5, cl: 0.38 }).valid).toBe(false);
+    expect(transonicLimitMach(kornMasonLockBand, w, 0.38)!).toBeGreaterThan(0.75);
+    // The 47 deg wing diverges above M 0.90, but the model stops there.
+    expect(transonicLimitMach(kornMasonLockBand, bielatWing("47"), 0)!).toBeCloseTo(0.9, 2);
+  });
+  it("a band with a value that is not finite is outside the model's range and never scores as inside", () => {
+    const nan = makeBand([{ id: "x", model: () => ({ cl: 0, cd: Number.NaN, valid: true, reasons: [], beyondLock: false, transonic: false, parts: { parasite: 0, induced: 0, wave: 0, minimumDragCl: 0 } }) }]);
+    const b = nan(bielatWing("35"), { mach: 0.6, cl: 0 });
+    expect(b.valid).toBe(false);
+    expect(Number.isNaN(bandError(b, 0.01))).toBe(true);
   });
   it("validated only when every symbol lies inside the band and the band's half-spread is within 0.0020", () => {
     const w = bielatWing("35");
