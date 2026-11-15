@@ -1,0 +1,340 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig07b",
+    "number": "7(b)",
+    "title": "Figure 7 (continued). (b) Drag coefficient. Variation with lift coefficient of the aerodynamic characteristics for the 47 deg sweptback wing.",
+    "pdf_page": 28,
+    "printed_page": 26,
+    "x_axis": "Lift coefficient, C_L, on staggered scales, same layout as figure 7(a). Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 2.8 (31 vertical lines). Label row: -.2 at the left frame, one '0' per Mach number every 0.2 (M = 0.50 ... 1.112, 12 zeros), then .2, .4, .6 on the M = 1.112 scale (.6 at the right frame); the '0' labels sit within about 2 px of grid lines 0.0 to 2.2 (828.5 to 2189.5 px on row 350). CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.843), 1.0 (0.941), 1.4 (0.990), 2.2 (1.112).",
+    "y_axis": "Drag coefficient, C_D (grid 0 to 0.22 by 0.01; frame line at 0.22). The Mach-number box sits below the C_D = 0 line, between it and the bottom frame line (one grid step lower, not used).",
+    "content_note": "One hollow symbol shape with a centre dot per Mach number (same shapes as figure 7(a)), on one faired polar per Mach number. Same test points as figure 7(a): crowded low-drag symbols were matched to figure 7(a) by lift coefficient."
+  },
+  "scan": {
+    "pdf_page": 28,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 28 .cache/scans/p28.png"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "points": [
+      {
+        "px": [
+          766,
+          297
+        ],
+        "x": -0.1,
+        "y": 0.21
+      },
+      {
+        "px": [
+          953,
+          484
+        ],
+        "x": 0.2,
+        "y": 0.18
+      },
+      {
+        "px": [
+          829,
+          856
+        ],
+        "x": 0.0,
+        "y": 0.12
+      },
+      {
+        "px": [
+          768,
+          1230
+        ],
+        "x": -0.1,
+        "y": 0.06
+      },
+      {
+        "px": [
+          1016,
+          1106
+        ],
+        "x": 0.3,
+        "y": 0.08
+      },
+      {
+        "px": [
+          1202,
+          358
+        ],
+        "x": 0.6,
+        "y": 0.2
+      },
+      {
+        "px": [
+          1756,
+          296
+        ],
+        "x": 1.5,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2252,
+          420
+        ],
+        "x": 2.3,
+        "y": 0.19
+      },
+      {
+        "px": [
+          2437,
+          669
+        ],
+        "x": 2.6,
+        "y": 0.15
+      },
+      {
+        "px": [
+          2376,
+          980
+        ],
+        "x": 2.5,
+        "y": 0.1
+      },
+      {
+        "px": [
+          2501,
+          1228
+        ],
+        "x": 2.7,
+        "y": 0.06
+      },
+      {
+        "px": [
+          2501,
+          1477
+        ],
+        "x": 2.7,
+        "y": 0.02
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07b-47deg-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1
+        },
+        {
+          "id": "p2",
+          "candidate": 2
+        },
+        {
+          "id": "p3",
+          "candidate": 4
+        },
+        {
+          "id": "p4",
+          "candidate": 6
+        },
+        {
+          "id": "p5",
+          "candidate": 9
+        },
+        {
+          "id": "p6",
+          "candidate": 13
+        },
+        {
+          "id": "p7",
+          "candidate": 15
+        },
+        {
+          "id": "p8",
+          "candidate": 19
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 7
+        },
+        {
+          "id": "p2",
+          "candidate": 10
+        },
+        {
+          "id": "p3",
+          "candidate": 14
+        },
+        {
+          "id": "p4",
+          "candidate": 21
+        },
+        {
+          "id": "p5",
+          "candidate": 27
+        },
+        {
+          "id": "p6",
+          "candidate": 30
+        },
+        {
+          "id": "p7",
+          "candidate": 34
+        },
+        {
+          "id": "p8",
+          "candidate": 37
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 25
+        },
+        {
+          "id": "p2",
+          "candidate": 33
+        },
+        {
+          "id": "p3",
+          "candidate": 40,
+          "note": "Touches the M = 0.990 symbol just above it (candidate 39); own dot clean."
+        },
+        {
+          "id": "p4",
+          "candidate": 45
+        },
+        {
+          "id": "p5",
+          "candidate": 50
+        },
+        {
+          "id": "p6",
+          "candidate": 56
+        },
+        {
+          "id": "p7",
+          "candidate": 59
+        },
+        {
+          "id": "p8",
+          "candidate": 63
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 39
+        },
+        {
+          "id": "p2",
+          "candidate": 48
+        },
+        {
+          "id": "p3",
+          "candidate": 54,
+          "note": "Touches a symbol of the M = 1.010 polar (candidate 55) just above it; own dot clean."
+        },
+        {
+          "id": "p4",
+          "candidate": 62,
+          "note": "Top point, under the .990 label. Candidate 61 directly below it (C_D 0.018) is a symbol of the M = 1.010 polar, not this one."
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter disc with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 70
+        },
+        {
+          "id": "p2",
+          "px": [
+            2270,
+            1500
+          ],
+          "snap": "dot",
+          "note": "Faint dot, not found by candidates.py; the dot snap isolates it at the default level."
+        },
+        {
+          "id": "p3",
+          "candidate": 78
+        },
+        {
+          "id": "p4",
+          "candidate": 80
+        }
+      ]
+    }
+  ]
+}

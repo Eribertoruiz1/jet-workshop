@@ -1,0 +1,317 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig07a",
+    "number": "7(a)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 47 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 27,
+    "printed_page": 25,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label and a heavier vertical line)",
+    "y_axis": "Angle of attack, alpha, deg (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot on one faired line per Mach number. Same test points as figure 7(b)."
+  },
+  "scan": {
+    "pdf_page": 27,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": -3.0,
+        "step": 1.0,
+        "count": 18
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.2, grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.2 (M 1.112); then .2 .4 .6 of M 1.112 at 2.4 to 2.8 (right frame). Test Mach numbers 0.50, 0.696, 0.843, 0.892, 0.916, 0.941, 0.965, 0.990, 1.010, 1.024, 1.088, 1.112.",
+    "points": [
+      {
+        "px": [
+          452,
+          502
+        ],
+        "x": -0.1,
+        "y": 12.0
+      },
+      {
+        "px": [
+          452,
+          818
+        ],
+        "x": -0.1,
+        "y": 8.0
+      },
+      {
+        "px": [
+          452,
+          1134
+        ],
+        "x": -0.1,
+        "y": 4.0
+      },
+      {
+        "px": [
+          452,
+          1528
+        ],
+        "x": -0.1,
+        "y": -1.0
+      },
+      {
+        "px": [
+          764,
+          424
+        ],
+        "x": 0.3,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2324,
+          424
+        ],
+        "x": 2.3,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2636,
+          424
+        ],
+        "x": 2.7,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2636,
+          898
+        ],
+        "x": 2.7,
+        "y": 7.0
+      },
+      {
+        "px": [
+          2636,
+          1370
+        ],
+        "x": 2.7,
+        "y": 1.0
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07a-47deg-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1
+        },
+        {
+          "id": "p2",
+          "candidate": 2
+        },
+        {
+          "id": "p3",
+          "candidate": 4
+        },
+        {
+          "id": "p4",
+          "candidate": 6
+        },
+        {
+          "id": "p5",
+          "candidate": 9
+        },
+        {
+          "id": "p6",
+          "candidate": 14
+        },
+        {
+          "id": "p7",
+          "candidate": 16
+        },
+        {
+          "id": "p8",
+          "candidate": 20
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 7
+        },
+        {
+          "id": "p2",
+          "candidate": 10
+        },
+        {
+          "id": "p3",
+          "candidate": 15
+        },
+        {
+          "id": "p4",
+          "candidate": 22
+        },
+        {
+          "id": "p5",
+          "candidate": 27
+        },
+        {
+          "id": "p6",
+          "candidate": 30
+        },
+        {
+          "id": "p7",
+          "candidate": 34
+        },
+        {
+          "id": "p8",
+          "candidate": 36
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 25
+        },
+        {
+          "id": "p2",
+          "candidate": 33
+        },
+        {
+          "id": "p3",
+          "candidate": 40
+        },
+        {
+          "id": "p4",
+          "candidate": 45
+        },
+        {
+          "id": "p5",
+          "candidate": 52
+        },
+        {
+          "id": "p6",
+          "candidate": 56
+        },
+        {
+          "id": "p7",
+          "px": [
+            1935,
+            543
+          ],
+          "snap": "none",
+          "note": "A vertical grid line runs through the symbol and hides the dot. Outline centroid (left side x 1926, y 529-557; apex 1953,543)."
+        },
+        {
+          "id": "p8",
+          "candidate": 62
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 39
+        },
+        {
+          "id": "p2",
+          "candidate": 49
+        },
+        {
+          "id": "p3",
+          "candidate": 55
+        },
+        {
+          "id": "p4",
+          "candidate": 61
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter circle",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 70
+        },
+        {
+          "id": "p2",
+          "candidate": 76
+        },
+        {
+          "id": "p3",
+          "candidate": 78
+        },
+        {
+          "id": "p4",
+          "candidate": 82
+        }
+      ]
+    }
+  ],
+  "assignment_method": "Candidates grouped in alpha bands and ordered by common-axis CL: within each band the Mach numbers appear left to right in test order. Shapes checked against the symbol next to each Mach label."
+}

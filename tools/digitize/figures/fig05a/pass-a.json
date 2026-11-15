@@ -1,0 +1,360 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig05a",
+    "number": "5(a)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 10.8 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 21,
+    "printed_page": 19,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label and a heavier vertical line)",
+    "y_axis": "Angle of attack, alpha, deg (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot on one straight faired line per Mach number. Same test points as figure 5(b)."
+  },
+  "scan": {
+    "pdf_page": 21,
+    "size_px": [
+      3060,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 35
+      },
+      "y_lines": {
+        "start": -4.0,
+        "step": 1.0,
+        "count": 19,
+        "skip": [
+          -3.0
+        ]
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.2, grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.4 (M 1.114); then .2 .4 .6 .8 of M 1.114 at 2.6 to 3.2 (right frame).",
+    "points": [
+      {
+        "px": [
+          432,
+          500
+        ],
+        "x": -0.1,
+        "y": 12.0
+      },
+      {
+        "px": [
+          432,
+          781
+        ],
+        "x": -0.1,
+        "y": 8.0
+      },
+      {
+        "px": [
+          432,
+          1062
+        ],
+        "x": -0.1,
+        "y": 4.0
+      },
+      {
+        "px": [
+          432,
+          1413
+        ],
+        "x": -0.1,
+        "y": -1.0
+      },
+      {
+        "px": [
+          850,
+          424
+        ],
+        "x": 0.5,
+        "y": 13.0
+      },
+      {
+        "px": [
+          1900,
+          442
+        ],
+        "x": 2.0,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2455,
+          447
+        ],
+        "x": 2.8,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2455,
+          729
+        ],
+        "x": 2.8,
+        "y": 9.0
+      },
+      {
+        "px": [
+          2452,
+          1222
+        ],
+        "x": 2.8,
+        "y": 2.0
+      }
+    ],
+    "grid_note": "The alpha = -3 deg line is the top border of the Mach-number label box, with lettering right below it; it is skipped and the mesh interpolates between -2 and -4 deg there."
+  },
+  "series": [
+    {
+      "id": "fig05a-10.8deg-M0.500",
+      "wing": "10.8",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1
+        },
+        {
+          "id": "p2",
+          "candidate": 3,
+          "note": "Thick outline: two circles drawn on top of each other (a repeated point). Only one centre dot is visible here, so one point is recorded; figure 5(b) separates them by 4 px in CD."
+        },
+        {
+          "id": "p4",
+          "candidate": 5
+        },
+        {
+          "id": "p5",
+          "candidate": 9
+        },
+        {
+          "id": "p6",
+          "candidate": 12
+        },
+        {
+          "id": "p7",
+          "candidate": 15,
+          "note": "p6 and p7: two overlapping circles (repeated point)."
+        },
+        {
+          "id": "p8",
+          "candidate": 19
+        },
+        {
+          "id": "p9",
+          "candidate": 24
+        },
+        {
+          "id": "p10",
+          "candidate": 28
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M0.850",
+      "wing": "10.8",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 7
+        },
+        {
+          "id": "p2",
+          "candidate": 14
+        },
+        {
+          "id": "p3",
+          "candidate": 16
+        },
+        {
+          "id": "p4",
+          "candidate": 21
+        },
+        {
+          "id": "p5",
+          "candidate": 31
+        },
+        {
+          "id": "p6",
+          "px": [
+            1276.5,
+            818.0
+          ],
+          "snap": "none",
+          "note": "One of three overlapping diamonds near alpha 7.6 (with p7 and p11); no centre dots visible; outline centre of the lower-left one."
+        },
+        {
+          "id": "p7",
+          "px": [
+            1295.5,
+            814.5
+          ],
+          "snap": "none",
+          "note": "Second overlapping diamond; centre from the outline (vertices about x 1281-1310, y 797-832)."
+        },
+        {
+          "id": "p8",
+          "candidate": 43
+        },
+        {
+          "id": "p9",
+          "candidate": 44
+        },
+        {
+          "id": "p10",
+          "candidate": 45
+        },
+        {
+          "id": "p11",
+          "px": [
+            1284.5,
+            811.5
+          ],
+          "snap": "none",
+          "note": "Middle diamond of a three-diamond cluster (top vertex 1284.5,795; centre from the outline). Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M0.950",
+      "wing": "10.8",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 29
+        },
+        {
+          "id": "p2",
+          "candidate": 39,
+          "note": "Thick outline: two triangles on top of each other (repeated point)."
+        },
+        {
+          "id": "p3",
+          "px": [
+            1300,
+            1323
+          ],
+          "snap": "dot",
+          "note": "Second dot inside the double triangle of p2 (repeated point), 5 px below the first.",
+          "dot_radius": 3,
+          "dot_level": 160
+        },
+        {
+          "id": "p4",
+          "candidate": 49
+        },
+        {
+          "id": "p5",
+          "candidate": 57
+        },
+        {
+          "id": "p6",
+          "candidate": 64
+        },
+        {
+          "id": "p7",
+          "candidate": 66
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M1.000",
+      "wing": "10.8",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 42
+        },
+        {
+          "id": "p2",
+          "candidate": 53
+        },
+        {
+          "id": "p3",
+          "candidate": 60
+        },
+        {
+          "id": "p4",
+          "candidate": 70
+        },
+        {
+          "id": "p5",
+          "candidate": 76
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M1.100",
+      "wing": "10.8",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter circle, straight sides top and left",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 72
+        },
+        {
+          "id": "p2",
+          "candidate": 81
+        },
+        {
+          "id": "p3",
+          "candidate": 87
+        },
+        {
+          "id": "p4",
+          "candidate": 91
+        },
+        {
+          "id": "p5",
+          "candidate": 94
+        }
+      ]
+    }
+  ]
+}

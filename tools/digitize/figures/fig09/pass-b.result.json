@@ -1,0 +1,1905 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig09",
+    "number": "9",
+    "title": "Effect of sweep angle on the variation of drag coefficient at zero lift with Mach number for the wing-body configuration.",
+    "pdf_page": 31,
+    "printed_page": 29,
+    "x_axis": "Mach number, M (grid 0.40 to 1.20 by 0.05; frame lines at 0.40 and 1.20)",
+    "y_axis": "C_D0, drag coefficient at zero lift (grid 0 to 0.030 by 0.005; frame lines at 0 and 0.030)",
+    "content_note": "Three faired curves without symbols, for sweep 10.8, 35 and 47 deg. Line identity read by tracing: below M = 0.82 the 35 deg curve is the middle of the three lines (below the 10.8 deg line, above the 47 deg line), crosses the CD0 = 0.010 grid line near M = 0.79 and runs along it from about M = 0.65 to 0.81; from about M = 0.83 to 0.87 it lies alongside the 10.8 deg line as one two-stroke band (band width never drops to a single stroke, so the lines do not cross; 35 deg is the lower stroke); from M = 0.88 it is the middle curve of the transonic rise (legend '35' sits at the right end of this middle curve). It is solid to M = 1.037, dashed from M = 1.04 to 1.081 (three short dashes, level near CD0 = 0.0200), absent between M = 1.081 and 1.088, and solid again from M = 1.088 to 1.131 (a single long stroke, about 0.043 in M, falling to the right; read as the faired line through the supersonic points, unlike the short dashes before it). Sample M = 1.085 is left out: its column (about x = 2394 px) falls in the gap between the last dash (ends x = 2385) and the start of the final solid stroke (x = 2404, M = 1.088). Cross-check of line identity against figure 6(b) (35 deg polars, my own rough reading, not part of this result): the M = 0.50 faired polar crosses CL = 0 at CD about 0.0090 and the M = 0.70 polar at about 0.0099, closer to the middle line (0.0096, 0.0100) than to the upper line (0.0102, 0.0103); the M = 0.90 polar gives about 0.011, matching the middle curve there. 10.8 and 47 deg curves (added in the second round): below M = 0.82 the 10.8 deg curve is the top line (above the 35 deg line and the C_D0 = 0.010 grid line), joins the 35 deg line as the upper stroke of a two-stroke band from M = 0.83 to 0.87, and is the leftmost (highest) rising curve from M = 0.88, ending under the label '10.8'; solid to M = 1.038, three short dashes to M = 1.080, then a single long stroke from M = 1.084 to 1.115 falling to the right. The 47 deg curve is the lowest line below M = 0.94 (about 35 to 40 px under the others at M = 0.50), runs into the C_D0 = 0.010 grid line near M = 0.94, rises last (rightmost) and ends under the label '47'; solid to M = 1.036, short dashes to M = 1.086, gap, then a single long level stroke from M = 1.090 to 1.126. As for 35 deg, the final long strokes are read as solid faired lines; the short dashes are left out."
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "scan": {
+    "pdf_page": 31,
+    "size_px": [
+      3062,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 31 .cache/scans/p31.png"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": 0.4,
+        "step": 0.05,
+        "count": 17
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.005,
+        "count": 7
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0003547727168547395,
+        -4.8429507583117254e-06,
+        0.24011710157593363
+      ],
+      [
+        -3.428025981064568e-07,
+        -3.535743776947461e-05,
+        0.052424859738183616
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          610,
+          1334
+        ],
+        "px": [
+          609.54,
+          1334.44
+        ],
+        "x": 0.45,
+        "y": 0.005,
+        "residual_data": [
+          -9.688572228083725e-05,
+          3.348478778069947e-05
+        ],
+        "residual_px": [
+          -0.29,
+          -0.94
+        ],
+        "mesh_residual_data": [
+          -7.194079464128977e-05,
+          -6.89850807786014e-06
+        ]
+      },
+      {
+        "picked_px": [
+          605,
+          1052
+        ],
+        "px": [
+          605.02,
+          1052.52
+        ],
+        "x": 0.45,
+        "y": 0.015,
+        "residual_data": [
+          -0.00033443359044993404,
+          3.140418831398817e-06
+        ],
+        "residual_px": [
+          -0.94,
+          -0.08
+        ],
+        "mesh_residual_data": [
+          -5.7529168605130465e-05,
+          -7.235846428270756e-06
+        ]
+      },
+      {
+        "picked_px": [
+          601,
+          770
+        ],
+        "px": [
+          600.96,
+          770.58
+        ],
+        "x": 0.45,
+        "y": 0.025,
+        "residual_data": [
+          -0.00041094347369735607,
+          -2.6865945980652367e-05
+        ],
+        "residual_px": [
+          -1.15,
+          0.77
+        ],
+        "mesh_residual_data": [
+          6.22613383581272e-05,
+          -4.256879627607957e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1027,
+          907
+        ],
+        "px": [
+          1027.94,
+          907.48
+        ],
+        "x": 0.6,
+        "y": 0.02,
+        "residual_data": [
+          0.00040693768396693475,
+          -1.3552059504939179e-05
+        ],
+        "residual_px": [
+          1.15,
+          0.37
+        ],
+        "mesh_residual_data": [
+          0.00014236531590461343,
+          -3.2991838941169582e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1597,
+          1326
+        ],
+        "px": [
+          1596.56,
+          1326.08
+        ],
+        "x": 0.8,
+        "y": 0.005,
+        "residual_data": [
+          0.0001115078918234591,
+          -9.105824663384159e-06
+        ],
+        "residual_px": [
+          0.32,
+          0.25
+        ],
+        "mesh_residual_data": [
+          -8.806411458195385e-05,
+          7.587933926935658e-07
+        ]
+      },
+      {
+        "picked_px": [
+          1593,
+          1042
+        ],
+        "px": [
+          1593.0,
+          1042.45
+        ],
+        "x": 0.8,
+        "y": 0.015,
+        "residual_data": [
+          0.00022027809951175037,
+          2.041399513101616e-05
+        ],
+        "residual_px": [
+          0.61,
+          -0.58
+        ],
+        "mesh_residual_data": [
+          -5.7737753216380305e-05,
+          -5.307530180000131e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1590,
+          760
+        ],
+        "px": [
+          1589.52,
+          760.45
+        ],
+        "x": 0.8,
+        "y": 0.025,
+        "residual_data": [
+          0.0003513829281838188,
+          -7.513213292321963e-06
+        ],
+        "residual_px": [
+          0.99,
+          0.2
+        ],
+        "mesh_residual_data": [
+          -4.399992933934449e-05,
+          -1.3025151904648424e-06
+        ]
+      },
+      {
+        "picked_px": [
+          2021,
+          1322
+        ],
+        "px": [
+          2021.06,
+          1321.98
+        ],
+        "x": 0.95,
+        "y": 0.005,
+        "residual_data": [
+          0.000732902458069562,
+          -9.913844765302264e-06
+        ],
+        "residual_px": [
+          2.07,
+          0.26
+        ],
+        "mesh_residual_data": [
+          -8.978360697198262e-05,
+          3.2066233871192243e-06
+        ]
+      },
+      {
+        "picked_px": [
+          2441,
+          1318
+        ],
+        "px": [
+          2440.99,
+          1318.54
+        ],
+        "x": 1.1,
+        "y": 0.005,
+        "residual_data": [
+          -0.00027169586330488826,
+          -3.2220426134719864e-05
+        ],
+        "residual_px": [
+          -0.75,
+          0.92
+        ],
+        "mesh_residual_data": [
+          -5.111674322622051e-05,
+          2.572858404410218e-06
+        ]
+      },
+      {
+        "picked_px": [
+          2438,
+          1034
+        ],
+        "px": [
+          2437.54,
+          1033.62
+        ],
+        "x": 1.1,
+        "y": 0.015,
+        "residual_data": [
+          -0.00011731898273037444,
+          4.302776644420081e-05
+        ],
+        "residual_px": [
+          -0.35,
+          -1.21
+        ],
+        "mesh_residual_data": [
+          -6.972461815113462e-05,
+          2.0183190530955603e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2434,
+          752
+        ],
+        "px": [
+          2434.08,
+          751.63
+        ],
+        "x": 1.1,
+        "y": 0.025,
+        "residual_data": [
+          2.346460438951148e-05,
+          1.4897913567284149e-05
+        ],
+        "residual_px": [
+          0.06,
+          -0.42
+        ],
+        "mesh_residual_data": [
+          -4.624017428844773e-05,
+          3.832438096144919e-06
+        ]
+      },
+      {
+        "picked_px": [
+          2579,
+          1174
+        ],
+        "px": [
+          2579.0,
+          1175.33
+        ],
+        "x": 1.15,
+        "y": 0.01,
+        "residual_data": [
+          -0.0006151960334777051,
+          -1.5793567413815643e-05
+        ],
+        "residual_px": [
+          -1.73,
+          0.46
+        ],
+        "mesh_residual_data": [
+          2.8805241265583703e-05,
+          -1.222038791409523e-05
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.00037012126911871,
+      2.2457069583289267e-05
+    ],
+    "affine_max_abs_residual_data": [
+      0.000732902458069562,
+      4.302776644420081e-05
+    ],
+    "data_per_px": [
+      0.0003547727168546899,
+      -3.53574377694732e-05
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 332,
+        "used": 331,
+        "rms_px": 0.36,
+        "max_warp_px": 0.41
+      },
+      {
+        "line": "horizontal",
+        "value": 0.005,
+        "samples": 371,
+        "used": 371,
+        "rms_px": 0.289,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "horizontal",
+        "value": 0.01,
+        "samples": 339,
+        "used": 339,
+        "rms_px": 0.394,
+        "max_warp_px": 0.51
+      },
+      {
+        "line": "horizontal",
+        "value": 0.015,
+        "samples": 368,
+        "used": 368,
+        "rms_px": 0.306,
+        "max_warp_px": 0.45
+      },
+      {
+        "line": "horizontal",
+        "value": 0.02,
+        "samples": 339,
+        "used": 338,
+        "rms_px": 0.346,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "horizontal",
+        "value": 0.025,
+        "samples": 351,
+        "used": 350,
+        "rms_px": 0.292,
+        "max_warp_px": 0.22
+      },
+      {
+        "line": "horizontal",
+        "value": 0.03,
+        "samples": 368,
+        "used": 368,
+        "rms_px": 0.298,
+        "max_warp_px": 0.27
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.259,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.45,
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.266,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 137,
+        "used": 137,
+        "rms_px": 0.304,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 0.55,
+        "samples": 136,
+        "used": 136,
+        "rms_px": 0.28,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.271,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "vertical",
+        "value": 0.65,
+        "samples": 136,
+        "used": 136,
+        "rms_px": 0.265,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.249,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 0.75,
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.269,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 139,
+        "used": 139,
+        "rms_px": 0.264,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "vertical",
+        "value": 0.85,
+        "samples": 137,
+        "used": 137,
+        "rms_px": 0.279,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "vertical",
+        "value": 0.9,
+        "samples": 137,
+        "used": 137,
+        "rms_px": 0.271,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": 0.95,
+        "samples": 136,
+        "used": 136,
+        "rms_px": 0.3,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 1.0,
+        "samples": 135,
+        "used": 135,
+        "rms_px": 0.294,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 1.05,
+        "samples": 137,
+        "used": 137,
+        "rms_px": 0.284,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 1.1,
+        "samples": 123,
+        "used": 123,
+        "rms_px": 0.32,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": 1.15,
+        "samples": 125,
+        "used": 125,
+        "rms_px": 0.304,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 1.2,
+        "samples": 128,
+        "used": 128,
+        "rms_px": 0.313,
+        "max_warp_px": 0.2
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig09-35deg",
+      "wing": "35",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            755,
+            1205
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            749.97,
+            1204.3
+          ],
+          "columns_used": 7,
+          "line_width_px": 2.0,
+          "fit_rms_px": 0.107,
+          "slope_px_per_px": 0.0359,
+          "data": [
+            0.5000000000006734,
+            0.009576654221561271
+          ],
+          "affine_data": [
+            0.5003536304372478,
+            0.009586805767903446
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 11.91,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.500",
+          "note": "Curve starts on the M = 0.50 grid line; right-side columns only, extrapolated a few px to the start.",
+          "value": {
+            "M": 0.5000000000006734,
+            "CD0": 0.009576654221561271
+          }
+        },
+        {
+          "x_value": 0.7,
+          "hint": [
+            1313,
+            1189
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1314.41,
+            1188.38
+          ],
+          "columns_used": 14,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.357,
+          "slope_px_per_px": 0.0072,
+          "data": [
+            0.700000000029674,
+            0.009968603990512812
+          ],
+          "affine_data": [
+            0.7006786425148093,
+            0.009956204678718265
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 0.89,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M0.700",
+          "note": "Here the 35 deg line runs along the CD0 = 0.010 grid line (merged ink band about 7 px wide, two strokes). The value is the centre of the merged band. Interpolating the clean parts of both lines, the grid stroke is near row 1186.3 and the 35 deg stroke near row 1189.3 here (it crosses the grid line upward near M = 0.79), so the 35 deg stroke is about 1 px below the band centre and the true value may be lower by about 0.00004.",
+          "value": {
+            "M": 0.700000000029674,
+            "CD0": 0.009968603990512812
+          }
+        },
+        {
+          "x_value": 0.85,
+          "hint": [
+            1737,
+            1171
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1736.76,
+            1170.86
+          ],
+          "columns_used": 14,
+          "line_width_px": 8.5,
+          "fit_rms_px": 0.268,
+          "slope_px_per_px": -0.0823,
+          "data": [
+            0.8500000000006994,
+            0.01041275205380257
+          ],
+          "affine_data": [
+            0.8506017479756942,
+            0.010430884311129214
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 11.72,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.850",
+          "note": "Here the 35 deg line lies alongside the 10.8 deg line (one ink band about 9 px wide). The two strokes never narrow to a single stroke between M = 0.82 and 0.87, so I read them as not crossing, with 35 deg the lower stroke. The value is the centre of the two-stroke band; the 35 deg stroke itself is about 2 px lower, i.e. the true value may be lower by about 0.00007.",
+          "value": {
+            "M": 0.8500000000006994,
+            "CD0": 0.01041275205380257
+          }
+        },
+        {
+          "x_value": 0.9,
+          "hint": [
+            1878,
+            1154
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1877.77,
+            1154.16
+          ],
+          "columns_used": 14,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.679,
+          "slope_px_per_px": -0.2385,
+          "data": [
+            0.8999999999947792,
+            0.010967808001610162
+          ],
+          "affine_data": [
+            0.9007091260570448,
+            0.010973014927520439
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 27.57,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.900",
+          "note": "Lower of two close lines (10.8 deg is about 7 px above); M = 0.90 column is on a vertical grid line, neighbouring columns used.",
+          "value": {
+            "M": 0.8999999999947792,
+            "CD0": 0.010967808001610162
+          }
+        },
+        {
+          "x_value": 0.925,
+          "hint": [
+            1948,
+            1134
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1948.22,
+            1134.33
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.149,
+          "slope_px_per_px": -0.3261,
+          "data": [
+            0.9249999999745925,
+            0.011636661474880744
+          ],
+          "affine_data": [
+            0.9257988996729984,
+            0.011650002475452524
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 46.63,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.925",
+          "value": {
+            "M": 0.9249999999745925,
+            "CD0": 0.011636661474880744
+          }
+        },
+        {
+          "x_value": 0.95,
+          "hint": [
+            2018,
+            1102
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2018.37,
+            1101.23
+          ],
+          "columns_used": 14,
+          "line_width_px": 6.0,
+          "fit_rms_px": 0.564,
+          "slope_px_per_px": -0.9418,
+          "data": [
+            0.9499999967544462,
+            0.012766909437158813
+          ],
+          "affine_data": [
+            0.9508465074304586,
+            0.012796286063364963
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 63.73,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.950",
+          "note": "Drawn corner of the curve (slope changes sharply) just at M = 0.95, which is also on a vertical grid line; straight-line fit over neighbouring columns on both sides.",
+          "value": {
+            "M": 0.9499999967544462,
+            "CD0": 0.012766909437158813
+          }
+        },
+        {
+          "x_value": 0.975,
+          "hint": [
+            2088,
+            997
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2087.46,
+            998.57
+          ],
+          "columns_used": 17,
+          "line_width_px": 8.0,
+          "fit_rms_px": 0.49,
+          "slope_px_per_px": -1.3639,
+          "data": [
+            0.9749999973345943,
+            0.016366063343726412
+          ],
+          "affine_data": [
+            0.9758549317628009,
+            0.01640239639327605
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 38.21,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.975",
+          "note": "Steep part of the rise.",
+          "value": {
+            "M": 0.9749999973345943,
+            "CD0": 0.016366063343726412
+          }
+        },
+        {
+          "x_value": 1.0,
+          "hint": [
+            2157,
+            926
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2157.35,
+            925.73
+          ],
+          "columns_used": 13,
+          "line_width_px": 6.0,
+          "fit_rms_px": 0.217,
+          "slope_px_per_px": -0.6248,
+          "data": [
+            1.0000000000896327,
+            0.018945283340790077
+          ],
+          "affine_data": [
+            1.001002757477014,
+            0.01895387368682292
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 29.51,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.000",
+          "note": "On a vertical grid line, neighbouring columns used.",
+          "value": {
+            "M": 1.0000000000896327,
+            "CD0": 0.018945283340790077
+          }
+        },
+        {
+          "x_value": 1.02,
+          "hint": [
+            2213,
+            906
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2212.49,
+            906.22
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.159,
+          "slope_px_per_px": -0.2191,
+          "data": [
+            1.0199999999886644,
+            0.019628005884645423
+          ],
+          "affine_data": [
+            1.0206594110536789,
+            0.019624795162445786
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 10.41,
+            "inked_here": false
+          },
+          "near_grid_line": false,
+          "id": "M1.020",
+          "value": {
+            "M": 1.0199999999886644,
+            "CD0": 0.019628005884645423
+          }
+        },
+        {
+          "x_value": 1.035,
+          "hint": [
+            2254,
+            899
+          ],
+          "found": true,
+          "side": "left",
+          "px": [
+            2253.95,
+            899.52
+          ],
+          "columns_used": 8,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.097,
+          "slope_px_per_px": -0.0729,
+          "data": [
+            1.0349999999964974,
+            0.0198559675669305
+          ],
+          "affine_data": [
+            1.0354007356645571,
+            0.01984747739978377
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 4.03,
+            "inked_here": false
+          },
+          "near_grid_line": false,
+          "id": "M1.035",
+          "note": "Solid line ends about 6 px to the right (M = 1.037); left-side columns only. The CD0 = 0.020 grid line is not printed here (it is interrupted from about x = 2190 to 2431 px for the legend), so no grid ink touches the curve at this column; a near-grid-line flag here comes from the fitted grid line bridging that gap.",
+          "value": {
+            "M": 1.0349999999964974,
+            "CD0": 0.0198559675669305
+          }
+        },
+        {
+          "x_value": 1.1,
+          "hint": [
+            2437,
+            913
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2436.44,
+            913.3
+          ],
+          "columns_used": 13,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.397,
+          "slope_px_per_px": 0.3382,
+          "data": [
+            1.0999999999755967,
+            0.01930963175618777
+          ],
+          "affine_data": [
+            1.100076472901929,
+            0.019297693861191963
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 19.37,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.100",
+          "note": "On the final solid stroke (M = 1.088 to 1.131), on a vertical grid line; neighbouring columns used.",
+          "value": {
+            "M": 1.0999999999755967,
+            "CD0": 0.01930963175618777
+          }
+        },
+        {
+          "x_value": 1.13,
+          "hint": [
+            2520,
+            935
+          ],
+          "found": true,
+          "side": "left",
+          "px": [
+            2520.74,
+            935.44
+          ],
+          "columns_used": 8,
+          "line_width_px": 4.5,
+          "fit_rms_px": 0.123,
+          "slope_px_per_px": 0.2301,
+          "data": [
+            1.129999999998573,
+            0.0184900989417576
+          ],
+          "affine_data": [
+            1.1298765900029946,
+            0.018485981929955417
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 42.43,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.130",
+          "note": "End of the final solid stroke is about 3 px to the right (M = 1.131); left-side columns only.",
+          "value": {
+            "M": 1.129999999998573,
+            "CD0": 0.0184900989417576
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig09-10.8deg",
+      "wing": "10.8",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            756,
+            1185
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            749.76,
+            1188.19
+          ],
+          "columns_used": 7,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.651,
+          "slope_px_per_px": 0.5346,
+          "data": [
+            0.4999988921454718,
+            0.010148416805706146
+          ],
+          "affine_data": [
+            0.5003571481034248,
+            0.010156486078915283
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 4.2,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M0.500",
+          "note": "Curve starts on the M = 0.50 grid line; right-side columns only. The 10.8 deg line (top of the three below M = 0.82) runs about 6 px above the C_D0 = 0.010 grid line here, but the light gap row between them (grey 156 to 176) falls below the ink threshold in about half the columns, so the fitted centre (row 1188.2) is pulled toward the grid line. Read from the pixel values, the stroke alone is centred at row 1186.5 (rows 1184 to 1188), about 1.7 px higher, i.e. the true value is about 0.00006 higher (about 0.0102).",
+          "value": {
+            "M": 0.4999988921454718,
+            "CD0": 0.010148416805706146
+          }
+        },
+        {
+          "x_value": 0.7,
+          "hint": [
+            1310,
+            1179.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1314.29,
+            1179.48
+          ],
+          "columns_used": 13,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.163,
+          "slope_px_per_px": 0.0107,
+          "data": [
+            0.7000000000000022,
+            0.01028193593611888
+          ],
+          "affine_data": [
+            0.7006791720505356,
+            0.01027092701117837
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 8.01,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.700",
+          "note": "Top line, clear of the C_D0 = 0.010 grid line (which carries the 35 deg line here).",
+          "value": {
+            "M": 0.7000000000000022,
+            "CD0": 0.01028193593611888
+          }
+        },
+        {
+          "x_value": 0.85,
+          "hint": [
+            1733,
+            1170
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1736.76,
+            1170.86
+          ],
+          "columns_used": 14,
+          "line_width_px": 8.5,
+          "fit_rms_px": 0.268,
+          "slope_px_per_px": -0.0823,
+          "data": [
+            0.8500000000972017,
+            0.010412752054491794
+          ],
+          "affine_data": [
+            0.8506017479756942,
+            0.010430884311129214
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 11.72,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.850",
+          "note": "Here the 10.8 and 35 deg lines lie side by side as one two-stroke band about 8 px wide (10.8 deg is the upper stroke; they separate again near M = 0.87). The value is the centre of the band; the 10.8 deg stroke itself is about 2 px higher, i.e. the true value may be higher by about 0.00007.",
+          "value": {
+            "M": 0.8500000000972017,
+            "CD0": 0.010412752054491794
+          }
+        },
+        {
+          "x_value": 0.9,
+          "hint": [
+            1876,
+            1148
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1877.68,
+            1146.81
+          ],
+          "columns_used": 14,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.243,
+          "slope_px_per_px": -0.338,
+          "data": [
+            0.8999999990255079,
+            0.01122596647169017
+          ],
+          "affine_data": [
+            0.9007127922006015,
+            0.011232922947359912
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 34.92,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.900",
+          "note": "Upper of two close lines (35 deg about 7 px below); M = 0.90 is on a vertical grid line, neighbouring columns used.",
+          "value": {
+            "M": 0.8999999990255079,
+            "CD0": 0.01122596647169017
+          }
+        },
+        {
+          "x_value": 0.925,
+          "hint": [
+            1944,
+            1094
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1947.49,
+            1089.39
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.419,
+          "slope_px_per_px": -1.2286,
+          "data": [
+            0.925000005176238,
+            0.013214227681622148
+          ],
+          "affine_data": [
+            0.9257575577967732,
+            0.013239215974709326
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 50.88,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.925",
+          "note": "Steep rise; leftmost (highest) of the three rising curves.",
+          "value": {
+            "M": 0.925000005176238,
+            "CD0": 0.013214227681622148
+          }
+        },
+        {
+          "x_value": 0.95,
+          "hint": [
+            2018,
+            1002
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2016.7,
+            991.49
+          ],
+          "columns_used": 14,
+          "line_width_px": 8.0,
+          "fit_rms_px": 0.531,
+          "slope_px_per_px": -1.6079,
+          "data": [
+            0.9500019385887255,
+            0.016645221283171183
+          ],
+          "affine_data": [
+            0.9507855024095284,
+            0.01667698376452595
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 46.03,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.950",
+          "note": "On a vertical grid line, neighbouring columns used. Steep part of the rise.",
+          "value": {
+            "M": 0.9500019385887255,
+            "CD0": 0.016645221283171183
+          }
+        },
+        {
+          "x_value": 0.975,
+          "hint": [
+            2085,
+            873
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2085.87,
+            872.62
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.378,
+          "slope_px_per_px": -1.4424,
+          "data": [
+            0.9750000009578506,
+            0.020857651127997104
+          ],
+          "affine_data": [
+            0.9759008127910112,
+            0.02085621073647237
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 24.32,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.975",
+          "note": "Upper part of the rise, curving into the plateau.",
+          "value": {
+            "M": 0.9750000009578506,
+            "CD0": 0.020857651127997104
+          }
+        },
+        {
+          "x_value": 1.0,
+          "hint": [
+            2157,
+            813
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2155.72,
+            810.57
+          ],
+          "columns_used": 14,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.371,
+          "slope_px_per_px": -0.3722,
+          "data": [
+            0.9999999988003827,
+            0.023026722130370464
+          ],
+          "affine_data": [
+            1.0009821921578679,
+            0.02302619498859053
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 55.86,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.000",
+          "note": "On a vertical grid line, neighbouring columns used.",
+          "value": {
+            "M": 0.9999999988003827,
+            "CD0": 0.023026722130370464
+          }
+        },
+        {
+          "x_value": 1.02,
+          "hint": [
+            2212,
+            798.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2210.86,
+            798.69
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.094,
+          "slope_px_per_px": -0.0758,
+          "data": [
+            1.0199999999970926,
+            0.023428407207712575
+          ],
+          "affine_data": [
+            1.020601894020247,
+            0.023427339214032297
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 44.53,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.020",
+          "value": {
+            "M": 1.0199999999970926,
+            "CD0": 0.023428407207712575
+          }
+        },
+        {
+          "x_value": 1.035,
+          "hint": [
+            2253,
+            796.5
+          ],
+          "found": true,
+          "side": "left",
+          "px": [
+            2252.3,
+            796.18
+          ],
+          "columns_used": 8,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.09,
+          "slope_px_per_px": -0.0482,
+          "data": [
+            1.0350000000018593,
+            0.02350240990531381
+          ],
+          "affine_data": [
+            1.035315831213111,
+            0.02350188064316815
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 42.46,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.035",
+          "note": "The solid line ends about 8 px to the right (x = 2262, M = 1.038); left-side columns only. Beyond it the curve is dashed (three short dashes, M = 1.046 to 1.080) and then a single long stroke from x = 2392 to 2478 (M = 1.084 to 1.115), falling to the right; as for the 35 deg curve I read that long stroke as the faired line (solid), not as a dash.",
+          "value": {
+            "M": 1.0350000000018593,
+            "CD0": 0.02350240990531381
+          }
+        },
+        {
+          "x_value": 1.085,
+          "hint": [
+            2396,
+            805
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            2392.75,
+            804.95
+          ],
+          "columns_used": 9,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.09,
+          "slope_px_per_px": 0.1101,
+          "data": [
+            1.0850000000018365,
+            0.023143242428734535
+          ],
+          "affine_data": [
+            1.0851011866172087,
+            0.023143649289025802
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 52.81,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.085",
+          "note": "At the very start of the final long stroke (it begins about 2 px left of this column, at x = 2392); right-side columns only. If that stroke is read as a dash or a leader to the label rather than the faired line, this sample and the next two should be dropped.",
+          "value": {
+            "M": 1.0850000000018365,
+            "CD0": 0.023143242428734535
+          }
+        },
+        {
+          "x_value": 1.1,
+          "hint": [
+            2437,
+            813
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2435.23,
+            814.06
+          ],
+          "columns_used": 14,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.402,
+          "slope_px_per_px": 0.3391,
+          "data": [
+            1.0999999992890828,
+            0.022808481291752624
+          ],
+          "affine_data": [
+            1.1001278123477898,
+            0.02280698077657833
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 62.34,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.100",
+          "note": "On the final long stroke, on a vertical grid line; neighbouring columns used.",
+          "value": {
+            "M": 1.0999999992890828,
+            "CD0": 0.022808481291752624
+          }
+        },
+        {
+          "x_value": 1.114,
+          "hint": [
+            2474,
+            827
+          ],
+          "found": true,
+          "side": "left",
+          "px": [
+            2474.71,
+            826.2
+          ],
+          "columns_used": 8,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.091,
+          "slope_px_per_px": 0.3262,
+          "data": [
+            1.1140000000609438,
+            0.022366680903311564
+          ],
+          "affine_data": [
+            1.114075445787009,
+            0.022364207635483663
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 67.28,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.114",
+          "note": "End of the final long stroke is about 4 px to the right (x = 2478); left-side columns only.",
+          "value": {
+            "M": 1.1140000000609438,
+            "CD0": 0.022366680903311564
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig09-47deg",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            756,
+            1240
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            750.37,
+            1235.23
+          ],
+          "columns_used": 6,
+          "line_width_px": 2.5,
+          "fit_rms_px": 0.105,
+          "slope_px_per_px": 0.0383,
+          "data": [
+            0.5000000000056471,
+            0.008476920866164186
+          ],
+          "affine_data": [
+            0.5003457470570352,
+            0.008493063096654353
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 42.84,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.500",
+          "note": "Curve starts on the M = 0.50 grid line; right-side columns only. Lowest of the three lines below M = 0.94.",
+          "value": {
+            "M": 0.5000000000056471,
+            "CD0": 0.008476920866164186
+          }
+        },
+        {
+          "x_value": 0.696,
+          "hint": [
+            1299,
+            1218
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1303.39,
+            1217.91
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.15,
+          "slope_px_per_px": -0.0495,
+          "data": [
+            0.6960000000001924,
+            0.008924087532743194
+          ],
+          "affine_data": [
+            0.6966260348391772,
+            0.008915877226016819
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 30.34,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.696",
+          "value": {
+            "M": 0.6960000000001924,
+            "CD0": 0.008924087532743194
+          }
+        },
+        {
+          "x_value": 0.843,
+          "hint": [
+            1713,
+            1201.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1717.31,
+            1201.51
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.15,
+          "slope_px_per_px": -0.0208,
+          "data": [
+            0.8429999999999976,
+            0.009341093435405042
+          ],
+          "affine_data": [
+            0.8435529821921273,
+            0.00935384635402798
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 18.73,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.843",
+          "value": {
+            "M": 0.8429999999999976,
+            "CD0": 0.009341093435405042
+          }
+        },
+        {
+          "x_value": 0.892,
+          "hint": [
+            1851,
+            1196
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1855.67,
+            1196.11
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.103,
+          "slope_px_per_px": -0.0565,
+          "data": [
+            0.8919999999997269,
+            0.00950131662043992
+          ],
+          "affine_data": [
+            0.892665487230244,
+            0.009497346350509132
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 14.15,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.892",
+          "value": {
+            "M": 0.8919999999997269,
+            "CD0": 0.00950131662043992
+          }
+        },
+        {
+          "x_value": 0.916,
+          "hint": [
+            1919,
+            1191
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1923.48,
+            1191.04
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.125,
+          "slope_px_per_px": -0.0866,
+          "data": [
+            0.9159999999997966,
+            0.009655447168042702
+          ],
+          "affine_data": [
+            0.9167471789205084,
+            0.009653363115822773
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 9.78,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.916",
+          "note": "Approaching the C_D0 = 0.010 grid line from below (about 9 px under it); clear of it.",
+          "value": {
+            "M": 0.9159999999997966,
+            "CD0": 0.009655447168042702
+          }
+        },
+        {
+          "x_value": 0.941,
+          "hint": [
+            1989,
+            1182
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1994.07,
+            1180.33
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.094,
+          "slope_px_per_px": -0.1087,
+          "data": [
+            0.9410000000167662,
+            0.010003990898691341
+          ],
+          "affine_data": [
+            0.941842453005906,
+            0.010007842838933509
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 0.12,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M0.941",
+          "note": "The 47 deg line crosses the C_D0 = 0.010 grid line at almost exactly this column (pixel values: 2 to 3 px below the grid line at x = 1975 to 1987, within it at x = 1993 to 1996, above it from x = 2005), so the inked band is the line and the grid line merged; the value is the centre of the merged band, which here coincides with the line.",
+          "value": {
+            "M": 0.9410000000167662,
+            "CD0": 0.010003990898691341
+          }
+        },
+        {
+          "x_value": 0.965,
+          "hint": [
+            2057,
+            1147.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2061.35,
+            1143.53
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.165,
+          "slope_px_per_px": -0.8925,
+          "data": [
+            0.9650000026304698,
+            0.011269439821568873
+          ],
+          "affine_data": [
+            0.9658897819837986,
+            0.011285932790049573
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 36.23,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.965",
+          "note": "Rightmost (lowest) of the three rising curves.",
+          "value": {
+            "M": 0.9650000026304698,
+            "CD0": 0.011269439821568873
+          }
+        },
+        {
+          "x_value": 0.99,
+          "hint": [
+            2127,
+            1079
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2130.85,
+            1074.97
+          ],
+          "columns_used": 17,
+          "line_width_px": 6.0,
+          "fit_rms_px": 0.339,
+          "slope_px_per_px": -1.0916,
+          "data": [
+            0.9900000058424445,
+            0.013647878157760772
+          ],
+          "affine_data": [
+            0.9908785185091931,
+            0.013686213942956348
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 38.62,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.990",
+          "value": {
+            "M": 0.9900000058424445,
+            "CD0": 0.013647878157760772
+          }
+        },
+        {
+          "x_value": 1.01,
+          "hint": [
+            2184,
+            1025.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2186.2,
+            1023.39
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.659,
+          "slope_px_per_px": -0.9645,
+          "data": [
+            1.010000001547755,
+            0.015446281676028437
+          ],
+          "affine_data": [
+            1.0107649877872165,
+            0.015490976459300657
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 12.48,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.010",
+          "value": {
+            "M": 1.010000001547755,
+            "CD0": 0.015446281676028437
+          }
+        },
+        {
+          "x_value": 1.024,
+          "hint": [
+            2223,
+            996
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2224.67,
+            994.93
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.164,
+          "slope_px_per_px": -0.5469,
+          "data": [
+            1.0240000002998717,
+            0.016452604940588415
+          ],
+          "affine_data": [
+            1.0245509245831999,
+            0.016484061522270756
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 40.63,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.024",
+          "note": "The solid line ends at x = 2257 (M = 1.036); dashed beyond (short dashes from M = 1.044 to 1.086), then a single long level stroke from x = 2407 to 2508 (M = 1.090 to 1.126).",
+          "value": {
+            "M": 1.0240000002998717,
+            "CD0": 0.016452604940588415
+          }
+        },
+        {
+          "x_value": 1.112,
+          "hint": [
+            2471,
+            971.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2470.59,
+            971.5
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.037,
+          "slope_px_per_px": 0.0032,
+          "data": [
+            1.112,
+            0.01722298236739581
+          ],
+          "affine_data": [
+            1.1119101014483848,
+            0.017228184274283208
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 62.42,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.112",
+          "note": "On the final long level stroke (x = 2407 to 2508), read as the faired line as for the other two wings. Sample M = 1.088 is left out: its column (about x = 2402) falls in the gap between the last short dash (ends x = 2395) and the start of this stroke (x = 2407).",
+          "value": {
+            "M": 1.112,
+            "CD0": 0.01722298236739581
+          }
+        }
+      ]
+    }
+  ]
+}

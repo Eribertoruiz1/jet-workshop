@@ -1,0 +1,487 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig06a",
+    "number": "6(a)",
+    "title": "Figure 6. Variation with lift coefficient of the aerodynamic characteristics for the 35 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 24,
+    "printed_page": 22,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 3.0 (33 vertical lines). Label row: -.2 at the left frame, one '0' per Mach number every 0.2 (M = 0.50, .70, .85, .90, .925, .95, .975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.13), then .2, .4, .6 on the M = 1.13 scale (.6 at the right frame). The '0' labels sit at x = 500, 646, 798, 951, 1098, 1246, 1399, 1543, 1690, 1837, 1988, 2140, 2293 px, within 2 to 6 px of grid lines 0.0 to 2.4 (496.5 to 2293.5 px on row 1200). CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.85), 0.6 (0.90), 1.0 (0.95), 1.4 (1.00), 2.2 (1.10).",
+    "y_axis": "Angle of attack, alpha, deg (grid -3 to 14 by 1; frame lines at -3 and 14). Between alpha = -2 and the bottom frame the Mach-number box is drawn over erased vertical grid lines.",
+    "content_note": "One hollow symbol shape with a centre dot per Mach number, on one faired line per Mach number. Same test points as figure 6(b)."
+  },
+  "scan": {
+    "pdf_page": 24,
+    "size_px": [
+      3058,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 24 .cache/scans/p24.png"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 33
+      },
+      "y_lines": {
+        "start": -3.0,
+        "step": 1.0,
+        "count": 18
+      }
+    },
+    "points": [
+      {
+        "px": [
+          416,
+          425
+        ],
+        "x": -0.1,
+        "y": 13.0
+      },
+      {
+        "px": [
+          643,
+          649
+        ],
+        "x": 0.2,
+        "y": 10.0
+      },
+      {
+        "px": [
+          570,
+          949
+        ],
+        "x": 0.1,
+        "y": 6.0
+      },
+      {
+        "px": [
+          420,
+          1100
+        ],
+        "x": -0.1,
+        "y": 4.0
+      },
+      {
+        "px": [
+          946,
+          1547
+        ],
+        "x": 0.6,
+        "y": -2.0
+      },
+      {
+        "px": [
+          1319,
+          422
+        ],
+        "x": 1.1,
+        "y": 13.0
+      },
+      {
+        "px": [
+          1618,
+          496
+        ],
+        "x": 1.5,
+        "y": 12.0
+      },
+      {
+        "px": [
+          1993,
+          571
+        ],
+        "x": 2.0,
+        "y": 11.0
+      },
+      {
+        "px": [
+          1993,
+          793
+        ],
+        "x": 2.0,
+        "y": 8.0
+      },
+      {
+        "px": [
+          2590,
+          493
+        ],
+        "x": 2.8,
+        "y": 12.0
+      },
+      {
+        "px": [
+          2668,
+          716
+        ],
+        "x": 2.9,
+        "y": 9.0
+      },
+      {
+        "px": [
+          2669,
+          1316
+        ],
+        "x": 2.9,
+        "y": 1.0
+      },
+      {
+        "px": [
+          2443,
+          1467
+        ],
+        "x": 2.6,
+        "y": -1.0
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06a-35deg-M0.500",
+      "wing": "35",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            449,
+            1544
+          ],
+          "snap": "dot",
+          "note": "Faint circle and faint dot, not found by candidates.py; the dot snap finds it at the default level."
+        },
+        {
+          "id": "p2",
+          "candidate": 1,
+          "snap": "candidate",
+          "note": "Two circles drawn almost on top of each other at alpha about 0.2 deg (outline doubled at the top, offset about 3 px vertically), two dots 3.5 px apart in one column; this is the upper dot. Candidate centroids used so the snap cannot merge the two dots."
+        },
+        {
+          "id": "p3",
+          "candidate": 2,
+          "snap": "candidate",
+          "note": "Lower dot of the doubled circle (see previous point)."
+        },
+        {
+          "id": "p4",
+          "candidate": 4
+        },
+        {
+          "id": "p5",
+          "candidate": 7
+        },
+        {
+          "id": "p6",
+          "candidate": 9,
+          "snap": "candidate",
+          "note": "Two circles offset about 4 px horizontally at alpha about 6.6 deg, two dots 4 px apart on one row; this is the left dot."
+        },
+        {
+          "id": "p7",
+          "candidate": 10,
+          "snap": "candidate",
+          "note": "Right dot of the two overlapping circles (see previous point)."
+        },
+        {
+          "id": "p8",
+          "candidate": 14
+        },
+        {
+          "id": "p9",
+          "candidate": 16
+        },
+        {
+          "id": "p10",
+          "candidate": 19
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M0.850",
+      "wing": "35",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 6
+        },
+        {
+          "id": "p2",
+          "candidate": 11,
+          "note": "Two diamonds overlap at alpha about 0.3 deg, the second offset about (+4, -8) px; this is the lower one, its dot is clean."
+        },
+        {
+          "id": "p3",
+          "px": [
+            874.0,
+            1367.8
+          ],
+          "snap": "none",
+          "note": "Upper of the two overlapping diamonds at alpha about 0.3 deg. Outline vertices top (874, 1352), left (857, 1368), right (891, 1368), bottom (874, 1384) give centre (874.5, 1368); its dot lies against the upper-right edge of the lower diamond and is not isolated. A template match with a clean diamond of this figure gives (872.7, 1367.3) after correcting the 1 px bias measured on clean diamonds; value used is between the two. Uncertainty about 1.5 px."
+        },
+        {
+          "id": "p4",
+          "candidate": 15
+        },
+        {
+          "id": "p5",
+          "candidate": 22
+        },
+        {
+          "id": "p6",
+          "px": [
+            1254.3,
+            853.0
+          ],
+          "snap": "none",
+          "note": "Three overlapping diamonds at alpha about 7.4 to 7.6 deg (this point and the next two; figure 6(b) also shows three diamonds here). Lower-left diamond: vertices left (1238, 853), top (1254, 837), bottom (1254, 869); its centre coincides with the left vertex of the lower-right diamond, so the dot is hidden. Centre from the outline (clean diamonds here have the dot at the outline centre, half-diagonal 16.5 px). Template match gives (1254.1, 852.2) after bias correction. Uncertainty about 1.5 px."
+        },
+        {
+          "id": "p7",
+          "px": [
+            1269.0,
+            851.5
+          ],
+          "snap": "none",
+          "note": "Lower-right diamond of the three: top vertex (1269, 836), right vertex (1286, 852), bottom vertex (1270, 866); its centre coincides with the right vertex of the lower-left diamond, dot hidden. Centre from the outline; template match (1268.5, 850.2). Uncertainty about 1.5 px."
+        },
+        {
+          "id": "p8",
+          "px": [
+            1269.5,
+            840.0
+          ],
+          "snap": "none",
+          "note": "Upper diamond of the three: top vertex (1269, 823), right vertex (1287, 841); centre from the outline. No clean dot (only a faint grey mark at (1269, 844.5), 4 px below the outline centre, which I do not take as its dot). Template match (1268.6, 839.9). Uncertainty about 1.5 px."
+        },
+        {
+          "id": "p9",
+          "candidate": 31
+        },
+        {
+          "id": "p10",
+          "candidate": 32
+        },
+        {
+          "id": "p11",
+          "candidate": 36
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M0.900",
+      "wing": "35",
+      "mach": 0.9,
+      "kind": "symbols",
+      "symbol": "upright triangle with centre dot",
+      "x_offset": 0.6,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 12
+        },
+        {
+          "id": "p2",
+          "candidate": 18,
+          "note": "Two upright triangles drawn one over the other at alpha about 0.3 deg (apexes at rows 1356 and 1360.5, bases at rows 1375.5 and 1382.8, same column). Two dots in one column: this is the upper one (clean). Figure 6(b) shows a single triangle at this lift coefficient."
+        },
+        {
+          "id": "p3",
+          "px": [
+            1024.5,
+            1374.0
+          ],
+          "snap": "none",
+          "note": "Lower dot of the doubled triangle: faint, touching the upper triangle's base line (rows 1373 to 1374 at x 1024 to 1025), so the snap cannot isolate it. Its position agrees with the lower outline (base 1382.8 minus the 8.7 px dot height of the clean triangles) and with a template match (1024.0, 1374.1). Uncertainty about 1 px."
+        },
+        {
+          "id": "p4",
+          "candidate": 23
+        },
+        {
+          "id": "p5",
+          "candidate": 29
+        },
+        {
+          "id": "p6",
+          "px": [
+            1428.5,
+            849.1
+          ],
+          "snap": "none",
+          "note": "Three overlapping upright triangles at alpha about 7.3 to 7.5 deg (this point and the next two; figure 6(b) also shows three). Left triangle: apex (1428.5, 833.5), base row 857.8; its dot would lie on the faired line, which runs almost vertically through it, so the centre is placed from the outline (apex column; base minus 8.7 px, the dot height measured on clean triangles of this figure). Uncertainty about 1.5 px."
+        },
+        {
+          "id": "p7",
+          "px": [
+            1445.0,
+            844.8
+          ],
+          "snap": "none",
+          "note": "Lower-right triangle of the three: base row 853.5 from x 1432 to 1457, right side visible inside the upper-right triangle; its dot falls on the base line of the upper-right triangle (row 846). Centre from the outline (base mid-point, base minus 8.7 px). It has the same column as the upper-right triangle, as the two coincident symbols of figure 6(b). Uncertainty about 1.5 px in x, 1 px in y."
+        },
+        {
+          "id": "p8",
+          "px": [
+            1446.0,
+            837.6
+          ],
+          "snap": "none",
+          "note": "Upper-right triangle of the three: apex (1446, 821), base row 846.3 from x 1432 to 1460; its dot falls on the right side of the lower-right triangle. Centre from the outline. Uncertainty about 1 px."
+        },
+        {
+          "id": "p9",
+          "candidate": 40
+        },
+        {
+          "id": "p10",
+          "candidate": 41
+        },
+        {
+          "id": "p11",
+          "candidate": 44
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M0.950",
+      "wing": "35",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 24
+        },
+        {
+          "id": "p2",
+          "px": [
+            1340.0,
+            1381.7
+          ],
+          "snap": "none",
+          "note": "Outline drawn twice (two vertical edges at x = 1330 and 1335, apex region thickened), but only one dot-like mark, at (1340, 1381.7), joined to strokes inside the symbol so the snap cannot isolate it; figure 6(b) shows a single symbol at this lift coefficient, so one point is recorded. The mark agrees with the left outline (dot 8.4 px right of the vertical edge on clean triangles of this figure); a template match gives (1338.7, 1384.3) and (1341.9, 1384.7) for the two outlines. Uncertainty about 2 px."
+        },
+        {
+          "id": "p3",
+          "candidate": 39
+        },
+        {
+          "id": "p4",
+          "candidate": 47
+        },
+        {
+          "id": "p5",
+          "candidate": 56
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M1.000",
+      "wing": "35",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 37,
+          "note": "Lowest point; several false candidates (33, 34, 35) lie on its outline and the label below."
+        },
+        {
+          "id": "p2",
+          "candidate": 46
+        },
+        {
+          "id": "p3",
+          "candidate": 54
+        },
+        {
+          "id": "p4",
+          "candidate": 60
+        },
+        {
+          "id": "p5",
+          "candidate": 62
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M1.100",
+      "wing": "35",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter disc, square corner at top left, with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 64
+        },
+        {
+          "id": "p2",
+          "px": [
+            2211.6,
+            1364.3
+          ],
+          "snap": "none",
+          "note": "Two quarter discs drawn one over the other at alpha about 0.2 deg (top edges at rows 1351 and 1361.5, same column), two dots in one column, neither isolated. Upper dot: rows 1363 to 1366 at x 2211 to 2212, joined to the top edge of the lower disc; centroid of the part below that edge. Template matches give (2213.9, 1363.2) and (2213.0, 1373.5) for the two discs. Uncertainty about 1 px."
+        },
+        {
+          "id": "p3",
+          "px": [
+            2211.8,
+            1373.4
+          ],
+          "snap": "none",
+          "note": "Lower dot of the doubled quarter disc: rows 1371 to 1375 at x 2211 to 2212, merging with the arc below. Uncertainty about 1 px."
+        },
+        {
+          "id": "p4",
+          "candidate": 77
+        },
+        {
+          "id": "p5",
+          "candidate": 81
+        },
+        {
+          "id": "p6",
+          "candidate": 83
+        }
+      ]
+    }
+  ]
+}

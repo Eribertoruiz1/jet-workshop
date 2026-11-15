@@ -1,0 +1,1607 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig07a",
+    "number": "7(a)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 47 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 27,
+    "printed_page": 25,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label and a heavier vertical line)",
+    "y_axis": "Angle of attack, alpha, deg (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot on one faired line per Mach number. Same test points as figure 7(b)."
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "scan": {
+    "pdf_page": 27,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": -3.0,
+        "step": 1.0,
+        "count": 18
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0012758047301916209,
+        -4.090217049654396e-06,
+        -0.6731075276391314
+      ],
+      [
+        3.517594896765109e-05,
+        -0.012659552909262267,
+        18.324943432169416
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          452,
+          502
+        ],
+        "px": [
+          449.07,
+          501.4
+        ],
+        "x": -0.1,
+        "y": 12.0,
+        "residual_data": [
+          -0.002234868076155888,
+          -0.006743344817419228
+        ],
+        "residual_px": [
+          -1.75,
+          0.53
+        ],
+        "mesh_residual_data": [
+          -2.6991295611594746e-05,
+          0.0004886190746535846
+        ]
+      },
+      {
+        "picked_px": [
+          452,
+          818
+        ],
+        "px": [
+          451.2,
+          816.11
+        ],
+        "x": -0.1,
+        "y": 8.0,
+        "residual_data": [
+          -0.0007969175032832287,
+          0.009234336972127721
+        ],
+        "residual_px": [
+          -0.63,
+          -0.73
+        ],
+        "mesh_residual_data": [
+          -0.0003139968652649122,
+          0.00022384286512178164
+        ]
+      },
+      {
+        "picked_px": [
+          452,
+          1134
+        ],
+        "px": [
+          453.5,
+          1132.13
+        ],
+        "x": -0.1,
+        "y": 4.0,
+        "residual_data": [
+          0.0008452699527855823,
+          0.008634174715206555
+        ],
+        "residual_px": [
+          0.66,
+          -0.68
+        ],
+        "mesh_residual_data": [
+          -4.670664216835374e-05,
+          6.341873303661316e-05
+        ]
+      },
+      {
+        "picked_px": [
+          452,
+          1528
+        ],
+        "px": [
+          455.0,
+          1528.9
+        ],
+        "x": -0.1,
+        "y": -1.0,
+        "residual_data": [
+          0.00113009513575138,
+          -0.014231477444916152
+        ],
+        "residual_px": [
+          0.89,
+          1.13
+        ],
+        "mesh_residual_data": [
+          1.7410096876807613e-06,
+          7.15813008305144e-05
+        ]
+      },
+      {
+        "picked_px": [
+          764,
+          424
+        ],
+        "px": [
+          765.01,
+          422.51
+        ],
+        "x": 0.3,
+        "y": 13.0,
+        "residual_data": [
+          0.0011683685578620095,
+          0.003019553825346577
+        ],
+        "residual_px": [
+          0.92,
+          -0.24
+        ],
+        "mesh_residual_data": [
+          5.423343412325199e-05,
+          -0.00022375033945287726
+        ]
+      },
+      {
+        "picked_px": [
+          2324,
+          424
+        ],
+        "px": [
+          2332.07,
+          426.82
+        ],
+        "x": 2.3,
+        "y": 13.0,
+        "residual_data": [
+          0.0004151942633985328,
+          0.003579409970745573
+        ],
+        "residual_px": [
+          0.32,
+          -0.28
+        ],
+        "mesh_residual_data": [
+          -0.00012263699601211542,
+          0.00023579351122116066
+        ]
+      },
+      {
+        "picked_px": [
+          2636,
+          424
+        ],
+        "px": [
+          2645.92,
+          428.51
+        ],
+        "x": 2.7,
+        "y": 13.0,
+        "residual_data": [
+          0.0008204615165254836,
+          -0.006705977882990766
+        ],
+        "residual_px": [
+          0.64,
+          0.53
+        ],
+        "mesh_residual_data": [
+          5.1203740008887166e-05,
+          0.0014325248184583472
+        ]
+      },
+      {
+        "picked_px": [
+          2636,
+          898
+        ],
+        "px": [
+          2646.94,
+          902.51
+        ],
+        "x": 2.7,
+        "y": 7.0,
+        "residual_data": [
+          0.0001761726919546902,
+          -0.007364287337351172
+        ],
+        "residual_px": [
+          0.14,
+          0.58
+        ],
+        "mesh_residual_data": [
+          5.842242579401358e-05,
+          0.0029719298626522672
+        ]
+      },
+      {
+        "picked_px": [
+          2636,
+          1370
+        ],
+        "px": [
+          2647.12,
+          1375.05
+        ],
+        "x": 2.7,
+        "y": 1.0,
+        "residual_data": [
+          -0.0015237765387552393,
+          0.01057761199709617
+        ],
+        "residual_px": [
+          -1.2,
+          -0.84
+        ],
+        "mesh_residual_data": [
+          -1.4481812605104949e-05,
+          0.0005056442724020727
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.0011635610739211724,
+      0.008438326755395895
+    ],
+    "affine_max_abs_residual_data": [
+      0.002234868076155888,
+      0.014231477444916152
+    ],
+    "data_per_px": [
+      0.001275804730191732,
+      -0.012659552909262572
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": -3.0,
+        "samples": 383,
+        "used": 383,
+        "rms_px": 0.201,
+        "max_warp_px": 0.49
+      },
+      {
+        "line": "horizontal",
+        "value": -2.0,
+        "samples": 322,
+        "used": 315,
+        "rms_px": 0.338,
+        "max_warp_px": 0.46
+      },
+      {
+        "line": "horizontal",
+        "value": -1.0,
+        "samples": 384,
+        "used": 384,
+        "rms_px": 0.248,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 361,
+        "used": 360,
+        "rms_px": 0.222,
+        "max_warp_px": 0.49
+      },
+      {
+        "line": "horizontal",
+        "value": 1.0,
+        "samples": 383,
+        "used": 383,
+        "rms_px": 0.208,
+        "max_warp_px": 0.53
+      },
+      {
+        "line": "horizontal",
+        "value": 2.0,
+        "samples": 386,
+        "used": 386,
+        "rms_px": 0.171,
+        "max_warp_px": 0.41
+      },
+      {
+        "line": "horizontal",
+        "value": 3.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.179,
+        "max_warp_px": 0.46
+      },
+      {
+        "line": "horizontal",
+        "value": 4.0,
+        "samples": 384,
+        "used": 384,
+        "rms_px": 0.183,
+        "max_warp_px": 0.47
+      },
+      {
+        "line": "horizontal",
+        "value": 5.0,
+        "samples": 387,
+        "used": 387,
+        "rms_px": 0.19,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "horizontal",
+        "value": 6.0,
+        "samples": 386,
+        "used": 386,
+        "rms_px": 0.18,
+        "max_warp_px": 0.42
+      },
+      {
+        "line": "horizontal",
+        "value": 7.0,
+        "samples": 375,
+        "used": 374,
+        "rms_px": 0.25,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "horizontal",
+        "value": 8.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.176,
+        "max_warp_px": 0.4
+      },
+      {
+        "line": "horizontal",
+        "value": 9.0,
+        "samples": 383,
+        "used": 383,
+        "rms_px": 0.22,
+        "max_warp_px": 0.4
+      },
+      {
+        "line": "horizontal",
+        "value": 10.0,
+        "samples": 388,
+        "used": 388,
+        "rms_px": 0.17,
+        "max_warp_px": 0.35
+      },
+      {
+        "line": "horizontal",
+        "value": 11.0,
+        "samples": 378,
+        "used": 378,
+        "rms_px": 0.187,
+        "max_warp_px": 0.49
+      },
+      {
+        "line": "horizontal",
+        "value": 12.0,
+        "samples": 381,
+        "used": 381,
+        "rms_px": 0.167,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "horizontal",
+        "value": 13.0,
+        "samples": 382,
+        "used": 382,
+        "rms_px": 0.198,
+        "max_warp_px": 0.48
+      },
+      {
+        "line": "horizontal",
+        "value": 14.0,
+        "samples": 355,
+        "used": 355,
+        "rms_px": 0.216,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": -0.2,
+        "samples": 221,
+        "used": 221,
+        "rms_px": 0.257,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": -0.1,
+        "samples": 209,
+        "used": 209,
+        "rms_px": 0.202,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 0.0,
+        "samples": 208,
+        "used": 208,
+        "rms_px": 0.181,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 0.1,
+        "samples": 221,
+        "used": 221,
+        "rms_px": 0.207,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 0.2,
+        "samples": 208,
+        "used": 208,
+        "rms_px": 0.185,
+        "max_warp_px": 0.41
+      },
+      {
+        "line": "vertical",
+        "value": 0.3,
+        "samples": 220,
+        "used": 220,
+        "rms_px": 0.246,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 210,
+        "used": 208,
+        "rms_px": 0.183,
+        "max_warp_px": 0.42
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 221,
+        "used": 221,
+        "rms_px": 0.238,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 202,
+        "used": 202,
+        "rms_px": 0.17,
+        "max_warp_px": 0.36
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 213,
+        "used": 213,
+        "rms_px": 0.298,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 192,
+        "used": 190,
+        "rms_px": 0.218,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 0.9,
+        "samples": 213,
+        "used": 213,
+        "rms_px": 0.236,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 1.0,
+        "samples": 202,
+        "used": 199,
+        "rms_px": 0.216,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 1.1,
+        "samples": 217,
+        "used": 217,
+        "rms_px": 0.255,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 1.2,
+        "samples": 194,
+        "used": 194,
+        "rms_px": 0.182,
+        "max_warp_px": 0.35
+      },
+      {
+        "line": "vertical",
+        "value": 1.3,
+        "samples": 214,
+        "used": 214,
+        "rms_px": 0.297,
+        "max_warp_px": 0.52
+      },
+      {
+        "line": "vertical",
+        "value": 1.4,
+        "samples": 204,
+        "used": 203,
+        "rms_px": 0.208,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": 1.5,
+        "samples": 217,
+        "used": 212,
+        "rms_px": 0.286,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "vertical",
+        "value": 1.6,
+        "samples": 202,
+        "used": 199,
+        "rms_px": 0.23,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "vertical",
+        "value": 1.7,
+        "samples": 219,
+        "used": 217,
+        "rms_px": 0.372,
+        "max_warp_px": 0.35
+      },
+      {
+        "line": "vertical",
+        "value": 1.8,
+        "samples": 209,
+        "used": 209,
+        "rms_px": 0.295,
+        "max_warp_px": 0.46
+      },
+      {
+        "line": "vertical",
+        "value": 1.9,
+        "samples": 216,
+        "used": 214,
+        "rms_px": 0.309,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 2.0,
+        "samples": 209,
+        "used": 208,
+        "rms_px": 0.164,
+        "max_warp_px": 0.39
+      },
+      {
+        "line": "vertical",
+        "value": 2.1,
+        "samples": 215,
+        "used": 215,
+        "rms_px": 0.246,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 2.2,
+        "samples": 200,
+        "used": 200,
+        "rms_px": 0.146,
+        "max_warp_px": 0.44
+      },
+      {
+        "line": "vertical",
+        "value": 2.3,
+        "samples": 215,
+        "used": 215,
+        "rms_px": 0.239,
+        "max_warp_px": 0.38
+      },
+      {
+        "line": "vertical",
+        "value": 2.4,
+        "samples": 214,
+        "used": 212,
+        "rms_px": 0.195,
+        "max_warp_px": 0.48
+      },
+      {
+        "line": "vertical",
+        "value": 2.5,
+        "samples": 207,
+        "used": 207,
+        "rms_px": 0.174,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 2.6,
+        "samples": 207,
+        "used": 207,
+        "rms_px": 0.418,
+        "max_warp_px": 0.45
+      },
+      {
+        "line": "vertical",
+        "value": 2.7,
+        "samples": 209,
+        "used": 209,
+        "rms_px": 0.199,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 2.8,
+        "samples": 221,
+        "used": 221,
+        "rms_px": 0.284,
+        "max_warp_px": 0.41
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07a-47deg-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            473.91,
+            1604.39
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 1,
+          "dot_pixels": 19,
+          "px": [
+            473.76,
+            1604.53
+          ],
+          "data": [
+            -0.07638059344518625,
+            -1.9698533389353998
+          ],
+          "affine_data": [
+            -0.07524515462623105,
+            -1.9710240397462542
+          ],
+          "value": {
+            "CL": -0.07638059344518625,
+            "alpha": -1.9698533389353998
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            577.37,
+            1441.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 2,
+          "dot_pixels": 14,
+          "px": [
+            577.46,
+            1441.33
+          ],
+          "data": [
+            0.055260012890526865,
+            0.08750004928432464
+          ],
+          "affine_data": [
+            0.057723319317143695,
+            0.09866274095329075
+          ],
+          "value": {
+            "CL": 0.055260012890526865,
+            "alpha": 0.08750004928432464
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            670.77,
+            1272.89
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 4,
+          "dot_pixels": 16,
+          "px": [
+            670.57,
+            1272.96
+          ],
+          "data": [
+            0.17583674510512232,
+            2.229668825747235
+          ],
+          "affine_data": [
+            0.1772021675899358,
+            2.233426896894155
+          ],
+          "value": {
+            "CL": 0.17583674510512232,
+            "alpha": 2.229668825747235
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            750.16,
+            1111.34
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 6,
+          "dot_pixels": 13,
+          "px": [
+            750.32,
+            1111.39
+          ],
+          "data": [
+            0.27705242966725663,
+            4.266933653971693
+          ],
+          "affine_data": [
+            0.2796084511914303,
+            4.2816361423738325
+          ],
+          "value": {
+            "CL": 0.27705242966725663,
+            "alpha": 4.266933653971693
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            871.5,
+            948.05
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 9,
+          "dot_pixels": 12,
+          "px": [
+            871.51,
+            948.39
+          ],
+          "data": [
+            0.4322670054247001,
+            6.33248123482904
+          ],
+          "affine_data": [
+            0.4348899318224464,
+            6.349406239838974
+          ],
+          "value": {
+            "CL": 0.4322670054247001,
+            "alpha": 6.33248123482904
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            973.8,
+            775.53
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 14,
+          "dot_pixels": 14,
+          "px": [
+            973.89,
+            775.75
+          ],
+          "data": [
+            0.5660582776393153,
+            8.52288996912434
+          ],
+          "affine_data": [
+            0.5662129551709167,
+            8.538552767749318
+          ],
+          "value": {
+            "CL": 0.5660582776393153,
+            "alpha": 8.52288996912434
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1049.28,
+            609.6
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 16,
+          "dot_pixels": 15,
+          "px": [
+            1049.42,
+            609.66
+          ],
+          "data": [
+            0.6626628600520842,
+            10.633055429717368
+          ],
+          "affine_data": [
+            0.6632538305920672,
+            10.643834749874216
+          ],
+          "value": {
+            "CL": 0.6626628600520842,
+            "alpha": 10.633055429717368
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1128.1,
+            443.69
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 20,
+          "dot_pixels": 16,
+          "px": [
+            1128.0,
+            443.83
+          ],
+          "data": [
+            0.7640478286674108,
+            12.733121656365935
+          ],
+          "affine_data": [
+            0.7641848469838688,
+            12.745932534887054
+          ],
+          "value": {
+            "CL": 0.7640478286674108,
+            "alpha": 12.733121656365935
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            782.85,
+            1617.3
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 7,
+          "dot_pixels": 13,
+          "px": [
+            782.69,
+            1617.34
+          ],
+          "data": [
+            0.31552858552200896,
+            -2.132492999457249
+          ],
+          "affine_data": [
+            0.3188368049914604,
+            -2.1223260065993266
+          ],
+          "value": {
+            "CL": -0.08447141447799106,
+            "alpha": -2.132492999457249
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            906.53,
+            1439.08
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 10,
+          "dot_pixels": 10,
+          "px": [
+            906.32,
+            1439.43
+          ],
+          "data": [
+            0.47474691164092364,
+            0.11843004696191817
+          ],
+          "affine_data": [
+            0.4772922343003545,
+            0.13428385405839194
+          ],
+          "value": {
+            "CL": 0.07474691164092362,
+            "alpha": 0.11843004696191817
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1042.73,
+            1257.16
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 15,
+          "dot_pixels": 19,
+          "px": [
+            1042.61,
+            1257.11
+          ],
+          "data": [
+            0.6501784283568544,
+            2.445666146277543
+          ],
+          "affine_data": [
+            0.6519173893506633,
+            2.4471676705598906
+          ],
+          "value": {
+            "CL": 0.25017842835685433,
+            "alpha": 2.445666146277543
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1163.13,
+            1082.9
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 22,
+          "dot_pixels": 15,
+          "px": [
+            1163.29,
+            1083.02
+          ],
+          "data": [
+            0.8050006468804055,
+            4.645638820480823
+          ],
+          "affine_data": [
+            0.8065935700763625,
+            4.655314270054774
+          ],
+          "value": {
+            "CL": 0.4050006468804055,
+            "alpha": 4.645638820480823
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1265.47,
+            904.1
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 27,
+          "dot_pixels": 14,
+          "px": [
+            1265.35,
+            904.26
+          ],
+          "data": [
+            0.9356628798729862,
+            6.917253639062426
+          ],
+          "affine_data": [
+            0.9375333680395155,
+            6.921926005466135
+          ],
+          "value": {
+            "CL": 0.5356628798729862,
+            "alpha": 6.917253639062426
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1371.77,
+            723.9
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 30,
+          "dot_pixels": 16,
+          "px": [
+            1371.58,
+            723.97
+          ],
+          "data": [
+            1.0740799039628404,
+            9.191948003005583
+          ],
+          "affine_data": [
+            1.0737995297596536,
+            9.208053540535863
+          ],
+          "value": {
+            "CL": 0.6740799039628403,
+            "alpha": 9.191948003005583
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1433.67,
+            547.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 34,
+          "dot_pixels": 13,
+          "px": [
+            1433.6,
+            547.36
+          ],
+          "data": [
+            1.153565463332637,
+            11.421142190081094
+          ],
+          "affine_data": [
+            1.1536473123592774,
+            11.446038792195646
+          ],
+          "value": {
+            "CL": 0.7535654633326371,
+            "alpha": 11.421142190081094
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1489.9,
+            379.42
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 36,
+          "dot_pixels": 20,
+          "px": [
+            1489.88,
+            379.64
+          ],
+          "data": [
+            1.225784182233986,
+            13.54743453918617
+          ],
+          "affine_data": [
+            1.2261356137780302,
+            13.571278708545012
+          ],
+          "value": {
+            "CL": 0.8257841822339861,
+            "alpha": 13.54743453918617
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1244.64,
+            1619.95
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 25,
+          "dot_pixels": 13,
+          "px": [
+            1244.62,
+            1619.71
+          ],
+          "data": [
+            0.9058987606043497,
+            -2.147699551026358
+          ],
+          "affine_data": [
+            0.9081595901944679,
+            -2.1360803208876504
+          ],
+          "value": {
+            "CL": -0.0941012393956503,
+            "alpha": -2.147699551026358
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1422.71,
+            1435.36
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 33,
+          "dot_pixels": 16,
+          "px": [
+            1422.68,
+            1435.16
+          ],
+          "data": [
+            1.1357363964765337,
+            0.18717267851055852
+          ],
+          "affine_data": [
+            1.1360842300089018,
+            0.2065035979898795
+          ],
+          "value": {
+            "CL": 0.13573639647653368,
+            "alpha": 0.18717267851055852
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1561.12,
+            1255.37
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 40,
+          "dot_pixels": 15,
+          "px": [
+            1561.22,
+            1255.36
+          ],
+          "data": [
+            1.3131215662085562,
+            2.471422690432987
+          ],
+          "affine_data": [
+            1.313569638355177,
+            2.487564487045214
+          ],
+          "value": {
+            "CL": 0.31312156620855625,
+            "alpha": 2.471422690432987
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1686.09,
+            1087.32
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 45,
+          "dot_pixels": 14,
+          "px": [
+            1686.06,
+            1087.2
+          ],
+          "data": [
+            1.4728031186420807,
+            4.604321510143166
+          ],
+          "affine_data": [
+            1.4735289117713686,
+            4.620786269735877
+          ],
+          "value": {
+            "CL": 0.4728031186420807,
+            "alpha": 4.604321510143166
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1786.61,
+            900.3
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 52,
+          "dot_pixels": 18,
+          "px": [
+            1786.66,
+            900.31
+          ],
+          "data": [
+            1.6028496004145025,
+            6.977405505970771
+          ],
+          "affine_data": [
+            1.6026392882930556,
+            6.990268813414049
+          ],
+          "value": {
+            "CL": 0.6028496004145025,
+            "alpha": 6.977405505970771
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1873.84,
+            720.85
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 56,
+          "dot_pixels": 13,
+          "px": [
+            1873.95,
+            720.75
+          ],
+          "data": [
+            1.7143603735466304,
+            9.248711481968465
+          ],
+          "affine_data": [
+            1.7147387225649182,
+            9.266488642386568
+          ],
+          "value": {
+            "CL": 0.7143603735466304,
+            "alpha": 9.248711481968465
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1935,
+            543
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1935,
+            543
+          ],
+          "data": [
+            1.7921450609890917,
+            11.500440356966587
+          ],
+          "affine_data": [
+            1.7933536374236927,
+            11.51887166369241
+          ],
+          "value": {
+            "CL": 0.7921450609890917,
+            "alpha": 11.500440356966587
+          },
+          "note": "A vertical grid line runs through the symbol and hides the dot. Outline centroid (left side x 1926, y 529-557; apex 1953,543)."
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            2006.34,
+            369.99
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 62,
+          "dot_pixels": 18,
+          "px": [
+            2006.48,
+            370.17
+          ],
+          "data": [
+            1.8823060880705278,
+            13.689805067345944
+          ],
+          "affine_data": [
+            1.8852550717504815,
+            13.709336569832416
+          ],
+          "value": {
+            "CL": 0.8823060880705278,
+            "alpha": 13.689805067345944
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1555.51,
+            1621.94
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 39,
+          "dot_pixels": 13,
+          "px": [
+            1555.48,
+            1621.7
+          ],
+          "data": [
+            1.3054804615186346,
+            -2.1746603700767113
+          ],
+          "affine_data": [
+            1.3047481090899065,
+            -2.150338035680999
+          ],
+          "value": {
+            "CL": -0.0945195384813653,
+            "alpha": -2.1746603700767113
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1735.37,
+            1439.12
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 49,
+          "dot_pixels": 14,
+          "px": [
+            1735.47,
+            1439.27
+          ],
+          "data": [
+            1.5353850825512718,
+            0.14261232091966125
+          ],
+          "affine_data": [
+            1.5351263807734647,
+            0.16547552061039994
+          ],
+          "value": {
+            "CL": 0.1353850825512719,
+            "alpha": 0.14261232091966125
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1860.81,
+            1264.9
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 55,
+          "dot_pixels": 14,
+          "px": [
+            1860.87,
+            1264.86
+          ],
+          "data": [
+            1.6952132415508003,
+            2.3607889962634436
+          ],
+          "affine_data": [
+            1.6958256686951243,
+            2.377839207515377
+          ],
+          "value": {
+            "CL": 0.2952132415508004,
+            "alpha": 2.3607889962634436
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1981.96,
+            1085.18
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 61,
+          "dot_pixels": 23,
+          "px": [
+            1981.98,
+            1085.09
+          ],
+          "data": [
+            1.8490847854079508,
+            4.645870250777298
+          ],
+          "affine_data": [
+            1.8510736778876478,
+            4.65790719319293
+          ],
+          "value": {
+            "CL": 0.44908478540795094,
+            "alpha": 4.645870250777298
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter circle",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            2198.27,
+            1623.01
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 70,
+          "dot_pixels": 15,
+          "px": [
+            2198.03,
+            1622.99
+          ],
+          "data": [
+            2.125331853436112,
+            -2.1646247511125276
+          ],
+          "affine_data": [
+            2.1245111620945387,
+            -2.1440665529247873
+          ],
+          "value": {
+            "CL": -0.0746681465638881,
+            "alpha": -2.1646247511125276
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            2359.49,
+            1400.98
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 76,
+          "dot_pixels": 10,
+          "px": [
+            2359.33,
+            1400.78
+          ],
+          "data": [
+            2.3341101797860584,
+            0.6552687646024018
+          ],
+          "affine_data": [
+            2.3312073522050505,
+            0.6746865796108672
+          ],
+          "value": {
+            "CL": 0.13411017978605821,
+            "alpha": 0.6552687646024018
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            2443.69,
+            1271.17
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 78,
+          "dot_pixels": 16,
+          "px": [
+            2443.53,
+            1271.02
+          ],
+          "data": [
+            2.442286125288033,
+            2.29780445351507
+          ],
+          "affine_data": [
+            2.4391608570515486,
+            2.3203519800198116
+          ],
+          "value": {
+            "CL": 0.24228612528803284,
+            "alpha": 2.29780445351507
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            2565.91,
+            1094.88
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 82,
+          "dot_pixels": 13,
+          "px": [
+            2565.9,
+            1094.98
+          ],
+          "data": [
+            2.598756356238363,
+            4.533570729883597
+          ],
+          "affine_data": [
+            2.596001123694518,
+            4.553244155041515
+          ],
+          "value": {
+            "CL": 0.3987563562383629,
+            "alpha": 4.533570729883597
+          }
+        }
+      ]
+    }
+  ]
+}

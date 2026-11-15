@@ -1,0 +1,13 @@
+{
+  "name": "@jet-workshop/validation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./data/bielat-l52b08.csv": "./data/bielat-l52b08.csv"
+  },
+  "dependencies": {
+    "@jet-workshop/physics": "workspace:*"
+  }
+}

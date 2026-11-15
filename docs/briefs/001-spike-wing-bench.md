@@ -291,3 +291,43 @@ Respuestas en español. Código, commits e interfaz en inglés.
 Debe sentirse como una figura de informe técnico que respira: sobria, exacta y con una sola sorpresa.
 
 Prueba de aceptación: abro la aplicación, pulso `NACA wing · 35° sweep`, muevo la flecha hasta 47° y veo desplazarse el muro transónico. En cada ala ensayada, los puntos de 1952 aparecen con sus barras, y puedo ver de un vistazo dónde el modelo acierta, dónde estima y dónde deja de valer.
+
+## Enmienda 1 (15 de noviembre de 2026)
+
+Decisión del dueño para la compuerta 2, si las superposiciones del paso 0 se ven bien. Prevalece sobre el texto anterior donde lo contradiga.
+
+1. "Measured" son solo los símbolos de las polares (figuras 5(b), 6(b) y 7(b)). El modelo se puntúa en el CL y el Mach de cada símbolo, sin interpolar.
+2. La figura 9 entra como una tercera clase, "NACA faired curve (1952)": una línea sin símbolos en la gráfica de resistencia contra Mach. Nunca bajo "Measured". Su comparación con el modelo se reporta aparte.
+3. Comprobación cruzada: los símbolos de baja sustentación deben caer sobre la curva de la figura 9 dentro de la precisión del ensayo. Si no, hay un error de lectura.
+4. Las bandas de CD0 se aplican a los símbolos con |CL| ≤ 0.1.
+5. Empieza por cinco valores de Mach por ala que cubran todo el rango. Amplía solo si la herramienta lo hace barato; el resto va a Tickets.
+6. Los símbolos medidos se muestran en la polar, con un selector de Mach ensayado.
+7. Dime si la pasada B recalibró la rejilla o reutilizó la calibración de la A. Si la reutilizó, que recalibre una figura por su cuenta: la diferencia entre pasadas tiene que cubrir también la calibración.
+8. Cuando entre la primera prueba, quita `--passWithNoTests` del comando de pruebas.
+
+Revisión del punto 3 (15 de noviembre de 2026, aprobada por el dueño): los símbolos de baja sustentación están en CL ≈ −0.1 (α = −2°) y CL ≈ +0.1 (α = 0°, por la curvatura), no en CL = 0, y su resistencia difiere del CD0 por la resistencia debida a la sustentación. La comprobación cruzada pasa a ser: una parábola ajustada a los símbolos de la polar con |CL| ≤ 0.3, evaluada en CL = 0, debe coincidir con la curva de la figura 9 dentro de ±0.001. Si no, hay un error de lectura. La parábola es solo una comprobación: nunca se muestra ni se guarda como dato medido.
+
+## Enmienda 2 (15 de noviembre de 2026)
+
+Prevalece sobre el texto anterior y sobre la Enmienda 1 donde lo contradiga.
+
+1. Punto 3 de la Enmienda 1: aceptada la comprobación por parábola por los símbolos con |CL| ≤ 0.3, evaluada en CL = 0, contra la figura 9, dentro de ±0.001. Solo como comprobación, nunca como dato.
+2. Punto 4 de la Enmienda 1: las bandas de CD0 se reportan de dos formas, por separado: el modelo en CL = 0 contra la curva de la figura 9, rotulada como curva de la NACA; y el modelo contra los símbolos medidos con |CL| ≤ 0.3.
+3. El modelo necesita una polar desplazada: resistencia mínima en el CL de diseño de la línea media, sacado de la geometría del perfil y no ajustado a los datos. Si se ajusta, se aplica la regla de calibración.
+4. Si la diferencia entre pasadas sale casi cero, es por construcción: las dos comparten el ajuste al punto central y la rejilla. Queda como control de errores gruesos. Como incertidumbre de digitalización se usa el mayor de: esa diferencia y ±1 px por eje en unidades del dato. Se explica en el README de la herramienta.
+5. Prueba independiente: digitalizar la figura 6(b) desde el escaneo de la UNT con la misma herramienta y comparar. Si no es barato, a Tickets.
+6. En el muestreo de curvas, se marcan las muestras a menos de un ancho de línea de una línea horizontal de la rejilla.
+7. Al cerrar la pasada B, se suben los specs y resultados de ambas pasadas a `tools/digitize/figures/`.
+8. La sesión se mueve a una carpeta permanente del dueño.
+
+## Enmienda 3 (15 de noviembre de 2026)
+
+Decisiones de la compuerta 4. Prevalece sobre el texto anterior y sobre las Enmiendas 1 y 2 donde lo contradiga.
+
+1. Salida del CD0: la banda, con tus cinco reglas. No se calibra ni se elige ninguna variante.
+2. Descargas: sí a RM L51I04a y RM L51K16a, a .cache/. De la primera digitaliza solo la resistencia del cuerpo aislado, en dos pasadas, y compárala con nuestro término de fuselaje. La serie de espesores a 47° y los datos a M 1.60 van a Tickets para el brief 002.
+3. Tinling y Kolk: no se replica. A Tickets.
+4. Transónico: queda marcado como fuera de rango. No adelantes la resistencia de onda por áreas: será el brief 002.
+5. Registra como hallazgos abiertos: Korn fuera de su rango en alas del 4%, y la tendencia del CD0 con la flecha que ninguna variante reproduce.
+6. Termina la pantalla con los datos reales. Leyenda de la banda: "Model range". Texto bajo la gráfica: "Band: spread of four form-factor methods and two boundary-layer states. No method was fitted to the data."
+7. Haz la verificación del brief (capturas en las tres alas y en un ala sin datos, revisor de contexto fresco) y abre el PR. El merge lo hago yo.

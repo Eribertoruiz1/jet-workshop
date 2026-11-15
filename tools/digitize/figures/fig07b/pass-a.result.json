@@ -1,0 +1,1673 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig07b",
+    "number": "7(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 47 deg sweptback wing. (b) Drag coefficient.",
+    "pdf_page": 28,
+    "printed_page": 26,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot, one shape per Mach number, joined by faired curves."
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "scan": {
+    "pdf_page": 28,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0016163306636516645,
+        4.4240767282737424e-07,
+        -1.3413345944697745
+      ],
+      [
+        -1.1647455317287495e-07,
+        -0.00016053477879908603,
+        0.2576859291657309
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          765,
+          1417
+        ],
+        "px": [
+          768.48,
+          1417.47
+        ],
+        "x": -0.1,
+        "y": 0.03,
+        "residual_data": [
+          0.0014110922256177771,
+          4.3006269463130575e-05
+        ],
+        "residual_px": [
+          0.87,
+          -0.27
+        ],
+        "mesh_residual_data": [
+          9.76741482375254e-07,
+          5.3554647503409325e-06
+        ]
+      },
+      {
+        "picked_px": [
+          765,
+          1044
+        ],
+        "px": [
+          767.56,
+          1044.02
+        ],
+        "x": -0.1,
+        "y": 0.09,
+        "residual_data": [
+          -0.0002492682138540425,
+          -5.132815364600196e-06
+        ],
+        "residual_px": [
+          -0.15,
+          0.03
+        ],
+        "mesh_residual_data": [
+          -3.649306936692742e-06,
+          -2.6818532811223594e-05
+        ]
+      },
+      {
+        "picked_px": [
+          765,
+          671
+        ],
+        "px": [
+          767.53,
+          670.44
+        ],
+        "x": -0.1,
+        "y": 0.15,
+        "residual_data": [
+          -0.0004557171408459959,
+          -3.2220857585363305e-05
+        ],
+        "residual_px": [
+          -0.28,
+          0.2
+        ],
+        "mesh_residual_data": [
+          -2.4819231140948972e-05,
+          3.278717932525543e-05
+        ]
+      },
+      {
+        "picked_px": [
+          765,
+          298
+        ],
+        "px": [
+          766.55,
+          296.95
+        ],
+        "x": -0.1,
+        "y": 0.21,
+        "residual_data": [
+          -0.002205030882318354,
+          -7.399770690133534e-05
+        ],
+        "residual_px": [
+          -1.36,
+          0.46
+        ],
+        "mesh_residual_data": [
+          -4.382746059164444e-05,
+          -2.1022341629262087e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1199,
+          298
+        ],
+        "px": [
+          1201.56,
+          295.41
+        ],
+        "x": 0.6,
+        "y": 0.21,
+        "residual_data": [
+          0.0009097370346425881,
+          0.00012316738530321336
+        ],
+        "residual_px": [
+          0.56,
+          -0.77
+        ],
+        "mesh_residual_data": [
+          -0.00013987615927524288,
+          -1.564055927652519e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1447,
+          298
+        ],
+        "px": [
+          1449.41,
+          295.88
+        ],
+        "x": 1.0,
+        "y": 0.21,
+        "residual_data": [
+          0.0015260903968585815,
+          1.7519361445811343e-05
+        ],
+        "residual_px": [
+          0.94,
+          -0.11
+        ],
+        "mesh_residual_data": [
+          7.168056121331645e-06,
+          1.4781164460436758e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2315,
+          671
+        ],
+        "px": [
+          2314.34,
+          670.06
+        ],
+        "x": 2.4,
+        "y": 0.15,
+        "residual_data": [
+          -0.0003024542365830385,
+          -0.00015222545852777714
+        ],
+        "residual_px": [
+          -0.19,
+          0.95
+        ],
+        "mesh_residual_data": [
+          0.0007085077387123384,
+          -8.244008376603884e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2315,
+          1044
+        ],
+        "px": [
+          2314.0,
+          1043.92
+        ],
+        "x": 2.4,
+        "y": 0.09,
+        "residual_data": [
+          -0.000685378326273689,
+          -0.00016955111236957587
+        ],
+        "residual_px": [
+          -0.42,
+          1.06
+        ],
+        "mesh_residual_data": [
+          5.696323101123113e-05,
+          -0.0002200601933450841
+        ]
+      },
+      {
+        "picked_px": [
+          2501,
+          298
+        ],
+        "px": [
+          2500.59,
+          294.52
+        ],
+        "x": 2.7,
+        "y": 0.21,
+        "residual_data": [
+          0.0005832268623784387,
+          0.00011390798235128008
+        ],
+        "residual_px": [
+          0.36,
+          -0.71
+        ],
+        "mesh_residual_data": [
+          -0.00023016063498637607,
+          3.390203234643341e-06
+        ]
+      },
+      {
+        "picked_px": [
+          2501,
+          1417
+        ],
+        "px": [
+          2499.6,
+          1415.64
+        ],
+        "x": 2.7,
+        "y": 0.03,
+        "residual_data": [
+          -0.0005322977193715772,
+          0.00013552695213514543
+        ],
+        "residual_px": [
+          -0.33,
+          -0.84
+        ],
+        "mesh_residual_data": [
+          -8.522680705524976e-05,
+          2.7843704802403557e-05
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.0010707214875055244,
+      0.00010350343726317882
+    ],
+    "affine_max_abs_residual_data": [
+      0.002205030882318354,
+      0.00016955111236957587
+    ],
+    "data_per_px": [
+      0.0016163306636514108,
+      -0.0001605347787990985
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 269,
+        "used": 268,
+        "rms_px": 0.261,
+        "max_warp_px": 0.48
+      },
+      {
+        "line": "horizontal",
+        "value": 0.01,
+        "samples": 292,
+        "used": 288,
+        "rms_px": 0.398,
+        "max_warp_px": 0.39
+      },
+      {
+        "line": "horizontal",
+        "value": 0.02,
+        "samples": 290,
+        "used": 289,
+        "rms_px": 0.314,
+        "max_warp_px": 0.45
+      },
+      {
+        "line": "horizontal",
+        "value": 0.03,
+        "samples": 300,
+        "used": 300,
+        "rms_px": 0.241,
+        "max_warp_px": 0.64
+      },
+      {
+        "line": "horizontal",
+        "value": 0.04,
+        "samples": 304,
+        "used": 304,
+        "rms_px": 0.165,
+        "max_warp_px": 0.43
+      },
+      {
+        "line": "horizontal",
+        "value": 0.05,
+        "samples": 302,
+        "used": 302,
+        "rms_px": 0.321,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "horizontal",
+        "value": 0.06,
+        "samples": 302,
+        "used": 302,
+        "rms_px": 0.258,
+        "max_warp_px": 0.53
+      },
+      {
+        "line": "horizontal",
+        "value": 0.07,
+        "samples": 304,
+        "used": 303,
+        "rms_px": 0.317,
+        "max_warp_px": 0.45
+      },
+      {
+        "line": "horizontal",
+        "value": 0.08,
+        "samples": 301,
+        "used": 301,
+        "rms_px": 0.17,
+        "max_warp_px": 0.53
+      },
+      {
+        "line": "horizontal",
+        "value": 0.09,
+        "samples": 305,
+        "used": 305,
+        "rms_px": 0.276,
+        "max_warp_px": 0.46
+      },
+      {
+        "line": "horizontal",
+        "value": 0.1,
+        "samples": 305,
+        "used": 304,
+        "rms_px": 0.203,
+        "max_warp_px": 0.54
+      },
+      {
+        "line": "horizontal",
+        "value": 0.11,
+        "samples": 304,
+        "used": 304,
+        "rms_px": 0.204,
+        "max_warp_px": 0.58
+      },
+      {
+        "line": "horizontal",
+        "value": 0.12,
+        "samples": 305,
+        "used": 305,
+        "rms_px": 0.2,
+        "max_warp_px": 0.43
+      },
+      {
+        "line": "horizontal",
+        "value": 0.13,
+        "samples": 305,
+        "used": 305,
+        "rms_px": 0.217,
+        "max_warp_px": 0.37
+      },
+      {
+        "line": "horizontal",
+        "value": 0.14,
+        "samples": 300,
+        "used": 300,
+        "rms_px": 0.136,
+        "max_warp_px": 0.49
+      },
+      {
+        "line": "horizontal",
+        "value": 0.15,
+        "samples": 304,
+        "used": 304,
+        "rms_px": 0.252,
+        "max_warp_px": 0.69
+      },
+      {
+        "line": "horizontal",
+        "value": 0.16,
+        "samples": 305,
+        "used": 304,
+        "rms_px": 0.128,
+        "max_warp_px": 0.62
+      },
+      {
+        "line": "horizontal",
+        "value": 0.17,
+        "samples": 305,
+        "used": 305,
+        "rms_px": 0.196,
+        "max_warp_px": 0.53
+      },
+      {
+        "line": "horizontal",
+        "value": 0.18,
+        "samples": 291,
+        "used": 289,
+        "rms_px": 0.158,
+        "max_warp_px": 0.64
+      },
+      {
+        "line": "horizontal",
+        "value": 0.19,
+        "samples": 299,
+        "used": 299,
+        "rms_px": 0.202,
+        "max_warp_px": 0.45
+      },
+      {
+        "line": "horizontal",
+        "value": 0.2,
+        "samples": 300,
+        "used": 298,
+        "rms_px": 0.188,
+        "max_warp_px": 0.55
+      },
+      {
+        "line": "horizontal",
+        "value": 0.21,
+        "samples": 298,
+        "used": 296,
+        "rms_px": 0.198,
+        "max_warp_px": 0.83
+      },
+      {
+        "line": "horizontal",
+        "value": 0.22,
+        "samples": 293,
+        "used": 290,
+        "rms_px": 0.312,
+        "max_warp_px": 0.4
+      },
+      {
+        "line": "vertical",
+        "value": -0.2,
+        "samples": 226,
+        "used": 226,
+        "rms_px": 0.153,
+        "max_warp_px": 0.37
+      },
+      {
+        "line": "vertical",
+        "value": -0.1,
+        "samples": 226,
+        "used": 226,
+        "rms_px": 0.125,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 0.0,
+        "samples": 226,
+        "used": 226,
+        "rms_px": 0.135,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": 0.1,
+        "samples": 226,
+        "used": 226,
+        "rms_px": 0.132,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.2,
+        "samples": 225,
+        "used": 225,
+        "rms_px": 0.151,
+        "max_warp_px": 0.44
+      },
+      {
+        "line": "vertical",
+        "value": 0.3,
+        "samples": 226,
+        "used": 225,
+        "rms_px": 0.222,
+        "max_warp_px": 0.42
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 226,
+        "used": 226,
+        "rms_px": 0.188,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.21,
+        "max_warp_px": 0.55
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 225,
+        "used": 225,
+        "rms_px": 0.192,
+        "max_warp_px": 0.4
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 222,
+        "used": 220,
+        "rms_px": 0.205,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 218,
+        "used": 216,
+        "rms_px": 0.196,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 0.9,
+        "samples": 221,
+        "used": 219,
+        "rms_px": 0.194,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 1.0,
+        "samples": 219,
+        "used": 217,
+        "rms_px": 0.191,
+        "max_warp_px": 0.52
+      },
+      {
+        "line": "vertical",
+        "value": 1.1,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.244,
+        "max_warp_px": 0.42
+      },
+      {
+        "line": "vertical",
+        "value": 1.2,
+        "samples": 221,
+        "used": 221,
+        "rms_px": 0.229,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 1.3,
+        "samples": 224,
+        "used": 220,
+        "rms_px": 0.178,
+        "max_warp_px": 0.41
+      },
+      {
+        "line": "vertical",
+        "value": 1.4,
+        "samples": 222,
+        "used": 221,
+        "rms_px": 0.218,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 1.5,
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.241,
+        "max_warp_px": 0.54
+      },
+      {
+        "line": "vertical",
+        "value": 1.6,
+        "samples": 224,
+        "used": 223,
+        "rms_px": 0.193,
+        "max_warp_px": 0.48
+      },
+      {
+        "line": "vertical",
+        "value": 1.7,
+        "samples": 219,
+        "used": 218,
+        "rms_px": 0.211,
+        "max_warp_px": 0.35
+      },
+      {
+        "line": "vertical",
+        "value": 1.8,
+        "samples": 223,
+        "used": 221,
+        "rms_px": 0.185,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 1.9,
+        "samples": 219,
+        "used": 219,
+        "rms_px": 0.261,
+        "max_warp_px": 0.36
+      },
+      {
+        "line": "vertical",
+        "value": 2.0,
+        "samples": 223,
+        "used": 221,
+        "rms_px": 0.217,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 2.1,
+        "samples": 223,
+        "used": 221,
+        "rms_px": 0.175,
+        "max_warp_px": 0.41
+      },
+      {
+        "line": "vertical",
+        "value": 2.2,
+        "samples": 224,
+        "used": 222,
+        "rms_px": 0.216,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "vertical",
+        "value": 2.3,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.186,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "vertical",
+        "value": 2.4,
+        "samples": 213,
+        "used": 213,
+        "rms_px": 0.197,
+        "max_warp_px": 0.47
+      },
+      {
+        "line": "vertical",
+        "value": 2.5,
+        "samples": 218,
+        "used": 217,
+        "rms_px": 0.232,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 2.6,
+        "samples": 212,
+        "used": 212,
+        "rms_px": 0.119,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 2.7,
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.186,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 2.8,
+        "samples": 226,
+        "used": 226,
+        "rms_px": 0.159,
+        "max_warp_px": 0.34
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07b-47deg-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            784.23,
+            1538.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 1,
+          "dot_pixels": 12,
+          "px": [
+            784.07,
+            1537.9
+          ],
+          "data": [
+            -0.07448424485881407,
+            0.010645318210621948
+          ],
+          "affine_data": [
+            -0.0733378322603726,
+            0.010708168647710237
+          ],
+          "value": {
+            "CL": -0.07448424485881407,
+            "CD": 0.010645318210621948
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            864.46,
+            1558.49
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 2,
+          "dot_pixels": 8,
+          "px": [
+            864.17,
+            1558.18
+          ],
+          "data": [
+            0.05553121367321946,
+            0.00738596751961401
+          ],
+          "affine_data": [
+            0.05613922592573051,
+            0.007443193721955621
+          ],
+          "value": {
+            "CL": 0.05553121367321946,
+            "CD": 0.00738596751961401
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            938.54,
+            1550.53
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 4,
+          "dot_pixels": 9,
+          "px": [
+            938.84,
+            1550.66
+          ],
+          "data": [
+            0.17663149580956827,
+            0.008562583638882721
+          ],
+          "affine_data": [
+            0.17682730967490068,
+            0.00864171810363934
+          ],
+          "value": {
+            "CL": 0.17663149580956827,
+            "CD": 0.008562583638882721
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1001.52,
+            1512.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 6,
+          "dot_pixels": 9,
+          "px": [
+            1001.83,
+            1512.63
+          ],
+          "data": [
+            0.27684194232921083,
+            0.014647098165314586
+          ],
+          "affine_data": [
+            0.2786231534145214,
+            0.014739519009264207
+          ],
+          "value": {
+            "CL": 0.27684194232921083,
+            "CD": 0.014647098165314586
+          },
+          "note": "Candidate 5 next to it is an M 0.696 square."
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1098.0,
+            1389.55
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 9,
+          "dot_pixels": 11,
+          "px": [
+            1097.93,
+            1389.42
+          ],
+          "data": [
+            0.4310496729549055,
+            0.03429787346679872
+          ],
+          "affine_data": [
+            0.4338980211420773,
+            0.034507815900539696
+          ],
+          "value": {
+            "CL": 0.4310496729549055,
+            "CD": 0.03429787346679872
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1180.17,
+            1175.65
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 13,
+          "dot_pixels": 9,
+          "px": [
+            1180.05,
+            1175.9
+          ],
+          "data": [
+            0.5644448360163559,
+            0.06866078087775114
+          ],
+          "affine_data": [
+            0.5665366323548497,
+            0.06877563697941397
+          ],
+          "value": {
+            "CL": 0.5644448360163559,
+            "CD": 0.06866078087775114
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1240.51,
+            949.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 15,
+          "dot_pixels": 11,
+          "px": [
+            1240.62,
+            949.5
+          ],
+          "data": [
+            0.6628565754263758,
+            0.10496423632823208
+          ],
+          "affine_data": [
+            0.664337619555103,
+            0.10511365603584139
+          ],
+          "value": {
+            "CL": 0.6628565754263758,
+            "CD": 0.10496423632823208
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1302.97,
+            661.33
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 19,
+          "dot_pixels": 9,
+          "px": [
+            1302.98,
+            661.13
+          ],
+          "data": [
+            0.7627378272135391,
+            0.1511891677283461
+          ],
+          "affine_data": [
+            0.7650044226398074,
+            0.15139980684499796
+          ],
+          "value": {
+            "CL": 0.7627378272135391,
+            "CD": 0.1511891677283461
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1024.99,
+            1524.72
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 7,
+          "dot_pixels": 11,
+          "px": [
+            1024.93,
+            1524.69
+          ],
+          "data": [
+            0.31344626997384073,
+            0.012700828136393297
+          ],
+          "affine_data": [
+            0.31596572718140914,
+            0.012800779014768948
+          ],
+          "value": {
+            "CL": -0.08655373002615929,
+            "CD": 0.012700828136393297
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1124.24,
+            1551.97
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 10,
+          "dot_pixels": 10,
+          "px": [
+            1124.07,
+            1552.12
+          ],
+          "data": [
+            0.47321520615988943,
+            0.008279670461162807
+          ],
+          "affine_data": [
+            0.4762208844183007,
+            0.008385762745108466
+          ],
+          "value": {
+            "CL": 0.07321520615988941,
+            "CD": 0.008279670461162807
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1232.24,
+            1536.99
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 14,
+          "dot_pixels": 10,
+          "px": [
+            1232.05,
+            1536.85
+          ],
+          "data": [
+            0.6490837814031366,
+            0.010671721752584627
+          ],
+          "affine_data": [
+            0.6507455139142433,
+            0.010824551895118911
+          ],
+          "value": {
+            "CL": 0.24908378140313658,
+            "CD": 0.010671721752584627
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1328.31,
+            1443.32
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 21,
+          "dot_pixels": 8,
+          "px": [
+            1328.17,
+            1443.12
+          ],
+          "data": [
+            0.8032938961526653,
+            0.02566758023583627
+          ],
+          "affine_data": [
+            0.8060657504332673,
+            0.025860281177906258
+          ],
+          "value": {
+            "CL": 0.4032938961526653,
+            "CD": 0.02566758023583627
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1410.0,
+            1274.45
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 27,
+          "dot_pixels": 8,
+          "px": [
+            1409.88,
+            1274.12
+          ],
+          "data": [
+            0.9362854889848333,
+            0.05289049085082545
+          ],
+          "affine_data": [
+            0.9380613620635372,
+            0.05298114165921208
+          ],
+          "value": {
+            "CL": 0.5362854889848333,
+            "CD": 0.05289049085082545
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1493.7,
+            1007.65
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 30,
+          "dot_pixels": 8,
+          "px": [
+            1493.95,
+            1007.5
+          ],
+          "data": [
+            1.073215963501002,
+            0.09568096905181779
+          ],
+          "affine_data": [
+            1.073828326223003,
+            0.0957731323669391
+          ],
+          "value": {
+            "CL": 0.6732159635010019,
+            "CD": 0.09568096905181779
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1545.0,
+            728.49
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 34,
+          "dot_pixels": 7,
+          "px": [
+            1545.03,
+            728.67
+          ],
+          "data": [
+            1.1551812322591055,
+            0.14038478871321985
+          ],
+          "affine_data": [
+            1.1562671399909155,
+            0.14052909521931223
+          ],
+          "value": {
+            "CL": 0.7551812322591055,
+            "CD": 0.14038478871321985
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1588.0,
+            429.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 37,
+          "dot_pixels": 7,
+          "px": [
+            1587.71,
+            428.99
+          ],
+          "data": [
+            1.2250541349804671,
+            0.18836762440862334
+          ],
+          "affine_data": [
+            1.225119551984176,
+            0.1886331865958929
+          ],
+          "value": {
+            "CL": 0.8250541349804671,
+            "CD": 0.18836762440862334
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1391.97,
+            1518.78
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 25,
+          "dot_pixels": 9,
+          "px": [
+            1391.98,
+            1518.95
+          ],
+          "data": [
+            0.9070322504481132,
+            0.013500710261756836
+          ],
+          "affine_data": [
+            0.9092373578547104,
+            0.013679496660333607
+          ],
+          "value": {
+            "CL": -0.0929677495518868,
+            "CD": 0.013500710261756836
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1530.54,
+            1557.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 33,
+          "dot_pixels": 6,
+          "px": [
+            1530.53,
+            1557.08
+          ],
+          "data": [
+            1.1313047590393657,
+            0.007505657129959254
+          ],
+          "affine_data": [
+            1.1331968403082135,
+            0.007542167995382376
+          ],
+          "value": {
+            "CL": 0.13130475903936567,
+            "CD": 0.007505657129959254
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1642.0,
+            1513.46
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 40,
+          "dot_pixels": 8,
+          "px": [
+            1641.88,
+            1513.13
+          ],
+          "data": [
+            1.3122699944338112,
+            0.014497313803413804
+          ],
+          "affine_data": [
+            1.3131558158886056,
+            0.014584702082106354
+          ],
+          "value": {
+            "CL": 0.3122699944338112,
+            "CD": 0.014497313803413804
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1739.34,
+            1389.31
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 45,
+          "dot_pixels": 11,
+          "px": [
+            1739.39,
+            1389.41
+          ],
+          "data": [
+            1.4714671516969118,
+            0.03422450405768035
+          ],
+          "affine_data": [
+            1.4707094842239972,
+            0.03443470748144942
+          ],
+          "value": {
+            "CL": 0.4714671516969118,
+            "CD": 0.03422450405768035
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1820.15,
+            1188.16
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 50,
+          "dot_pixels": 11,
+          "px": [
+            1820.19,
+            1188.19
+          ],
+          "data": [
+            1.60281649877577,
+            0.06662932235170929
+          ],
+          "affine_data": [
+            1.6012199805751255,
+            0.06672810452750513
+          ],
+          "value": {
+            "CL": 0.60281649877577,
+            "CD": 0.06662932235170929
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1889.77,
+            932.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 56,
+          "dot_pixels": 9,
+          "px": [
+            1889.97,
+            932.0
+          ],
+          "data": [
+            1.7140475274615177,
+            0.10768147335640797
+          ],
+          "affine_data": [
+            1.713894193863037,
+            0.10784738191372259
+          ],
+          "value": {
+            "CL": 0.7140475274615177,
+            "CD": 0.10768147335640797
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1940.91,
+            650.1
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 59,
+          "dot_pixels": 10,
+          "px": [
+            1941.0,
+            649.9
+          ],
+          "data": [
+            1.7969197786373852,
+            0.1530370655613401
+          ],
+          "affine_data": [
+            1.7962507444246767,
+            0.15312829931649635
+          ],
+          "value": {
+            "CL": 0.7969197786373852,
+            "CD": 0.1530370655613401
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1994.3,
+            331.66
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 63,
+          "dot_pixels": 8,
+          "px": [
+            1994.56,
+            331.78
+          ],
+          "data": [
+            1.8828645961153592,
+            0.20393558098088418
+          ],
+          "affine_data": [
+            1.8826806760409798,
+            0.20419138477099366
+          ],
+          "value": {
+            "CL": 0.8828645961153592,
+            "CD": 0.20393558098088418
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1637.23,
+            1495.03
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 39,
+          "dot_pixels": 11,
+          "px": [
+            1636.96,
+            1495.32
+          ],
+          "data": [
+            1.3041742428867362,
+            0.017323278595802478
+          ],
+          "affine_data": [
+            1.3051955897427865,
+            0.017444399547319717
+          ],
+          "value": {
+            "CL": -0.09582575711326369,
+            "CD": 0.017323278595802478
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1777.37,
+            1530.82
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 48,
+          "dot_pixels": 8,
+          "px": [
+            1777.37,
+            1530.81
+          ],
+          "data": [
+            1.5327768385878844,
+            0.011628376038564307
+          ],
+          "affine_data": [
+            1.532160279274425,
+            0.011730666055729172
+          ],
+          "value": {
+            "CL": 0.13277683858788447,
+            "CD": 0.011628376038564307
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1877.48,
+            1488.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 54,
+          "dot_pixels": 6,
+          "px": [
+            1877.48,
+            1488.87
+          ],
+          "data": [
+            1.6944224693518681,
+            0.018269723163610058
+          ],
+          "affine_data": [
+            1.693952587434795,
+            0.0184518344110447
+          ],
+          "value": {
+            "CL": 0.2944224693518682,
+            "CD": 0.018269723163610058
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1973.17,
+            1375.41
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 62,
+          "dot_pixels": 11,
+          "px": [
+            1973.07,
+            1375.36
+          ],
+          "data": [
+            1.8494268284440263,
+            0.036470303087458474
+          ],
+          "affine_data": [
+            1.848407417878315,
+            0.03666300334999115
+          ],
+          "value": {
+            "CL": 0.44942682844402637,
+            "CD": 0.036470303087458474
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter circle",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            2144.74,
+            1477.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 70,
+          "dot_pixels": 9,
+          "px": [
+            2144.89,
+            1477.0
+          ],
+          "data": [
+            2.1269120067378426,
+            0.02012161958762626
+          ],
+          "affine_data": [
+            2.12617031882281,
+            0.02032623577512585
+          ],
+          "value": {
+            "CL": -0.07308799326215754,
+            "CD": 0.02012161958762626
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            2272,
+            1502
+          ],
+          "snap": "dot",
+          "found": true,
+          "dot_pixels": 5,
+          "px": [
+            2271.79,
+            1501.39
+          ],
+          "data": [
+            2.332163086754556,
+            0.01631532988740014
+          ],
+          "affine_data": [
+            2.3312934703633466,
+            0.0163960118994185
+          ],
+          "value": {
+            "CL": 0.1321630867545558,
+            "CD": 0.01631532988740014
+          },
+          "note": "Not found by candidates.py."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            2338.66,
+            1471.71
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 78,
+          "dot_pixels": 8,
+          "px": [
+            2338.49,
+            1471.94
+          ],
+          "data": [
+            2.439975115522808,
+            0.020972252528224485
+          ],
+          "affine_data": [
+            2.4390896967229474,
+            0.021115992282354973
+          ],
+          "value": {
+            "CL": 0.23997511552280804,
+            "CD": 0.020972252528224485
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            2435.0,
+            1368.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 80,
+          "dot_pixels": 7,
+          "px": [
+            2435.08,
+            1368.66
+          ],
+          "data": [
+            2.5985367153739443,
+            0.03756371994431447
+          ],
+          "affine_data": [
+            2.5951653836606123,
+            0.0376847739596336
+          ],
+          "value": {
+            "CL": 0.3985367153739441,
+            "CD": 0.03756371994431447
+          }
+        }
+      ]
+    }
+  ]
+}

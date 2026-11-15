@@ -1,0 +1,398 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig05b",
+    "number": "5(b)",
+    "title": "Figure 5 (continued). (b) Drag coefficient. Variation with lift coefficient of the aerodynamic characteristics for the 10.8 deg sweptback wing.",
+    "pdf_page": 22,
+    "printed_page": 20,
+    "x_axis": "Lift coefficient, C_L, on staggered scales, same layout as figure 5(a). Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 3.2 (35 vertical lines). Label row: -.2 at the left frame, one '0' per Mach number every 0.2 (M = 0.50 ... 1.114, 13 zeros), then .2, .4, .6, .8 on the M = 1.114 scale (.8 at the right frame). Each '0' is centred within 0 to 8 px of a vertical grid line (labels at x = 611, 739, 868, 997, 1127, 1257, 1382, 1513, 1647, 1776, 1907, 2035, 2161 px; grid lines 0.0 to 2.4 at 604.5 to 2157 px on row 1150). CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.85), 1.0 (0.95), 1.4 (1.00), 2.2 (1.10).",
+    "y_axis": "Drag coefficient, C_D (grid 0 to 0.22 by 0.01; frame lines at 0 and 0.22). The Mach-number box sits between C_D = 0 and about 0.0045, below the 0.01 grid line.",
+    "content_note": "One hollow symbol shape with a centre dot per Mach number (same shapes as figure 5(a)), on one faired polar per Mach number. Same test points as figure 5(a): crowded low-drag symbols were matched to figure 5(a) by lift coefficient."
+  },
+  "scan": {
+    "pdf_page": 22,
+    "size_px": [
+      3060,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 22 .cache/scans/p22.png"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 35
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "points": [
+      {
+        "px": [
+          532,
+          433
+        ],
+        "x": -0.1,
+        "y": 0.2
+      },
+      {
+        "px": [
+          729,
+          628
+        ],
+        "x": 0.2,
+        "y": 0.17
+      },
+      {
+        "px": [
+          603,
+          956
+        ],
+        "x": 0.0,
+        "y": 0.12
+      },
+      {
+        "px": [
+          541,
+          1349
+        ],
+        "x": -0.1,
+        "y": 0.06
+      },
+      {
+        "px": [
+          798,
+          1150
+        ],
+        "x": 0.3,
+        "y": 0.09
+      },
+      {
+        "px": [
+          920,
+          363
+        ],
+        "x": 0.5,
+        "y": 0.21
+      },
+      {
+        "px": [
+          1573,
+          1076
+        ],
+        "x": 1.5,
+        "y": 0.1
+      },
+      {
+        "px": [
+          1765,
+          617
+        ],
+        "x": 1.8,
+        "y": 0.17
+      },
+      {
+        "px": [
+          2149,
+          415
+        ],
+        "x": 2.4,
+        "y": 0.2
+      },
+      {
+        "px": [
+          2349,
+          871
+        ],
+        "x": 2.7,
+        "y": 0.13
+      },
+      {
+        "px": [
+          2543,
+          738
+        ],
+        "x": 3.0,
+        "y": 0.15
+      },
+      {
+        "px": [
+          2611,
+          1329
+        ],
+        "x": 3.1,
+        "y": 0.06
+      },
+      {
+        "px": [
+          2612,
+          1526
+        ],
+        "x": 3.1,
+        "y": 0.03
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig05b-10.8deg-M0.500",
+      "wing": "10.8",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 2
+        },
+        {
+          "id": "p2",
+          "candidate": 5,
+          "snap": "candidate",
+          "note": "Two circles drawn almost on top of each other at CL 0.055 (outline doubled at top and bottom, offset about 3.5 px vertically); two dots 3.6 px apart in one column. This is the upper dot (higher CD); the candidate centroid is used because the dot snap would merge the two dots. Figure 5(a) shows a single circle at this CL (outline slightly thickened, dot slightly elongated), recorded there as one point."
+        },
+        {
+          "id": "p3",
+          "candidate": 4,
+          "snap": "candidate",
+          "note": "Lower dot of the doubled circle at CL 0.055 (see previous point)."
+        },
+        {
+          "id": "p4",
+          "candidate": 7
+        },
+        {
+          "id": "p5",
+          "px": [
+            818.5,
+            1612.2
+          ],
+          "snap": "dot",
+          "dot_radius": 3,
+          "dot_level": 220,
+          "note": "Faint centre dot, not found by candidates.py; isolated at dot_level 220. Outline centre (818, 1612) agrees."
+        },
+        {
+          "id": "p6",
+          "candidate": 11
+        },
+        {
+          "id": "p7",
+          "candidate": 12
+        },
+        {
+          "id": "p8",
+          "candidate": 19
+        },
+        {
+          "id": "p9",
+          "candidate": 23
+        },
+        {
+          "id": "p10",
+          "candidate": 27
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M0.850",
+      "wing": "10.8",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 8
+        },
+        {
+          "id": "p2",
+          "candidate": 14
+        },
+        {
+          "id": "p3",
+          "candidate": 15
+        },
+        {
+          "id": "p4",
+          "candidate": 21
+        },
+        {
+          "id": "p5",
+          "candidate": 31
+        },
+        {
+          "id": "p6",
+          "candidate": 39,
+          "note": "Lowest of three diamonds at CL 0.70 to 0.74 (repeated points, matching the three-diamond cluster of figure 5(a)); separate outline, clean dot."
+        },
+        {
+          "id": "p7",
+          "candidate": 41,
+          "snap": "candidate",
+          "note": "Two overlapping diamonds offset about (5, -3) px, both dots visible and isolated but only 5 px apart; candidate centroid used so the snap cannot merge them."
+        },
+        {
+          "id": "p8",
+          "candidate": 42,
+          "snap": "candidate",
+          "note": "Second of the two overlapping diamonds (see previous point)."
+        },
+        {
+          "id": "p9",
+          "candidate": 45
+        },
+        {
+          "id": "p10",
+          "candidate": 47
+        },
+        {
+          "id": "p11",
+          "candidate": 48
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M0.950",
+      "wing": "10.8",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 29
+        },
+        {
+          "id": "p2",
+          "px": [
+            1350,
+            1621
+          ],
+          "snap": "dot",
+          "dot_radius": 3,
+          "dot_level": 90,
+          "note": "Two right-pointing triangles drawn on top of each other at CL 0.15 (shared vertical edge at x = 1343.5, apexes at (1364, 1620) and (1363, 1626)), matching the doubled triangle of figure 5(a). Not found by candidates.py: the dots merge with the other triangle's edges and the faired line. Upper dot: merged with the lower triangle's upper edge, isolated at dot_level 90 (1350.2, 1620.7); agrees with the clean-triangle geometry (dot 7 px right of the vertical edge, about 1 px below the apex row)."
+        },
+        {
+          "id": "p3",
+          "px": [
+            1350.3,
+            1626.8
+          ],
+          "snap": "none",
+          "note": "Lower dot of the doubled triangle: merged with the upper triangle's lower edge (dark blob at x 1349 to 1353, rows 1626 to 1629). Centre placed from the outline as for the upper one: 7 px right of the vertical edge, 1 px below the apex row 1626. Uncertainty about 1 px."
+        },
+        {
+          "id": "p4",
+          "candidate": 55
+        },
+        {
+          "id": "p5",
+          "candidate": 66
+        },
+        {
+          "id": "p6",
+          "candidate": 76
+        },
+        {
+          "id": "p7",
+          "candidate": 79
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M1.000",
+      "wing": "10.8",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 49
+        },
+        {
+          "id": "p2",
+          "candidate": 60,
+          "note": "Two right triangles of this shape side by side at C_D 0.0224 (this one and the next), 15 px apart."
+        },
+        {
+          "id": "p3",
+          "candidate": 62,
+          "note": "Second right triangle (right angle top left) beside the previous one, its left edge on the C_L grid line; same shape as every M = 1.00 symbol. Figure 5(a) shows only one M = 1.00 symbol near this lift coefficient (alpha 0.28 deg, C_L 0.087), so this point has no counterpart there."
+        },
+        {
+          "id": "p4",
+          "candidate": 71
+        },
+        {
+          "id": "p5",
+          "candidate": 82
+        },
+        {
+          "id": "p6",
+          "candidate": 90
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M1.100",
+      "wing": "10.8",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter disc, square corner at top left, with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 85
+        },
+        {
+          "id": "p2",
+          "candidate": 95
+        },
+        {
+          "id": "p3",
+          "candidate": 100
+        },
+        {
+          "id": "p4",
+          "candidate": 103
+        },
+        {
+          "id": "p5",
+          "candidate": 107
+        }
+      ]
+    }
+  ]
+}

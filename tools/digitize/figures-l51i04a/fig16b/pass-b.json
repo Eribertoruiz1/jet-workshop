@@ -1,0 +1,183 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f"
+  },
+  "figure": {
+    "id": "fig16b",
+    "number": "16(b)",
+    "title": "Figure 16 (continued). (b) Drag coefficient. Aerodynamic characteristics of the body alone.",
+    "pdf_page": 38,
+    "printed_page": 37,
+    "x_axis": "Drag coefficient, C_D, on staggered scales. Common axis = the M = 0.50 scale: left frame line = 0, grid every 0.002, right frame line = 0.060 (31 vertical lines, about 74 px apart). The label strip under the alpha = -2 line reads '0 for M = 0.50 .70 .85 .90 .925 .95 .975 1.00 1.02 1.035 1.085 1.10 1.13'; the row of '0' labels under the strip sits under every second grid line (left frame, then every 0.004), each '0' directly below its Mach number, followed by .004 .008 .012 on the M = 1.13 scale (.012 at the right frame).",
+    "y_axis": "Angle of attack, alpha, deg (common to all Mach numbers). Grid every 1 deg from -2 (the line above the label strip) to 14 (top frame line).",
+    "content_note": "Body alone. One faired polar per Mach number, 13 Mach numbers, hollow symbols with a centre dot, one shape per Mach number (identified by the M labels along the top of the plot, each above its polar). Only the symbols at nominal alpha = -2, 0 and +2 deg are read here. Every Mach number has two symbols at alpha = 0 (repeated test point), overlapping in all cases except M = 0.50; where the dot of one of them is hidden under or merged with the other's outline its centre is placed by eye (snap 'none', see notes)."
+  },
+  "scan": {
+    "pdf_page": 38,
+    "size_px": [3074, 2201],
+    "extraction": "tools/digitize/extract_scan.py --turn cw"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context reader",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "x_definition": "Common axis = the M = 0.50 C_D scale (its zero is the left frame line). Each Mach number's C_D = 0 is the grid line above its '0' label: M 0.50 at 0.000, 0.70 at 0.004, 0.85 at 0.008, 0.90 at 0.012, 0.925 at 0.016, 0.95 at 0.020, 0.975 at 0.024, 1.00 at 0.028, 1.02 at 0.032, 1.035 at 0.036, 1.085 at 0.040, 1.10 at 0.044, 1.13 at 0.048 (then .004, .008, .012 of the M = 1.13 scale = 0.052, 0.056, 0.060, the right frame). Reported C_D = common-axis value minus x_offset.",
+    "grid": {
+      "x_lines": {"start": 0.0, "step": 0.002, "count": 31},
+      "y_lines": {"start": -2.0, "step": 1.0, "count": 17}
+    },
+    "points": [
+      {"px": [522.5, 388], "x": 0.002, "y": 12.0},
+      {"px": [1711, 389], "x": 0.034, "y": 12.0},
+      {"px": [1340, 463.5], "x": 0.024, "y": 11.0},
+      {"px": [2304, 464.5], "x": 0.050, "y": 11.0},
+      {"px": [818, 610.5], "x": 0.010, "y": 9.0},
+      {"px": [2156.5, 612], "x": 0.046, "y": 9.0},
+      {"px": [1413.5, 760.5], "x": 0.026, "y": 7.0},
+      {"px": [966.5, 908.5], "x": 0.014, "y": 5.0},
+      {"px": [669.5, 1055.5], "x": 0.006, "y": 3.0},
+      {"px": [1932.5, 1058], "x": 0.040, "y": 3.0},
+      {"px": [2526.5, 1134.5], "x": 0.056, "y": 2.0},
+      {"px": [1115.5, 1205], "x": 0.018, "y": 1.0},
+      {"px": [594, 1351], "x": 0.004, "y": -1.0},
+      {"px": [1560.5, 1354.5], "x": 0.030, "y": -1.0},
+      {"px": [2599, 1357.5], "x": 0.058, "y": -1.0}
+    ]
+  },
+  "series": [
+    {
+      "id": "fig16b-body-M0.500", "wing": "body", "mach": 0.5, "kind": "symbols",
+      "symbol": "circle with centre dot", "x_offset": 0.0, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 3, "note": "alpha -2"},
+        {"id": "p2", "candidate": 2, "note": "alpha 0, left circle of two separate circles (off the faired curve)"},
+        {"id": "p3", "candidate": 4, "note": "alpha 0, right circle (on the faired curve); candidate 5 inside it is a 1-px speck, not a second dot"},
+        {"id": "p4", "candidate": 6, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.700", "wing": "body", "mach": 0.7, "kind": "symbols",
+      "symbol": "square with centre dot", "x_offset": 0.004, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 17, "note": "alpha -2"},
+        {"id": "p2", "candidate": 16, "snap": "candidate", "note": "alpha 0, left of two overlapping squares (offset about 6 px); dots 5 px apart, candidate centroid used so they do not merge"},
+        {"id": "p3", "candidate": 18, "snap": "candidate", "note": "alpha 0, right of two overlapping squares; candidate centroid used"},
+        {"id": "p4", "candidate": 19, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.850", "wing": "body", "mach": 0.85, "kind": "symbols",
+      "symbol": "diamond with centre dot", "x_offset": 0.008, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 27, "note": "alpha -2"},
+        {"id": "p2", "px": [864.2, 1262.5], "snap": "none", "note": "alpha 0, upper of two overlapping diamonds (centres about (863.5,1262) and (860.5,1269.5)); its dot is visible but touches the other diamond's upper-right edge, so the centre of the visible dot is placed by eye"},
+        {"id": "p3", "px": [859.5, 1269.0], "snap": "none", "note": "alpha 0, lower of two overlapping diamonds; dot merged with the upper diamond's lower-left edge (the edge is 2-3 px wider there), centre by eye from the extra ink, consistent with the outline centre"},
+        {"id": "p4", "candidate": 28, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.900", "wing": "body", "mach": 0.9, "kind": "symbols",
+      "symbol": "triangle (apex up) with centre dot", "x_offset": 0.012, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 33, "note": "alpha -2"},
+        {"id": "p2", "px": [1008.7, 1263.0], "snap": "none", "note": "alpha 0, two almost coincident triangles (outline strokes 6 px instead of 3, offset about 3 px); the two dots form one 20-px blob (candidate 34, centroid 1010.25,1262.3), split by eye: this is its lower-left half. Doubtful whether doubled, but the stroke width says two symbols"},
+        {"id": "p3", "px": [1011.8, 1261.8], "snap": "none", "note": "alpha 0, second dot of the merged blob (upper-right half), by eye"},
+        {"id": "p4", "candidate": 35, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.925", "wing": "body", "mach": 0.925, "kind": "symbols",
+      "symbol": "inverted triangle (apex down) with centre dot", "x_offset": 0.016, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 42, "note": "alpha -2"},
+        {"id": "p2", "px": [1159.5, 1268.0], "snap": "none", "note": "alpha 0, upper of two inverted triangles stacked 6 px apart vertically; its dot is mostly hidden under the lower triangle's top edge (only a 2-px tail shows at row 1269), centre by eye"},
+        {"id": "p3", "candidate": 43, "note": "alpha 0, lower of the two inverted triangles; small 3-px dot just above the alpha = 0 line"},
+        {"id": "p4", "candidate": 44, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.950", "wing": "body", "mach": 0.95, "kind": "symbols",
+      "symbol": "triangle pointing right (vertical left side) with centre dot", "x_offset": 0.02, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 50, "note": "alpha -2"},
+        {"id": "p2", "px": [1307.8, 1268.3], "snap": "none", "note": "alpha 0, left of two overlapping triangles (vertical sides at x 1300 and 1306); its dot is merged with the right triangle's vertical side (side 2 px wider in rows 1267-1270), centre by eye"},
+        {"id": "p3", "px": [1313.0, 1271.0], "snap": "none", "note": "alpha 0, right of the two triangles; dot merged with the left triangle's lower edge, centre by eye"},
+        {"id": "p4", "candidate": 51, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.975", "wing": "body", "mach": 0.975, "kind": "symbols",
+      "symbol": "triangle pointing left (vertical right side) with centre dot", "x_offset": 0.024, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 58, "note": "alpha -2"},
+        {"id": "p2", "px": [1471.3, 1270.2], "snap": "none", "note": "alpha 0, left of two overlapping triangles (apexes at x about 1455.5 and 1461; vertical sides at 1479.5 and on the grid line at 1487); dot merged with the right triangle's upper edge, centre by eye"},
+        {"id": "p3", "px": [1476.5, 1271.5], "snap": "none", "note": "alpha 0, right of the two triangles; dot merged with the left triangle's vertical side, centre by eye"},
+        {"id": "p4", "candidate": 59, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.000", "wing": "body", "mach": 1.0, "kind": "symbols",
+      "symbol": "right triangle with horizontal top and vertical left side (hypotenuse from top right to bottom left), with centre dot", "x_offset": 0.028, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 71, "note": "alpha -2"},
+        {"id": "p2", "candidate": 70, "note": "alpha 0, upper of two symbols (top edges at y 1255 and 1270.5)"},
+        {"id": "p3", "px": [1650.0, 1279.5], "snap": "none", "note": "alpha 0, lower symbol; dot merged with the upper symbol's hypotenuse and the alpha = 0 line (visible as extra ink at 1649-1651, rows 1278-1281), centre by eye"},
+        {"id": "p4", "candidate": 72, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.020", "wing": "body", "mach": 1.02, "kind": "symbols",
+      "symbol": "right triangle with horizontal top and vertical right side (hypotenuse from top left to bottom right), with centre dot", "x_offset": 0.032, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 79, "note": "alpha -2"},
+        {"id": "p2", "candidate": 80, "note": "alpha 0, left/lower of two overlapping symbols"},
+        {"id": "p3", "candidate": 82, "note": "alpha 0, right/upper of two overlapping symbols"},
+        {"id": "p4", "candidate": 81, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.035", "wing": "body", "mach": 1.035, "kind": "symbols",
+      "symbol": "right triangle with vertical left side and horizontal bottom (hypotenuse from top left to bottom right), with centre dot", "x_offset": 0.036, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "px": [1986, 1426], "snap": "dot", "note": "alpha -2; isolated dot not in the candidates file, picked by hand"},
+        {"id": "p2", "px": [1986.6, 1276.3], "snap": "none", "note": "alpha 0, upper of two symbols sharing the left side (tops at y 1254 and about 1260.5); the two dots form one vertical blob at x 1986-1988, rows 1275-1279, touching the alpha = 0 line; this is its upper part, by eye. About 2 px lower than the outline geometry suggests"},
+        {"id": "p3", "px": [1987.0, 1280.0], "snap": "none", "note": "alpha 0, lower symbol; its dot is the lower part of the blob, partly hidden under the upper symbol's bottom edge and the alpha = 0 line, centre by eye"},
+        {"id": "p4", "candidate": 89, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.085", "wing": "body", "mach": 1.085, "kind": "symbols",
+      "symbol": "right triangle with vertical right side and horizontal bottom (hypotenuse from bottom left to top right), with centre dot", "x_offset": 0.04, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "px": [2154, 1427.5], "snap": "dot", "note": "alpha -2; isolated dot not in the candidates file, picked by hand"},
+        {"id": "p2", "px": [2157.0, 1273.5], "snap": "none", "note": "alpha 0, upper-left of two symbols (vertical sides at x 2165.7, thin, and 2171); no separate dot visible: it is merged with the lower symbol's hypotenuse (stroke 1-2 px wider there); centre by eye from the outline (same dot offset from the corner as the single symbols at -2 and +2). Doubtful to about 2 px"},
+        {"id": "p3", "px": [2161.7, 1278.5], "snap": "none", "note": "alpha 0, lower-right symbol; dot split by a blank scan row (rows 1277-1278 = candidate 95, row 1280 touching the alpha = 0 line), centre by eye over both parts"},
+        {"id": "p4", "candidate": 96, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.100", "wing": "body", "mach": 1.1, "kind": "symbols",
+      "symbol": "quarter-round (D-shaped) symbol: horizontal top, vertical left side, curved right side, with centre dot", "x_offset": 0.044, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 105, "note": "alpha -2"},
+        {"id": "p2", "px": [2313.8, 1273.5], "snap": "none", "note": "alpha 0, upper-left of two symbols (left side on the grid line at x 2304, top at y 1264); dot merged with the other symbol's left side (side 2-3 px wider at rows 1273-1274), centre by eye"},
+        {"id": "p3", "candidate": 104, "note": "alpha 0, lower-right of the two symbols (left side x 2311, top y 1268). Candidate 108 to its right is a speck outside both outlines"},
+        {"id": "p4", "candidate": 106, "note": "alpha +2"}
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.130", "wing": "body", "mach": 1.13, "kind": "symbols",
+      "symbol": "quarter-round (D-shaped) symbol: horizontal top, vertical right side, curved left side, with centre dot", "x_offset": 0.048, "x_variable": "CD", "y_variable": "alpha",
+      "points": [
+        {"id": "p1", "candidate": 112, "note": "alpha -2"},
+        {"id": "p2", "px": [2462.0, 1269.5], "snap": "none", "note": "alpha 0, upper-right of two symbols (right sides x 2473 and 2465, tops y 1262 and 1269). No dot visible: the area below the other symbol's top edge is blank, so the dot is presumably hidden under that edge (rows 1268-1270); centre by eye from the outline. Doubtful to about 2-3 px"},
+        {"id": "p3", "px": [2455.0, 1279.0], "snap": "none", "note": "alpha 0, lower-left symbol; no separate dot visible, it falls on the upper symbol's curved side; centre by eye from the outline (dot offset from the top-right corner as in the single symbols). Doubtful to about 2-3 px"},
+        {"id": "p4", "candidate": 114, "note": "alpha +2"}
+      ]
+    }
+  ]
+}
