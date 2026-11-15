@@ -153,7 +153,7 @@ def main() -> None:
 
     args.out_csv.parent.mkdir(parents=True, exist_ok=True)
     with args.out_csv.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=FIELDS)
+        w = csv.DictWriter(f, fieldnames=FIELDS, lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 
@@ -177,7 +177,7 @@ def main() -> None:
         lines += ["", "Unmatched:"] + [f"- {u}" for u in unmatched]
     md = "\n".join(lines) + "\n"
     if args.md:
-        args.md.write_text(md, encoding="utf-8")
+        args.md.write_text(md, encoding="utf-8", newline="\n")
     print(md)
 
 

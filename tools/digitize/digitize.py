@@ -534,7 +534,7 @@ def main() -> None:
     g = load_gray(args.scan)
     result = run(spec, g)
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    args.out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     cal = result["calibration"]
     print(f"{spec['figure']['id']} pass {spec['pass']}: {len(cal['points'])} calibration points, "
           f"affine rms residual x {cal['affine_rms_residual_data'][0]:.5f}, y {cal['affine_rms_residual_data'][1]:.6f}; "
