@@ -291,3 +291,16 @@ Respuestas en español. Código, commits e interfaz en inglés.
 Debe sentirse como una figura de informe técnico que respira: sobria, exacta y con una sola sorpresa.
 
 Prueba de aceptación: abro la aplicación, pulso `NACA wing · 35° sweep`, muevo la flecha hasta 47° y veo desplazarse el muro transónico. En cada ala ensayada, los puntos de 1952 aparecen con sus barras, y puedo ver de un vistazo dónde el modelo acierta, dónde estima y dónde deja de valer.
+
+## Enmienda 1 (15 de noviembre de 2026)
+
+Decisión del dueño para la compuerta 2, si las superposiciones del paso 0 se ven bien. Prevalece sobre el texto anterior donde lo contradiga.
+
+1. "Measured" son solo los símbolos de las polares (figuras 5(b), 6(b) y 7(b)). El modelo se puntúa en el CL y el Mach de cada símbolo, sin interpolar.
+2. La figura 9 entra como una tercera clase, "NACA faired curve (1952)": una línea sin símbolos en la gráfica de resistencia contra Mach. Nunca bajo "Measured". Su comparación con el modelo se reporta aparte.
+3. Comprobación cruzada: los símbolos de baja sustentación deben caer sobre la curva de la figura 9 dentro de la precisión del ensayo. Si no, hay un error de lectura.
+4. Las bandas de CD0 se aplican a los símbolos con |CL| ≤ 0.1.
+5. Empieza por cinco valores de Mach por ala que cubran todo el rango. Amplía solo si la herramienta lo hace barato; el resto va a Tickets.
+6. Los símbolos medidos se muestran en la polar, con un selector de Mach ensayado.
+7. Dime si la pasada B recalibró la rejilla o reutilizó la calibración de la A. Si la reutilizó, que recalibre una figura por su cuenta: la diferencia entre pasadas tiene que cubrir también la calibración.
+8. Cuando entre la primera prueba, quita `--passWithNoTests` del comando de pruebas.
