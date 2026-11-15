@@ -1,0 +1,25 @@
+# Dependencies and builds
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Downloaded third-party sources (never committed: public repository)
+.cache/
+*.pdf
+
+# Python tooling
+.venv/
+__pycache__/
+*.pyc
+
+# Local environment
+.env
+.env.*
+.claude/settings.local.json
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
