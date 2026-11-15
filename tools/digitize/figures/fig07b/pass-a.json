@@ -1,0 +1,326 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig07b",
+    "number": "7(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 47 deg sweptback wing. (b) Drag coefficient.",
+    "pdf_page": 28,
+    "printed_page": 26,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot, one shape per Mach number, joined by faired curves."
+  },
+  "scan": {
+    "pdf_page": 28,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.2, grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.2 (M 1.112); then .2 .4 .6 of M 1.112 at 2.4 to 2.8 (right frame). Test Mach numbers 0.50, 0.696, 0.843, 0.892, 0.916, 0.941, 0.965, 0.990, 1.010, 1.024, 1.088, 1.112.",
+    "points": [
+      {
+        "px": [
+          765,
+          1417
+        ],
+        "x": -0.1,
+        "y": 0.03
+      },
+      {
+        "px": [
+          765,
+          1044
+        ],
+        "x": -0.1,
+        "y": 0.09
+      },
+      {
+        "px": [
+          765,
+          671
+        ],
+        "x": -0.1,
+        "y": 0.15
+      },
+      {
+        "px": [
+          765,
+          298
+        ],
+        "x": -0.1,
+        "y": 0.21
+      },
+      {
+        "px": [
+          1199,
+          298
+        ],
+        "x": 0.6,
+        "y": 0.21
+      },
+      {
+        "px": [
+          1447,
+          298
+        ],
+        "x": 1.0,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2315,
+          671
+        ],
+        "x": 2.4,
+        "y": 0.15
+      },
+      {
+        "px": [
+          2315,
+          1044
+        ],
+        "x": 2.4,
+        "y": 0.09
+      },
+      {
+        "px": [
+          2501,
+          298
+        ],
+        "x": 2.7,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2501,
+          1417
+        ],
+        "x": 2.7,
+        "y": 0.03
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07b-47deg-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1
+        },
+        {
+          "id": "p2",
+          "candidate": 2
+        },
+        {
+          "id": "p3",
+          "candidate": 4
+        },
+        {
+          "id": "p4",
+          "candidate": 6,
+          "note": "Candidate 5 next to it is an M 0.696 square."
+        },
+        {
+          "id": "p5",
+          "candidate": 9
+        },
+        {
+          "id": "p6",
+          "candidate": 13
+        },
+        {
+          "id": "p7",
+          "candidate": 15
+        },
+        {
+          "id": "p8",
+          "candidate": 19
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 7
+        },
+        {
+          "id": "p2",
+          "candidate": 10
+        },
+        {
+          "id": "p3",
+          "candidate": 14
+        },
+        {
+          "id": "p4",
+          "candidate": 21
+        },
+        {
+          "id": "p5",
+          "candidate": 27
+        },
+        {
+          "id": "p6",
+          "candidate": 30
+        },
+        {
+          "id": "p7",
+          "candidate": 34
+        },
+        {
+          "id": "p8",
+          "candidate": 37
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 25
+        },
+        {
+          "id": "p2",
+          "candidate": 33
+        },
+        {
+          "id": "p3",
+          "candidate": 40
+        },
+        {
+          "id": "p4",
+          "candidate": 45
+        },
+        {
+          "id": "p5",
+          "candidate": 50
+        },
+        {
+          "id": "p6",
+          "candidate": 56
+        },
+        {
+          "id": "p7",
+          "candidate": 59
+        },
+        {
+          "id": "p8",
+          "candidate": 63
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 39
+        },
+        {
+          "id": "p2",
+          "candidate": 48
+        },
+        {
+          "id": "p3",
+          "candidate": 54
+        },
+        {
+          "id": "p4",
+          "candidate": 62
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter circle",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 70
+        },
+        {
+          "id": "p2",
+          "px": [
+            2272,
+            1502
+          ],
+          "snap": "dot",
+          "note": "Not found by candidates.py."
+        },
+        {
+          "id": "p3",
+          "candidate": 78
+        },
+        {
+          "id": "p4",
+          "candidate": 80
+        }
+      ]
+    }
+  ],
+  "assignment_method": "Symbols assigned by shape and confirmed by lift coefficient: each test point's CL read on figure 7(a) must reappear on figure 7(b)."
+}

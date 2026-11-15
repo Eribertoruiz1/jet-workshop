@@ -126,7 +126,7 @@
   },
   "series": [
     {
-      "id": "fig06b-35deg-M0.90",
+      "id": "fig06b-35deg-M0.900",
       "wing": "35",
       "mach": 0.9,
       "kind": "symbols",

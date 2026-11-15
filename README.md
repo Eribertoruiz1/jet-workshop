@@ -17,10 +17,19 @@ The wing bench compares a fast drag model (Korn–Mason drag divergence with Loc
 
 ```bash
 pnpm install
-pnpm test
+pnpm test        # all tests (physics and validation)
+pnpm validate    # writes packages/validation/report/validation-report.md
+pnpm dev         # the wing bench at http://localhost:5173
+pnpm typecheck
+pnpm lint
 ```
 
-More commands (`validate`, `dev`, `typecheck`, `lint`) arrive with spike 1.
+## Layout
+
+- `packages/physics`: the drag model and the baseline it is compared with.
+- `packages/validation`: the digitized NACA dataset (see its `README.md`, the dataset card), the scoring and the generated validation report.
+- `apps/web`: the wing bench.
+- `tools/digitize`: the Python tools that read the NACA figures, with the specs and results of both reading passes.
 
 ## License
 

@@ -14,33 +14,128 @@
     "printed_page": 29,
     "x_axis": "Mach number, M (grid 0.40 to 1.20 by 0.05; frame lines at 0.40 and 1.20)",
     "y_axis": "C_D0, drag coefficient at zero lift (grid 0 to 0.030 by 0.005; frame lines at 0 and 0.030)",
-    "content_note": "Three faired curves without symbols, for sweep 10.8, 35 and 47 deg. Line identity read by tracing: below M = 0.82 the 35 deg curve is the middle of the three lines (below the 10.8 deg line, above the 47 deg line), crosses the CD0 = 0.010 grid line near M = 0.79 and runs along it from about M = 0.65 to 0.81; from about M = 0.83 to 0.87 it lies alongside the 10.8 deg line as one two-stroke band (band width never drops to a single stroke, so the lines do not cross; 35 deg is the lower stroke); from M = 0.88 it is the middle curve of the transonic rise (legend '35' sits at the right end of this middle curve). It is solid to M = 1.037, dashed from M = 1.04 to 1.081 (three short dashes, level near CD0 = 0.0200), absent between M = 1.081 and 1.088, and solid again from M = 1.088 to 1.131 (a single long stroke, about 0.043 in M, falling to the right; read as the faired line through the supersonic points, unlike the short dashes before it). Sample M = 1.085 is left out: its column (about x = 2394 px) falls in the gap between the last dash (ends x = 2385) and the start of the final solid stroke (x = 2404, M = 1.088). Cross-check of line identity against figure 6(b) (35 deg polars, my own rough reading, not part of this result): the M = 0.50 faired polar crosses CL = 0 at CD about 0.0090 and the M = 0.70 polar at about 0.0099, closer to the middle line (0.0096, 0.0100) than to the upper line (0.0102, 0.0103); the M = 0.90 polar gives about 0.011, matching the middle curve there."
+    "content_note": "Three faired curves without symbols, for sweep 10.8, 35 and 47 deg. Line identity read by tracing: below M = 0.82 the 35 deg curve is the middle of the three lines (below the 10.8 deg line, above the 47 deg line), crosses the CD0 = 0.010 grid line near M = 0.79 and runs along it from about M = 0.65 to 0.81; from about M = 0.83 to 0.87 it lies alongside the 10.8 deg line as one two-stroke band (band width never drops to a single stroke, so the lines do not cross; 35 deg is the lower stroke); from M = 0.88 it is the middle curve of the transonic rise (legend '35' sits at the right end of this middle curve). It is solid to M = 1.037, dashed from M = 1.04 to 1.081 (three short dashes, level near CD0 = 0.0200), absent between M = 1.081 and 1.088, and solid again from M = 1.088 to 1.131 (a single long stroke, about 0.043 in M, falling to the right; read as the faired line through the supersonic points, unlike the short dashes before it). Sample M = 1.085 is left out: its column (about x = 2394 px) falls in the gap between the last dash (ends x = 2385) and the start of the final solid stroke (x = 2404, M = 1.088). Cross-check of line identity against figure 6(b) (35 deg polars, my own rough reading, not part of this result): the M = 0.50 faired polar crosses CL = 0 at CD about 0.0090 and the M = 0.70 polar at about 0.0099, closer to the middle line (0.0096, 0.0100) than to the upper line (0.0102, 0.0103); the M = 0.90 polar gives about 0.011, matching the middle curve there. 10.8 and 47 deg curves (added in the second round): below M = 0.82 the 10.8 deg curve is the top line (above the 35 deg line and the C_D0 = 0.010 grid line), joins the 35 deg line as the upper stroke of a two-stroke band from M = 0.83 to 0.87, and is the leftmost (highest) rising curve from M = 0.88, ending under the label '10.8'; solid to M = 1.038, three short dashes to M = 1.080, then a single long stroke from M = 1.084 to 1.115 falling to the right. The 47 deg curve is the lowest line below M = 0.94 (about 35 to 40 px under the others at M = 0.50), runs into the C_D0 = 0.010 grid line near M = 0.94, rises last (rightmost) and ends under the label '47'; solid to M = 1.036, short dashes to M = 1.086, gap, then a single long level stroke from M = 1.090 to 1.126. As for 35 deg, the final long strokes are read as solid faired lines; the short dashes are left out."
   },
   "scan": {
     "pdf_page": 31,
-    "size_px": [3062, 2342],
+    "size_px": [
+      3062,
+      2342
+    ],
     "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 31 .cache/scans/p31.png"
   },
   "pass": "B",
   "digitizer": "pass B, fresh-context subagent",
   "calibration": {
     "grid": {
-      "x_lines": {"start": 0.40, "step": 0.05, "count": 17},
-      "y_lines": {"start": 0.000, "step": 0.005, "count": 7}
+      "x_lines": {
+        "start": 0.4,
+        "step": 0.05,
+        "count": 17
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.005,
+        "count": 7
+      }
     },
     "points": [
-      {"px": [610, 1334], "x": 0.45, "y": 0.005},
-      {"px": [605, 1052], "x": 0.45, "y": 0.015},
-      {"px": [601, 770], "x": 0.45, "y": 0.025},
-      {"px": [1027, 907], "x": 0.60, "y": 0.020},
-      {"px": [1597, 1326], "x": 0.80, "y": 0.005},
-      {"px": [1593, 1042], "x": 0.80, "y": 0.015},
-      {"px": [1590, 760], "x": 0.80, "y": 0.025},
-      {"px": [2021, 1322], "x": 0.95, "y": 0.005},
-      {"px": [2441, 1318], "x": 1.10, "y": 0.005},
-      {"px": [2438, 1034], "x": 1.10, "y": 0.015},
-      {"px": [2434, 752], "x": 1.10, "y": 0.025},
-      {"px": [2579, 1174], "x": 1.15, "y": 0.010}
+      {
+        "px": [
+          610,
+          1334
+        ],
+        "x": 0.45,
+        "y": 0.005
+      },
+      {
+        "px": [
+          605,
+          1052
+        ],
+        "x": 0.45,
+        "y": 0.015
+      },
+      {
+        "px": [
+          601,
+          770
+        ],
+        "x": 0.45,
+        "y": 0.025
+      },
+      {
+        "px": [
+          1027,
+          907
+        ],
+        "x": 0.6,
+        "y": 0.02
+      },
+      {
+        "px": [
+          1597,
+          1326
+        ],
+        "x": 0.8,
+        "y": 0.005
+      },
+      {
+        "px": [
+          1593,
+          1042
+        ],
+        "x": 0.8,
+        "y": 0.015
+      },
+      {
+        "px": [
+          1590,
+          760
+        ],
+        "x": 0.8,
+        "y": 0.025
+      },
+      {
+        "px": [
+          2021,
+          1322
+        ],
+        "x": 0.95,
+        "y": 0.005
+      },
+      {
+        "px": [
+          2441,
+          1318
+        ],
+        "x": 1.1,
+        "y": 0.005
+      },
+      {
+        "px": [
+          2438,
+          1034
+        ],
+        "x": 1.1,
+        "y": 0.015
+      },
+      {
+        "px": [
+          2434,
+          752
+        ],
+        "x": 1.1,
+        "y": 0.025
+      },
+      {
+        "px": [
+          2579,
+          1174
+        ],
+        "x": 1.15,
+        "y": 0.01
+      }
     ]
   },
   "series": [
@@ -51,18 +146,348 @@
       "x_variable": "M",
       "y_variable": "CD0",
       "samples": [
-        {"id": "M0.500", "x": 0.500, "hint_px": [755, 1205], "side": "right", "note": "Curve starts on the M = 0.50 grid line; right-side columns only, extrapolated a few px to the start."},
-        {"id": "M0.700", "x": 0.700, "hint_px": [1313, 1189], "note": "Here the 35 deg line runs along the CD0 = 0.010 grid line (merged ink band about 7 px wide, two strokes). The value is the centre of the merged band. Interpolating the clean parts of both lines, the grid stroke is near row 1186.3 and the 35 deg stroke near row 1189.3 here (it crosses the grid line upward near M = 0.79), so the 35 deg stroke is about 1 px below the band centre and the true value may be lower by about 0.00004."},
-        {"id": "M0.850", "x": 0.850, "hint_px": [1737, 1171], "note": "Here the 35 deg line lies alongside the 10.8 deg line (one ink band about 9 px wide). The two strokes never narrow to a single stroke between M = 0.82 and 0.87, so I read them as not crossing, with 35 deg the lower stroke. The value is the centre of the two-stroke band; the 35 deg stroke itself is about 2 px lower, i.e. the true value may be lower by about 0.00007."},
-        {"id": "M0.900", "x": 0.900, "hint_px": [1878, 1154], "note": "Lower of two close lines (10.8 deg is about 7 px above); M = 0.90 column is on a vertical grid line, neighbouring columns used."},
-        {"id": "M0.925", "x": 0.925, "hint_px": [1948, 1134]},
-        {"id": "M0.950", "x": 0.950, "hint_px": [2018, 1102], "note": "Drawn corner of the curve (slope changes sharply) just at M = 0.95, which is also on a vertical grid line; straight-line fit over neighbouring columns on both sides."},
-        {"id": "M0.975", "x": 0.975, "hint_px": [2088, 997], "note": "Steep part of the rise."},
-        {"id": "M1.000", "x": 1.000, "hint_px": [2157, 926], "note": "On a vertical grid line, neighbouring columns used."},
-        {"id": "M1.020", "x": 1.020, "hint_px": [2213, 906]},
-        {"id": "M1.035", "x": 1.035, "hint_px": [2254, 899], "side": "left", "note": "Solid line ends about 6 px to the right (M = 1.037); left-side columns only. The CD0 = 0.020 grid line is not printed here (it is interrupted from about x = 2190 to 2431 px for the legend), so no grid ink touches the curve at this column; a near-grid-line flag here comes from the fitted grid line bridging that gap."},
-        {"id": "M1.100", "x": 1.100, "hint_px": [2437, 913], "note": "On the final solid stroke (M = 1.088 to 1.131), on a vertical grid line; neighbouring columns used."},
-        {"id": "M1.130", "x": 1.130, "hint_px": [2520, 935], "side": "left", "note": "End of the final solid stroke is about 3 px to the right (M = 1.131); left-side columns only."}
+        {
+          "id": "M0.500",
+          "x": 0.5,
+          "hint_px": [
+            755,
+            1205
+          ],
+          "side": "right",
+          "note": "Curve starts on the M = 0.50 grid line; right-side columns only, extrapolated a few px to the start."
+        },
+        {
+          "id": "M0.700",
+          "x": 0.7,
+          "hint_px": [
+            1313,
+            1189
+          ],
+          "note": "Here the 35 deg line runs along the CD0 = 0.010 grid line (merged ink band about 7 px wide, two strokes). The value is the centre of the merged band. Interpolating the clean parts of both lines, the grid stroke is near row 1186.3 and the 35 deg stroke near row 1189.3 here (it crosses the grid line upward near M = 0.79), so the 35 deg stroke is about 1 px below the band centre and the true value may be lower by about 0.00004."
+        },
+        {
+          "id": "M0.850",
+          "x": 0.85,
+          "hint_px": [
+            1737,
+            1171
+          ],
+          "note": "Here the 35 deg line lies alongside the 10.8 deg line (one ink band about 9 px wide). The two strokes never narrow to a single stroke between M = 0.82 and 0.87, so I read them as not crossing, with 35 deg the lower stroke. The value is the centre of the two-stroke band; the 35 deg stroke itself is about 2 px lower, i.e. the true value may be lower by about 0.00007."
+        },
+        {
+          "id": "M0.900",
+          "x": 0.9,
+          "hint_px": [
+            1878,
+            1154
+          ],
+          "note": "Lower of two close lines (10.8 deg is about 7 px above); M = 0.90 column is on a vertical grid line, neighbouring columns used."
+        },
+        {
+          "id": "M0.925",
+          "x": 0.925,
+          "hint_px": [
+            1948,
+            1134
+          ]
+        },
+        {
+          "id": "M0.950",
+          "x": 0.95,
+          "hint_px": [
+            2018,
+            1102
+          ],
+          "note": "Drawn corner of the curve (slope changes sharply) just at M = 0.95, which is also on a vertical grid line; straight-line fit over neighbouring columns on both sides."
+        },
+        {
+          "id": "M0.975",
+          "x": 0.975,
+          "hint_px": [
+            2088,
+            997
+          ],
+          "note": "Steep part of the rise."
+        },
+        {
+          "id": "M1.000",
+          "x": 1.0,
+          "hint_px": [
+            2157,
+            926
+          ],
+          "note": "On a vertical grid line, neighbouring columns used."
+        },
+        {
+          "id": "M1.020",
+          "x": 1.02,
+          "hint_px": [
+            2213,
+            906
+          ]
+        },
+        {
+          "id": "M1.035",
+          "x": 1.035,
+          "hint_px": [
+            2254,
+            899
+          ],
+          "side": "left",
+          "note": "Solid line ends about 6 px to the right (M = 1.037); left-side columns only. The CD0 = 0.020 grid line is not printed here (it is interrupted from about x = 2190 to 2431 px for the legend), so no grid ink touches the curve at this column; a near-grid-line flag here comes from the fitted grid line bridging that gap."
+        },
+        {
+          "id": "M1.100",
+          "x": 1.1,
+          "hint_px": [
+            2437,
+            913
+          ],
+          "note": "On the final solid stroke (M = 1.088 to 1.131), on a vertical grid line; neighbouring columns used."
+        },
+        {
+          "id": "M1.130",
+          "x": 1.13,
+          "hint_px": [
+            2520,
+            935
+          ],
+          "side": "left",
+          "note": "End of the final solid stroke is about 3 px to the right (M = 1.131); left-side columns only."
+        }
+      ]
+    },
+    {
+      "id": "fig09-10.8deg",
+      "wing": "10.8",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "samples": [
+        {
+          "id": "M0.500",
+          "x": 0.5,
+          "hint_px": [
+            756,
+            1185
+          ],
+          "side": "right",
+          "note": "Curve starts on the M = 0.50 grid line; right-side columns only. The 10.8 deg line (top of the three below M = 0.82) runs about 6 px above the C_D0 = 0.010 grid line here, but the light gap row between them (grey 156 to 176) falls below the ink threshold in about half the columns, so the fitted centre (row 1188.2) is pulled toward the grid line. Read from the pixel values, the stroke alone is centred at row 1186.5 (rows 1184 to 1188), about 1.7 px higher, i.e. the true value is about 0.00006 higher (about 0.0102)."
+        },
+        {
+          "id": "M0.700",
+          "x": 0.7,
+          "hint_px": [
+            1310,
+            1179.5
+          ],
+          "note": "Top line, clear of the C_D0 = 0.010 grid line (which carries the 35 deg line here)."
+        },
+        {
+          "id": "M0.850",
+          "x": 0.85,
+          "hint_px": [
+            1733,
+            1170
+          ],
+          "note": "Here the 10.8 and 35 deg lines lie side by side as one two-stroke band about 8 px wide (10.8 deg is the upper stroke; they separate again near M = 0.87). The value is the centre of the band; the 10.8 deg stroke itself is about 2 px higher, i.e. the true value may be higher by about 0.00007."
+        },
+        {
+          "id": "M0.900",
+          "x": 0.9,
+          "hint_px": [
+            1876,
+            1148
+          ],
+          "note": "Upper of two close lines (35 deg about 7 px below); M = 0.90 is on a vertical grid line, neighbouring columns used."
+        },
+        {
+          "id": "M0.925",
+          "x": 0.925,
+          "hint_px": [
+            1944,
+            1094
+          ],
+          "note": "Steep rise; leftmost (highest) of the three rising curves."
+        },
+        {
+          "id": "M0.950",
+          "x": 0.95,
+          "hint_px": [
+            2018,
+            1002
+          ],
+          "note": "On a vertical grid line, neighbouring columns used. Steep part of the rise."
+        },
+        {
+          "id": "M0.975",
+          "x": 0.975,
+          "hint_px": [
+            2085,
+            873
+          ],
+          "note": "Upper part of the rise, curving into the plateau."
+        },
+        {
+          "id": "M1.000",
+          "x": 1.0,
+          "hint_px": [
+            2157,
+            813
+          ],
+          "note": "On a vertical grid line, neighbouring columns used."
+        },
+        {
+          "id": "M1.020",
+          "x": 1.02,
+          "hint_px": [
+            2212,
+            798.5
+          ]
+        },
+        {
+          "id": "M1.035",
+          "x": 1.035,
+          "hint_px": [
+            2253,
+            796.5
+          ],
+          "side": "left",
+          "note": "The solid line ends about 8 px to the right (x = 2262, M = 1.038); left-side columns only. Beyond it the curve is dashed (three short dashes, M = 1.046 to 1.080) and then a single long stroke from x = 2392 to 2478 (M = 1.084 to 1.115), falling to the right; as for the 35 deg curve I read that long stroke as the faired line (solid), not as a dash."
+        },
+        {
+          "id": "M1.085",
+          "x": 1.085,
+          "hint_px": [
+            2396,
+            805
+          ],
+          "side": "right",
+          "note": "At the very start of the final long stroke (it begins about 2 px left of this column, at x = 2392); right-side columns only. If that stroke is read as a dash or a leader to the label rather than the faired line, this sample and the next two should be dropped."
+        },
+        {
+          "id": "M1.100",
+          "x": 1.1,
+          "hint_px": [
+            2437,
+            813
+          ],
+          "note": "On the final long stroke, on a vertical grid line; neighbouring columns used."
+        },
+        {
+          "id": "M1.114",
+          "x": 1.114,
+          "hint_px": [
+            2474,
+            827
+          ],
+          "side": "left",
+          "note": "End of the final long stroke is about 4 px to the right (x = 2478); left-side columns only."
+        }
+      ]
+    },
+    {
+      "id": "fig09-47deg",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "samples": [
+        {
+          "id": "M0.500",
+          "x": 0.5,
+          "hint_px": [
+            756,
+            1240
+          ],
+          "side": "right",
+          "note": "Curve starts on the M = 0.50 grid line; right-side columns only. Lowest of the three lines below M = 0.94."
+        },
+        {
+          "id": "M0.696",
+          "x": 0.696,
+          "hint_px": [
+            1299,
+            1218
+          ]
+        },
+        {
+          "id": "M0.843",
+          "x": 0.843,
+          "hint_px": [
+            1713,
+            1201.5
+          ]
+        },
+        {
+          "id": "M0.892",
+          "x": 0.892,
+          "hint_px": [
+            1851,
+            1196
+          ]
+        },
+        {
+          "id": "M0.916",
+          "x": 0.916,
+          "hint_px": [
+            1919,
+            1191
+          ],
+          "note": "Approaching the C_D0 = 0.010 grid line from below (about 9 px under it); clear of it."
+        },
+        {
+          "id": "M0.941",
+          "x": 0.941,
+          "hint_px": [
+            1989,
+            1182
+          ],
+          "note": "The 47 deg line crosses the C_D0 = 0.010 grid line at almost exactly this column (pixel values: 2 to 3 px below the grid line at x = 1975 to 1987, within it at x = 1993 to 1996, above it from x = 2005), so the inked band is the line and the grid line merged; the value is the centre of the merged band, which here coincides with the line."
+        },
+        {
+          "id": "M0.965",
+          "x": 0.965,
+          "hint_px": [
+            2057,
+            1147.5
+          ],
+          "note": "Rightmost (lowest) of the three rising curves."
+        },
+        {
+          "id": "M0.990",
+          "x": 0.99,
+          "hint_px": [
+            2127,
+            1079
+          ]
+        },
+        {
+          "id": "M1.010",
+          "x": 1.01,
+          "hint_px": [
+            2184,
+            1025.5
+          ]
+        },
+        {
+          "id": "M1.024",
+          "x": 1.024,
+          "hint_px": [
+            2223,
+            996
+          ],
+          "note": "The solid line ends at x = 2257 (M = 1.036); dashed beyond (short dashes from M = 1.044 to 1.086), then a single long level stroke from x = 2407 to 2508 (M = 1.090 to 1.126)."
+        },
+        {
+          "id": "M1.112",
+          "x": 1.112,
+          "hint_px": [
+            2471,
+            971.5
+          ],
+          "note": "On the final long level stroke (x = 2407 to 2508), read as the faired line as for the other two wings. Sample M = 1.088 is left out: its column (about x = 2402) falls in the gap between the last short dash (ends x = 2395) and the start of this stroke (x = 2407)."
+        }
       ]
     }
   ]

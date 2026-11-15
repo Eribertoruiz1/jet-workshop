@@ -29,7 +29,7 @@
     "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
   },
   "calibration": {
-    "model": "mesh: every grid line traced and fitted with a cubic, linear interpolation inside the grid cell (affine fit over the picked intersections used only to predict line positions)",
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
     "grid": {
       "x_lines": {
         "start": 0.4,
@@ -75,8 +75,8 @@
           -0.76
         ],
         "mesh_residual_data": [
-          -9.186497243818259e-05,
-          -1.3104190873723838e-05
+          -7.454220970587455e-05,
+          -1.0676997485456474e-05
         ]
       },
       {
@@ -99,8 +99,8 @@
           0.13
         ],
         "mesh_residual_data": [
-          -0.00011542368569805728,
-          -7.518070574088001e-06
+          -5.7076455607874e-05,
+          -8.757846108405423e-06
         ]
       },
       {
@@ -123,8 +123,8 @@
           1.04
         ],
         "mesh_residual_data": [
-          3.759974716410763e-05,
-          -1.121996480427101e-05
+          5.402829422196387e-05,
+          -6.014974566558029e-06
         ]
       },
       {
@@ -147,8 +147,8 @@
           -0.22
         ],
         "mesh_residual_data": [
-          -8.092600525677618e-05,
-          4.556040406000772e-06
+          -8.77322868428898e-05,
+          3.50298320482903e-06
         ]
       },
       {
@@ -171,8 +171,8 @@
           -0.31
         ],
         "mesh_residual_data": [
-          -4.959067720167187e-05,
-          8.522836079933108e-06
+          -8.222051361195248e-06,
+          8.920988203115626e-06
         ]
       },
       {
@@ -195,8 +195,8 @@
           0.48
         ],
         "mesh_residual_data": [
-          -4.631138043220684e-05,
-          5.602583431709579e-06
+          -6.103762007325653e-05,
+          5.75284283975408e-06
         ]
       },
       {
@@ -219,8 +219,8 @@
           0.25
         ],
         "mesh_residual_data": [
-          -8.691050364950659e-05,
-          6.796982603519269e-06
+          -6.871715851963778e-05,
+          4.990675709206326e-06
         ]
       },
       {
@@ -243,8 +243,8 @@
           -0.9
         ],
         "mesh_residual_data": [
-          -4.558569809065549e-05,
-          6.030133120551659e-06
+          2.1240974115377398e-05,
+          3.399717181717943e-06
         ]
       },
       {
@@ -267,8 +267,8 @@
           -0.05
         ],
         "mesh_residual_data": [
-          3.644216034992542e-05,
-          1.1460006201658574e-05
+          3.474514127121964e-05,
+          6.726671751243474e-06
         ]
       },
       {
@@ -291,8 +291,8 @@
           0.75
         ],
         "mesh_residual_data": [
-          -0.00014690168332753828,
-          3.081732168722616e-06
+          -0.00015103961738338612,
+          -1.7471038142305093e-06
         ]
       },
       {
@@ -315,8 +315,8 @@
           -1.27
         ],
         "mesh_residual_data": [
-          -1.485140588886047e-05,
-          1.2145859944972734e-05
+          1.5004046277855565e-05,
+          8.972670940122357e-06
         ]
       },
       {
@@ -339,8 +339,8 @@
           0.01
         ],
         "mesh_residual_data": [
-          1.079251150670757e-05,
-          3.861821375832769e-06
+          1.3811061356561183e-05,
+          5.4057955327473095e-06
         ]
       },
       {
@@ -363,8 +363,8 @@
           1.44
         ],
         "mesh_residual_data": [
-          -5.902914549671401e-05,
-          -1.1827664628244645e-05
+          -3.6655640083482766e-05,
+          -9.27620970960722e-06
         ]
       },
       {
@@ -387,8 +387,8 @@
           -0.58
         ],
         "mesh_residual_data": [
-          -7.231410633523616e-05,
-          3.1235704101781336e-06
+          -1.8299049679315615e-05,
+          4.02418174644259e-06
         ]
       }
     ],
@@ -408,174 +408,683 @@
       {
         "line": "horizontal",
         "value": 0.0,
-        "samples": 374,
-        "used": 374,
-        "rms_px": 0.368
+        "samples": 332,
+        "used": 331,
+        "rms_px": 0.36,
+        "max_warp_px": 0.41
       },
       {
         "line": "horizontal",
         "value": 0.005,
-        "samples": 373,
-        "used": 373,
-        "rms_px": 0.352
+        "samples": 371,
+        "used": 371,
+        "rms_px": 0.289,
+        "max_warp_px": 0.29
       },
       {
         "line": "horizontal",
         "value": 0.01,
-        "samples": 348,
-        "used": 291,
-        "rms_px": 0.46
+        "samples": 339,
+        "used": 339,
+        "rms_px": 0.394,
+        "max_warp_px": 0.51
       },
       {
         "line": "horizontal",
         "value": 0.015,
-        "samples": 372,
-        "used": 369,
-        "rms_px": 0.383
+        "samples": 368,
+        "used": 368,
+        "rms_px": 0.306,
+        "max_warp_px": 0.45
       },
       {
         "line": "horizontal",
         "value": 0.02,
-        "samples": 353,
-        "used": 342,
-        "rms_px": 0.331
+        "samples": 341,
+        "used": 340,
+        "rms_px": 0.352,
+        "max_warp_px": 0.24
       },
       {
         "line": "horizontal",
         "value": 0.025,
-        "samples": 353,
-        "used": 350,
-        "rms_px": 0.333
+        "samples": 348,
+        "used": 347,
+        "rms_px": 0.293,
+        "max_warp_px": 0.24
       },
       {
         "line": "horizontal",
         "value": 0.03,
-        "samples": 369,
-        "used": 369,
-        "rms_px": 0.329
+        "samples": 367,
+        "used": 367,
+        "rms_px": 0.306,
+        "max_warp_px": 0.21
       },
       {
         "line": "vertical",
         "value": 0.4,
         "samples": 138,
         "used": 138,
-        "rms_px": 0.257
+        "rms_px": 0.264,
+        "max_warp_px": 0.14
       },
       {
         "line": "vertical",
         "value": 0.45,
-        "samples": 139,
-        "used": 139,
-        "rms_px": 0.313
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.266,
+        "max_warp_px": 0.2
       },
       {
         "line": "vertical",
         "value": 0.5,
         "samples": 137,
         "used": 137,
-        "rms_px": 0.324
+        "rms_px": 0.304,
+        "max_warp_px": 0.16
       },
       {
         "line": "vertical",
         "value": 0.55,
-        "samples": 138,
-        "used": 138,
-        "rms_px": 0.333
+        "samples": 137,
+        "used": 137,
+        "rms_px": 0.288,
+        "max_warp_px": 0.19
       },
       {
         "line": "vertical",
         "value": 0.6,
-        "samples": 139,
-        "used": 139,
-        "rms_px": 0.305
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.271,
+        "max_warp_px": 0.18
       },
       {
         "line": "vertical",
         "value": 0.65,
-        "samples": 138,
+        "samples": 136,
         "used": 136,
-        "rms_px": 0.27
+        "rms_px": 0.265,
+        "max_warp_px": 0.19
       },
       {
         "line": "vertical",
         "value": 0.7,
         "samples": 138,
         "used": 138,
-        "rms_px": 0.301
+        "rms_px": 0.265,
+        "max_warp_px": 0.2
       },
       {
         "line": "vertical",
         "value": 0.75,
         "samples": 138,
         "used": 138,
-        "rms_px": 0.307
+        "rms_px": 0.269,
+        "max_warp_px": 0.15
       },
       {
         "line": "vertical",
         "value": 0.8,
-        "samples": 138,
-        "used": 138,
-        "rms_px": 0.308
+        "samples": 137,
+        "used": 137,
+        "rms_px": 0.269,
+        "max_warp_px": 0.17
       },
       {
         "line": "vertical",
         "value": 0.85,
         "samples": 137,
         "used": 137,
-        "rms_px": 0.301
+        "rms_px": 0.279,
+        "max_warp_px": 0.19
       },
       {
         "line": "vertical",
         "value": 0.9,
         "samples": 137,
         "used": 137,
-        "rms_px": 0.313
+        "rms_px": 0.271,
+        "max_warp_px": 0.2
       },
       {
         "line": "vertical",
         "value": 0.95,
-        "samples": 137,
-        "used": 137,
-        "rms_px": 0.316
+        "samples": 138,
+        "used": 138,
+        "rms_px": 0.302,
+        "max_warp_px": 0.16
       },
       {
         "line": "vertical",
         "value": 1.0,
         "samples": 135,
         "used": 135,
-        "rms_px": 0.317
+        "rms_px": 0.294,
+        "max_warp_px": 0.12
       },
       {
         "line": "vertical",
         "value": 1.05,
-        "samples": 138,
-        "used": 138,
-        "rms_px": 0.303
+        "samples": 137,
+        "used": 137,
+        "rms_px": 0.284,
+        "max_warp_px": 0.15
       },
       {
         "line": "vertical",
         "value": 1.1,
-        "samples": 126,
-        "used": 126,
-        "rms_px": 0.373
+        "samples": 124,
+        "used": 124,
+        "rms_px": 0.316,
+        "max_warp_px": 0.21
       },
       {
         "line": "vertical",
         "value": 1.15,
         "samples": 125,
-        "used": 121,
-        "rms_px": 0.322
+        "used": 125,
+        "rms_px": 0.304,
+        "max_warp_px": 0.16
       },
       {
         "line": "vertical",
         "value": 1.2,
-        "samples": 132,
-        "used": 129,
-        "rms_px": 0.386
+        "samples": 130,
+        "used": 130,
+        "rms_px": 0.37,
+        "max_warp_px": 0.24
       }
     ]
   },
   "series": [
+    {
+      "id": "fig09-10.8deg",
+      "wing": "10.8",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "curve_type": "faired crossplot curve, no symbols",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            749,
+            1186
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            749.77,
+            1188.2
+          ],
+          "columns_used": 7,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.651,
+          "slope_px_per_px": 0.5346,
+          "data": [
+            0.49999998271333784,
+            0.010148347747257536
+          ],
+          "affine_data": [
+            0.500302238665663,
+            0.010151540145886664
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 4.2,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M0.500",
+          "note": "Top of the three lines at low Mach; curve starts on the M = 0.5 grid line.",
+          "value": {
+            "M": 0.49999998271333784,
+            "CD0": 0.010148347747257536
+          }
+        },
+        {
+          "x_value": 0.7,
+          "hint": [
+            1307,
+            1181
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1314.29,
+            1179.48
+          ],
+          "columns_used": 13,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.163,
+          "slope_px_per_px": 0.0107,
+          "data": [
+            0.7000000000833533,
+            0.010281958195081159
+          ],
+          "affine_data": [
+            0.7006588079315981,
+            0.010264600723108579
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 8.01,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.700",
+          "value": {
+            "M": 0.7000000000833533,
+            "CD0": 0.010281958195081159
+          }
+        },
+        {
+          "x_value": 0.85,
+          "hint": [
+            1731,
+            1168
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1736.76,
+            1170.86
+          ],
+          "columns_used": 14,
+          "line_width_px": 8.5,
+          "fit_rms_px": 0.268,
+          "slope_px_per_px": -0.0823,
+          "data": [
+            0.8500000004086384,
+            0.010412839903617386
+          ],
+          "affine_data": [
+            0.8506093893578768,
+            0.010423234235764078
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 11.72,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.850",
+          "note": "Drawn as one double stroke with the 35 deg curve from about M 0.84 to 0.88; 10.8 deg is the upper stroke, so the reading may sit about 1 px low.",
+          "value": {
+            "M": 0.8500000004086384,
+            "CD0": 0.010412839903617386
+          }
+        },
+        {
+          "x_value": 0.9,
+          "hint": [
+            1877,
+            1149
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1877.69,
+            1146.81
+          ],
+          "columns_used": 14,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.243,
+          "slope_px_per_px": -0.338,
+          "data": [
+            0.8999999980215261,
+            0.011226102974494596
+          ],
+          "affine_data": [
+            0.9007286122454332,
+            0.011224589222622837
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 34.92,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.900",
+          "note": "Upper of the two lines leaving the double stroke.",
+          "value": {
+            "M": 0.8999999980215261,
+            "CD0": 0.011226102974494596
+          }
+        },
+        {
+          "x_value": 0.925,
+          "hint": [
+            1948,
+            1097
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1947.51,
+            1089.41
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.406,
+          "slope_px_per_px": -1.235,
+          "data": [
+            0.9249999908544013,
+            0.013213766978140196
+          ],
+          "affine_data": [
+            0.9257690026010976,
+            0.013229322084370769
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 50.9,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.925",
+          "value": {
+            "M": 0.9249999908544013,
+            "CD0": 0.013213766978140196
+          }
+        },
+        {
+          "x_value": 0.95,
+          "hint": [
+            2018,
+            990
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2016.71,
+            991.36
+          ],
+          "columns_used": 14,
+          "line_width_px": 8.0,
+          "fit_rms_px": 0.428,
+          "slope_px_per_px": -1.6074,
+          "data": [
+            0.950000007239515,
+            0.01664975256087863
+          ],
+          "affine_data": [
+            0.9507772113226606,
+            0.016671091026435082
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 46.16,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.950",
+          "value": {
+            "M": 0.950000007239515,
+            "CD0": 0.01664975256087863
+          }
+        },
+        {
+          "x_value": 0.975,
+          "hint": [
+            2086,
+            872
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2085.86,
+            872.63
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.378,
+          "slope_px_per_px": -1.4424,
+          "data": [
+            0.974999998427007,
+            0.020856606640355414
+          ],
+          "affine_data": [
+            0.9758632288096698,
+            0.020843836014826617
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 24.29,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.975",
+          "value": {
+            "M": 0.974999998427007,
+            "CD0": 0.020856606640355414
+          }
+        },
+        {
+          "x_value": 1.0,
+          "hint": [
+            2157,
+            812
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2155.72,
+            810.56
+          ],
+          "columns_used": 14,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.371,
+          "slope_px_per_px": -0.3722,
+          "data": [
+            0.9999999994019585,
+            0.023026738311872408
+          ],
+          "affine_data": [
+            1.000939390417003,
+            0.023013621654421862
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 55.84,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.000",
+          "value": {
+            "M": 0.9999999994019585,
+            "CD0": 0.023026738311872408
+          }
+        },
+        {
+          "x_value": 1.02,
+          "hint": [
+            2213,
+            800
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2210.86,
+            798.69
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.094,
+          "slope_px_per_px": -0.0758,
+          "data": [
+            1.020000000021055,
+            0.023428043072425
+          ],
+          "affine_data": [
+            1.0205603083391164,
+            0.023414118437825045
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 44.53,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.020",
+          "value": {
+            "M": 1.020000000021055,
+            "CD0": 0.023428043072425
+          }
+        },
+        {
+          "x_value": 1.035,
+          "hint": [
+            2254,
+            797
+          ],
+          "found": true,
+          "side": "left",
+          "px": [
+            2252.31,
+            796.18
+          ],
+          "columns_used": 8,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.09,
+          "slope_px_per_px": -0.0482,
+          "data": [
+            1.0350000000047994,
+            0.023500867246144322
+          ],
+          "affine_data": [
+            1.035280170679635,
+            0.023488507802261027
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 42.48,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.035",
+          "note": "Solid line ends at about x 2263; dashed beyond.",
+          "value": {
+            "M": 1.0350000000047994,
+            "CD0": 0.023500867246144322
+          }
+        },
+        {
+          "x_value": 1.085,
+          "hint": [
+            2394,
+            805
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            2392.75,
+            804.95
+          ],
+          "columns_used": 9,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.09,
+          "slope_px_per_px": 0.1101,
+          "data": [
+            1.085000000000983,
+            0.02314307517226569
+          ],
+          "affine_data": [
+            1.0850738770019919,
+            0.023129970940588176
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 52.81,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.085",
+          "note": "One pixel before the start of the final solid stroke (ink from x 2394): one-sided fit. Left out in the first pass A reading (taken as a gap); added after pass B sampled it.",
+          "value": {
+            "M": 1.085000000000983,
+            "CD0": 0.02314307517226569
+          }
+        },
+        {
+          "x_value": 1.1,
+          "hint": [
+            2436,
+            813
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2435.2,
+            814.05
+          ],
+          "columns_used": 14,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.402,
+          "slope_px_per_px": 0.3391,
+          "data": [
+            1.0999999993035963,
+            0.022808524163487075
+          ],
+          "affine_data": [
+            1.1000949394439634,
+            0.022793645584631334
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 62.32,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.100",
+          "note": "Long solid stroke from about M 1.087 to 1.116 after the dashes.",
+          "value": {
+            "M": 1.0999999993035963,
+            "CD0": 0.022808524163487075
+          }
+        },
+        {
+          "x_value": 1.114,
+          "hint": [
+            2476,
+            828
+          ],
+          "found": true,
+          "side": "left",
+          "px": [
+            2474.69,
+            826.19
+          ],
+          "columns_used": 8,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.091,
+          "slope_px_per_px": 0.3262,
+          "data": [
+            1.11400000013545,
+            0.02236703934147368
+          ],
+          "affine_data": [
+            1.1140516188145941,
+            0.022350891167029388
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 67.29,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.114",
+          "note": "Stroke ends at about x 2480.",
+          "value": {
+            "M": 1.11400000013545,
+            "CD0": 0.02236703934147368
+          }
+        }
+      ]
+    },
     {
       "id": "fig09-35deg",
       "wing": "35",
@@ -593,32 +1102,32 @@
           "found": true,
           "side": "right",
           "px": [
-            749.81,
-            1204.29
+            749.98,
+            1204.3
           ],
           "columns_used": 7,
           "line_width_px": 2.0,
           "fit_rms_px": 0.107,
           "slope_px_per_px": 0.0359,
           "data": [
-            0.4999999999968534,
-            0.009582796402879228
+            0.499999999996851,
+            0.009576712536066855
           ],
           "affine_data": [
-            0.5002420893384133,
-            0.00958280646924578
+            0.5003023665368175,
+            0.009582394237524591
           ],
           "nearest_grid_line": {
             "value": 0.01,
-            "distance_px": 11.73,
+            "distance_px": 11.91,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M0.500",
           "note": "Curve starts on the M = 0.5 grid line; middle of three lines, below the CD0 = 0.010 grid line.",
           "value": {
-            "M": 0.4999999999968534,
-            "CD0": 0.009582796402879228
+            "M": 0.499999999996851,
+            "CD0": 0.009576712536066855
           }
         },
         {
@@ -630,7 +1139,7 @@
           "found": true,
           "side": "both",
           "px": [
-            1314.32,
+            1314.41,
             1188.38
           ],
           "columns_used": 14,
@@ -638,24 +1147,24 @@
           "fit_rms_px": 0.357,
           "slope_px_per_px": 0.0072,
           "data": [
-            0.7000000000468729,
-            0.009965248170272748
+            0.7000000000466315,
+            0.009968618895690888
           ],
           "affine_data": [
-            0.7006283312171687,
-            0.009950009453806682
+            0.7006602671363628,
+            0.009949978340257203
           ],
           "nearest_grid_line": {
             "value": 0.01,
-            "distance_px": 0.99,
+            "distance_px": 0.89,
             "inked_here": true
           },
           "near_grid_line": true,
           "id": "M0.700",
           "note": "35 deg curve runs on top of the CD0 = 0.010 grid line here (merged from about x 1150 to 1630). Identity from tracing the line from the right.",
           "value": {
-            "M": 0.7000000000468729,
-            "CD0": 0.009965248170272748
+            "M": 0.7000000000466315,
+            "CD0": 0.009968618895690888
           }
         },
         {
@@ -667,7 +1176,7 @@
           "found": true,
           "side": "both",
           "px": [
-            1736.73,
+            1736.76,
             1170.86
           ],
           "columns_used": 14,
@@ -675,24 +1184,24 @@
           "fit_rms_px": 0.268,
           "slope_px_per_px": -0.0823,
           "data": [
-            0.850000000000687,
-            0.010429203866758843
+            0.8500000000007013,
+            0.01041283990070362
           ],
           "affine_data": [
-            0.8505987440514787,
-            0.01042324460694724
+            0.8506093893578768,
+            0.010423234235764078
           ],
           "nearest_grid_line": {
             "value": 0.01,
-            "distance_px": 12.22,
+            "distance_px": 11.72,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M0.850",
           "note": "35 deg and 10.8 deg curves drawn as one double line from about x 1700 to 1870; reading is the double line.",
           "value": {
-            "M": 0.850000000000687,
-            "CD0": 0.010429203866758843
+            "M": 0.8500000000007013,
+            "CD0": 0.01041283990070362
           }
         },
         {
@@ -704,32 +1213,32 @@
           "found": true,
           "side": "both",
           "px": [
-            1877.69,
-            1154.18
+            1877.77,
+            1154.16
           ],
           "columns_used": 14,
           "line_width_px": 5.0,
           "fit_rms_px": 0.679,
           "slope_px_per_px": -0.2385,
           "data": [
-            0.8999999991131155,
-            0.010963199649837359
+            0.899999999117514,
+            0.010967926225511808
           ],
           "affine_data": [
-            0.9006945595158268,
-            0.010964087962045864
+            0.9007230394085902,
+            0.010964767228923991
           ],
           "nearest_grid_line": {
             "value": 0.01,
-            "distance_px": 27.45,
+            "distance_px": 27.57,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M0.900",
           "note": "Lower of the two lines leaving the double line; upper is 10.8 deg.",
           "value": {
-            "M": 0.8999999991131155,
-            "CD0": 0.010963199649837359
+            "M": 0.899999999117514,
+            "CD0": 0.010967926225511808
           }
         },
         {
@@ -741,31 +1250,31 @@
           "found": true,
           "side": "both",
           "px": [
-            1948.13,
-            1134.36
+            1948.22,
+            1134.33
           ],
           "columns_used": 17,
           "line_width_px": 5.0,
           "fit_rms_px": 0.149,
           "slope_px_per_px": -0.3261,
           "data": [
-            0.9250000000492306,
-            0.011633229679301194
+            0.9250000000515938,
+            0.011636790656092974
           ],
           "affine_data": [
-            0.9257813162925523,
-            0.01164029748024422
+            0.9258133908252997,
+            0.011641326751744577
           ],
           "nearest_grid_line": {
             "value": 0.01,
-            "distance_px": 46.55,
+            "distance_px": 46.64,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M0.925",
           "value": {
-            "M": 0.9250000000492306,
-            "CD0": 0.011633229679301194
+            "M": 0.9250000000515938,
+            "CD0": 0.011636790656092974
           }
         },
         {
@@ -777,31 +1286,31 @@
           "found": true,
           "side": "both",
           "px": [
-            2018.34,
-            1101.27
+            2018.38,
+            1101.22
           ],
           "columns_used": 14,
           "line_width_px": 6.0,
           "fit_rms_px": 0.564,
           "slope_px_per_px": -0.9418,
           "data": [
-            0.9500002102931956,
-            0.012769129132382028
+            0.9500002124838918,
+            0.012767366226034143
           ],
           "affine_data": [
-            0.9508477724486587,
-            0.012785630164558678
+            0.9508621972131117,
+            0.012787383644730858
           ],
           "nearest_grid_line": {
             "value": 0.015,
-            "distance_px": 63.59,
+            "distance_px": 63.72,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M0.950",
           "value": {
-            "M": 0.9500002102931956,
-            "CD0": 0.012769129132382028
+            "M": 0.9500002124838918,
+            "CD0": 0.012767366226034143
           }
         },
         {
@@ -813,31 +1322,31 @@
           "found": true,
           "side": "both",
           "px": [
-            2087.56,
-            998.45
+            2087.47,
+            998.56
           ],
           "columns_used": 17,
           "line_width_px": 8.0,
           "fit_rms_px": 0.49,
-          "slope_px_per_px": -1.3626,
+          "slope_px_per_px": -1.3639,
           "data": [
-            0.9749999992512852,
-            0.01637662652994706
+            0.9749999990597071,
+            0.016366458261887033
           ],
           "affine_data": [
-            0.9758851175961363,
-            0.016395993415425192
+            0.9758526734272467,
+            0.016392136450458596
           ],
           "nearest_grid_line": {
             "value": 0.015,
-            "distance_px": 38.53,
+            "distance_px": 38.23,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M0.975",
           "value": {
-            "M": 0.9749999992512852,
-            "CD0": 0.01637662652994706
+            "M": 0.9749999990597071,
+            "CD0": 0.016366458261887033
           }
         },
         {
@@ -849,31 +1358,31 @@
           "found": true,
           "side": "both",
           "px": [
-            2157.3,
-            925.77
+            2157.35,
+            925.73
           ],
           "columns_used": 13,
           "line_width_px": 6.0,
           "fit_rms_px": 0.217,
           "slope_px_per_px": -0.6248,
           "data": [
-            1.0000000007462684,
-            0.01894931480797826
+            1.000000000762426,
+            0.01894510121880556
           ],
           "affine_data": [
-            1.0009677209712462,
-            0.018940843385712593
+            1.000985647966647,
+            0.018942239947140442
           ],
           "nearest_grid_line": {
             "value": 0.02,
-            "distance_px": 29.41,
+            "distance_px": 29.52,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M1.000",
           "value": {
-            "M": 1.0000000007462684,
-            "CD0": 0.01894931480797826
+            "M": 1.000000000762426,
+            "CD0": 0.01894510121880556
           }
         },
         {
@@ -885,31 +1394,31 @@
           "found": true,
           "side": "both",
           "px": [
-            2212.44,
-            906.23
+            2212.49,
+            906.22
           ],
           "columns_used": 17,
           "line_width_px": 5.0,
           "fit_rms_px": 0.159,
           "slope_px_per_px": -0.2191,
           "data": [
-            1.0199999998477953,
-            0.019628567195719593
+            1.019999999818784,
+            0.019626390089142912
           ],
           "affine_data": [
-            1.0206240777584994,
-            0.01961244528019114
+            1.020641866140347,
+            0.019612781456569146
           ],
           "nearest_grid_line": {
             "value": 0.02,
-            "distance_px": 10.4,
+            "distance_px": 10.46,
             "inked_here": false
           },
           "near_grid_line": false,
           "id": "M1.020",
           "value": {
-            "M": 1.0199999998477953,
-            "CD0": 0.019628567195719593
+            "M": 1.019999999818784,
+            "CD0": 0.019626390089142912
           }
         },
         {
@@ -921,32 +1430,32 @@
           "found": true,
           "side": "both",
           "px": [
-            2253.89,
-            899.53
+            2253.96,
+            899.52
           ],
           "columns_used": 16,
           "line_width_px": 5.0,
           "fit_rms_px": 0.293,
           "slope_px_per_px": -0.0567,
           "data": [
-            1.0350000000059776,
-            0.019853930573202807
+            1.0350000000060338,
+            0.01985170896478167
           ],
           "affine_data": [
-            1.0353632997919693,
-            0.019834935089921214
+            1.035388185044749,
+            0.01983526435217712
           ],
           "nearest_grid_line": {
             "value": 0.02,
-            "distance_px": 4.09,
+            "distance_px": 4.15,
             "inked_here": false
           },
           "near_grid_line": false,
           "id": "M1.035",
           "note": "Last solid stretch before the dashed segment. The CD0 = 0.020 grid line is erased by the draftsman from about x 2192 to 2430.",
           "value": {
-            "M": 1.0350000000059776,
-            "CD0": 0.019853930573202807
+            "M": 1.0350000000060338,
+            "CD0": 0.01985170896478167
           }
         },
         {
@@ -958,32 +1467,32 @@
           "found": true,
           "side": "both",
           "px": [
-            2436.37,
-            913.28
+            2436.44,
+            913.3
           ],
           "columns_used": 13,
           "line_width_px": 5.0,
           "fit_rms_px": 0.397,
           "slope_px_per_px": 0.3382,
           "data": [
-            1.0999999999761838,
-            0.019302309474140186
+            1.099999999988786,
+            0.019307986748639292
           ],
           "affine_data": [
-            1.1000516189635188,
-            0.019285840825305864
+            1.1000763656027452,
+            0.019285109702511925
           ],
           "nearest_grid_line": {
             "value": 0.02,
-            "distance_px": 19.54,
+            "distance_px": 19.42,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M1.100",
           "note": "Solid again from about x 2405 (M 1.09).",
           "value": {
-            "M": 1.0999999999761838,
-            "CD0": 0.019302309474140186
+            "M": 1.099999999988786,
+            "CD0": 0.019307986748639292
           }
         },
         {
@@ -995,32 +1504,442 @@
           "found": true,
           "side": "left",
           "px": [
-            2520.72,
-            935.43
+            2520.73,
+            935.44
           ],
           "columns_used": 8,
           "line_width_px": 4.5,
           "fit_rms_px": 0.123,
           "slope_px_per_px": 0.2301,
           "data": [
-            1.1299999999673616,
-            0.01848472942009128
+            1.1299999999966945,
+            0.01849153394176188
           ],
           "affine_data": [
-            1.1298803291123076,
-            0.01847376288685472
+            1.129883831343256,
+            0.018473405968110382
           ],
           "nearest_grid_line": {
             "value": 0.02,
-            "distance_px": 42.45,
+            "distance_px": 42.38,
             "inked_here": true
           },
           "near_grid_line": false,
           "id": "M1.130",
           "note": "Curve ends at about x 2523.",
           "value": {
-            "M": 1.1299999999673616,
-            "CD0": 0.01848472942009128
+            "M": 1.1299999999966945,
+            "CD0": 0.01849153394176188
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig09-47deg",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "curve_type": "faired crossplot curve, no symbols",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            749,
+            1235
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            750.38,
+            1235.23
+          ],
+          "columns_used": 6,
+          "line_width_px": 2.5,
+          "fit_rms_px": 0.105,
+          "slope_px_per_px": 0.0383,
+          "data": [
+            0.49999999999973127,
+            0.008476971467550085
+          ],
+          "affine_data": [
+            0.5003013933819527,
+            0.008488998968699035
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 42.84,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.500",
+          "note": "Lowest of the three lines; curve starts on the M = 0.5 grid line.",
+          "value": {
+            "M": 0.49999999999973127,
+            "CD0": 0.008476971467550085
+          }
+        },
+        {
+          "x_value": 0.696,
+          "hint": [
+            1296.5,
+            1218
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1303.38,
+            1217.91
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.15,
+          "slope_px_per_px": -0.0495,
+          "data": [
+            0.6960000000001944,
+            0.008924116716227603
+          ],
+          "affine_data": [
+            0.6966099008763539,
+            0.008910019127875042
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 30.34,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.696",
+          "value": {
+            "M": 0.6960000000001944,
+            "CD0": 0.008924116716227603
+          }
+        },
+        {
+          "x_value": 0.843,
+          "hint": [
+            1710,
+            1200
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1717.31,
+            1201.51
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.15,
+          "slope_px_per_px": -0.0208,
+          "data": [
+            0.8429999999994277,
+            0.009341158998546338
+          ],
+          "affine_data": [
+            0.8435660655295071,
+            0.009346598160261746
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 18.73,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.843",
+          "value": {
+            "M": 0.8429999999994277,
+            "CD0": 0.009341158998546338
+          }
+        },
+        {
+          "x_value": 0.892,
+          "hint": [
+            1848,
+            1197
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1855.68,
+            1196.11
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.103,
+          "slope_px_per_px": -0.0565,
+          "data": [
+            0.8920000000022835,
+            0.009501393572420986
+          ],
+          "affine_data": [
+            0.8926907175121023,
+            0.009489632115434014
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 14.15,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.892",
+          "value": {
+            "M": 0.8920000000022835,
+            "CD0": 0.009501393572420986
+          }
+        },
+        {
+          "x_value": 0.916,
+          "hint": [
+            1916,
+            1190
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1923.48,
+            1191.04
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.125,
+          "slope_px_per_px": -0.0866,
+          "data": [
+            0.9159999999946609,
+            0.009655530674333977
+          ],
+          "affine_data": [
+            0.916772535662074,
+            0.009645398314913296
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 9.78,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.916",
+          "value": {
+            "M": 0.9159999999946609,
+            "CD0": 0.009655530674333977
+          }
+        },
+        {
+          "x_value": 0.941,
+          "hint": [
+            1986,
+            1181
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1994.07,
+            1180.33
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.094,
+          "slope_px_per_px": -0.1087,
+          "data": [
+            0.9410000000067149,
+            0.010004066279928819
+          ],
+          "affine_data": [
+            0.9418704266550886,
+            0.00999955238372826
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 0.12,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M0.941",
+          "note": "Runs along the CD0 = 0.010 grid line here.",
+          "value": {
+            "M": 0.9410000000067149,
+            "CD0": 0.010004066279928819
+          }
+        },
+        {
+          "x_value": 0.965,
+          "hint": [
+            2053.5,
+            1148
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2061.35,
+            1143.53
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.165,
+          "slope_px_per_px": -0.8925,
+          "data": [
+            0.9650000029566232,
+            0.011269544301993822
+          ],
+          "affine_data": [
+            0.9659143330957558,
+            0.011277032271428095
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 36.24,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.965",
+          "value": {
+            "M": 0.9650000029566232,
+            "CD0": 0.011269544301993822
+          }
+        },
+        {
+          "x_value": 0.99,
+          "hint": [
+            2124,
+            1082.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2130.87,
+            1074.96
+          ],
+          "columns_used": 17,
+          "line_width_px": 6.0,
+          "fit_rms_px": 0.339,
+          "slope_px_per_px": -1.0916,
+          "data": [
+            0.9899999990357176,
+            0.01364839527307001
+          ],
+          "affine_data": [
+            0.9908998808338045,
+            0.013676685545230813
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 38.61,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.990",
+          "value": {
+            "M": 0.9899999990357176,
+            "CD0": 0.01364839527307001
+          }
+        },
+        {
+          "x_value": 1.01,
+          "hint": [
+            2186,
+            1022.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2186.2,
+            1023.39
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.659,
+          "slope_px_per_px": -0.9645,
+          "data": [
+            1.0099999993511193,
+            0.015446500651077737
+          ],
+          "affine_data": [
+            1.0107716509653724,
+            0.015480359527093486
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 12.49,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.010",
+          "note": "Curve crosses the CD0 = 0.015 grid line just to the right. The first pass A hint sat on the grid line (CD0 0.0150 read instead of the curve); corrected after pass B's value differed by 0.00044.",
+          "value": {
+            "M": 1.0099999993511193,
+            "CD0": 0.015446500651077737
+          }
+        },
+        {
+          "x_value": 1.024,
+          "hint": [
+            2220,
+            997
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2224.68,
+            994.93
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.164,
+          "slope_px_per_px": -0.5469,
+          "data": [
+            1.0240000005813388,
+            0.0164520429095869
+          ],
+          "affine_data": [
+            1.0245575286961386,
+            0.01647300870677261
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 40.63,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.024",
+          "value": {
+            "M": 1.0240000005813388,
+            "CD0": 0.0164520429095869
+          }
+        },
+        {
+          "x_value": 1.112,
+          "hint": [
+            2467,
+            971.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            2470.56,
+            971.5
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.037,
+          "slope_px_per_px": 0.0032,
+          "data": [
+            1.112,
+            0.017222958509100272
+          ],
+          "affine_data": [
+            1.1119147171192245,
+            0.01721616721351052
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 62.42,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.112",
+          "note": "Flat solid stroke from about M 1.09 after the dash-dot segment.",
+          "value": {
+            "M": 1.112,
+            "CD0": 0.017222958509100272
           }
         }
       ]

@@ -1,0 +1,372 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig05b",
+    "number": "5(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 10.8 deg sweptback wing. (b) Drag coefficient.",
+    "pdf_page": 22,
+    "printed_page": 20,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot, one shape per Mach number, joined by faired curves. Test Mach numbers 0.50, 0.70, 0.85, 0.90, 0.925, 0.95, 0.975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.114."
+  },
+  "scan": {
+    "pdf_page": 22,
+    "size_px": [
+      3060,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 35
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.2, grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.4 (M 1.114); then .2 .4 .6 .8 of M 1.114 at 2.6 to 3.2 (right frame).",
+    "points": [
+      {
+        "px": [
+          546,
+          1543
+        ],
+        "x": -0.1,
+        "y": 0.03
+      },
+      {
+        "px": [
+          546,
+          1152
+        ],
+        "x": -0.1,
+        "y": 0.09
+      },
+      {
+        "px": [
+          546,
+          760
+        ],
+        "x": -0.1,
+        "y": 0.15
+      },
+      {
+        "px": [
+          546,
+          369
+        ],
+        "x": -0.1,
+        "y": 0.21
+      },
+      {
+        "px": [
+          933,
+          560
+        ],
+        "x": 0.5,
+        "y": 0.18
+      },
+      {
+        "px": [
+          1642,
+          357
+        ],
+        "x": 1.6,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2029,
+          875
+        ],
+        "x": 2.2,
+        "y": 0.13
+      },
+      {
+        "px": [
+          2029,
+          353
+        ],
+        "x": 2.2,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2610,
+          739
+        ],
+        "x": 3.1,
+        "y": 0.15
+      },
+      {
+        "px": [
+          2610,
+          347
+        ],
+        "x": 3.1,
+        "y": 0.21
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig05b-10.8deg-M0.500",
+      "wing": "10.8",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 2
+        },
+        {
+          "id": "p2",
+          "candidate": 5,
+          "note": "p2 and p3: two circles drawn 4 px apart (repeated point)."
+        },
+        {
+          "id": "p3",
+          "candidate": 4
+        },
+        {
+          "id": "p4",
+          "candidate": 7
+        },
+        {
+          "id": "p5",
+          "px": [
+            818.5,
+            1612.0
+          ],
+          "snap": "dot",
+          "dot_level": 226,
+          "note": "Faint centre dot (grey about 210); not found by candidates.py."
+        },
+        {
+          "id": "p6",
+          "candidate": 11,
+          "note": "p6 and p7: two overlapping circles (repeated point)."
+        },
+        {
+          "id": "p7",
+          "candidate": 12
+        },
+        {
+          "id": "p8",
+          "candidate": 19
+        },
+        {
+          "id": "p9",
+          "candidate": 23
+        },
+        {
+          "id": "p10",
+          "candidate": 27
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M0.850",
+      "wing": "10.8",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 8
+        },
+        {
+          "id": "p2",
+          "candidate": 14
+        },
+        {
+          "id": "p3",
+          "candidate": 15
+        },
+        {
+          "id": "p4",
+          "candidate": 21
+        },
+        {
+          "id": "p5",
+          "candidate": 31
+        },
+        {
+          "id": "p6",
+          "candidate": 39
+        },
+        {
+          "id": "p7",
+          "candidate": 41,
+          "note": "p7 and p8: two overlapping diamonds with two centre dots. Figure 5(a) shows only two diamonds between CL 0.70 and 0.74 where figure 5(b) shows three (p6, p7, p8)."
+        },
+        {
+          "id": "p8",
+          "candidate": 42
+        },
+        {
+          "id": "p9",
+          "candidate": 45
+        },
+        {
+          "id": "p10",
+          "candidate": 47
+        },
+        {
+          "id": "p11",
+          "candidate": 48
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M0.950",
+      "wing": "10.8",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 29
+        },
+        {
+          "id": "p2",
+          "px": [
+            1350.2,
+            1620.6
+          ],
+          "snap": "dot",
+          "note": "Upper of two right-pointing triangles drawn on top of each other (a repeated point; also two dots on figure 5(a)). Dot isolated at grey < 90. First pass A recorded the pair as one point; the split follows pass B's report.",
+          "dot_level": 90,
+          "dot_radius": 3
+        },
+        {
+          "id": "p3",
+          "candidate": 55
+        },
+        {
+          "id": "p4",
+          "candidate": 66
+        },
+        {
+          "id": "p5",
+          "candidate": 76
+        },
+        {
+          "id": "p6",
+          "candidate": 79
+        },
+        {
+          "id": "p7",
+          "px": [
+            1350.0,
+            1626.5
+          ],
+          "snap": "none",
+          "note": "Lower triangle of the doubled pair; its dot merges with the upper triangle's lower edge; centre from the outline (shared left edge x 1343.5, apex about 1363,1626). Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M1.000",
+      "wing": "10.8",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 49
+        },
+        {
+          "id": "p2",
+          "candidate": 60
+        },
+        {
+          "id": "p3",
+          "candidate": 71
+        },
+        {
+          "id": "p4",
+          "candidate": 82
+        },
+        {
+          "id": "p5",
+          "candidate": 90
+        },
+        {
+          "candidate": 62,
+          "id": "p6",
+          "snap": "candidate",
+          "note": "Second right triangle of the same shape beside p2 (candidate 60), same CD, CL 0.023 higher; both dots visible. No counterpart is visible on figure 5(a). Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        }
+      ]
+    },
+    {
+      "id": "fig05b-10.8deg-M1.100",
+      "wing": "10.8",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter circle, straight sides top and left",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 85
+        },
+        {
+          "id": "p2",
+          "candidate": 95
+        },
+        {
+          "id": "p3",
+          "candidate": 100
+        },
+        {
+          "id": "p4",
+          "candidate": 103
+        },
+        {
+          "id": "p5",
+          "candidate": 107,
+          "note": "Candidate 106 just above is the decimal point of the 1.10 label, not a symbol."
+        }
+      ]
+    }
+  ],
+  "assignment_method": "Symbols assigned to a Mach number by shape (read from the symbol next to each polar's Mach label) and confirmed by lift coefficient: each test point's CL read on figure 5(a) must reappear on figure 5(b)."
+}

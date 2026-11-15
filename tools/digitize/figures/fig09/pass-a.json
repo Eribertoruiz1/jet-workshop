@@ -158,6 +158,131 @@
   },
   "series": [
     {
+      "id": "fig09-10.8deg",
+      "wing": "10.8",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "curve_type": "faired crossplot curve, no symbols",
+      "samples": [
+        {
+          "id": "M0.500",
+          "x": 0.5,
+          "hint_px": [
+            749,
+            1186
+          ],
+          "side": "right",
+          "note": "Top of the three lines at low Mach; curve starts on the M = 0.5 grid line."
+        },
+        {
+          "id": "M0.700",
+          "x": 0.7,
+          "hint_px": [
+            1307,
+            1181
+          ]
+        },
+        {
+          "id": "M0.850",
+          "x": 0.85,
+          "hint_px": [
+            1731,
+            1168
+          ],
+          "note": "Drawn as one double stroke with the 35 deg curve from about M 0.84 to 0.88; 10.8 deg is the upper stroke, so the reading may sit about 1 px low."
+        },
+        {
+          "id": "M0.900",
+          "x": 0.9,
+          "hint_px": [
+            1877,
+            1149
+          ],
+          "note": "Upper of the two lines leaving the double stroke."
+        },
+        {
+          "id": "M0.925",
+          "x": 0.925,
+          "hint_px": [
+            1948,
+            1097
+          ]
+        },
+        {
+          "id": "M0.950",
+          "x": 0.95,
+          "hint_px": [
+            2018,
+            990
+          ]
+        },
+        {
+          "id": "M0.975",
+          "x": 0.975,
+          "hint_px": [
+            2086,
+            872
+          ]
+        },
+        {
+          "id": "M1.000",
+          "x": 1.0,
+          "hint_px": [
+            2157,
+            812
+          ]
+        },
+        {
+          "id": "M1.020",
+          "x": 1.02,
+          "hint_px": [
+            2213,
+            800
+          ]
+        },
+        {
+          "id": "M1.035",
+          "x": 1.035,
+          "hint_px": [
+            2254,
+            797
+          ],
+          "side": "left",
+          "note": "Solid line ends at about x 2263; dashed beyond."
+        },
+        {
+          "id": "M1.085",
+          "x": 1.085,
+          "hint_px": [
+            2394,
+            805
+          ],
+          "side": "right",
+          "note": "One pixel before the start of the final solid stroke (ink from x 2394): one-sided fit. Left out in the first pass A reading (taken as a gap); added after pass B sampled it."
+        },
+        {
+          "id": "M1.100",
+          "x": 1.1,
+          "hint_px": [
+            2436,
+            813
+          ],
+          "note": "Long solid stroke from about M 1.087 to 1.116 after the dashes."
+        },
+        {
+          "id": "M1.114",
+          "x": 1.114,
+          "hint_px": [
+            2476,
+            828
+          ],
+          "side": "left",
+          "note": "Stroke ends at about x 2480."
+        }
+      ]
+    },
+    {
       "id": "fig09-35deg",
       "wing": "35",
       "kind": "curve_samples",
@@ -269,6 +394,109 @@
           ],
           "side": "left",
           "note": "Curve ends at about x 2523."
+        }
+      ]
+    },
+    {
+      "id": "fig09-47deg",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "curve_type": "faired crossplot curve, no symbols",
+      "samples": [
+        {
+          "id": "M0.500",
+          "x": 0.5,
+          "hint_px": [
+            749,
+            1235
+          ],
+          "side": "right",
+          "note": "Lowest of the three lines; curve starts on the M = 0.5 grid line."
+        },
+        {
+          "id": "M0.696",
+          "x": 0.696,
+          "hint_px": [
+            1296.5,
+            1218
+          ]
+        },
+        {
+          "id": "M0.843",
+          "x": 0.843,
+          "hint_px": [
+            1710,
+            1200
+          ]
+        },
+        {
+          "id": "M0.892",
+          "x": 0.892,
+          "hint_px": [
+            1848,
+            1197
+          ]
+        },
+        {
+          "id": "M0.916",
+          "x": 0.916,
+          "hint_px": [
+            1916,
+            1190
+          ]
+        },
+        {
+          "id": "M0.941",
+          "x": 0.941,
+          "hint_px": [
+            1986,
+            1181
+          ],
+          "note": "Runs along the CD0 = 0.010 grid line here."
+        },
+        {
+          "id": "M0.965",
+          "x": 0.965,
+          "hint_px": [
+            2053.5,
+            1148
+          ]
+        },
+        {
+          "id": "M0.990",
+          "x": 0.99,
+          "hint_px": [
+            2124,
+            1082.5
+          ]
+        },
+        {
+          "id": "M1.010",
+          "x": 1.01,
+          "hint_px": [
+            2186,
+            1022.5
+          ],
+          "note": "Curve crosses the CD0 = 0.015 grid line just to the right. The first pass A hint sat on the grid line (CD0 0.0150 read instead of the curve); corrected after pass B's value differed by 0.00044."
+        },
+        {
+          "id": "M1.024",
+          "x": 1.024,
+          "hint_px": [
+            2220,
+            997
+          ]
+        },
+        {
+          "id": "M1.112",
+          "x": 1.112,
+          "hint_px": [
+            2467,
+            971.5
+          ],
+          "note": "Flat solid stroke from about M 1.09 after the dash-dot segment."
         }
       ]
     }

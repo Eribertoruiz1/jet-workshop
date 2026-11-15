@@ -50,6 +50,8 @@ def main() -> None:
     ap.add_argument("out", type=Path)
     ap.add_argument("--inset", type=int, default=36, help="half size of each inset, native px")
     ap.add_argument("--zoom", type=int, default=4)
+    ap.add_argument("--insets", choices=["all", "flagged", "none"], default="all",
+                    help="flagged: only points picked by eye or where the passes differ by more than one pixel")
     args = ap.parse_args()
 
     ra = json.loads(args.pass_a.read_text(encoding="utf-8"))
@@ -83,8 +85,19 @@ def main() -> None:
     scale = 1800 / full.width
     full = full.resize((1800, int(full.height * scale)), Image.LANCZOS)
 
-    # Insets: one per pass-A point, with every mark that falls inside it.
+    # Insets: one per pass-A point (or per flagged point), with every mark that falls inside it.
     a_pts = [p for p in pts if p[0] == "A"]
+    if args.insets != "all":
+        b_by = [p for p in pts if p[0] == "B"]
+
+        def flagged(item) -> bool:
+            _, _, (ax, ay), pa = item
+            if pa.get("snap") == "none" or pa.get("near_grid_line"):
+                return True
+            near = min(((bx - ax) ** 2 + (by - ay) ** 2 for _, _, (bx, by), _ in b_by), default=1e9)
+            return near > 1.0
+
+        a_pts = [p for p in a_pts if flagged(p)] if args.insets == "flagged" else []
     font = ImageFont.load_default(size=18)
     size = 2 * args.inset * args.zoom
     cols = max(1, 1800 // (size + 20))

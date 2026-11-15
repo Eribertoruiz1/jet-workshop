@@ -1,0 +1,1874 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig05a",
+    "number": "5(a)",
+    "title": "Figure 5. Variation with lift coefficient of the aerodynamic characteristics for the 10.8 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 21,
+    "printed_page": 19,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 3.2 (35 vertical lines). The label row under the plot reads -.2 at the left frame, then one '0' per Mach number every 0.2 (M = 0.50, .70, .85, .90, .925, .95, .975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.114), then .2, .4, .6, .8 (M = 1.114 scale, .8 at the right frame). Each '0' sits under a short tick at the bottom of its cell of the Mach-number box, and each tick continues a vertical grid line (checked against the traced lines: ticks at x = 500, 640, 779, 918, 1057, 1197, 1335, 1473, 1612, 1753, 1891, 2031, 2172 px, grid lines 0.0 to 2.4 at 502.6 to 2174.5 px on row 1160, the 2 to 3 px difference being the page skew). So CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.85), 1.0 (0.95), 1.4 (1.00), 2.2 (1.10).",
+    "y_axis": "Angle of attack, alpha, deg (grid -4 to 14 by 1; frame lines at -4 and 14). The alpha = -3 line is not printed: the strip between alpha = -3.2 and -4 holds the Mach-number box, drawn over erased grid, so that line is skipped and the bottom cell is interpolated between the -2 and -4 lines.",
+    "content_note": "One hollow symbol shape with a centre dot per Mach number, on one faired line per Mach number. Same test points as figure 5(b)."
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "scan": {
+    "pdf_page": 21,
+    "size_px": [
+      3060,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 21 .cache/scans/p21.png"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 35
+      },
+      "y_lines": {
+        "start": -4.0,
+        "step": 1.0,
+        "count": 19,
+        "skip": [
+          -3.0
+        ]
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0014370825190708856,
+        7.107466199052356e-06,
+        -0.7309185700358521
+      ],
+      [
+        0.00014792633414546663,
+        -0.014149043749849509,
+        18.95562637884551
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          436,
+          428
+        ],
+        "px": [
+          436.51,
+          427.45
+        ],
+        "x": -0.1,
+        "y": 13.0,
+        "residual_data": [
+          -0.0005806795360747408,
+          -0.027825306013493645
+        ],
+        "residual_px": [
+          -0.41,
+          1.96
+        ],
+        "mesh_residual_data": [
+          0.00018486996092491326,
+          -0.0025524377042387414
+        ]
+      },
+      {
+        "picked_px": [
+          644,
+          640
+        ],
+        "px": [
+          644.48,
+          639.55
+        ],
+        "x": 0.2,
+        "y": 10.0,
+        "residual_data": [
+          -0.00020456075032132537,
+          0.0019043585414273423
+        ],
+        "residual_px": [
+          -0.14,
+          -0.14
+        ],
+        "mesh_residual_data": [
+          0.00010048437359497231,
+          -0.0014219359713028012
+        ]
+      },
+      {
+        "picked_px": [
+          574,
+          922
+        ],
+        "px": [
+          573.41,
+          921.11
+        ],
+        "x": 0.1,
+        "y": 6.0,
+        "residual_data": [
+          -0.0003280480261696195,
+          0.007639564392276199
+        ],
+        "residual_px": [
+          -0.23,
+          -0.54
+        ],
+        "mesh_residual_data": [
+          0.0002670974747858573,
+          0.003967148707393342
+        ]
+      },
+      {
+        "picked_px": [
+          435,
+          1061
+        ],
+        "px": [
+          434.54,
+          1060.83
+        ],
+        "x": -0.1,
+        "y": 4.0,
+        "residual_data": [
+          0.001094992495895869,
+          0.010208841009298197
+        ],
+        "residual_px": [
+          0.77,
+          -0.71
+        ],
+        "mesh_residual_data": [
+          -0.0002049138367066078,
+          -0.004180650054722346
+        ]
+      },
+      {
+        "picked_px": [
+          918,
+          1490
+        ],
+        "px": [
+          918.5,
+          1490.52
+        ],
+        "x": 0.6,
+        "y": -2.0,
+        "residual_data": [
+          -0.0003704868667058214,
+          0.0020093390621624962
+        ],
+        "residual_px": [
+          -0.26,
+          -0.14
+        ],
+        "mesh_residual_data": [
+          0.00017448067569691972,
+          -0.0012213318614047175
+        ]
+      },
+      {
+        "picked_px": [
+          1551,
+          509
+        ],
+        "px": [
+          1550.42,
+          506.97
+        ],
+        "x": 1.5,
+        "y": 12.0,
+        "residual_data": [
+          0.0007612118887743158,
+          0.01178082964205629
+        ],
+        "residual_px": [
+          0.53,
+          -0.83
+        ],
+        "mesh_residual_data": [
+          -0.0004924665085357383,
+          0.006094757498955161
+        ]
+      },
+      {
+        "picked_px": [
+          1897,
+          583
+        ],
+        "px": [
+          1897.34,
+          581.97
+        ],
+        "x": 2.0,
+        "y": 11.0,
+        "residual_data": [
+          -0.00015067089436371361,
+          0.0019995610918464024
+        ],
+        "residual_px": [
+          -0.1,
+          -0.14
+        ],
+        "mesh_residual_data": [
+          0.00015637941050217208,
+          -0.004152211560718655
+        ]
+      },
+      {
+        "picked_px": [
+          1895,
+          865
+        ],
+        "px": [
+          1895.4,
+          864.48
+        ],
+        "x": 2.0,
+        "y": 7.0,
+        "residual_data": [
+          -0.0009273398040261505,
+          0.00441691125815602
+        ],
+        "residual_px": [
+          -0.64,
+          -0.32
+        ],
+        "mesh_residual_data": [
+          -0.00020776577950232245,
+          -0.004377452600619058
+        ]
+      },
+      {
+        "picked_px": [
+          2173,
+          1504
+        ],
+        "px": [
+          2171.97,
+          1503.98
+        ],
+        "x": 2.4,
+        "y": -2.0,
+        "residual_data": [
+          0.0010702714077406306,
+          -0.0029552832080206315
+        ],
+        "residual_px": [
+          0.74,
+          0.22
+        ],
+        "mesh_residual_data": [
+          -0.0007277077834610957,
+          -0.0010685037694182498
+        ]
+      },
+      {
+        "picked_px": [
+          2455,
+          518
+        ],
+        "px": [
+          2454.08,
+          517.02
+        ],
+        "x": 2.8,
+        "y": 12.0,
+        "residual_data": [
+          -0.0005344898060917203,
+          0.0032467996083056505
+        ],
+        "residual_px": [
+          -0.37,
+          -0.23
+        ],
+        "mesh_residual_data": [
+          -0.0005974156674812825,
+          0.0008513625438766326
+        ]
+      },
+      {
+        "picked_px": [
+          2594,
+          730
+        ],
+        "px": [
+          2593.47,
+          730.54
+        ],
+        "x": 3.0,
+        "y": 9.0,
+        "residual_data": [
+          0.0012985395891713658,
+          0.002882383001651334
+        ],
+        "residual_px": [
+          0.9,
+          -0.19
+        ],
+        "mesh_residual_data": [
+          0.00017763968009143483,
+          -0.004258815522202752
+        ]
+      },
+      {
+        "picked_px": [
+          2521,
+          1297
+        ],
+        "px": [
+          2520.59,
+          1296.15
+        ],
+        "x": 2.9,
+        "y": 1.0,
+        "residual_data": [
+          0.0005831741156097081,
+          -0.010822707926060104
+        ],
+        "residual_px": [
+          0.4,
+          0.77
+        ],
+        "mesh_residual_data": [
+          -0.0004333328562897698,
+          0.007953018721134075
+        ]
+      },
+      {
+        "picked_px": [
+          2656,
+          1439
+        ],
+        "px": [
+          2657.46,
+          1438.49
+        ],
+        "x": 3.1,
+        "y": -1.0,
+        "residual_data": [
+          -0.0017119138133194767,
+          -0.004485290462636016
+        ],
+        "residual_px": [
+          -1.19,
+          0.3
+        ],
+        "mesh_residual_data": [
+          0.00055017490593956,
+          0.00032752040665751103
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.0008626046890008879,
+      0.009890254453020527
+    ],
+    "affine_max_abs_residual_data": [
+      0.0017119138133194767,
+      0.027825306013493645
+    ],
+    "data_per_px": [
+      0.0014370825190708203,
+      -0.01414904374984971
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": -4.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.325,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "horizontal",
+        "value": -2.0,
+        "samples": 384,
+        "used": 384,
+        "rms_px": 0.327,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "horizontal",
+        "value": -1.0,
+        "samples": 388,
+        "used": 388,
+        "rms_px": 0.311,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 384,
+        "used": 383,
+        "rms_px": 0.316,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "horizontal",
+        "value": 1.0,
+        "samples": 389,
+        "used": 389,
+        "rms_px": 0.329,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "horizontal",
+        "value": 2.0,
+        "samples": 389,
+        "used": 389,
+        "rms_px": 0.326,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "horizontal",
+        "value": 3.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.355,
+        "max_warp_px": 0.43
+      },
+      {
+        "line": "horizontal",
+        "value": 4.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.323,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "horizontal",
+        "value": 5.0,
+        "samples": 373,
+        "used": 370,
+        "rms_px": 0.333,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "horizontal",
+        "value": 6.0,
+        "samples": 389,
+        "used": 389,
+        "rms_px": 0.325,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "horizontal",
+        "value": 7.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.314,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "horizontal",
+        "value": 8.0,
+        "samples": 365,
+        "used": 365,
+        "rms_px": 0.306,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "horizontal",
+        "value": 9.0,
+        "samples": 389,
+        "used": 389,
+        "rms_px": 0.304,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "horizontal",
+        "value": 10.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.34,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "horizontal",
+        "value": 11.0,
+        "samples": 386,
+        "used": 386,
+        "rms_px": 0.302,
+        "max_warp_px": 0.27
+      },
+      {
+        "line": "horizontal",
+        "value": 12.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.325,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "horizontal",
+        "value": 13.0,
+        "samples": 387,
+        "used": 387,
+        "rms_px": 0.298,
+        "max_warp_px": 0.22
+      },
+      {
+        "line": "horizontal",
+        "value": 14.0,
+        "samples": 387,
+        "used": 387,
+        "rms_px": 0.319,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": -0.2,
+        "samples": 210,
+        "used": 210,
+        "rms_px": 0.318,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": -0.1,
+        "samples": 196,
+        "used": 195,
+        "rms_px": 0.27,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "vertical",
+        "value": 0.0,
+        "samples": 200,
+        "used": 200,
+        "rms_px": 0.363,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 0.1,
+        "samples": 209,
+        "used": 209,
+        "rms_px": 0.274,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.2,
+        "samples": 200,
+        "used": 200,
+        "rms_px": 0.31,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "vertical",
+        "value": 0.3,
+        "samples": 208,
+        "used": 208,
+        "rms_px": 0.357,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 203,
+        "used": 203,
+        "rms_px": 0.357,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 210,
+        "used": 210,
+        "rms_px": 0.322,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 204,
+        "used": 202,
+        "rms_px": 0.376,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 203,
+        "used": 200,
+        "rms_px": 0.389,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 194,
+        "used": 193,
+        "rms_px": 0.359,
+        "max_warp_px": 0.36
+      },
+      {
+        "line": "vertical",
+        "value": 0.9,
+        "samples": 202,
+        "used": 201,
+        "rms_px": 0.353,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "vertical",
+        "value": 1.0,
+        "samples": 200,
+        "used": 200,
+        "rms_px": 0.362,
+        "max_warp_px": 0.43
+      },
+      {
+        "line": "vertical",
+        "value": 1.1,
+        "samples": 202,
+        "used": 198,
+        "rms_px": 0.299,
+        "max_warp_px": 0.39
+      },
+      {
+        "line": "vertical",
+        "value": 1.2,
+        "samples": 196,
+        "used": 194,
+        "rms_px": 0.327,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": 1.3,
+        "samples": 203,
+        "used": 202,
+        "rms_px": 0.333,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "vertical",
+        "value": 1.4,
+        "samples": 201,
+        "used": 201,
+        "rms_px": 0.361,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 1.5,
+        "samples": 204,
+        "used": 202,
+        "rms_px": 0.371,
+        "max_warp_px": 0.27
+      },
+      {
+        "line": "vertical",
+        "value": 1.6,
+        "samples": 193,
+        "used": 192,
+        "rms_px": 0.298,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "vertical",
+        "value": 1.7,
+        "samples": 202,
+        "used": 200,
+        "rms_px": 0.385,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "vertical",
+        "value": 1.8,
+        "samples": 198,
+        "used": 198,
+        "rms_px": 0.346,
+        "max_warp_px": 0.27
+      },
+      {
+        "line": "vertical",
+        "value": 1.9,
+        "samples": 206,
+        "used": 203,
+        "rms_px": 0.31,
+        "max_warp_px": 0.22
+      },
+      {
+        "line": "vertical",
+        "value": 2.0,
+        "samples": 200,
+        "used": 198,
+        "rms_px": 0.363,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": 2.1,
+        "samples": 203,
+        "used": 203,
+        "rms_px": 0.305,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": 2.2,
+        "samples": 202,
+        "used": 202,
+        "rms_px": 0.364,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 2.3,
+        "samples": 204,
+        "used": 203,
+        "rms_px": 0.324,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 2.4,
+        "samples": 206,
+        "used": 206,
+        "rms_px": 0.328,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "vertical",
+        "value": 2.5,
+        "samples": 203,
+        "used": 201,
+        "rms_px": 0.353,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": 2.6,
+        "samples": 210,
+        "used": 210,
+        "rms_px": 0.313,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 2.7,
+        "samples": 206,
+        "used": 205,
+        "rms_px": 0.414,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": 2.8,
+        "samples": 210,
+        "used": 210,
+        "rms_px": 0.329,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": 2.9,
+        "samples": 194,
+        "used": 194,
+        "rms_px": 0.308,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "vertical",
+        "value": 3.0,
+        "samples": 201,
+        "used": 201,
+        "rms_px": 0.291,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": 3.1,
+        "samples": 192,
+        "used": 190,
+        "rms_px": 0.341,
+        "max_warp_px": 0.36
+      },
+      {
+        "line": "vertical",
+        "value": 3.2,
+        "samples": 210,
+        "used": 210,
+        "rms_px": 0.309,
+        "max_warp_px": 0.2
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig05a-10.8deg-M0.500",
+      "wing": "10.8",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            443.51,
+            1479.53
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 1,
+          "dot_pixels": 5,
+          "px": [
+            443.59,
+            1479.77
+          ],
+          "data": [
+            -0.08548761010917155,
+            -1.9323080921300555
+          ],
+          "affine_data": [
+            -0.08292572014382638,
+            -1.9160854483057115
+          ],
+          "value": {
+            "CL": -0.08548761010917155,
+            "alpha": -1.9323080921300555
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            540.89,
+            1328.14
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 3,
+          "dot_pixels": 15,
+          "px": [
+            540.93,
+            1328.03
+          ],
+          "data": [
+            0.05601791098856737,
+            0.24014532221522733
+          ],
+          "affine_data": [
+            0.05588140534148944,
+            0.245289599662172
+          ],
+          "value": {
+            "CL": 0.05601791098856737,
+            "alpha": 0.24014532221522733
+          },
+          "note": "Outline slightly thickened at the top and dot slightly elongated vertically: possibly two circles drawn almost exactly on top of each other (figure 5(b) shows two dots 3.6 px apart at this lift coefficient). Only one dot can be seen, so one point is recorded."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            674.0,
+            1123.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 5,
+          "dot_pixels": 10,
+          "px": [
+            673.98,
+            1123.25
+          ],
+          "data": [
+            0.24604701866508877,
+            3.1648775636814035
+          ],
+          "affine_data": [
+            0.24562976757562893,
+            3.162412377514409
+          ],
+          "value": {
+            "CL": 0.24604701866508877,
+            "alpha": 3.1648775636814035
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            729.99,
+            1025.02
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 9,
+          "dot_pixels": 9,
+          "px": [
+            729.99,
+            1025.03
+          ],
+          "data": [
+            0.3267099734561957,
+            4.550097705842983
+          ],
+          "affine_data": [
+            0.32542266413871823,
+            4.560416808600115
+          ],
+          "value": {
+            "CL": 0.3267099734561957,
+            "alpha": 4.550097705842983
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            821.04,
+            889.27
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 12,
+          "dot_pixels": 11,
+          "px": [
+            821.1,
+            889.32
+          ],
+          "data": [
+            0.45639392282663965,
+            6.4905479623038875
+          ],
+          "affine_data": [
+            0.4553906982133932,
+            6.494061104196184
+          ],
+          "value": {
+            "CL": 0.45639392282663965,
+            "alpha": 6.4905479623038875
+          },
+          "note": "Two circles overlap at alpha about 6.5 deg (this one and the next point); both dots visible and isolated."
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            836.1,
+            880.99
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 15,
+          "dot_pixels": 17,
+          "px": [
+            836.11,
+            881.07
+          ],
+          "data": [
+            0.47787357949097065,
+            6.611732903347862
+          ],
+          "affine_data": [
+            0.47690267022850497,
+            6.6130110894079674
+          ],
+          "value": {
+            "CL": 0.47787357949097065,
+            "alpha": 6.611732903347862
+          },
+          "note": "Second of the two overlapping circles."
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            926.5,
+            730.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 19,
+          "dot_pixels": 11,
+          "px": [
+            926.4,
+            730.48
+          ],
+          "data": [
+            0.6070622867883598,
+            8.74656096299216
+          ],
+          "affine_data": [
+            0.6055865375405,
+            8.757071856407798
+          ],
+          "value": {
+            "CL": 0.6070622867883598,
+            "alpha": 8.74656096299216
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1002.95,
+            583.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 24,
+          "dot_pixels": 12,
+          "px": [
+            1002.62,
+            583.51
+          ],
+          "data": [
+            0.7134395362350741,
+            10.840196388548957
+          ],
+          "affine_data": [
+            0.7140763828368083,
+            10.847831761511749
+          ],
+          "value": {
+            "CL": 0.7134395362350741,
+            "alpha": 10.840196388548957
+          }
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            1050.53,
+            442.45
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 28,
+          "dot_pixels": 9,
+          "px": [
+            1050.55,
+            442.18
+          ],
+          "data": [
+            0.7813105382868822,
+            12.854390381700048
+          ],
+          "affine_data": [
+            0.7819512497779636,
+            12.854606223873573
+          ],
+          "value": {
+            "CL": 0.7813105382868822,
+            "alpha": 12.854390381700048
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M0.850",
+      "wing": "10.8",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            701.0,
+            1498.75
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 7,
+          "dot_pixels": 13,
+          "px": [
+            700.99,
+            1498.94
+          ],
+          "data": [
+            0.28728828320443145,
+            -2.162224389970661
+          ],
+          "affine_data": [
+            0.2871155703920555,
+            -2.149246378581285
+          ],
+          "value": {
+            "CL": -0.11271171679556857,
+            "alpha": -2.162224389970661
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            834.62,
+            1330.66
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 14,
+          "dot_pixels": 12,
+          "px": [
+            834.59,
+            1330.53
+          ],
+          "data": [
+            0.4790300166243862,
+            0.25143237874236113
+          ],
+          "affine_data": [
+            0.47791282655734346,
+            0.2533570375727052
+          ],
+          "value": {
+            "CL": 0.07903001662438619,
+            "alpha": 0.25143237874236113
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            871.5,
+            1298.1
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 16,
+          "dot_pixels": 12,
+          "px": [
+            871.51,
+            1298.4
+          ],
+          "data": [
+            0.5318578547008517,
+            0.7116371029539073
+          ],
+          "affine_data": [
+            0.530741550272465,
+            0.7134272535120196
+          ],
+          "value": {
+            "CL": 0.13185785470085165,
+            "alpha": 0.7116371029539073
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            968.82,
+            1162.19
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 21,
+          "dot_pixels": 9,
+          "px": [
+            968.95,
+            1162.07
+          ],
+          "data": [
+            0.6692023174389768,
+            2.65831972720203
+          ],
+          "affine_data": [
+            0.6698019100638152,
+            2.6567803299281394
+          ],
+          "value": {
+            "CL": 0.2692023174389768,
+            "alpha": 2.65831972720203
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1128.25,
+            990.36
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 31,
+          "dot_pixels": 10,
+          "px": [
+            1128.47,
+            990.18
+          ],
+          "data": [
+            0.8977910869510183,
+            5.100849474212517
+          ],
+          "affine_data": [
+            0.8978236111410477,
+            5.112456668912657
+          ],
+          "value": {
+            "CL": 0.49779108695101826,
+            "alpha": 5.100849474212517
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1275,
+            819.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "dot_pixels": 2,
+          "px": [
+            1275.0,
+            819.53
+          ],
+          "data": [
+            1.1064230494329925,
+            7.5322693134337415
+          ],
+          "affine_data": [
+            1.1071864235536362,
+            7.54866663056681
+          ],
+          "value": {
+            "CL": 0.7064230494329925,
+            "alpha": 7.5322693134337415
+          },
+          "note": "Cluster of three overlapping diamonds at alpha about 7.5 deg (this point and the next two; figure 5(b) also shows three diamonds at the same lift coefficients). Lower-left diamond of the three: outline vertices left (1258, 820), bottom (1273, 835), upper-left and upper-right edges give centre (1274.5, 819.5). Its dot merges with the lower-left edge of the middle diamond; isolated at dot_level 110."
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1284.0,
+            811.0
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1284.0,
+            811.0
+          ],
+          "data": [
+            1.1194561773410912,
+            7.651559359451935
+          ],
+          "affine_data": [
+            1.1200595395385964,
+            7.670689310760336
+          ],
+          "value": {
+            "CL": 0.7194561773410911,
+            "alpha": 7.651559359451935
+          },
+          "note": "Middle diamond of the three-diamond cluster: top vertex (1284, 795), edges x+y = 2079 and x-y = 489 give centre (1284.0, 811.0). Its dot lies on the upper-left edge of the right-hand diamond (merged dark blob centred at (1283.7, 812.2)), so the centre is taken from the outline. Uncertainty about 1 px."
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1297.0,
+            816.5
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1297.0,
+            816.5
+          ],
+          "data": [
+            1.138359393504217,
+            7.577147336040423
+          ],
+          "affine_data": [
+            1.1387807033506125,
+            7.594792612480054
+          ],
+          "value": {
+            "CL": 0.7383593935042171,
+            "alpha": 7.577147336040423
+          },
+          "note": "Right-hand diamond of the three-diamond cluster: top vertex (1297, 801) where the faired line meets it, right vertex (1312, 817), bottom vertex (1297, 832); centre (1297.0, 816.5) from the outline. Its dot is hidden in the lower-right edge of the middle diamond. Uncertainty about 1 px."
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            1344.17,
+            663.34
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 43,
+          "dot_pixels": 11,
+          "px": [
+            1344.14,
+            663.2
+          ],
+          "data": [
+            1.2058171582773094,
+            9.757079350292567
+          ],
+          "affine_data": [
+            1.2054351987312995,
+            9.770814266723601
+          ],
+          "value": {
+            "CL": 0.8058171582773094,
+            "alpha": 9.757079350292567
+          }
+        },
+        {
+          "id": "p10",
+          "picked_px": [
+            1352.31,
+            524.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 44,
+          "dot_pixels": 13,
+          "px": [
+            1352.42,
+            524.1
+          ],
+          "data": [
+            1.216631989194718,
+            11.73242530550099
+          ],
+          "affine_data": [
+            1.2163455934409182,
+            11.740171082374392
+          ],
+          "value": {
+            "CL": 0.8166319891947179,
+            "alpha": 11.73242530550099
+          }
+        },
+        {
+          "id": "p11",
+          "picked_px": [
+            1361.48,
+            387.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 45,
+          "dot_pixels": 11,
+          "px": [
+            1361.36,
+            387.55
+          ],
+          "data": [
+            1.2280803535062097,
+            13.672903281476533
+          ],
+          "affine_data": [
+            1.2282225866519312,
+            13.673545467843603
+          ],
+          "value": {
+            "CL": 0.8280803535062097,
+            "alpha": 13.672903281476533
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M0.950",
+      "wing": "10.8",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1063.0,
+            1529.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 29,
+          "dot_pixels": 7,
+          "px": [
+            1062.69,
+            1528.97
+          ],
+          "data": [
+            0.8069741189249419,
+            -2.5309145530327446
+          ],
+          "affine_data": [
+            0.8071217547499524,
+            -2.5206372073288463
+          ],
+          "value": {
+            "CL": -0.19302588107505814,
+            "alpha": -2.5309145530327446
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1299.71,
+            1317.74
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 39,
+          "dot_pixels": 7,
+          "px": [
+            1299.74,
+            1317.96
+          ],
+          "data": [
+            1.1459232484510877,
+            0.4997061063617908
+          ],
+          "affine_data": [
+            1.1462824194530437,
+            0.5000184518360768
+          ],
+          "value": {
+            "CL": 0.14592324845108773,
+            "alpha": 0.4997061063617908
+          },
+          "note": "Two right-pointing triangles drawn almost on top of each other at alpha about 0.5 deg (doubled outline, offset about 4 px vertically); two dots at the same column, 4.5 px apart. This is the upper dot."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1301,
+            1322.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "dot_pixels": 2,
+          "px": [
+            1300.0,
+            1322.51
+          ],
+          "data": [
+            1.1463322383448897,
+            0.4350708520462202
+          ],
+          "affine_data": [
+            1.1466883998792077,
+            0.4356787636211408
+          ],
+          "value": {
+            "CL": 0.14633223834488973,
+            "alpha": 0.4350708520462202
+          },
+          "note": "Lower dot of the doubled right-pointing triangle; it touches the merged lower edges, isolated at dot_level 140."
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1440.29,
+            1167.65
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 49,
+          "dot_pixels": 9,
+          "px": [
+            1439.95,
+            1167.36
+          ],
+          "data": [
+            1.3465450292042525,
+            2.647534868213593
+          ],
+          "affine_data": [
+            1.3467053750423954,
+            2.6516051918739514
+          ],
+          "value": {
+            "CL": 0.34654502920425245,
+            "alpha": 2.647534868213593
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1591.97,
+            992.21
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 57,
+          "dot_pixels": 9,
+          "px": [
+            1591.97,
+            992.02
+          ],
+          "data": [
+            1.5641317428984327,
+            5.141603243568429
+          ],
+          "affine_data": [
+            1.5639244364682092,
+            5.1549862842893575
+          ],
+          "value": {
+            "CL": 0.5641317428984327,
+            "alpha": 5.141603243568429
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1749.99,
+            823.03
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 64,
+          "dot_pixels": 11,
+          "px": [
+            1749.92,
+            823.31
+          ],
+          "data": [
+            1.7887109148500289,
+            7.546543466555925
+          ],
+          "affine_data": [
+            1.7897125197330137,
+            7.565436419804744
+          ],
+          "value": {
+            "CL": 0.7887109148500289,
+            "alpha": 7.546543466555925
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1801.51,
+            752.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 66,
+          "dot_pixels": 6,
+          "px": [
+            1801.51,
+            752.91
+          ],
+          "data": [
+            1.8613371025221555,
+            8.548712666441512
+          ],
+          "affine_data": [
+            1.8633512412714675,
+            8.569160619372715
+          ],
+          "value": {
+            "CL": 0.8613371025221555,
+            "alpha": 8.548712666441512
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M1.000",
+      "wing": "10.8",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1343.31,
+            1521.31
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 42,
+          "dot_pixels": 8,
+          "px": [
+            1343.27,
+            1520.86
+          ],
+          "data": [
+            1.2111186540007384,
+            -2.373533905876568
+          ],
+          "affine_data": [
+            1.2102807263999869,
+            -2.3643832916830334
+          ],
+          "value": {
+            "CL": -0.18888134599926154,
+            "alpha": -2.373533905876568
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1537.0,
+            1335.97
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 53,
+          "dot_pixels": 8,
+          "px": [
+            1537.13,
+            1335.88
+          ],
+          "data": [
+            1.4870181308606556,
+            0.28014094601698336
+          ],
+          "affine_data": [
+            1.4875588044495682,
+            0.2815838203015666
+          ],
+          "value": {
+            "CL": 0.08701813086065568,
+            "alpha": 0.28014094601698336
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1697.39,
+            1171.25
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 60,
+          "dot_pixels": 10,
+          "px": [
+            1697.26,
+            1171.46
+          ],
+          "data": [
+            1.7158419949747392,
+            2.629806406476949
+          ],
+          "affine_data": [
+            1.7165102186359409,
+            2.6316570375385346
+          ],
+          "value": {
+            "CL": 0.3158419949747393,
+            "alpha": 2.629806406476949
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1858.0,
+            995.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 70,
+          "dot_pixels": 8,
+          "px": [
+            1858.14,
+            995.09
+          ],
+          "data": [
+            1.9455733138847657,
+            5.138582867628158
+          ],
+          "affine_data": [
+            1.9464545104905384,
+            5.1509222723368175
+          ],
+          "value": {
+            "CL": 0.5455733138847658,
+            "alpha": 5.138582867628158
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1999.07,
+            828.33
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 76,
+          "dot_pixels": 12,
+          "px": [
+            1999.22,
+            828.51
+          ],
+          "data": [
+            2.146655263606534,
+            7.5144524459230615
+          ],
+          "affine_data": [
+            2.1480141505616204,
+            7.528739427407993
+          ],
+          "value": {
+            "CL": 0.746655263606534,
+            "alpha": 7.5144524459230615
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M1.100",
+      "wing": "10.8",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter disc, square corner at top left, with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1916.91,
+            1519.34
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 72,
+          "dot_pixels": 10,
+          "px": [
+            1916.91,
+            1519.27
+          ],
+          "data": [
+            2.0362394523462113,
+            -2.260176413501905
+          ],
+          "affine_data": [
+            2.0346374417685533,
+            -2.257029849801569
+          ],
+          "value": {
+            "CL": -0.1637605476537889,
+            "alpha": -2.260176413501905
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            2108.29,
+            1324.04
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 81,
+          "dot_pixels": 15,
+          "px": [
+            2108.35,
+            1324.1
+          ],
+          "data": [
+            2.305547291298419,
+            0.5408422451199159
+          ],
+          "affine_data": [
+            2.3083653550414143,
+            0.5327580362653705
+          ],
+          "value": {
+            "CL": 0.10554729129841878,
+            "alpha": 0.5408422451199159
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            2238.71,
+            1173.25
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 87,
+          "dot_pixels": 15,
+          "px": [
+            2238.63,
+            1173.38
+          ],
+          "data": [
+            2.494775434294032,
+            2.6902044751563556
+          ],
+          "affine_data": [
+            2.4945172283204484,
+            2.684573753055158
+          ],
+          "value": {
+            "CL": 0.29477543429403186,
+            "alpha": 2.6902044751563556
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            2365.28,
+            1013.56
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 91,
+          "dot_pixels": 23,
+          "px": [
+            2365.24,
+            1012.42
+          ],
+          "data": [
+            2.674295755516514,
+            4.971115802196535
+          ],
+          "affine_data": [
+            2.6753222283006135,
+            4.980732788197093
+          ],
+          "value": {
+            "CL": 0.47429575551651393,
+            "alpha": 4.971115802196535
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            2508.37,
+            838.57
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 94,
+          "dot_pixels": 15,
+          "px": [
+            2508.4,
+            838.59
+          ],
+          "data": [
+            2.878526258382475,
+            7.456589031969677
+          ],
+          "affine_data": [
+            2.8798194708814204,
+            7.461438197229697
+          ],
+          "value": {
+            "CL": 0.6785262583824747,
+            "alpha": 7.456589031969677
+          }
+        }
+      ]
+    }
+  ]
+}

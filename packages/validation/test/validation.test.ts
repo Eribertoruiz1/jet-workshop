@@ -49,7 +49,18 @@ describe("scoring helpers", () => {
   });
   it("recovers an exact parabola at CL = 0", () => {
     const pts = [-0.1, 0.05, 0.2, 0.28].map((cl) => ({ cl, cd: 0.01 + 0.002 * cl + 0.1 * cl * cl }) as PolarPoint);
-    expect(parabolaAtZeroLift(pts)!.cd0).toBeCloseTo(0.01, 10);
+    expect(parabolaAtZeroLift(pts).cd0).toBeCloseTo(0.01, 10);
+  });
+  it("refuses a parabola when a repeated point leaves only two lift levels", () => {
+    // As at 10.8 deg, M 0.95: two symbols at CL 0.147 (CD 0.0165 and 0.0174) and one at CL -0.196.
+    const pts = [
+      { cl: -0.196, cd: 0.0266 },
+      { cl: 0.1467, cd: 0.0165 },
+      { cl: 0.1468, cd: 0.0174 },
+    ] as PolarPoint[];
+    const r = parabolaAtZeroLift(pts);
+    expect(r.levels).toBe(2);
+    expect(r.cd0).toBeNull();
   });
   it("recovers an exact lift slope and ignores high-lift points", () => {
     const pts = [-2, 0, 2, 4, 8].map((alpha) => ({ alpha, cl: alpha === 8 ? 0.9 : 0.06 * alpha + 0.05 }) as LiftPoint);

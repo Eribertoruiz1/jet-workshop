@@ -127,7 +127,138 @@
   },
   "series": [
     {
-      "id": "fig06b-35deg-M0.90",
+      "id": "fig06b-35deg-M0.500",
+      "wing": "35",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1
+        },
+        {
+          "id": "p2",
+          "candidate": 2,
+          "note": "Figure 6(a) shows a double circle here (two repeated points at alpha 0.18 and 0.23); figure 6(b) shows one symbol, recorded once."
+        },
+        {
+          "id": "p3",
+          "candidate": 4
+        },
+        {
+          "id": "p4",
+          "px": [
+            931,
+            1595
+          ],
+          "snap": "dot",
+          "dot_radius": 4,
+          "dot_level": 225,
+          "note": "Faint centre dot; not found by candidates.py."
+        },
+        {
+          "id": "p5",
+          "candidate": 9,
+          "note": "p5 and p6: double circle (repeated point), two dots."
+        },
+        {
+          "id": "p6",
+          "candidate": 10
+        },
+        {
+          "id": "p7",
+          "candidate": 14
+        },
+        {
+          "id": "p8",
+          "candidate": 16
+        },
+        {
+          "id": "p9",
+          "candidate": 23
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M0.850",
+      "wing": "35",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 7
+        },
+        {
+          "id": "p2",
+          "candidate": 11
+        },
+        {
+          "id": "p3",
+          "candidate": 15
+        },
+        {
+          "id": "p4",
+          "candidate": 33
+        },
+        {
+          "id": "p5",
+          "candidate": 39,
+          "note": "Upper diamond of the three (doubled with p11); one centre dot found."
+        },
+        {
+          "id": "p6",
+          "candidate": 44
+        },
+        {
+          "id": "p7",
+          "candidate": 45
+        },
+        {
+          "id": "p8",
+          "candidate": 49,
+          "note": "Candidate 47 just below is on this diamond's outline, not a dot."
+        },
+        {
+          "id": "p9",
+          "px": [
+            1047.5,
+            1662.5
+          ],
+          "snap": "dot",
+          "dot_radius": 3,
+          "note": "Right dot of a doubled diamond at CL 0.10 (with p2). Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        },
+        {
+          "id": "p10",
+          "px": [
+            1367.6,
+            1291.8
+          ],
+          "snap": "dot",
+          "note": "Lower-left diamond of three at CL 0.62-0.64, with a visible dot; missed in the first pass A reading. Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        },
+        {
+          "id": "p11",
+          "px": [
+            1381.5,
+            1271.5
+          ],
+          "snap": "none",
+          "note": "Second outline of the upper diamond (two diamonds about 3.5 px apart, with p5); its dot is hidden; centre from the outline. Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M0.900",
       "wing": "35",
       "mach": 0.9,
       "kind": "symbols",
@@ -222,6 +353,114 @@
           "snap": "dot"
         }
       ]
+    },
+    {
+      "id": "fig06b-35deg-M0.950",
+      "wing": "35",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            1294,
+            1621
+          ],
+          "snap": "none",
+          "note": "Overlaps the M 0.90 triangle p3; its vertical left side runs down that triangle's axis and no dot is visible. Outline centroid (side x 1287, y 1610-1632; apex about 1308,1621); uncertainty about 2 px."
+        },
+        {
+          "id": "p2",
+          "candidate": 43,
+          "note": "Candidate 42 next to it is the M 0.925 triangle."
+        },
+        {
+          "id": "p3",
+          "candidate": 53
+        },
+        {
+          "id": "p4",
+          "candidate": 63
+        },
+        {
+          "id": "p5",
+          "candidate": 70
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M1.000",
+      "wing": "35",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 51
+        },
+        {
+          "id": "p2",
+          "candidate": 62,
+          "note": "Candidate 60 next to it is an M 0.975 symbol."
+        },
+        {
+          "id": "p3",
+          "candidate": 68,
+          "note": "Overlaps another right-triangle symbol (candidate 67)."
+        },
+        {
+          "id": "p4",
+          "candidate": 74
+        },
+        {
+          "id": "p5",
+          "candidate": 76
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M1.100",
+      "wing": "35",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter circle, straight sides top and left",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 78,
+          "note": "Candidate 77 above it belongs to two other overlapping symbols."
+        },
+        {
+          "id": "p2",
+          "candidate": 84
+        },
+        {
+          "id": "p3",
+          "candidate": 89
+        },
+        {
+          "id": "p4",
+          "candidate": 93
+        },
+        {
+          "id": "p5",
+          "candidate": 94,
+          "note": "Candidate 95 above it is the decimal point of the 1.10 label."
+        }
+      ]
     }
-  ]
+  ],
+  "candidates_file": "candidates.json",
+  "assignment_method": "Symbols assigned by shape and confirmed by lift coefficient: each test point's CL read on figure 6(a) must reappear on figure 6(b). The M 0.90 series is the step-0 reading."
 }

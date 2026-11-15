@@ -121,10 +121,26 @@ export function sampledDragRiseMach(samples: { mach: number; cd: number }[]): nu
   return null;
 }
 
-/** Parabola CD = a + b CL + c CL^2 through the low-lift symbols, evaluated at CL = 0 (a check only, never data). */
-export function parabolaAtZeroLift(points: PolarPoint[], limit = LOW_LIFT): { cd0: number; n: number } | null {
+/** Symbols closer than this in CL count as one lift level: twice the declared CL reading accuracy (0.01). */
+export const DISTINCT_CL = 0.02;
+
+/** Number of distinct lift levels: values sorted, a new level starts when the gap exceeds DISTINCT_CL. */
+export function liftLevels(cls: number[], tol = DISTINCT_CL): number {
+  const s = [...cls].sort((x, y) => x - y);
+  let n = s.length ? 1 : 0;
+  for (let i = 1; i < s.length; i++) if (s[i]! - s[i - 1]! > tol) n++;
+  return n;
+}
+
+/**
+ * Parabola CD = a + b CL + c CL^2 through the low-lift symbols, evaluated at CL = 0 (a check only, never data).
+ * A parabola needs three distinct lift levels; a repeated point (two symbols at one CL) does not count twice,
+ * so with fewer than three levels cd0 is null.
+ */
+export function parabolaAtZeroLift(points: PolarPoint[], limit = LOW_LIFT): { cd0: number | null; n: number; levels: number } {
   const v = points.filter((p) => Math.abs(p.cl) <= limit);
-  if (v.length < 3) return null;
+  const levels = liftLevels(v.map((p) => p.cl));
+  if (levels < 3) return { cd0: null, n: v.length, levels };
   // Normal equations for a quadratic.
   const s = [0, 0, 0, 0, 0];
   const t = [0, 0, 0];
@@ -147,7 +163,7 @@ export function parabolaAtZeroLift(points: PolarPoint[], limit = LOW_LIFT): { cd
       for (let k = i; k < 4; k++) m[r]![k]! -= f * m[i]![k]!;
     }
   }
-  return { cd0: m[0]![3]! / m[0]![0]!, n: v.length };
+  return { cd0: m[0]![3]! / m[0]![0]!, n: v.length, levels };
 }
 
 export type Reliability = "validated" | "estimate" | "outside model range";

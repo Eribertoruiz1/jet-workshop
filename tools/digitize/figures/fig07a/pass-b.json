@@ -1,0 +1,337 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig07a",
+    "number": "7(a)",
+    "title": "Figure 7. Variation with lift coefficient of the aerodynamic characteristics for the 47 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 27,
+    "printed_page": 25,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 2.8 (31 vertical lines). Label row: -.2 at the left frame, one '0' per Mach number every 0.2 (M = 0.50, .696, .843, .892, .916, .941, .965, .990, 1.010, 1.024, 1.088, 1.112, 12 zeros), then .2, .4, .6 on the M = 1.112 scale (.6 at the right frame). The '0' labels sit within about 3 px of grid lines 0.0 to 2.2 (532.8 to 2253 px on row 1300). CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.843), 1.0 (0.941), 1.4 (0.990), 2.2 (1.112).",
+    "y_axis": "Angle of attack, alpha, deg (grid -3 to 14 by 1; frame lines at -3 and 14). Between alpha = -2 and the bottom frame the Mach-number box is drawn over erased vertical grid lines.",
+    "content_note": "One hollow symbol shape with a centre dot per Mach number, on one faired line per Mach number. Same test points as figure 7(b)."
+  },
+  "scan": {
+    "pdf_page": 27,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 27 .cache/scans/p27.png"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": -3.0,
+        "step": 1.0,
+        "count": 18
+      }
+    },
+    "points": [
+      {
+        "px": [
+          448,
+          423
+        ],
+        "x": -0.1,
+        "y": 13.0
+      },
+      {
+        "px": [
+          686,
+          660
+        ],
+        "x": 0.2,
+        "y": 10.0
+      },
+      {
+        "px": [
+          611,
+          974
+        ],
+        "x": 0.1,
+        "y": 6.0
+      },
+      {
+        "px": [
+          453,
+          1132
+        ],
+        "x": -0.1,
+        "y": 4.0
+      },
+      {
+        "px": [
+          1005,
+          1608
+        ],
+        "x": 0.6,
+        "y": -2.0
+      },
+      {
+        "px": [
+          1548,
+          426
+        ],
+        "x": 1.3,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2409,
+          505
+        ],
+        "x": 2.4,
+        "y": 12.0
+      },
+      {
+        "px": [
+          2566,
+          663
+        ],
+        "x": 2.6,
+        "y": 10.0
+      },
+      {
+        "px": [
+          2645,
+          429
+        ],
+        "x": 2.7,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2490,
+          902
+        ],
+        "x": 2.5,
+        "y": 7.0
+      },
+      {
+        "px": [
+          2567,
+          1295
+        ],
+        "x": 2.6,
+        "y": 2.0
+      },
+      {
+        "px": [
+          2647,
+          1452
+        ],
+        "x": 2.7,
+        "y": 0.0
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07a-47deg-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1
+        },
+        {
+          "id": "p2",
+          "candidate": 2
+        },
+        {
+          "id": "p3",
+          "candidate": 4
+        },
+        {
+          "id": "p4",
+          "candidate": 6
+        },
+        {
+          "id": "p5",
+          "candidate": 9
+        },
+        {
+          "id": "p6",
+          "candidate": 14
+        },
+        {
+          "id": "p7",
+          "candidate": 16
+        },
+        {
+          "id": "p8",
+          "candidate": 20
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 7
+        },
+        {
+          "id": "p2",
+          "candidate": 10
+        },
+        {
+          "id": "p3",
+          "candidate": 15
+        },
+        {
+          "id": "p4",
+          "candidate": 22
+        },
+        {
+          "id": "p5",
+          "candidate": 27
+        },
+        {
+          "id": "p6",
+          "candidate": 30
+        },
+        {
+          "id": "p7",
+          "candidate": 34
+        },
+        {
+          "id": "p8",
+          "candidate": 36
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 25
+        },
+        {
+          "id": "p2",
+          "candidate": 33
+        },
+        {
+          "id": "p3",
+          "candidate": 40
+        },
+        {
+          "id": "p4",
+          "candidate": 45
+        },
+        {
+          "id": "p5",
+          "candidate": 52
+        },
+        {
+          "id": "p6",
+          "candidate": 56
+        },
+        {
+          "id": "p7",
+          "px": [
+            1939.3,
+            544.6
+          ],
+          "snap": "none",
+          "note": "Not found by candidates.py. Outline: vertical edge x = 1927 (rows 530 to 557.5), apex (1951, 543.5). The only dark mark inside is a small blob at (1939.3, 544.6) (rows 543 to 546), joined to the lower edge, so the snap cannot isolate it; taken as the dot. It is 12 px right of the vertical edge, against 7 to 10 px on clean symbols of this polar, and 2 px left of the hidden C_L grid line; if it were a grid-line remnant the outline centre would be about (1935.5, 543.7). Uncertainty about 2 px in x."
+        },
+        {
+          "id": "p8",
+          "candidate": 62
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 39
+        },
+        {
+          "id": "p2",
+          "candidate": 49
+        },
+        {
+          "id": "p3",
+          "candidate": 55
+        },
+        {
+          "id": "p4",
+          "candidate": 61
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter disc with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 70
+        },
+        {
+          "id": "p2",
+          "candidate": 76
+        },
+        {
+          "id": "p3",
+          "candidate": 78
+        },
+        {
+          "id": "p4",
+          "candidate": 82
+        }
+      ]
+    }
+  ]
+}

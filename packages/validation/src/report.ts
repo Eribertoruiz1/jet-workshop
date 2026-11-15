@@ -8,6 +8,7 @@ import type { Dataset } from "./data.ts";
 import {
   ACCEPTANCE_RANGES,
   CD0_BANDS,
+  DISTINCT_CL,
   LOW_LIFT,
   bandOf,
   criticalMachAtZeroLift,
@@ -179,7 +180,7 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
   // 5. Cross-check between the two data classes.
   L.push("## 5. Cross-check: polar symbols against the figure 9 curve");
   L.push("");
-  L.push(`A parabola through the polar symbols with |CL| <= ${LOW_LIFT}, evaluated at CL = 0, against the figure 9 sample at the same Mach number; it must agree within 0.001 (Amendment 2, point 1). The parabola is a check only, never stored or shown as data.`);
+  L.push(`A parabola through the polar symbols with |CL| <= ${LOW_LIFT}, evaluated at CL = 0, against the figure 9 sample at the same Mach number; it must agree within 0.001 (Amendment 2, point 1). The parabola is a check only, never stored or shown as data. It needs three distinct lift levels: symbols closer than ${DISTINCT_CL} in CL (twice the declared CL reading accuracy) count as one level, so a repeated point does not count twice.`);
   L.push("");
   L.push("| Wing | Mach | Symbols | Parabola at CL = 0 | Figure 9 | Difference | Within 0.001 |");
   L.push("| --- | ---: | ---: | ---: | ---: | ---: | --- |");
@@ -188,8 +189,9 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
     for (const m of machs) {
       const par = parabolaAtZeroLift(data.polar.filter((p) => p.wing === wid && p.mach === m));
       const fs = data.faired.find((s) => s.wing === wid && Math.abs(s.mach - m) < 1e-6);
-      if (!par || !fs) {
-        L.push(`| ${wid} deg | ${f3(m)} | ${par ? par.n : "<3"} | ${par ? f4(par.cd0) : "n/a"} | ${fs ? f4(fs.cd0) : "no sample"} | n/a | n/a |`);
+      if (par.cd0 === null || !fs) {
+        const value = par.cd0 === null ? `n/a: ${par.levels} distinct CL level${par.levels === 1 ? "" : "s"}` : f4(par.cd0);
+        L.push(`| ${wid} deg | ${f3(m)} | ${par.n} | ${value} | ${fs ? f4(fs.cd0) : "no sample"} | n/a | n/a |`);
         continue;
       }
       const d = par.cd0 - fs.cd0;

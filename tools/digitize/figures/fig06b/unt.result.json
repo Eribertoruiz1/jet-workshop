@@ -28,7 +28,7 @@
     "extraction": "tools/digitize/extract_scan.py on the UNT PDF: the page's single embedded 1-bit image, page /Rotate 0"
   },
   "calibration": {
-    "model": "mesh: every grid line traced and fitted with a cubic, linear interpolation inside the grid cell (affine fit over the picked intersections used only to predict line positions)",
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
     "grid": {
       "x_lines": {
         "start": -0.2,
@@ -74,8 +74,8 @@
           -0.46
         ],
         "mesh_residual_data": [
-          0.00013135767897080874,
-          -3.224030388750132e-06
+          0.0004141357425019587,
+          3.0548308926799106e-06
         ]
       },
       {
@@ -98,8 +98,8 @@
           0.1
         ],
         "mesh_residual_data": [
-          -0.00010658328983781384,
-          -2.869348631688584e-05
+          -0.00037333394558700106,
+          -1.2196103517714274e-05
         ]
       },
       {
@@ -122,8 +122,8 @@
           -0.34
         ],
         "mesh_residual_data": [
-          0.00022881991718987083,
-          5.4246981265965166e-05
+          8.221770060272415e-05,
+          5.404341734979723e-05
         ]
       },
       {
@@ -146,8 +146,8 @@
           0.72
         ],
         "mesh_residual_data": [
-          0.00010805051456032333,
-          2.3487958543844112e-05
+          0.0001853252398218569,
+          6.307120037518654e-06
         ]
       },
       {
@@ -170,8 +170,8 @@
           -0.37
         ],
         "mesh_residual_data": [
-          -6.468708554019376e-05,
-          1.7230124888967246e-05
+          -0.000133165647421718,
+          2.935250027882863e-05
         ]
       },
       {
@@ -194,8 +194,8 @@
           1.3
         ],
         "mesh_residual_data": [
-          -0.00029493293043625357,
-          6.206397588695567e-05
+          -1.1763804410813705e-05,
+          7.050803523181437e-05
         ]
       },
       {
@@ -218,8 +218,8 @@
           -0.58
         ],
         "mesh_residual_data": [
-          0.000727769234142972,
-          -6.368249363319922e-05
+          0.00041867966914788113,
+          -5.978031122783056e-05
         ]
       },
       {
@@ -242,8 +242,8 @@
           -0.65
         ],
         "mesh_residual_data": [
-          0.00011226200419622856,
-          3.483256591857442e-05
+          -8.173357741547704e-05,
+          7.07609602437903e-05
         ]
       },
       {
@@ -266,8 +266,8 @@
           0.79
         ],
         "mesh_residual_data": [
-          -0.000430281863887938,
-          0.00010572344021061997
+          -0.00042366010057692804,
+          8.113218927055521e-05
         ]
       },
       {
@@ -290,8 +290,8 @@
           -0.53
         ],
         "mesh_residual_data": [
-          0.00010190999135017975,
-          -3.3670023734722054e-05
+          -1.6797874240470634e-05,
+          -1.2949789733734951e-05
         ]
       }
     ],
@@ -311,400 +311,456 @@
       {
         "line": "horizontal",
         "value": 0.0,
-        "samples": 314,
-        "used": 314,
-        "rms_px": 0.443
+        "samples": 310,
+        "used": 310,
+        "rms_px": 0.481,
+        "max_warp_px": 0.36
       },
       {
         "line": "horizontal",
         "value": 0.01,
-        "samples": 262,
-        "used": 232,
-        "rms_px": 0.563
+        "samples": 244,
+        "used": 240,
+        "rms_px": 0.519,
+        "max_warp_px": 0.54
       },
       {
         "line": "horizontal",
         "value": 0.02,
-        "samples": 278,
-        "used": 242,
-        "rms_px": 0.564
+        "samples": 256,
+        "used": 252,
+        "rms_px": 0.54,
+        "max_warp_px": 0.69
       },
       {
         "line": "horizontal",
         "value": 0.03,
-        "samples": 306,
-        "used": 290,
-        "rms_px": 0.427
+        "samples": 307,
+        "used": 307,
+        "rms_px": 0.429,
+        "max_warp_px": 0.41
       },
       {
         "line": "horizontal",
         "value": 0.04,
-        "samples": 309,
-        "used": 302,
-        "rms_px": 0.457
+        "samples": 311,
+        "used": 311,
+        "rms_px": 0.433,
+        "max_warp_px": 0.32
       },
       {
         "line": "horizontal",
         "value": 0.05,
-        "samples": 305,
-        "used": 295,
-        "rms_px": 0.509
+        "samples": 298,
+        "used": 296,
+        "rms_px": 0.468,
+        "max_warp_px": 0.41
       },
       {
         "line": "horizontal",
         "value": 0.06,
-        "samples": 308,
-        "used": 305,
-        "rms_px": 0.472
+        "samples": 307,
+        "used": 307,
+        "rms_px": 0.461,
+        "max_warp_px": 0.36
       },
       {
         "line": "horizontal",
         "value": 0.07,
-        "samples": 293,
-        "used": 281,
-        "rms_px": 0.491
+        "samples": 288,
+        "used": 288,
+        "rms_px": 0.462,
+        "max_warp_px": 0.35
       },
       {
         "line": "horizontal",
         "value": 0.08,
-        "samples": 308,
-        "used": 298,
-        "rms_px": 0.492
+        "samples": 305,
+        "used": 304,
+        "rms_px": 0.445,
+        "max_warp_px": 0.36
       },
       {
         "line": "horizontal",
         "value": 0.09,
-        "samples": 314,
-        "used": 311,
-        "rms_px": 0.426
+        "samples": 313,
+        "used": 313,
+        "rms_px": 0.415,
+        "max_warp_px": 0.27
       },
       {
         "line": "horizontal",
         "value": 0.1,
-        "samples": 311,
-        "used": 306,
-        "rms_px": 0.423
+        "samples": 305,
+        "used": 305,
+        "rms_px": 0.412,
+        "max_warp_px": 0.36
       },
       {
         "line": "horizontal",
         "value": 0.11,
-        "samples": 316,
-        "used": 316,
-        "rms_px": 0.451
+        "samples": 317,
+        "used": 317,
+        "rms_px": 0.403,
+        "max_warp_px": 0.28
       },
       {
         "line": "horizontal",
         "value": 0.12,
-        "samples": 312,
-        "used": 312,
-        "rms_px": 0.491
+        "samples": 313,
+        "used": 313,
+        "rms_px": 0.454,
+        "max_warp_px": 0.35
       },
       {
         "line": "horizontal",
         "value": 0.13,
-        "samples": 313,
-        "used": 313,
-        "rms_px": 0.515
+        "samples": 312,
+        "used": 312,
+        "rms_px": 0.469,
+        "max_warp_px": 0.46
       },
       {
         "line": "horizontal",
         "value": 0.14,
         "samples": 315,
         "used": 315,
-        "rms_px": 0.464
+        "rms_px": 0.438,
+        "max_warp_px": 0.4
       },
       {
         "line": "horizontal",
         "value": 0.15,
-        "samples": 314,
-        "used": 314,
-        "rms_px": 0.45
+        "samples": 315,
+        "used": 315,
+        "rms_px": 0.435,
+        "max_warp_px": 0.41
       },
       {
         "line": "horizontal",
         "value": 0.16,
         "samples": 312,
-        "used": 309,
-        "rms_px": 0.408
+        "used": 311,
+        "rms_px": 0.424,
+        "max_warp_px": 0.32
       },
       {
         "line": "horizontal",
         "value": 0.17,
         "samples": 314,
-        "used": 312,
-        "rms_px": 0.464
+        "used": 314,
+        "rms_px": 0.443,
+        "max_warp_px": 0.37
       },
       {
         "line": "horizontal",
         "value": 0.18,
-        "samples": 315,
-        "used": 309,
-        "rms_px": 0.4
+        "samples": 311,
+        "used": 310,
+        "rms_px": 0.393,
+        "max_warp_px": 0.3
       },
       {
         "line": "horizontal",
         "value": 0.19,
         "samples": 314,
-        "used": 313,
-        "rms_px": 0.474
+        "used": 314,
+        "rms_px": 0.444,
+        "max_warp_px": 0.34
       },
       {
         "line": "horizontal",
         "value": 0.2,
-        "samples": 315,
-        "used": 315,
-        "rms_px": 0.436
+        "samples": 316,
+        "used": 316,
+        "rms_px": 0.423,
+        "max_warp_px": 0.23
       },
       {
         "line": "horizontal",
         "value": 0.21,
-        "samples": 312,
-        "used": 309,
-        "rms_px": 0.448
+        "samples": 316,
+        "used": 316,
+        "rms_px": 0.434,
+        "max_warp_px": 0.25
       },
       {
         "line": "horizontal",
         "value": 0.22,
-        "samples": 314,
+        "samples": 313,
         "used": 313,
-        "rms_px": 0.401
+        "rms_px": 0.411,
+        "max_warp_px": 0.3
       },
       {
         "line": "vertical",
         "value": -0.2,
-        "samples": 224,
-        "used": 224,
-        "rms_px": 0.431
+        "samples": 232,
+        "used": 232,
+        "rms_px": 0.402,
+        "max_warp_px": 0.39
       },
       {
         "line": "vertical",
         "value": -0.1,
-        "samples": 230,
-        "used": 230,
-        "rms_px": 0.31
+        "samples": 232,
+        "used": 232,
+        "rms_px": 0.302,
+        "max_warp_px": 0.19
       },
       {
         "line": "vertical",
         "value": 0.0,
         "samples": 230,
         "used": 230,
-        "rms_px": 0.374
+        "rms_px": 0.322,
+        "max_warp_px": 0.59
       },
       {
         "line": "vertical",
         "value": 0.1,
         "samples": 229,
-        "used": 226,
-        "rms_px": 0.283
+        "used": 229,
+        "rms_px": 0.271,
+        "max_warp_px": 0.26
       },
       {
         "line": "vertical",
         "value": 0.2,
-        "samples": 230,
-        "used": 228,
-        "rms_px": 0.37
+        "samples": 228,
+        "used": 227,
+        "rms_px": 0.354,
+        "max_warp_px": 0.48
       },
       {
         "line": "vertical",
         "value": 0.3,
-        "samples": 228,
-        "used": 221,
-        "rms_px": 0.368
+        "samples": 227,
+        "used": 227,
+        "rms_px": 0.385,
+        "max_warp_px": 0.23
       },
       {
         "line": "vertical",
         "value": 0.4,
-        "samples": 230,
-        "used": 229,
-        "rms_px": 0.368
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.389,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 0.5,
-        "samples": 224,
-        "used": 216,
-        "rms_px": 0.351
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.334,
+        "max_warp_px": 0.21
       },
       {
         "line": "vertical",
         "value": 0.6,
-        "samples": 230,
-        "used": 222,
-        "rms_px": 0.396
+        "samples": 202,
+        "used": 200,
+        "rms_px": 0.387,
+        "max_warp_px": 0.35
       },
       {
         "line": "vertical",
         "value": 0.7,
-        "samples": 222,
-        "used": 208,
-        "rms_px": 0.395
+        "samples": 219,
+        "used": 217,
+        "rms_px": 0.405,
+        "max_warp_px": 0.31
       },
       {
         "line": "vertical",
         "value": 0.8,
-        "samples": 226,
-        "used": 223,
-        "rms_px": 0.387
+        "samples": 224,
+        "used": 222,
+        "rms_px": 0.397,
+        "max_warp_px": 0.34
       },
       {
         "line": "vertical",
         "value": 0.9,
         "samples": 225,
-        "used": 216,
-        "rms_px": 0.393
+        "used": 224,
+        "rms_px": 0.371,
+        "max_warp_px": 0.21
       },
       {
         "line": "vertical",
         "value": 1.0,
-        "samples": 219,
-        "used": 208,
-        "rms_px": 0.416
+        "samples": 207,
+        "used": 207,
+        "rms_px": 0.42,
+        "max_warp_px": 0.53
       },
       {
         "line": "vertical",
         "value": 1.1,
         "samples": 226,
-        "used": 220,
-        "rms_px": 0.404
+        "used": 226,
+        "rms_px": 0.393,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 1.2,
-        "samples": 227,
-        "used": 219,
-        "rms_px": 0.36
+        "samples": 203,
+        "used": 201,
+        "rms_px": 0.354,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 1.3,
-        "samples": 224,
-        "used": 217,
-        "rms_px": 0.44
+        "samples": 220,
+        "used": 219,
+        "rms_px": 0.417,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 1.4,
-        "samples": 225,
-        "used": 220,
-        "rms_px": 0.437
+        "samples": 216,
+        "used": 216,
+        "rms_px": 0.391,
+        "max_warp_px": 0.46
       },
       {
         "line": "vertical",
         "value": 1.5,
-        "samples": 220,
-        "used": 206,
-        "rms_px": 0.369
+        "samples": 217,
+        "used": 214,
+        "rms_px": 0.343,
+        "max_warp_px": 0.23
       },
       {
         "line": "vertical",
         "value": 1.6,
-        "samples": 222,
-        "used": 218,
-        "rms_px": 0.433
+        "samples": 204,
+        "used": 204,
+        "rms_px": 0.412,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 1.7,
-        "samples": 221,
-        "used": 213,
-        "rms_px": 0.345
+        "samples": 219,
+        "used": 218,
+        "rms_px": 0.342,
+        "max_warp_px": 0.2
       },
       {
         "line": "vertical",
         "value": 1.8,
-        "samples": 229,
-        "used": 225,
-        "rms_px": 0.425
+        "samples": 218,
+        "used": 217,
+        "rms_px": 0.456,
+        "max_warp_px": 0.44
       },
       {
         "line": "vertical",
         "value": 1.9,
-        "samples": 227,
-        "used": 221,
-        "rms_px": 0.343
+        "samples": 225,
+        "used": 225,
+        "rms_px": 0.364,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 2.0,
-        "samples": 226,
-        "used": 221,
-        "rms_px": 0.403
+        "samples": 224,
+        "used": 220,
+        "rms_px": 0.365,
+        "max_warp_px": 0.43
       },
       {
         "line": "vertical",
         "value": 2.1,
-        "samples": 227,
-        "used": 220,
-        "rms_px": 0.427
+        "samples": 222,
+        "used": 219,
+        "rms_px": 0.414,
+        "max_warp_px": 0.27
       },
       {
         "line": "vertical",
         "value": 2.2,
-        "samples": 224,
-        "used": 219,
-        "rms_px": 0.357
+        "samples": 221,
+        "used": 220,
+        "rms_px": 0.345,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 2.3,
-        "samples": 222,
-        "used": 214,
-        "rms_px": 0.418
+        "samples": 225,
+        "used": 224,
+        "rms_px": 0.403,
+        "max_warp_px": 0.45
       },
       {
         "line": "vertical",
         "value": 2.4,
-        "samples": 229,
-        "used": 228,
-        "rms_px": 0.372
+        "samples": 214,
+        "used": 214,
+        "rms_px": 0.38,
+        "max_warp_px": 0.25
       },
       {
         "line": "vertical",
         "value": 2.5,
-        "samples": 229,
-        "used": 222,
-        "rms_px": 0.4
+        "samples": 228,
+        "used": 226,
+        "rms_px": 0.376,
+        "max_warp_px": 0.45
       },
       {
         "line": "vertical",
         "value": 2.6,
-        "samples": 220,
-        "used": 212,
-        "rms_px": 0.384
+        "samples": 214,
+        "used": 214,
+        "rms_px": 0.375,
+        "max_warp_px": 0.3
       },
       {
         "line": "vertical",
         "value": 2.7,
-        "samples": 227,
-        "used": 223,
-        "rms_px": 0.378
+        "samples": 229,
+        "used": 228,
+        "rms_px": 0.378,
+        "max_warp_px": 0.23
       },
       {
         "line": "vertical",
         "value": 2.8,
-        "samples": 220,
-        "used": 218,
-        "rms_px": 0.382
+        "samples": 221,
+        "used": 220,
+        "rms_px": 0.375,
+        "max_warp_px": 0.23
       },
       {
         "line": "vertical",
         "value": 2.9,
-        "samples": 221,
-        "used": 215,
-        "rms_px": 0.416
+        "samples": 222,
+        "used": 221,
+        "rms_px": 0.374,
+        "max_warp_px": 0.4
       },
       {
         "line": "vertical",
         "value": 3.0,
-        "samples": 231,
-        "used": 227,
-        "rms_px": 0.354
+        "samples": 229,
+        "used": 228,
+        "rms_px": 0.342,
+        "max_warp_px": 0.27
       }
     ]
   },
   "series": [
     {
-      "id": "fig06b-35deg-M0.90",
+      "id": "fig06b-35deg-M0.900",
       "wing": "35",
       "mach": 0.9,
       "kind": "symbols",
@@ -728,16 +784,16 @@
             1765.0
           ],
           "data": [
-            0.5035127710839888,
-            0.014620485568444416
+            0.5033719042292821,
+            0.014590339957469476
           ],
           "affine_data": [
             0.5025890014082801,
             0.01472966934427683
           ],
           "value": {
-            "CL": -0.09648722891601114,
-            "CD": 0.014620485568444416
+            "CL": -0.09662809577071785,
+            "CD": 0.014590339957469476
           }
         },
         {
@@ -754,16 +810,16 @@
             1593.0
           ],
           "data": [
-            1.113709737414973,
-            0.04148427262760795
+            1.1138847002019507,
+            0.041461774232076434
           ],
           "affine_data": [
             1.1119931319986351,
             0.041678816962791965
           ],
           "value": {
-            "CL": 0.513709737414973,
-            "CD": 0.04148427262760795
+            "CL": 0.5138847002019508,
+            "CD": 0.041461774232076434
           }
         },
         {
@@ -780,16 +836,16 @@
             1364.0
           ],
           "data": [
-            1.2452817180967024,
-            0.0774542966701736
+            1.245180448640872,
+            0.0774477255641557
           ],
           "affine_data": [
             1.2429998772442534,
             0.07754963193105935
           ],
           "value": {
-            "CL": 0.6452817180967024,
-            "CD": 0.0774542966701736
+            "CL": 0.645180448640872,
+            "CD": 0.0774477255641557
           }
         },
         {
@@ -806,16 +862,16 @@
             1063.5
           ],
           "data": [
-            1.3623239357952428,
-            0.1246011114702562
+            1.3624951891374224,
+            0.12459228640484715
           ],
           "affine_data": [
             1.358866216984929,
             0.12461953237396947
           ],
           "value": {
-            "CL": 0.7623239357952428,
-            "CD": 0.1246011114702562
+            "CL": 0.7624951891374224,
+            "CD": 0.12459228640484715
           }
         }
       ]

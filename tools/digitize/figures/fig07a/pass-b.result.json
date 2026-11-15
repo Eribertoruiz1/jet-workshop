@@ -1,0 +1,1677 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig07a",
+    "number": "7(a)",
+    "title": "Figure 7. Variation with lift coefficient of the aerodynamic characteristics for the 47 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 27,
+    "printed_page": 25,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 2.8 (31 vertical lines). Label row: -.2 at the left frame, one '0' per Mach number every 0.2 (M = 0.50, .696, .843, .892, .916, .941, .965, .990, 1.010, 1.024, 1.088, 1.112, 12 zeros), then .2, .4, .6 on the M = 1.112 scale (.6 at the right frame). The '0' labels sit within about 3 px of grid lines 0.0 to 2.2 (532.8 to 2253 px on row 1300). CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.843), 1.0 (0.941), 1.4 (0.990), 2.2 (1.112).",
+    "y_axis": "Angle of attack, alpha, deg (grid -3 to 14 by 1; frame lines at -3 and 14). Between alpha = -2 and the bottom frame the Mach-number box is drawn over erased vertical grid lines.",
+    "content_note": "One hollow symbol shape with a centre dot per Mach number, on one faired line per Mach number. Same test points as figure 7(b)."
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "scan": {
+    "pdf_page": 27,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 27 .cache/scans/p27.png"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": -3.0,
+        "step": 1.0,
+        "count": 18
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0012764448807636361,
+        -4.329104242832647e-06,
+        -0.6733451479155859
+      ],
+      [
+        2.9770383569535012e-05,
+        -0.01267281809549044,
+        18.33224146907129
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          448,
+          423
+        ],
+        "px": [
+          448.5,
+          422.99
+        ],
+        "x": -0.1,
+        "y": 13.0,
+        "residual_data": [
+          -0.002685781588666697,
+          -0.01489904579478818
+        ],
+        "residual_px": [
+          -2.1,
+          1.17
+        ],
+        "mesh_residual_data": [
+          -1.8117413585747033e-05,
+          0.0008603351934350911
+        ]
+      },
+      {
+        "picked_px": [
+          686,
+          660
+        ],
+        "px": [
+          685.47,
+          658.17
+        ],
+        "x": 0.2,
+        "y": 10.0,
+        "residual_data": [
+          -0.0012338622762380624,
+          0.011725853024650235
+        ],
+        "residual_px": [
+          -0.97,
+          -0.93
+        ],
+        "mesh_residual_data": [
+          3.1964097161440996e-05,
+          0.00475656426607074
+        ]
+      },
+      {
+        "picked_px": [
+          611,
+          974
+        ],
+        "px": [
+          610.99,
+          973.98
+        ],
+        "x": 0.1,
+        "y": 6.0,
+        "residual_data": [
+          0.002338323749446175,
+          0.007308302875831174
+        ],
+        "residual_px": [
+          1.83,
+          -0.57
+        ],
+        "mesh_residual_data": [
+          4.637135857415986e-05,
+          -0.0016059059405479914
+        ]
+      },
+      {
+        "picked_px": [
+          453,
+          1132
+        ],
+        "px": [
+          453.5,
+          1132.12
+        ],
+        "x": -0.1,
+        "y": 4.0,
+        "residual_data": [
+          0.0006263758553280152,
+          -0.0014554042254015798
+        ],
+        "residual_px": [
+          0.49,
+          0.12
+        ],
+        "mesh_residual_data": [
+          -4.774017376972528e-05,
+          0.00021801891807982088
+        ]
+      },
+      {
+        "picked_px": [
+          1005,
+          1608
+        ],
+        "px": [
+          1003.63,
+          1607.5
+        ],
+        "x": 0.6,
+        "y": -2.0,
+        "residual_data": [
+          0.0007771556265677715,
+          -0.009462386018153524
+        ],
+        "residual_px": [
+          0.61,
+          0.75
+        ],
+        "mesh_residual_data": [
+          -4.318161704974788e-05,
+          0.00044562206434628493
+        ]
+      },
+      {
+        "picked_px": [
+          1548,
+          426
+        ],
+        "px": [
+          1548.15,
+          423.5
+        ],
+        "x": 1.3,
+        "y": 13.0,
+        "residual_data": [
+          0.000945030490662635,
+          0.0113856381064803
+        ],
+        "residual_px": [
+          0.74,
+          -0.9
+        ],
+        "mesh_residual_data": [
+          -0.00020222043531537004,
+          -0.00015201350020888071
+        ]
+      },
+      {
+        "picked_px": [
+          2409,
+          505
+        ],
+        "px": [
+          2408.95,
+          504.0
+        ],
+        "x": 2.4,
+        "y": 12.0,
+        "residual_data": [
+          -0.0006313602628744697,
+          0.016847079165122736
+        ],
+        "residual_px": [
+          -0.5,
+          -1.33
+        ],
+        "mesh_residual_data": [
+          3.5269142583782553e-05,
+          -8.207134523630089e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2566,
+          663
+        ],
+        "px": [
+          2565.99,
+          662.84
+        ],
+        "x": 2.6,
+        "y": 10.0,
+        "residual_data": [
+          -0.0008658727171115821,
+          0.008540330620839143
+        ],
+        "residual_px": [
+          -0.68,
+          -0.68
+        ],
+        "mesh_residual_data": [
+          -1.3943216496503652e-05,
+          -0.0035128962472761316
+        ]
+      },
+      {
+        "picked_px": [
+          2645,
+          429
+        ],
+        "px": [
+          2645.92,
+          428.51
+        ],
+        "x": 2.7,
+        "y": 13.0,
+        "residual_data": [
+          0.002169921817555487,
+          -0.019399473822932833
+        ],
+        "residual_px": [
+          1.71,
+          1.53
+        ],
+        "mesh_residual_data": [
+          4.567484383510845e-05,
+          0.001420589020643348
+        ]
+      },
+      {
+        "picked_px": [
+          2490,
+          902
+        ],
+        "px": [
+          2490.6,
+          902.02
+        ],
+        "x": 2.5,
+        "y": 7.0,
+        "residual_data": [
+          0.0018670499040780442,
+          -0.024805186568515936
+        ],
+        "residual_px": [
+          1.47,
+          1.96
+        ],
+        "mesh_residual_data": [
+          7.052909360005799e-05,
+          -0.0009988554838553654
+        ]
+      },
+      {
+        "picked_px": [
+          2567,
+          1295
+        ],
+        "px": [
+          2566.86,
+          1294.49
+        ],
+        "x": 2.6,
+        "y": 2.0,
+        "residual_data": [
+          -0.002488362685913792,
+          0.0038093290915170996
+        ],
+        "residual_px": [
+          -1.95,
+          -0.31
+        ],
+        "mesh_residual_data": [
+          2.559902395793401e-05,
+          -0.0004946185924625812
+        ]
+      },
+      {
+        "picked_px": [
+          2647,
+          1452
+        ],
+        "px": [
+          2647.05,
+          1451.98
+        ],
+        "x": 2.7,
+        "y": 0.0,
+        "residual_data": [
+          -0.0008186179127256388,
+          0.010404963542814727
+        ],
+        "residual_px": [
+          -0.64,
+          -0.82
+        ],
+        "mesh_residual_data": [
+          -3.053318105816771e-05,
+          1.7937218944830136e-05
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.0016405758275265716,
+      0.013245592457659433
+    ],
+    "affine_max_abs_residual_data": [
+      0.002685781588666697,
+      0.024805186568515936
+    ],
+    "data_per_px": [
+      0.0012764448807636164,
+      -0.012672818095490257
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": -3.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.199,
+        "max_warp_px": 0.51
+      },
+      {
+        "line": "horizontal",
+        "value": -2.0,
+        "samples": 322,
+        "used": 315,
+        "rms_px": 0.337,
+        "max_warp_px": 0.45
+      },
+      {
+        "line": "horizontal",
+        "value": -1.0,
+        "samples": 384,
+        "used": 384,
+        "rms_px": 0.248,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 364,
+        "used": 363,
+        "rms_px": 0.205,
+        "max_warp_px": 0.51
+      },
+      {
+        "line": "horizontal",
+        "value": 1.0,
+        "samples": 383,
+        "used": 383,
+        "rms_px": 0.208,
+        "max_warp_px": 0.53
+      },
+      {
+        "line": "horizontal",
+        "value": 2.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.17,
+        "max_warp_px": 0.4
+      },
+      {
+        "line": "horizontal",
+        "value": 3.0,
+        "samples": 385,
+        "used": 385,
+        "rms_px": 0.179,
+        "max_warp_px": 0.46
+      },
+      {
+        "line": "horizontal",
+        "value": 4.0,
+        "samples": 384,
+        "used": 384,
+        "rms_px": 0.181,
+        "max_warp_px": 0.44
+      },
+      {
+        "line": "horizontal",
+        "value": 5.0,
+        "samples": 387,
+        "used": 387,
+        "rms_px": 0.19,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "horizontal",
+        "value": 6.0,
+        "samples": 386,
+        "used": 386,
+        "rms_px": 0.18,
+        "max_warp_px": 0.41
+      },
+      {
+        "line": "horizontal",
+        "value": 7.0,
+        "samples": 375,
+        "used": 374,
+        "rms_px": 0.25,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "horizontal",
+        "value": 8.0,
+        "samples": 387,
+        "used": 387,
+        "rms_px": 0.172,
+        "max_warp_px": 0.44
+      },
+      {
+        "line": "horizontal",
+        "value": 9.0,
+        "samples": 383,
+        "used": 383,
+        "rms_px": 0.22,
+        "max_warp_px": 0.4
+      },
+      {
+        "line": "horizontal",
+        "value": 10.0,
+        "samples": 388,
+        "used": 388,
+        "rms_px": 0.17,
+        "max_warp_px": 0.35
+      },
+      {
+        "line": "horizontal",
+        "value": 11.0,
+        "samples": 378,
+        "used": 378,
+        "rms_px": 0.187,
+        "max_warp_px": 0.49
+      },
+      {
+        "line": "horizontal",
+        "value": 12.0,
+        "samples": 379,
+        "used": 379,
+        "rms_px": 0.166,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "horizontal",
+        "value": 13.0,
+        "samples": 382,
+        "used": 382,
+        "rms_px": 0.198,
+        "max_warp_px": 0.48
+      },
+      {
+        "line": "horizontal",
+        "value": 14.0,
+        "samples": 355,
+        "used": 355,
+        "rms_px": 0.216,
+        "max_warp_px": 0.35
+      },
+      {
+        "line": "vertical",
+        "value": -0.2,
+        "samples": 220,
+        "used": 220,
+        "rms_px": 0.256,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": -0.1,
+        "samples": 209,
+        "used": 209,
+        "rms_px": 0.202,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 0.0,
+        "samples": 208,
+        "used": 208,
+        "rms_px": 0.181,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 0.1,
+        "samples": 220,
+        "used": 220,
+        "rms_px": 0.204,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 0.2,
+        "samples": 208,
+        "used": 208,
+        "rms_px": 0.196,
+        "max_warp_px": 0.42
+      },
+      {
+        "line": "vertical",
+        "value": 0.3,
+        "samples": 219,
+        "used": 219,
+        "rms_px": 0.242,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 210,
+        "used": 208,
+        "rms_px": 0.183,
+        "max_warp_px": 0.42
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 220,
+        "used": 220,
+        "rms_px": 0.239,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 202,
+        "used": 202,
+        "rms_px": 0.17,
+        "max_warp_px": 0.36
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 213,
+        "used": 213,
+        "rms_px": 0.299,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 192,
+        "used": 190,
+        "rms_px": 0.217,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 0.9,
+        "samples": 212,
+        "used": 212,
+        "rms_px": 0.235,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 1.0,
+        "samples": 202,
+        "used": 199,
+        "rms_px": 0.216,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 1.1,
+        "samples": 216,
+        "used": 216,
+        "rms_px": 0.25,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "vertical",
+        "value": 1.2,
+        "samples": 196,
+        "used": 196,
+        "rms_px": 0.196,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 1.3,
+        "samples": 212,
+        "used": 211,
+        "rms_px": 0.288,
+        "max_warp_px": 0.46
+      },
+      {
+        "line": "vertical",
+        "value": 1.4,
+        "samples": 204,
+        "used": 203,
+        "rms_px": 0.208,
+        "max_warp_px": 0.27
+      },
+      {
+        "line": "vertical",
+        "value": 1.5,
+        "samples": 216,
+        "used": 211,
+        "rms_px": 0.282,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 1.6,
+        "samples": 203,
+        "used": 201,
+        "rms_px": 0.222,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "vertical",
+        "value": 1.7,
+        "samples": 216,
+        "used": 216,
+        "rms_px": 0.372,
+        "max_warp_px": 0.39
+      },
+      {
+        "line": "vertical",
+        "value": 1.8,
+        "samples": 206,
+        "used": 206,
+        "rms_px": 0.234,
+        "max_warp_px": 0.43
+      },
+      {
+        "line": "vertical",
+        "value": 1.9,
+        "samples": 215,
+        "used": 213,
+        "rms_px": 0.308,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 2.0,
+        "samples": 209,
+        "used": 208,
+        "rms_px": 0.164,
+        "max_warp_px": 0.39
+      },
+      {
+        "line": "vertical",
+        "value": 2.1,
+        "samples": 213,
+        "used": 213,
+        "rms_px": 0.248,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "vertical",
+        "value": 2.2,
+        "samples": 203,
+        "used": 203,
+        "rms_px": 0.185,
+        "max_warp_px": 0.46
+      },
+      {
+        "line": "vertical",
+        "value": 2.3,
+        "samples": 215,
+        "used": 215,
+        "rms_px": 0.253,
+        "max_warp_px": 0.38
+      },
+      {
+        "line": "vertical",
+        "value": 2.4,
+        "samples": 213,
+        "used": 211,
+        "rms_px": 0.194,
+        "max_warp_px": 0.48
+      },
+      {
+        "line": "vertical",
+        "value": 2.5,
+        "samples": 206,
+        "used": 206,
+        "rms_px": 0.177,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 2.6,
+        "samples": 205,
+        "used": 205,
+        "rms_px": 0.415,
+        "max_warp_px": 0.44
+      },
+      {
+        "line": "vertical",
+        "value": 2.7,
+        "samples": 208,
+        "used": 208,
+        "rms_px": 0.194,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "vertical",
+        "value": 2.8,
+        "samples": 220,
+        "used": 220,
+        "rms_px": 0.271,
+        "max_warp_px": 0.42
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07a-47deg-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            473.91,
+            1604.39
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 1,
+          "dot_pixels": 19,
+          "px": [
+            473.76,
+            1604.53
+          ],
+          "data": [
+            -0.0763806093502931,
+            -1.9699280010596008
+          ],
+          "affine_data": [
+            -0.0755627988357579,
+            -1.9875713327660876
+          ],
+          "value": {
+            "CL": -0.0763806093502931,
+            "alpha": -1.9699280010596008
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            577.37,
+            1441.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 2,
+          "dot_pixels": 14,
+          "px": [
+            577.46,
+            1441.33
+          ],
+          "data": [
+            0.0552626332514959,
+            0.08743656873107142
+          ],
+          "affine_data": [
+            0.05751104511186156,
+            0.0837197691941185
+          ],
+          "value": {
+            "CL": 0.0552626332514959,
+            "alpha": 0.08743656873107142
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            670.77,
+            1272.89
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 4,
+          "dot_pixels": 16,
+          "px": [
+            670.57,
+            1272.96
+          ],
+          "data": [
+            0.17584647817945964,
+            2.229672110235869
+          ],
+          "affine_data": [
+            0.17708971924112948,
+            2.2202140723459998
+          ],
+          "value": {
+            "CL": 0.17584647817945964,
+            "alpha": 2.229672110235869
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            750.16,
+            1111.34
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 6,
+          "dot_pixels": 13,
+          "px": [
+            750.32,
+            1111.39
+          ],
+          "data": [
+            0.2770530795372798,
+            4.26692360027505
+          ],
+          "affine_data": [
+            0.27958565185454387,
+            4.270135480124059
+          ],
+          "value": {
+            "CL": 0.2770530795372798,
+            "alpha": 4.26692360027505
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            871.5,
+            948.05
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 9,
+          "dot_pixels": 12,
+          "px": [
+            871.51,
+            948.39
+          ],
+          "data": [
+            0.4322660722014275,
+            6.332476903979021
+          ],
+          "affine_data": [
+            0.43498365094587066,
+            6.339412702473794
+          ],
+          "value": {
+            "CL": 0.4322660722014275,
+            "alpha": 6.332476903979021
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            973.8,
+            775.53
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 14,
+          "dot_pixels": 14,
+          "px": [
+            973.89,
+            775.75
+          ],
+          "data": [
+            0.566055896214144,
+            8.523030524152366
+          ],
+          "affine_data": [
+            0.5664134543949342,
+            8.530295910349114
+          ],
+          "value": {
+            "CL": 0.566055896214144,
+            "alpha": 8.523030524152366
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1049.28,
+            609.6
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 16,
+          "dot_pixels": 15,
+          "px": [
+            1049.42,
+            609.66
+          ],
+          "data": [
+            0.6626597972608668,
+            10.633054292920706
+          ],
+          "affine_data": [
+            0.6635423571627039,
+            10.637372824900128
+          ],
+          "value": {
+            "CL": 0.6626597972608668,
+            "alpha": 10.633054292920706
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1128.1,
+            443.69
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 20,
+          "dot_pixels": 16,
+          "px": [
+            1128.0,
+            443.83
+          ],
+          "data": [
+            0.7640595859651997,
+            12.733120592082876
+          ],
+          "affine_data": [
+            0.7645632912496994,
+            12.741245606416202
+          ],
+          "value": {
+            "CL": 0.7640595859651997,
+            "alpha": 12.733120592082876
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            782.85,
+            1617.3
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 7,
+          "dot_pixels": 13,
+          "px": [
+            782.69,
+            1617.34
+          ],
+          "data": [
+            0.3155588908170461,
+            -2.132530710702986
+          ],
+          "affine_data": [
+            0.31871386235320165,
+            -2.1407131679731783
+          ],
+          "value": {
+            "CL": -0.08444110918295394,
+            "alpha": -2.132530710702986
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            906.53,
+            1439.08
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 10,
+          "dot_pixels": 10,
+          "px": [
+            906.32,
+            1439.43
+          ],
+          "data": [
+            0.47474742350816124,
+            0.11872064644511438
+          ],
+          "affine_data": [
+            0.4772909338978524,
+            0.11758841191622338
+          ],
+          "value": {
+            "CL": 0.07474742350816121,
+            "alpha": 0.11872064644511438
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1042.73,
+            1257.16
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 15,
+          "dot_pixels": 19,
+          "px": [
+            1042.61,
+            1257.11
+          ],
+          "data": [
+            0.6502041591791679,
+            2.445653336020218
+          ],
+          "affine_data": [
+            0.6520468889826814,
+            2.4321540126627355
+          ],
+          "value": {
+            "CL": 0.25020415917916783,
+            "alpha": 2.445653336020218
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1163.13,
+            1082.9
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 22,
+          "dot_pixels": 15,
+          "px": [
+            1163.29,
+            1083.02
+          ],
+          "data": [
+            0.8050086531410253,
+            4.645604240352593
+          ],
+          "affine_data": [
+            0.8068419109508718,
+            4.641957604795836
+          ],
+          "value": {
+            "CL": 0.4050086531410253,
+            "alpha": 4.645604240352593
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1265.47,
+            904.1
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 27,
+          "dot_pixels": 14,
+          "px": [
+            1265.35,
+            904.26
+          ],
+          "data": [
+            0.9356612932328532,
+            6.91725238704071
+          ],
+          "affine_data": [
+            0.9378897461560571,
+            6.910388932892813
+          ],
+          "value": {
+            "CL": 0.5356612932328532,
+            "alpha": 6.91725238704071
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1371.77,
+            723.9
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 30,
+          "dot_pixels": 16,
+          "px": [
+            1371.58,
+            723.97
+          ],
+          "data": [
+            1.074077653115777,
+            9.191946952892533
+          ],
+          "affine_data": [
+            1.0742669800435185,
+            9.198333815175376
+          ],
+          "value": {
+            "CL": 0.6740776531157769,
+            "alpha": 9.191946952892533
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1433.67,
+            547.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 34,
+          "dot_pixels": 13,
+          "px": [
+            1433.6,
+            547.36
+          ],
+          "data": [
+            1.1535724480001568,
+            11.421112787468765
+          ],
+          "affine_data": [
+            1.1541966546488058,
+            11.438326578208926
+          ],
+          "value": {
+            "CL": 0.7535724480001568,
+            "alpha": 11.421112787468765
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1489.9,
+            379.42
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 36,
+          "dot_pixels": 20,
+          "px": [
+            1489.88,
+            379.64
+          ],
+          "data": [
+            1.2258631906248196,
+            13.547431396221386
+          ],
+          "affine_data": [
+            1.2267610499017916,
+            13.565487106371876
+          ],
+          "value": {
+            "CL": 0.8258631906248196,
+            "alpha": 13.547431396221386
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1244.64,
+            1619.95
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 25,
+          "dot_pixels": 13,
+          "px": [
+            1244.62,
+            1619.71
+          ],
+          "data": [
+            0.905924659860287,
+            -2.147713660658983
+          ],
+          "affine_data": [
+            0.9083317861472924,
+            -2.1569959135772194
+          ],
+          "value": {
+            "CL": -0.09407534013971297,
+            "alpha": -2.147713660658983
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1422.71,
+            1435.36
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 33,
+          "dot_pixels": 16,
+          "px": [
+            1422.68,
+            1435.16
+          ],
+          "data": [
+            1.1357360945601358,
+            0.18715049143041385
+          ],
+          "affine_data": [
+            1.1364144978040804,
+            0.18707358044393274
+          ],
+          "value": {
+            "CL": 0.1357360945601358,
+            "alpha": 0.18715049143041385
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1561.12,
+            1255.37
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 40,
+          "dot_pixels": 15,
+          "px": [
+            1561.22,
+            1255.36
+          ],
+          "data": [
+            1.3131362022950814,
+            2.4714212560043225
+          ],
+          "affine_data": [
+            1.3140315445279358,
+            2.469770662952838
+          ],
+          "value": {
+            "CL": 0.31313620229508143,
+            "alpha": 2.4714212560043225
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1686.09,
+            1087.32
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 45,
+          "dot_pixels": 14,
+          "px": [
+            1686.06,
+            1087.2
+          ],
+          "data": [
+            1.4727999011689579,
+            4.6042626391585495
+          ],
+          "affine_data": [
+            1.4741109056119428,
+            4.604548288575332
+          ],
+          "value": {
+            "CL": 0.47279990116895787,
+            "alpha": 4.6042626391585495
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1786.61,
+            900.3
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 52,
+          "dot_pixels": 18,
+          "px": [
+            1786.66,
+            900.31
+          ],
+          "data": [
+            1.602865803717772,
+            6.977398737801276
+          ],
+          "affine_data": [
+            1.6033303269087078,
+            6.975966163028636
+          ],
+          "value": {
+            "CL": 0.6028658037177721,
+            "alpha": 6.977398737801276
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1873.84,
+            720.85
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 56,
+          "dot_pixels": 13,
+          "px": [
+            1873.95,
+            720.75
+          ],
+          "data": [
+            1.7143585747860164,
+            9.248703167613215
+          ],
+          "affine_data": [
+            1.7155285345084086,
+            9.254096037036684
+          ],
+          "value": {
+            "CL": 0.7143585747860164,
+            "alpha": 9.248703167613215
+          }
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1939.3,
+            544.6
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1939.3,
+            544.6
+          ],
+          "data": [
+            1.797569078748055,
+            11.48101846417487
+          ],
+          "affine_data": [
+            1.799706779178687,
+            11.488358439123592
+          ],
+          "value": {
+            "CL": 0.7975690787480549,
+            "alpha": 11.48101846417487
+          },
+          "note": "Not found by candidates.py. Outline: vertical edge x = 1927 (rows 530 to 557.5), apex (1951, 543.5). The only dark mark inside is a small blob at (1939.3, 544.6) (rows 543 to 546), joined to the lower edge, so the snap cannot isolate it; taken as the dot. It is 12 px right of the vertical edge, against 7 to 10 px on clean symbols of this polar, and 2 px left of the hidden C_L grid line; if it were a grid-line remnant the outline centre would be about (1935.5, 543.7). Uncertainty about 2 px in x."
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            2006.34,
+            369.99
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 62,
+          "dot_pixels": 18,
+          "px": [
+            2006.48,
+            370.17
+          ],
+          "data": [
+            1.882300937251892,
+            13.689802729259462
+          ],
+          "affine_data": [
+            1.8862134719214656,
+            13.700878073888191
+          ],
+          "value": {
+            "CL": 0.882300937251892,
+            "alpha": 13.689802729259462
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1555.51,
+            1621.94
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 39,
+          "dot_pixels": 13,
+          "px": [
+            1555.48,
+            1621.7
+          ],
+          "data": [
+            1.3055226880105921,
+            -2.1746601332709425
+          ],
+          "affine_data": [
+            1.3051188268640332,
+            -2.1729604001508207
+          ],
+          "value": {
+            "CL": -0.09447731198940779,
+            "alpha": -2.1746601332709425
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1735.37,
+            1439.12
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 49,
+          "dot_pixels": 14,
+          "px": [
+            1735.47,
+            1439.27
+          ],
+          "data": [
+            1.53539663099303,
+            0.1425052908556258
+          ],
+          "affine_data": [
+            1.5356558994396998,
+            0.14430017634818526
+          ],
+          "value": {
+            "CL": 0.13539663099303012,
+            "alpha": 0.1425052908556258
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1860.81,
+            1264.9
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 55,
+          "dot_pixels": 14,
+          "px": [
+            1860.87,
+            1264.86
+          ],
+          "data": [
+            1.6952474998038012,
+            2.360781122203235
+          ],
+          "affine_data": [
+            1.6964771265584524,
+            2.3582995864822927
+          ],
+          "value": {
+            "CL": 0.29524749980380127,
+            "alpha": 2.360781122203235
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1981.96,
+            1085.18
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 61,
+          "dot_pixels": 23,
+          "px": [
+            1981.98,
+            1085.09
+          ],
+          "data": [
+            1.8491060109302186,
+            4.645896042292911
+          ],
+          "affine_data": [
+            1.8518456091374702,
+            4.640097586662714
+          ],
+          "value": {
+            "CL": 0.44910601093021874,
+            "alpha": 4.645896042292911
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig07a-47deg-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter disc with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            2198.27,
+            1623.01
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 70,
+          "dot_pixels": 15,
+          "px": [
+            2198.03,
+            1622.99
+          ],
+          "data": [
+            2.1253432627557123,
+            -2.1647000185275647
+          ],
+          "affine_data": [
+            2.1252929004542347,
+            -2.170179375531397
+          ],
+          "value": {
+            "CL": -0.0746567372442879,
+            "alpha": -2.1647000185275647
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            2359.49,
+            1400.98
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 76,
+          "dot_pixels": 10,
+          "px": [
+            2359.33,
+            1400.78
+          ],
+          "data": [
+            2.334106519996377,
+            0.6552083701801603
+          ],
+          "affine_data": [
+            2.3321454299752085,
+            0.650649496337298
+          ],
+          "value": {
+            "CL": 0.13410651999637668,
+            "alpha": 0.6552083701801603
+          }
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            2443.69,
+            1271.17
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 78,
+          "dot_pixels": 16,
+          "px": [
+            2443.53,
+            1271.02
+          ],
+          "data": [
+            2.442284860789505,
+            2.2977918681833835
+          ],
+          "affine_data": [
+            2.440183833502057,
+            2.2975810387046955
+          ],
+          "value": {
+            "CL": 0.24228486078950473,
+            "alpha": 2.2977918681833835
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            2565.91,
+            1094.88
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 82,
+          "dot_pixels": 13,
+          "px": [
+            2565.9,
+            1094.98
+          ],
+          "data": [
+            2.5987428127362837,
+            4.533615217809616
+          ],
+          "affine_data": [
+            2.5971444890720115,
+            4.532146938072236
+          ],
+          "value": {
+            "CL": 0.39874281273628354,
+            "alpha": 4.533615217809616
+          }
+        }
+      ]
+    }
+  ]
+}

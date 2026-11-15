@@ -2,7 +2,7 @@
 
 Reproducible, auditable digitization of the scanned figures of R. P. Bielat, NACA RM L52B08 (1952). Python is allowed only in this folder.
 
-Every figure is digitized twice, by two independent readers (pass A and pass B). The difference between passes, point by point, is the digitization uncertainty of that point.
+Every figure is digitized twice, by two independent readers (pass A and pass B). The digitization uncertainty of each point is the larger of the pass difference and one scan pixel (see Uncertainty below).
 
 ## Setup
 

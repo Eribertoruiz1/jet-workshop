@@ -1,0 +1,455 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig06a",
+    "number": "6(a)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 35 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 24,
+    "printed_page": 22,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label and a heavier vertical line)",
+    "y_axis": "Angle of attack, alpha, deg (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot on one faired line per Mach number. Same test points as figure 6(b)."
+  },
+  "scan": {
+    "pdf_page": 24,
+    "size_px": [
+      3058,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 33
+      },
+      "y_lines": {
+        "start": -3.0,
+        "step": 1.0,
+        "count": 18
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.2, grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.4 (M 1.13); then .2 .4 .6 of M 1.13 at 2.6 to 3.0 (right frame).",
+    "points": [
+      {
+        "px": [
+          424,
+          499
+        ],
+        "x": -0.1,
+        "y": 12.0
+      },
+      {
+        "px": [
+          424,
+          799
+        ],
+        "x": -0.1,
+        "y": 8.0
+      },
+      {
+        "px": [
+          424,
+          1099
+        ],
+        "x": -0.1,
+        "y": 4.0
+      },
+      {
+        "px": [
+          424,
+          1474
+        ],
+        "x": -0.1,
+        "y": -1.0
+      },
+      {
+        "px": [
+          724,
+          422
+        ],
+        "x": 0.3,
+        "y": 13.0
+      },
+      {
+        "px": [
+          1997,
+          415
+        ],
+        "x": 2.0,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2596,
+          412
+        ],
+        "x": 2.8,
+        "y": 13.0
+      },
+      {
+        "px": [
+          2596,
+          712
+        ],
+        "x": 2.8,
+        "y": 9.0
+      },
+      {
+        "px": [
+          2596,
+          1237
+        ],
+        "x": 2.8,
+        "y": 2.0
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06a-35deg-M0.500",
+      "wing": "35",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            448,
+            1544
+          ],
+          "snap": "dot",
+          "note": "Sits on the alpha = -2 deg line (top border of the label box); not found by candidates.py.",
+          "dot_radius": 4,
+          "dot_level": 210
+        },
+        {
+          "id": "p2",
+          "candidate": 2,
+          "note": "p2 and p3: two circles on top of each other (repeated point), two dots.",
+          "snap": "candidate"
+        },
+        {
+          "id": "p3",
+          "candidate": 1,
+          "snap": "candidate"
+        },
+        {
+          "id": "p4",
+          "candidate": 4
+        },
+        {
+          "id": "p5",
+          "candidate": 7
+        },
+        {
+          "id": "p6",
+          "candidate": 9,
+          "note": "p6 and p7: double circle (repeated point), two dots."
+        },
+        {
+          "id": "p7",
+          "candidate": 10
+        },
+        {
+          "id": "p8",
+          "candidate": 14
+        },
+        {
+          "id": "p9",
+          "candidate": 16
+        },
+        {
+          "id": "p10",
+          "candidate": 19
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M0.850",
+      "wing": "35",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 6
+        },
+        {
+          "id": "p2",
+          "candidate": 11
+        },
+        {
+          "id": "p3",
+          "candidate": 15
+        },
+        {
+          "id": "p4",
+          "candidate": 22
+        },
+        {
+          "id": "p5",
+          "px": [
+            1254.5,
+            853.5
+          ],
+          "snap": "none",
+          "note": "Three overlapping diamonds near alpha 7.3 (p5, p6, p11); no centre dots visible; outline centre of the lower-left one. First pass A read two diamonds here; corrected after pass B's report."
+        },
+        {
+          "id": "p6",
+          "px": [
+            1269.0,
+            852.0
+          ],
+          "snap": "none",
+          "note": "Lower-right diamond of the three; outline centre."
+        },
+        {
+          "id": "p7",
+          "candidate": 31
+        },
+        {
+          "id": "p8",
+          "candidate": 32
+        },
+        {
+          "id": "p9",
+          "candidate": 36
+        },
+        {
+          "id": "p10",
+          "px": [
+            873.5,
+            1367.5
+          ],
+          "snap": "none",
+          "note": "Upper diamond of two overlapping diamonds at alpha 0.3 (with p2); centre from the outline. Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        },
+        {
+          "id": "p11",
+          "px": [
+            1268.5,
+            841.0
+          ],
+          "snap": "none",
+          "note": "Upper diamond of the three (top vertex 1268,823; right vertex 1286,841); outline centre. Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M0.900",
+      "wing": "35",
+      "mach": 0.9,
+      "kind": "symbols",
+      "symbol": "triangle, apex up",
+      "x_offset": 0.6,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 12
+        },
+        {
+          "id": "p2",
+          "candidate": 18
+        },
+        {
+          "id": "p3",
+          "candidate": 23
+        },
+        {
+          "id": "p4",
+          "candidate": 29
+        },
+        {
+          "id": "p5",
+          "px": [
+            1428.7,
+            850.0
+          ],
+          "snap": "none",
+          "note": "Three overlapping triangles near alpha 7.3 (p5, p6, p11), dots hidden; outline centroid of the left one (apex 1428,836; base y 857)."
+        },
+        {
+          "id": "p6",
+          "px": [
+            1443.3,
+            838.7
+          ],
+          "snap": "none",
+          "note": "Upper-right triangle of the three (apex 1443,824; base y 846, x 1430-1457); outline centroid."
+        },
+        {
+          "id": "p7",
+          "candidate": 40
+        },
+        {
+          "id": "p8",
+          "candidate": 41
+        },
+        {
+          "id": "p9",
+          "candidate": 44
+        },
+        {
+          "id": "p10",
+          "px": [
+            1025.0,
+            1374.5
+          ],
+          "snap": "none",
+          "note": "Lower dot of two triangles drawn on top of each other at alpha 0.3 (with p2); faint and touching the base line, placed by eye. Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        },
+        {
+          "id": "p11",
+          "px": [
+            1444.5,
+            846.0
+          ],
+          "snap": "none",
+          "note": "Lower-right triangle of the three (base y 853.5, x 1432-1457; apex hidden); outline centroid. Matches the three symbols of figure 6(b). Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M0.950",
+      "wing": "35",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 24
+        },
+        {
+          "id": "p2",
+          "px": [
+            1341.0,
+            1385.0
+          ],
+          "snap": "none",
+          "note": "Crossed by the alpha = 0 line and probably doubled; no clear dot. Outline centroid (left side x 1332, y 1372-1398, apex 1360,1385); uncertainty about 2 px."
+        },
+        {
+          "id": "p3",
+          "candidate": 39
+        },
+        {
+          "id": "p4",
+          "candidate": 47
+        },
+        {
+          "id": "p5",
+          "candidate": 56
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M1.000",
+      "wing": "35",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 37,
+          "note": "Candidates 33, 34 and 35 next to it are on the symbol's outline or the label below, not dots."
+        },
+        {
+          "id": "p2",
+          "candidate": 46
+        },
+        {
+          "id": "p3",
+          "candidate": 54
+        },
+        {
+          "id": "p4",
+          "candidate": 60
+        },
+        {
+          "id": "p5",
+          "candidate": 62
+        }
+      ]
+    },
+    {
+      "id": "fig06a-35deg-M1.100",
+      "wing": "35",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter circle, straight sides top and left",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 64
+        },
+        {
+          "id": "p2",
+          "px": [
+            2212.0,
+            1373.0
+          ],
+          "snap": "none",
+          "note": "Lower of two quarter discs drawn one over the other at alpha about 0.2 (top edges at rows 1351 and 1361.5). Its dot touches the faired line; placed by eye."
+        },
+        {
+          "id": "p3",
+          "candidate": 77
+        },
+        {
+          "id": "p4",
+          "candidate": 81
+        },
+        {
+          "id": "p5",
+          "candidate": 83
+        },
+        {
+          "id": "p6",
+          "px": [
+            2212.0,
+            1364.5
+          ],
+          "snap": "none",
+          "note": "Upper of the two quarter discs: the mark first taken for a tick on the lower disc's top edge is this disc's dot. Missed in the first pass A reading; added after pass B reported it and confirmed on the scan; this pick is not independent of pass B."
+        }
+      ]
+    }
+  ],
+  "assignment_method": "Candidates grouped in alpha bands and ordered by common-axis CL: within each band the Mach numbers appear left to right in test order. Shapes checked against the symbol next to each Mach label."
+}

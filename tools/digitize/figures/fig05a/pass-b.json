@@ -1,0 +1,391 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig05a",
+    "number": "5(a)",
+    "title": "Figure 5. Variation with lift coefficient of the aerodynamic characteristics for the 10.8 deg sweptback wing. (a) Angle of attack.",
+    "pdf_page": 21,
+    "printed_page": 19,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 3.2 (35 vertical lines). The label row under the plot reads -.2 at the left frame, then one '0' per Mach number every 0.2 (M = 0.50, .70, .85, .90, .925, .95, .975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.114), then .2, .4, .6, .8 (M = 1.114 scale, .8 at the right frame). Each '0' sits under a short tick at the bottom of its cell of the Mach-number box, and each tick continues a vertical grid line (checked against the traced lines: ticks at x = 500, 640, 779, 918, 1057, 1197, 1335, 1473, 1612, 1753, 1891, 2031, 2172 px, grid lines 0.0 to 2.4 at 502.6 to 2174.5 px on row 1160, the 2 to 3 px difference being the page skew). So CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.85), 1.0 (0.95), 1.4 (1.00), 2.2 (1.10).",
+    "y_axis": "Angle of attack, alpha, deg (grid -4 to 14 by 1; frame lines at -4 and 14). The alpha = -3 line is not printed: the strip between alpha = -3.2 and -4 holds the Mach-number box, drawn over erased grid, so that line is skipped and the bottom cell is interpolated between the -2 and -4 lines.",
+    "content_note": "One hollow symbol shape with a centre dot per Mach number, on one faired line per Mach number. Same test points as figure 5(b)."
+  },
+  "scan": {
+    "pdf_page": 21,
+    "size_px": [
+      3060,
+      2342
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 21 .cache/scans/p21.png"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 35
+      },
+      "y_lines": {
+        "start": -4.0,
+        "step": 1.0,
+        "count": 19,
+        "skip": [
+          -3.0
+        ]
+      }
+    },
+    "points": [
+      {
+        "px": [
+          436,
+          428
+        ],
+        "x": -0.1,
+        "y": 13.0
+      },
+      {
+        "px": [
+          644,
+          640
+        ],
+        "x": 0.2,
+        "y": 10.0
+      },
+      {
+        "px": [
+          574,
+          922
+        ],
+        "x": 0.1,
+        "y": 6.0
+      },
+      {
+        "px": [
+          435,
+          1061
+        ],
+        "x": -0.1,
+        "y": 4.0
+      },
+      {
+        "px": [
+          918,
+          1490
+        ],
+        "x": 0.6,
+        "y": -2.0
+      },
+      {
+        "px": [
+          1551,
+          509
+        ],
+        "x": 1.5,
+        "y": 12.0
+      },
+      {
+        "px": [
+          1897,
+          583
+        ],
+        "x": 2.0,
+        "y": 11.0
+      },
+      {
+        "px": [
+          1895,
+          865
+        ],
+        "x": 2.0,
+        "y": 7.0
+      },
+      {
+        "px": [
+          2173,
+          1504
+        ],
+        "x": 2.4,
+        "y": -2.0
+      },
+      {
+        "px": [
+          2455,
+          518
+        ],
+        "x": 2.8,
+        "y": 12.0
+      },
+      {
+        "px": [
+          2594,
+          730
+        ],
+        "x": 3.0,
+        "y": 9.0
+      },
+      {
+        "px": [
+          2521,
+          1297
+        ],
+        "x": 2.9,
+        "y": 1.0
+      },
+      {
+        "px": [
+          2656,
+          1439
+        ],
+        "x": 3.1,
+        "y": -1.0
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig05a-10.8deg-M0.500",
+      "wing": "10.8",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1
+        },
+        {
+          "id": "p2",
+          "candidate": 3,
+          "note": "Outline slightly thickened at the top and dot slightly elongated vertically: possibly two circles drawn almost exactly on top of each other (figure 5(b) shows two dots 3.6 px apart at this lift coefficient). Only one dot can be seen, so one point is recorded."
+        },
+        {
+          "id": "p3",
+          "candidate": 5
+        },
+        {
+          "id": "p4",
+          "candidate": 9
+        },
+        {
+          "id": "p5",
+          "candidate": 12,
+          "note": "Two circles overlap at alpha about 6.5 deg (this one and the next point); both dots visible and isolated."
+        },
+        {
+          "id": "p6",
+          "candidate": 15,
+          "note": "Second of the two overlapping circles."
+        },
+        {
+          "id": "p7",
+          "candidate": 19
+        },
+        {
+          "id": "p8",
+          "candidate": 24
+        },
+        {
+          "id": "p9",
+          "candidate": 28
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M0.850",
+      "wing": "10.8",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 7
+        },
+        {
+          "id": "p2",
+          "candidate": 14
+        },
+        {
+          "id": "p3",
+          "candidate": 16
+        },
+        {
+          "id": "p4",
+          "candidate": 21
+        },
+        {
+          "id": "p5",
+          "candidate": 31
+        },
+        {
+          "id": "p6",
+          "px": [
+            1275,
+            819.5
+          ],
+          "snap": "dot",
+          "dot_radius": 3,
+          "dot_level": 110,
+          "note": "Cluster of three overlapping diamonds at alpha about 7.5 deg (this point and the next two; figure 5(b) also shows three diamonds at the same lift coefficients). Lower-left diamond of the three: outline vertices left (1258, 820), bottom (1273, 835), upper-left and upper-right edges give centre (1274.5, 819.5). Its dot merges with the lower-left edge of the middle diamond; isolated at dot_level 110."
+        },
+        {
+          "id": "p7",
+          "px": [
+            1284.0,
+            811.0
+          ],
+          "snap": "none",
+          "note": "Middle diamond of the three-diamond cluster: top vertex (1284, 795), edges x+y = 2079 and x-y = 489 give centre (1284.0, 811.0). Its dot lies on the upper-left edge of the right-hand diamond (merged dark blob centred at (1283.7, 812.2)), so the centre is taken from the outline. Uncertainty about 1 px."
+        },
+        {
+          "id": "p8",
+          "px": [
+            1297.0,
+            816.5
+          ],
+          "snap": "none",
+          "note": "Right-hand diamond of the three-diamond cluster: top vertex (1297, 801) where the faired line meets it, right vertex (1312, 817), bottom vertex (1297, 832); centre (1297.0, 816.5) from the outline. Its dot is hidden in the lower-right edge of the middle diamond. Uncertainty about 1 px."
+        },
+        {
+          "id": "p9",
+          "candidate": 43
+        },
+        {
+          "id": "p10",
+          "candidate": 44
+        },
+        {
+          "id": "p11",
+          "candidate": 45
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M0.950",
+      "wing": "10.8",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 29
+        },
+        {
+          "id": "p2",
+          "candidate": 39,
+          "note": "Two right-pointing triangles drawn almost on top of each other at alpha about 0.5 deg (doubled outline, offset about 4 px vertically); two dots at the same column, 4.5 px apart. This is the upper dot."
+        },
+        {
+          "id": "p3",
+          "px": [
+            1301,
+            1322.5
+          ],
+          "snap": "dot",
+          "dot_radius": 3,
+          "dot_level": 140,
+          "note": "Lower dot of the doubled right-pointing triangle; it touches the merged lower edges, isolated at dot_level 140."
+        },
+        {
+          "id": "p4",
+          "candidate": 49
+        },
+        {
+          "id": "p5",
+          "candidate": 57
+        },
+        {
+          "id": "p6",
+          "candidate": 64
+        },
+        {
+          "id": "p7",
+          "candidate": 66
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M1.000",
+      "wing": "10.8",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 42
+        },
+        {
+          "id": "p2",
+          "candidate": 53
+        },
+        {
+          "id": "p3",
+          "candidate": 60
+        },
+        {
+          "id": "p4",
+          "candidate": 70
+        },
+        {
+          "id": "p5",
+          "candidate": 76
+        }
+      ]
+    },
+    {
+      "id": "fig05a-10.8deg-M1.100",
+      "wing": "10.8",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter disc, square corner at top left, with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 72
+        },
+        {
+          "id": "p2",
+          "candidate": 81
+        },
+        {
+          "id": "p3",
+          "candidate": 87
+        },
+        {
+          "id": "p4",
+          "candidate": 91
+        },
+        {
+          "id": "p5",
+          "candidate": 94
+        }
+      ]
+    }
+  ]
+}

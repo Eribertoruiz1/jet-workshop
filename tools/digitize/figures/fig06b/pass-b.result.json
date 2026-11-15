@@ -12,9 +12,9 @@
     "title": "Figure 6 (continued). (b) Drag coefficient. Aerodynamic characteristics of the 35 deg sweptback wing-body configuration: drag coefficient against lift coefficient, one polar per Mach number.",
     "pdf_page": 25,
     "printed_page": 23,
-    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 3.0 (33 vertical lines). The label row under the plot reads -.2 at the left frame, then one '0' per Mach number every 0.2 (M = 0.50, .70, .85, .90, .925, .95, .975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.13, each centred under its cell of the Mach-number box), then .2, .4, .6 at the right (M = 1.13 scale, .6 at the right frame). So CL = 0 of the M = 0.90 polar is the 4th '0', the common-axis line 0.6 (the line that ends at the top of the box under the '.90' cell).",
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis used here = the M = 0.50 scale: left frame line = -0.2, grid every 0.1, right frame line = 3.0 (33 vertical lines). The label row under the plot reads -.2 at the left frame, then one '0' per Mach number every 0.2 (M = 0.50, .70, .85, .90, .925, .95, .975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.13, each centred under its cell of the Mach-number box), then .2, .4, .6 at the right (M = 1.13 scale, .6 at the right frame). So CL = 0 is at common-axis 0.0 (M 0.50), 0.4 (0.85), 0.6 (0.90: the 4th '0', the line that ends at the top of the box under the '.90' cell), 1.0 (0.95), 1.4 (1.00), 2.2 (1.10); the same layout as figure 6(a).",
     "y_axis": "Drag coefficient, C_D (grid 0 to 0.22 by 0.01; frame lines at 0 and 0.22)",
-    "content_note": "M = 0.90 polar: upright-triangle symbols (apex up), 10 symbols, faired curve through them. Most symbols hide the grid lines inside them (white-filled). Two places need judgement: at CL about 0.28 a right-pointing triangle of the M = 0.95 polar overlaps the M = 0.90 triangle and hides its centre dot (p3); at CL about 0.66 two M = 0.90 triangles overlap, offset 9 px vertically, both outlines and both dots visible but merged with each other's lines (p6, p7)."
+    "content_note": "One hollow symbol shape with a centre dot per Mach number (same shapes as figure 6(a)), on one faired polar per Mach number. Same test points as figure 6(a): crowded low-drag symbols were matched to figure 6(a) by lift coefficient. M = 0.90 polar (from the first round): upright triangles, 10 symbols; at CL about 0.28 a right-pointing triangle of the M = 0.95 polar overlaps the M = 0.90 triangle and hides both centre dots (M = 0.90 p3, M = 0.95 p1); at CL about 0.66 two M = 0.90 triangles overlap, offset 9 px vertically (p6, p7)."
   },
   "pass": "B",
   "digitizer": "pass B, fresh-context subagent",
@@ -27,7 +27,7 @@
     "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 25 .cache/scans/p25.png"
   },
   "calibration": {
-    "model": "mesh: every grid line traced and fitted with a cubic, linear interpolation inside the grid cell (affine fit over the picked intersections used only to predict line positions)",
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
     "grid": {
       "x_lines": {
         "start": -0.2,
@@ -73,8 +73,8 @@
           -0.65
         ],
         "mesh_residual_data": [
-          -0.00023063624840910513,
-          -1.1692681591901621e-05
+          -0.00026467334879209936,
+          -5.785293011928427e-06
         ]
       },
       {
@@ -97,8 +97,8 @@
           -0.23
         ],
         "mesh_residual_data": [
-          -0.0006115617472957358,
-          -3.360199086631377e-05
+          -5.243100503758702e-05,
+          -5.659122986557963e-05
         ]
       },
       {
@@ -121,8 +121,8 @@
           -0.82
         ],
         "mesh_residual_data": [
-          0.0003768880172468611,
-          -1.7517658796931818e-05
+          8.899247179959065e-05,
+          -1.036566549592055e-05
         ]
       },
       {
@@ -145,8 +145,8 @@
           1.29
         ],
         "mesh_residual_data": [
-          2.0353982574272678e-05,
-          -7.187558666937877e-05
+          -1.2284072755941455e-05,
+          -7.867341040163067e-07
         ]
       },
       {
@@ -169,8 +169,8 @@
           1.37
         ],
         "mesh_residual_data": [
-          -0.00019481993087699934,
-          -1.0229802468092464e-05
+          -0.00010366068366540748,
+          -5.579696367524756e-06
         ]
       },
       {
@@ -193,8 +193,8 @@
           -0.05
         ],
         "mesh_residual_data": [
-          0.00020328811693537396,
-          4.804680181027393e-05
+          -9.245396203361178e-05,
+          6.894411827553654e-05
         ]
       },
       {
@@ -217,8 +217,8 @@
           0.8
         ],
         "mesh_residual_data": [
-          -0.00032461393764515734,
-          8.80441260350806e-06
+          0.0002218340920137063,
+          -3.6084574421141324e-06
         ]
       },
       {
@@ -241,8 +241,8 @@
           -1.3
         ],
         "mesh_residual_data": [
-          -0.00018262465767238112,
-          5.371817359678399e-05
+          -0.00023612052163235475,
+          3.6015727464810965e-06
         ]
       },
       {
@@ -265,8 +265,8 @@
           -0.33
         ],
         "mesh_residual_data": [
-          7.32567842689491e-05,
-          7.72715249601659e-05
+          3.3729972854779078e-06,
+          7.69730897632638e-06
         ]
       },
       {
@@ -289,8 +289,8 @@
           -0.22
         ],
         "mesh_residual_data": [
-          0.0005528053419889822,
-          -6.179711654441533e-05
+          0.0001885040031384122,
+          -7.87294324722243e-06
         ]
       },
       {
@@ -313,8 +313,8 @@
           0.13
         ],
         "mesh_residual_data": [
-          -9.534116038878437e-06,
-          -3.2370026647937644e-05
+          7.317970971820742e-05,
+          3.338486048387601e-06
         ]
       },
       {
@@ -337,8 +337,8 @@
           0.32
         ],
         "mesh_residual_data": [
-          -0.00019303950742388665,
-          -2.6644017571464396e-05
+          -6.248538340614118e-05,
+          2.494033267713691e-06
         ]
       },
       {
@@ -361,8 +361,8 @@
           -0.31
         ],
         "mesh_residual_data": [
-          0.00011714564598008792,
-          -2.095636505936374e-05
+          0.0001624735384777587,
+          -3.604805583606874e-05
         ]
       }
     ],
@@ -382,400 +382,456 @@
       {
         "line": "horizontal",
         "value": 0.0,
-        "samples": 331,
-        "used": 331,
-        "rms_px": 0.351
+        "samples": 328,
+        "used": 328,
+        "rms_px": 0.167,
+        "max_warp_px": 0.54
       },
       {
         "line": "horizontal",
         "value": 0.01,
-        "samples": 294,
-        "used": 265,
-        "rms_px": 0.43
+        "samples": 280,
+        "used": 277,
+        "rms_px": 0.371,
+        "max_warp_px": 0.56
       },
       {
         "line": "horizontal",
         "value": 0.02,
-        "samples": 319,
-        "used": 302,
-        "rms_px": 0.467
+        "samples": 314,
+        "used": 313,
+        "rms_px": 0.458,
+        "max_warp_px": 0.53
       },
       {
         "line": "horizontal",
         "value": 0.03,
-        "samples": 327,
-        "used": 321,
-        "rms_px": 0.358
+        "samples": 325,
+        "used": 324,
+        "rms_px": 0.199,
+        "max_warp_px": 0.51
       },
       {
         "line": "horizontal",
         "value": 0.04,
         "samples": 324,
         "used": 324,
-        "rms_px": 0.358
+        "rms_px": 0.207,
+        "max_warp_px": 0.45
       },
       {
         "line": "horizontal",
         "value": 0.05,
-        "samples": 325,
-        "used": 308,
-        "rms_px": 0.356
+        "samples": 312,
+        "used": 312,
+        "rms_px": 0.336,
+        "max_warp_px": 0.37
       },
       {
         "line": "horizontal",
         "value": 0.06,
-        "samples": 330,
-        "used": 327,
-        "rms_px": 0.31
+        "samples": 328,
+        "used": 328,
+        "rms_px": 0.194,
+        "max_warp_px": 0.4
       },
       {
         "line": "horizontal",
         "value": 0.07,
-        "samples": 310,
-        "used": 305,
-        "rms_px": 0.419
+        "samples": 307,
+        "used": 306,
+        "rms_px": 0.174,
+        "max_warp_px": 0.66
       },
       {
         "line": "horizontal",
         "value": 0.08,
-        "samples": 323,
-        "used": 314,
-        "rms_px": 0.269
+        "samples": 321,
+        "used": 319,
+        "rms_px": 0.157,
+        "max_warp_px": 0.4
       },
       {
         "line": "horizontal",
         "value": 0.09,
-        "samples": 332,
-        "used": 332,
-        "rms_px": 0.308
+        "samples": 333,
+        "used": 333,
+        "rms_px": 0.106,
+        "max_warp_px": 0.5
       },
       {
         "line": "horizontal",
         "value": 0.1,
-        "samples": 327,
-        "used": 323,
-        "rms_px": 0.257
+        "samples": 324,
+        "used": 322,
+        "rms_px": 0.156,
+        "max_warp_px": 0.32
       },
       {
         "line": "horizontal",
         "value": 0.11,
         "samples": 332,
         "used": 332,
-        "rms_px": 0.291
+        "rms_px": 0.137,
+        "max_warp_px": 0.51
       },
       {
         "line": "horizontal",
         "value": 0.12,
         "samples": 333,
         "used": 333,
-        "rms_px": 0.325
+        "rms_px": 0.148,
+        "max_warp_px": 0.42
       },
       {
         "line": "horizontal",
         "value": 0.13,
-        "samples": 330,
-        "used": 330,
-        "rms_px": 0.339
+        "samples": 331,
+        "used": 331,
+        "rms_px": 0.13,
+        "max_warp_px": 0.61
       },
       {
         "line": "horizontal",
         "value": 0.14,
         "samples": 333,
         "used": 333,
-        "rms_px": 0.27
+        "rms_px": 0.188,
+        "max_warp_px": 0.32
       },
       {
         "line": "horizontal",
         "value": 0.15,
-        "samples": 333,
-        "used": 333,
-        "rms_px": 0.375
+        "samples": 332,
+        "used": 332,
+        "rms_px": 0.137,
+        "max_warp_px": 0.57
       },
       {
         "line": "horizontal",
         "value": 0.16,
-        "samples": 329,
-        "used": 327,
-        "rms_px": 0.379
+        "samples": 328,
+        "used": 326,
+        "rms_px": 0.175,
+        "max_warp_px": 0.6
       },
       {
         "line": "horizontal",
         "value": 0.17,
-        "samples": 330,
-        "used": 330,
-        "rms_px": 0.279
+        "samples": 326,
+        "used": 326,
+        "rms_px": 0.147,
+        "max_warp_px": 0.35
       },
       {
         "line": "horizontal",
         "value": 0.18,
-        "samples": 329,
-        "used": 324,
-        "rms_px": 0.328
+        "samples": 327,
+        "used": 322,
+        "rms_px": 0.163,
+        "max_warp_px": 0.39
       },
       {
         "line": "horizontal",
         "value": 0.19,
-        "samples": 325,
-        "used": 325,
-        "rms_px": 0.322
+        "samples": 328,
+        "used": 328,
+        "rms_px": 0.157,
+        "max_warp_px": 0.39
       },
       {
         "line": "horizontal",
         "value": 0.2,
-        "samples": 332,
-        "used": 332,
-        "rms_px": 0.332
+        "samples": 330,
+        "used": 330,
+        "rms_px": 0.103,
+        "max_warp_px": 0.56
       },
       {
         "line": "horizontal",
         "value": 0.21,
-        "samples": 323,
-        "used": 322,
-        "rms_px": 0.308
+        "samples": 326,
+        "used": 326,
+        "rms_px": 0.174,
+        "max_warp_px": 0.37
       },
       {
         "line": "horizontal",
         "value": 0.22,
-        "samples": 326,
-        "used": 326,
-        "rms_px": 0.297
+        "samples": 324,
+        "used": 324,
+        "rms_px": 0.198,
+        "max_warp_px": 0.39
       },
       {
         "line": "vertical",
         "value": -0.2,
-        "samples": 227,
-        "used": 227,
-        "rms_px": 0.288
+        "samples": 230,
+        "used": 230,
+        "rms_px": 0.232,
+        "max_warp_px": 0.35
       },
       {
         "line": "vertical",
         "value": -0.1,
         "samples": 230,
         "used": 230,
-        "rms_px": 0.234
+        "rms_px": 0.176,
+        "max_warp_px": 0.26
       },
       {
         "line": "vertical",
         "value": 0.0,
         "samples": 230,
         "used": 230,
-        "rms_px": 0.279
+        "rms_px": 0.188,
+        "max_warp_px": 0.38
       },
       {
         "line": "vertical",
         "value": 0.1,
-        "samples": 230,
-        "used": 227,
-        "rms_px": 0.336
+        "samples": 229,
+        "used": 226,
+        "rms_px": 0.195,
+        "max_warp_px": 0.54
       },
       {
         "line": "vertical",
         "value": 0.2,
-        "samples": 230,
+        "samples": 228,
         "used": 227,
-        "rms_px": 0.304
+        "rms_px": 0.167,
+        "max_warp_px": 0.41
       },
       {
         "line": "vertical",
         "value": 0.3,
-        "samples": 228,
-        "used": 226,
-        "rms_px": 0.338
+        "samples": 229,
+        "used": 228,
+        "rms_px": 0.285,
+        "max_warp_px": 0.37
       },
       {
         "line": "vertical",
         "value": 0.4,
         "samples": 229,
         "used": 229,
-        "rms_px": 0.263
+        "rms_px": 0.209,
+        "max_warp_px": 0.35
       },
       {
         "line": "vertical",
         "value": 0.5,
-        "samples": 226,
+        "samples": 222,
         "used": 222,
-        "rms_px": 0.284
+        "rms_px": 0.244,
+        "max_warp_px": 0.29
       },
       {
         "line": "vertical",
         "value": 0.6,
-        "samples": 227,
-        "used": 226,
-        "rms_px": 0.272
+        "samples": 225,
+        "used": 225,
+        "rms_px": 0.228,
+        "max_warp_px": 0.33
       },
       {
         "line": "vertical",
         "value": 0.7,
-        "samples": 225,
-        "used": 216,
-        "rms_px": 0.338
+        "samples": 224,
+        "used": 222,
+        "rms_px": 0.34,
+        "max_warp_px": 0.42
       },
       {
         "line": "vertical",
         "value": 0.8,
-        "samples": 228,
+        "samples": 227,
         "used": 225,
-        "rms_px": 0.277
+        "rms_px": 0.166,
+        "max_warp_px": 0.39
       },
       {
         "line": "vertical",
         "value": 0.9,
-        "samples": 229,
-        "used": 226,
-        "rms_px": 0.278
+        "samples": 227,
+        "used": 227,
+        "rms_px": 0.232,
+        "max_warp_px": 0.32
       },
       {
         "line": "vertical",
         "value": 1.0,
-        "samples": 224,
-        "used": 220,
-        "rms_px": 0.304
+        "samples": 223,
+        "used": 223,
+        "rms_px": 0.313,
+        "max_warp_px": 0.36
       },
       {
         "line": "vertical",
         "value": 1.1,
-        "samples": 228,
-        "used": 225,
-        "rms_px": 0.268
+        "samples": 230,
+        "used": 230,
+        "rms_px": 0.251,
+        "max_warp_px": 0.23
       },
       {
         "line": "vertical",
         "value": 1.2,
-        "samples": 228,
+        "samples": 227,
         "used": 227,
-        "rms_px": 0.296
+        "rms_px": 0.226,
+        "max_warp_px": 0.42
       },
       {
         "line": "vertical",
         "value": 1.3,
-        "samples": 224,
-        "used": 224,
-        "rms_px": 0.297
+        "samples": 225,
+        "used": 225,
+        "rms_px": 0.237,
+        "max_warp_px": 0.27
       },
       {
         "line": "vertical",
         "value": 1.4,
-        "samples": 230,
-        "used": 230,
-        "rms_px": 0.326
+        "samples": 228,
+        "used": 228,
+        "rms_px": 0.242,
+        "max_warp_px": 0.35
       },
       {
         "line": "vertical",
         "value": 1.5,
-        "samples": 224,
-        "used": 216,
-        "rms_px": 0.303
+        "samples": 218,
+        "used": 215,
+        "rms_px": 0.221,
+        "max_warp_px": 0.38
       },
       {
         "line": "vertical",
         "value": 1.6,
-        "samples": 224,
-        "used": 223,
-        "rms_px": 0.275
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.277,
+        "max_warp_px": 0.27
       },
       {
         "line": "vertical",
         "value": 1.7,
-        "samples": 219,
-        "used": 211,
-        "rms_px": 0.279
+        "samples": 217,
+        "used": 214,
+        "rms_px": 0.265,
+        "max_warp_px": 0.29
       },
       {
         "line": "vertical",
         "value": 1.8,
         "samples": 228,
         "used": 226,
-        "rms_px": 0.306
+        "rms_px": 0.199,
+        "max_warp_px": 0.42
       },
       {
         "line": "vertical",
         "value": 1.9,
-        "samples": 230,
+        "samples": 226,
         "used": 225,
-        "rms_px": 0.255
+        "rms_px": 0.165,
+        "max_warp_px": 0.36
       },
       {
         "line": "vertical",
         "value": 2.0,
         "samples": 225,
         "used": 222,
-        "rms_px": 0.257
+        "rms_px": 0.221,
+        "max_warp_px": 0.27
       },
       {
         "line": "vertical",
         "value": 2.1,
         "samples": 229,
-        "used": 224,
-        "rms_px": 0.271
+        "used": 227,
+        "rms_px": 0.236,
+        "max_warp_px": 0.31
       },
       {
         "line": "vertical",
         "value": 2.2,
-        "samples": 225,
-        "used": 222,
-        "rms_px": 0.275
+        "samples": 221,
+        "used": 220,
+        "rms_px": 0.195,
+        "max_warp_px": 0.29
       },
       {
         "line": "vertical",
         "value": 2.3,
-        "samples": 227,
+        "samples": 225,
         "used": 224,
-        "rms_px": 0.247
+        "rms_px": 0.184,
+        "max_warp_px": 0.26
       },
       {
         "line": "vertical",
         "value": 2.4,
         "samples": 228,
-        "used": 226,
-        "rms_px": 0.282
+        "used": 228,
+        "rms_px": 0.278,
+        "max_warp_px": 0.29
       },
       {
         "line": "vertical",
         "value": 2.5,
-        "samples": 230,
+        "samples": 227,
         "used": 227,
-        "rms_px": 0.297
+        "rms_px": 0.23,
+        "max_warp_px": 0.35
       },
       {
         "line": "vertical",
         "value": 2.6,
         "samples": 213,
         "used": 212,
-        "rms_px": 0.253
+        "rms_px": 0.206,
+        "max_warp_px": 0.29
       },
       {
         "line": "vertical",
         "value": 2.7,
-        "samples": 223,
-        "used": 222,
-        "rms_px": 0.293
+        "samples": 222,
+        "used": 221,
+        "rms_px": 0.24,
+        "max_warp_px": 0.29
       },
       {
         "line": "vertical",
         "value": 2.8,
-        "samples": 220,
+        "samples": 218,
         "used": 218,
-        "rms_px": 0.314
+        "rms_px": 0.255,
+        "max_warp_px": 0.42
       },
       {
         "line": "vertical",
         "value": 2.9,
         "samples": 219,
-        "used": 213,
-        "rms_px": 0.335
+        "used": 219,
+        "rms_px": 0.221,
+        "max_warp_px": 0.49
       },
       {
         "line": "vertical",
         "value": 3.0,
-        "samples": 225,
-        "used": 224,
-        "rms_px": 0.255
+        "samples": 227,
+        "used": 225,
+        "rms_px": 0.176,
+        "max_warp_px": 0.37
       }
     ]
   },
   "series": [
     {
-      "id": "fig06b-35deg-M0.90",
+      "id": "fig06b-35deg-M0.900",
       "wing": "35",
       "mach": 0.9,
       "kind": "symbols",
@@ -798,16 +854,16 @@
             1627.87
           ],
           "data": [
-            0.5043416038212373,
-            0.01445541157839306
+            0.5043977539326797,
+            0.014494077033874805
           ],
           "affine_data": [
             0.5069544822225751,
             0.014550272898532446
           ],
           "value": {
-            "CL": -0.0956583961787627,
-            "CD": 0.01445541157839306
+            "CL": -0.09560224606732026,
+            "CD": 0.014494077033874805
           },
           "note": "Lowest CL point; apex touched by the M = 0.70 polar line, dot clear."
         },
@@ -825,18 +881,18 @@
             1659.32
           ],
           "data": [
-            0.7047791366266174,
-            0.009565287164363194
+            0.7047616388410065,
+            0.009602264017219255
           ],
           "affine_data": [
             0.707496108108336,
             0.009564332935923736
           ],
           "value": {
-            "CL": 0.10477913662661742,
-            "CD": 0.009565287164363194
+            "CL": 0.10476163884100653,
+            "CD": 0.009602264017219255
           },
-          "note": "Minimum-drag point."
+          "note": "Minimum-drag point. Single triangle and dot here; figure 6(a) shows two triangles drawn one over the other at this lift coefficient (two dots)."
         },
         {
           "id": "p3",
@@ -851,16 +907,16 @@
             1620.8
           ],
           "data": [
-            0.8841668163821198,
-            0.015546401132188057
+            0.8841376517314256,
+            0.015566807816314828
           ],
           "affine_data": [
             0.8870118274377337,
             0.015632722009900735
           ],
           "value": {
-            "CL": 0.2841668163821198,
-            "CD": 0.015546401132188057
+            "CL": 0.2841376517314256,
+            "CD": 0.015566807816314828
           },
           "note": "Overlapped by a right-pointing triangle (M = 0.95 polar) whose vertical left side runs down the triangle's axis and whose body hides the centre dot (it also hides the CL grid line inside it). Centre placed from the outline: axis x = 1286.7 (mid-point of left and right sides on rows 1616, 1620, 1623) plus the +0.5 px mean dot offset seen on the clean triangles; y = apex 1610.0 + 0.6 x height 18.2 (base 1628.2), i.e. 7.4 px above the base, as on the clean triangles. Estimated pick uncertainty about 1 px each way (0.0016 CL, 0.00016 CD)."
         },
@@ -878,16 +934,16 @@
             1456.04
           ],
           "data": [
-            1.1143081418571932,
-            0.04154458196056685
+            1.1141560982804,
+            0.04156697002832731
           ],
           "affine_data": [
             1.1152579513561558,
             0.041637524239149265
           ],
           "value": {
-            "CL": 0.5143081418571932,
-            "CD": 0.04154458196056685
+            "CL": 0.5141560982804,
+            "CD": 0.04156697002832731
           }
         },
         {
@@ -904,16 +960,16 @@
             1229.31
           ],
           "data": [
-            1.2451122626729816,
-            0.07747174157842075
+            1.2454144987805214,
+            0.07746174004608558
           ],
           "affine_data": [
             1.2459680069884729,
             0.07743988909159272
           ],
           "value": {
-            "CL": 0.6451122626729816,
-            "CD": 0.07747174157842075
+            "CL": 0.6454144987805214,
+            "CD": 0.07746174004608558
           },
           "note": "Lowest of a cluster of three upright triangles at CL 0.64 to 0.67 (p5, p6, p7); clean outline and dot."
         },
@@ -930,16 +986,16 @@
             1205.2
           ],
           "data": [
-            1.2635154002490983,
-            0.08127479418837895
+            1.2638179779639152,
+            0.08126065265242663
           ],
           "affine_data": [
             1.265078248727594,
             0.0812465680230322
           ],
           "value": {
-            "CL": 0.6635154002490983,
-            "CD": 0.08127479418837895
+            "CL": 0.6638179779639152,
+            "CD": 0.08126065265242663
           },
           "note": "Second of two overlapping upright triangles (p6, p7) offset about 9 px vertically: p6 has apex at (1523, 1194) and base at about row 1212.5, merged with the CD = 0.08 grid line; its sides are visible inside p7 and below p7's base. Its centre dot lies on p7's base line and shows only as a dark bump below it at (1523, 1205), so the snap cannot isolate it. Pick = that bump; outline-based estimate (base - 7.45 px, axis + 0.45 px, the means over the clean triangles) is (1523.3, 1205.1). Uncertainty about 0.5 px each way."
         },
@@ -957,16 +1013,16 @@
             1195.49
           ],
           "data": [
-            1.263811197347467,
-            0.08282873572265627
+            1.2641142403472334,
+            0.08281431791104507
           ],
           "affine_data": [
             1.2654268644244588,
             0.08278032381886341
           ],
           "value": {
-            "CL": 0.6638111973474671,
-            "CD": 0.08282873572265627
+            "CL": 0.6641142403472334,
+            "CD": 0.08281431791104507
           },
           "note": "Upper of the two overlapping triangles (apex 1185.5, base 1203.5). Its centre dot coincides with the apex of p6, so the dot blob is darker and larger than usual and joins p6's sides; isolated at dot_level 110. The apex of p6 may pull the centroid up-left by up to about 1 px (outline-based estimate (1524.4, 1196.1))."
         },
@@ -984,16 +1040,16 @@
             931.05
           ],
           "data": [
-            1.3622891649618984,
-            0.12461416558071978
+            1.3619541650344102,
+            0.12458159239846524
           ],
           "affine_data": [
             1.3636545002317981,
             0.12454227715367497
           ],
           "value": {
-            "CL": 0.7622891649618985,
-            "CD": 0.12461416558071978
+            "CL": 0.7619541650344103,
+            "CD": 0.12458159239846524
           }
         },
         {
@@ -1010,16 +1066,16 @@
             648.82
           ],
           "data": [
-            1.4358465825210684,
-            0.16925964737004792
+            1.4359869956205138,
+            0.1692614968760286
           ],
           "affine_data": [
             1.4367322043321868,
             0.16911660239609788
           ],
           "value": {
-            "CL": 0.8358465825210685,
-            "CD": 0.16925964737004792
+            "CL": 0.8359869956205138,
+            "CD": 0.1692614968760286
           }
         },
         {
@@ -1036,18 +1092,1054 @@
             341.76
           ],
           "data": [
-            1.498080226182056,
-            0.2174416059154254
+            1.4979967771508458,
+            0.2174224995858189
           ],
           "affine_data": [
             1.4990707619721535,
             0.21761403330230245
           ],
           "value": {
-            "CL": 0.8980802261820561,
-            "CD": 0.2174416059154254
+            "CL": 0.8979967771508458,
+            "CD": 0.2174224995858189
           },
           "note": "Highest point, just under the top frame line (apex touches it)."
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M0.500",
+      "wing": "35",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            684.32,
+            1647.31
+          ],
+          "snap": "candidate-centroid",
+          "found": true,
+          "candidate": 1,
+          "px": [
+            684.32,
+            1647.31
+          ],
+          "data": [
+            -0.06717011078978119,
+            0.01140250829117735
+          ],
+          "affine_data": [
+            -0.06833672655850243,
+            0.01153149666888359
+          ],
+          "value": {
+            "CL": -0.06717011078978119,
+            "CD": 0.01140250829117735
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            770.5,
+            1667.49
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 2,
+          "dot_pixels": 6,
+          "px": [
+            770.5,
+            1667.16
+          ],
+          "data": [
+            0.06772894155327042,
+            0.00826525178406213
+          ],
+          "affine_data": [
+            0.06804154484394442,
+            0.008383682471053755
+          ],
+          "value": {
+            "CL": 0.06772894155327042,
+            "CD": 0.00826525178406213
+          },
+          "note": "Single circle here; figure 6(a) shows two circles drawn almost on top of each other at this lift coefficient."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            847.0,
+            1653.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 4,
+          "dot_pixels": 7,
+          "px": [
+            846.71,
+            1653.01
+          ],
+          "data": [
+            0.18888250488315478,
+            0.010529197451018686
+          ],
+          "affine_data": [
+            0.1889528420635198,
+            0.010607890052875435
+          ],
+          "value": {
+            "CL": 0.18888250488315478,
+            "CD": 0.010529197451018686
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            930.6,
+            1594.8
+          ],
+          "snap": "dot",
+          "found": true,
+          "dot_pixels": 5,
+          "px": [
+            930.62,
+            1594.77
+          ],
+          "data": [
+            0.3198561017305345,
+            0.01951944402734988
+          ],
+          "affine_data": [
+            0.322498238027233,
+            0.01979539337325026
+          ],
+          "value": {
+            "CL": 0.3198561017305345,
+            "CD": 0.01951944402734988
+          },
+          "note": "Faint circle and dot, not found by candidates.py; the dot snap isolates it at the default level."
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1027.0,
+            1456.0
+          ],
+          "snap": "candidate-centroid",
+          "found": true,
+          "candidate": 9,
+          "px": [
+            1027.0,
+            1456.0
+          ],
+          "data": [
+            0.4744902478865618,
+            0.041628968585343526
+          ],
+          "affine_data": [
+            0.47659366226607225,
+            0.04170152369561009
+          ],
+          "value": {
+            "CL": 0.4744902478865618,
+            "CD": 0.041628968585343526
+          },
+          "note": "Two circles offset about 4 px at CL 0.48 (as in figure 6(a)); two dots 6 px apart. Candidate centroids used so the snap cannot merge them; this is the lower-left dot."
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1029.68,
+            1450.32
+          ],
+          "snap": "candidate-centroid",
+          "found": true,
+          "candidate": 10,
+          "px": [
+            1029.68,
+            1450.32
+          ],
+          "data": [
+            0.4787541691495575,
+            0.042544676691506494
+          ],
+          "affine_data": [
+            0.4808963616587698,
+            0.042598345370189555
+          ],
+          "value": {
+            "CL": 0.4787541691495575,
+            "CD": 0.042544676691506494
+          },
+          "note": "Upper-right dot of the two overlapping circles (see previous point)."
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1100.46,
+            1243.51
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 14,
+          "dot_pixels": 8,
+          "px": [
+            1100.46,
+            1243.52
+          ],
+          "data": [
+            0.5948121847575031,
+            0.07535984162642531
+          ],
+          "affine_data": [
+            0.5950885222980045,
+            0.07525406810374469
+          ],
+          "value": {
+            "CL": 0.5948121847575031,
+            "CD": 0.07535984162642531
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1155.17,
+            996.17
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 16,
+          "dot_pixels": 10,
+          "px": [
+            1155.05,
+            996.18
+          ],
+          "data": [
+            0.6822452108516913,
+            0.11437970915589206
+          ],
+          "affine_data": [
+            0.6840206719008306,
+            0.11431575256783827
+          ],
+          "value": {
+            "CL": 0.6822452108516913,
+            "CD": 0.11437970915589206
+          }
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            1204.48,
+            714.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 23,
+          "dot_pixels": 7,
+          "px": [
+            1204.66,
+            713.98
+          ],
+          "data": [
+            0.7632536022738518,
+            0.15898840847253293
+          ],
+          "affine_data": [
+            0.765402101880265,
+            0.15888458907118508
+          ],
+          "value": {
+            "CL": 0.7632536022738518,
+            "CD": 0.15898840847253293
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M0.850",
+      "wing": "35",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            926.0,
+            1633.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 7,
+          "dot_pixels": 7,
+          "px": [
+            926.31,
+            1633.05
+          ],
+          "data": [
+            0.3124424737834405,
+            0.013614504684869869
+          ],
+          "affine_data": [
+            0.3152932742918755,
+            0.013749352317229346
+          ],
+          "value": {
+            "CL": -0.08755752621655954,
+            "CD": 0.013614504684869869
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1042.48,
+            1660.51
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 11,
+          "dot_pixels": 9,
+          "px": [
+            1042.07,
+            1660.91
+          ],
+          "data": [
+            0.495664350245135,
+            0.009349585812574725
+          ],
+          "affine_data": [
+            0.49846963773025554,
+            0.009332055504476189
+          ],
+          "value": {
+            "CL": 0.09566435024513498,
+            "CD": 0.009349585812574725
+          },
+          "note": "Two diamonds offset about 4 px horizontally at CL 0.10 (outline doubled on the right; figure 6(a) also shows two). This is the left dot."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1047,
+            1662
+          ],
+          "snap": "dot",
+          "found": true,
+          "dot_pixels": 4,
+          "px": [
+            1047.49,
+            1662.53
+          ],
+          "data": [
+            0.504289654177747,
+            0.009089307135063797
+          ],
+          "affine_data": [
+            0.5070430505897943,
+            0.009075386715785838
+          ],
+          "value": {
+            "CL": 0.10428965417774694,
+            "CD": 0.009089307135063797
+          },
+          "note": "Right dot of the doubled diamond at CL 0.10; not found by candidates.py, isolated by the dot snap."
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1148.32,
+            1633.34
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 15,
+          "dot_pixels": 7,
+          "px": [
+            1148.63,
+            1633.06
+          ],
+          "data": [
+            0.6656771216368615,
+            0.013690745193361983
+          ],
+          "affine_data": [
+            0.6676118082111624,
+            0.01371595301316586
+          ],
+          "value": {
+            "CL": 0.2656771216368615,
+            "CD": 0.013690745193361983
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1268.0,
+            1519.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 33,
+          "dot_pixels": 6,
+          "px": [
+            1268.03,
+            1519.5
+          ],
+          "data": [
+            0.855706507945981,
+            0.031693298906079505
+          ],
+          "affine_data": [
+            0.8579410700655903,
+            0.031636650483381046
+          ],
+          "value": {
+            "CL": 0.455706507945981,
+            "CD": 0.031693298906079505
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1367.6,
+            1291.8
+          ],
+          "snap": "dot",
+          "found": true,
+          "dot_pixels": 5,
+          "px": [
+            1367.6,
+            1291.77
+          ],
+          "data": [
+            1.016285206731896,
+            0.06766458417685776
+          ],
+          "affine_data": [
+            1.0179626943610436,
+            0.06759432761171177
+          ],
+          "value": {
+            "CL": 0.6162852067318959,
+            "CD": 0.06766458417685776
+          },
+          "note": "Three diamonds at CL 0.62 to 0.64 (this point and the next two), as in figure 6(a). Lower-left diamond: separate outline, faint dot not found by candidates.py but isolated by the dot snap."
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1380.47,
+            1267.97
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 39,
+          "dot_pixels": 9,
+          "px": [
+            1380.51,
+            1267.81
+          ],
+          "data": [
+            1.0369173720544027,
+            0.07147408763230652
+          ],
+          "affine_data": [
+            1.0386562042064078,
+            0.07137716961674018
+          ],
+          "value": {
+            "CL": 0.6369173720544027,
+            "CD": 0.07147408763230652
+          },
+          "note": "Upper pair of overlapping diamonds (this and the next point): two outlines offset about (1, 4) px, doubled upper-left and upper-right edges. This clean dot belongs to the upper one (its upper-left edge, x+y = 2631, is 15.5 px from the dot as on clean diamonds)."
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1381.5,
+            1271.4
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1381.5,
+            1271.4
+          ],
+          "data": [
+            1.038429730278935,
+            0.07091082745315756
+          ],
+          "affine_data": [
+            1.0401899484285129,
+            0.0708099562931547
+          ],
+          "value": {
+            "CL": 0.6384297302789349,
+            "CD": 0.07091082745315756
+          },
+          "note": "Lower diamond of the overlapping pair: its dot is hidden. Edge positions (upper-left edge x+y = 2636.5, upper-right edge x-y = 125) give a centre near (1381.7, 1272.2); a template match with a clean diamond of this figure gives (1381.4, 1270.6). Value between the two; uncertainty about 1.5 px."
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            1441.0,
+            992.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 44,
+          "dot_pixels": 7,
+          "px": [
+            1440.96,
+            991.72
+          ],
+          "data": [
+            1.1345638048772237,
+            0.11496805173587361
+          ],
+          "affine_data": [
+            1.1371563635071773,
+            0.1149793271567763
+          ],
+          "value": {
+            "CL": 0.7345638048772237,
+            "CD": 0.11496805173587361
+          }
+        },
+        {
+          "id": "p10",
+          "picked_px": [
+            1483.49,
+            711.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 45,
+          "dot_pixels": 5,
+          "px": [
+            1483.41,
+            710.31
+          ],
+          "data": [
+            1.2060777665477818,
+            0.15942816120829945
+          ],
+          "affine_data": [
+            1.2071833458719081,
+            0.1594244010903788
+          ],
+          "value": {
+            "CL": 0.8060777665477817,
+            "CD": 0.15942816120829945
+          }
+        },
+        {
+          "id": "p11",
+          "picked_px": [
+            1515.0,
+            418.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 49,
+          "dot_pixels": 7,
+          "px": [
+            1514.71,
+            418.01
+          ],
+          "data": [
+            1.2571371701638707,
+            0.20545702623986703
+          ],
+          "affine_data": [
+            1.2596471252792698,
+            0.20559124080392197
+          ],
+          "value": {
+            "CL": 0.8571371701638707,
+            "CD": 0.20545702623986703
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M0.950",
+      "wing": "35",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "right-pointing triangle with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1296.5,
+            1620.5
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1296.5,
+            1620.5
+          ],
+          "data": [
+            0.8989599841218745,
+            0.015612429892755075
+          ],
+          "affine_data": [
+            0.9020697616547442,
+            0.01567874991656626
+          ],
+          "value": {
+            "CL": -0.1010400158781255,
+            "CD": 0.015612429892755075
+          },
+          "note": "Overlaps the M = 0.90 triangle at CL 0.28 of that polar (its p3): the vertical edge of this right-pointing triangle (x = 1288.5, rows 1611 to 1630) runs down the upright triangle's axis, and its dot position falls under the right side of the upright triangle (x = 1295.4 at row 1620), so the dot is hidden. Centre from the outline: 8.3 px right of the vertical edge and at mid-height, as on clean right-pointing triangles of this figure. Uncertainty about 1.5 px."
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1437.65,
+            1639.29
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 43,
+          "dot_pixels": 9,
+          "px": [
+            1437.44,
+            1639.22
+          ],
+          "data": [
+            1.1249802918302099,
+            0.012674939900194963
+          ],
+          "affine_data": [
+            1.1252392693775315,
+            0.012701591450808514
+          ],
+          "value": {
+            "CL": 0.12498029183020987,
+            "CD": 0.012674939900194963
+          },
+          "note": "Single outline and dot here; in figure 6(a) the outline of this point is drawn twice (one dot)."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1581.55,
+            1563.48
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 53,
+          "dot_pixels": 10,
+          "px": [
+            1581.79,
+            1563.44
+          ],
+          "data": [
+            1.3538410681731712,
+            0.024525465547837175
+          ],
+          "affine_data": [
+            1.354737854058289,
+            0.024651039341005043
+          ],
+          "value": {
+            "CL": 0.3538410681731712,
+            "CD": 0.024525465547837175
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1685.33,
+            1406.67
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 63,
+          "dot_pixels": 7,
+          "px": [
+            1685.31,
+            1406.12
+          ],
+          "data": [
+            1.5193126209883199,
+            0.04946731636580777
+          ],
+          "affine_data": [
+            1.5203298959973357,
+            0.049486281093574946
+          ],
+          "value": {
+            "CL": 0.5193126209883199,
+            "CD": 0.04946731636580777
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1812.5,
+            1127.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 70,
+          "dot_pixels": 9,
+          "px": [
+            1812.98,
+            1127.35
+          ],
+          "data": [
+            1.7247148909158936,
+            0.09350424403950981
+          ],
+          "affine_data": [
+            1.7253822831573826,
+            0.09350214695894021
+          ],
+          "value": {
+            "CL": 0.7247148909158936,
+            "CD": 0.09350424403950981
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M1.000",
+      "wing": "35",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left, with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1525.4,
+            1569.22
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 51,
+          "dot_pixels": 7,
+          "px": [
+            1525.44,
+            1569.23
+          ],
+          "data": [
+            1.264043191479595,
+            0.02361432010700916
+          ],
+          "affine_data": [
+            1.2653812666739928,
+            0.023744523771759923
+          ],
+          "value": {
+            "CL": -0.13595680852040481,
+            "CD": 0.02361432010700916
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1674.47,
+            1603.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 62,
+          "dot_pixels": 10,
+          "px": [
+            1674.2,
+            1603.52
+          ],
+          "data": [
+            1.4993111911612729,
+            0.018128969605248676
+          ],
+          "affine_data": [
+            1.500790988883669,
+            0.018306829554277093
+          ],
+          "value": {
+            "CL": 0.09931119116127296,
+            "CD": 0.018128969605248676
+          },
+          "note": "Low-drag point; candidate 60 just above it (C_D 0.025) is a left-pointing triangle of the M = 0.975 polar, not this one."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1789.71,
+            1556.64
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 68,
+          "dot_pixels": 8,
+          "px": [
+            1789.92,
+            1556.48
+          ],
+          "data": [
+            1.6836042266128666,
+            0.025513852104443152
+          ],
+          "affine_data": [
+            1.6846372103129372,
+            0.025720642928631965
+          ],
+          "value": {
+            "CL": 0.28360422661286666,
+            "CD": 0.025513852104443152
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1928.51,
+            1392.47
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 74,
+          "dot_pixels": 7,
+          "px": [
+            1928.65,
+            1392.79
+          ],
+          "data": [
+            1.9038581933669532,
+            0.05146681771229068
+          ],
+          "affine_data": [
+            1.9060901867948505,
+            0.05155704195807259
+          ],
+          "value": {
+            "CL": 0.5038581933669533,
+            "CD": 0.05146681771229068
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1991.51,
+            1267.49
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 76,
+          "dot_pixels": 11,
+          "px": [
+            1991.6,
+            1267.45
+          ],
+          "data": [
+            2.006864165492153,
+            0.07135532695059763
+          ],
+          "affine_data": [
+            2.0070763923854904,
+            0.07134657202206798
+          ],
+          "value": {
+            "CL": 0.6068641654921532,
+            "CD": 0.07135532695059763
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig06b-35deg-M1.100",
+      "wing": "35",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter disc, square corner at top left, with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            2037.0,
+            1564.72
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 78,
+          "dot_pixels": 10,
+          "px": [
+            2036.99,
+            1564.73
+          ],
+          "data": [
+            2.074155014648327,
+            0.024199130650823894
+          ],
+          "affine_data": [
+            2.076097307060075,
+            0.02438212181268809
+          ],
+          "value": {
+            "CL": -0.125844985351673,
+            "CD": 0.024199130650823894
+          },
+          "note": "Touches the symbol above it (candidate 77, M = 1.02 polar); clean dot."
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            2174.77,
+            1597.98
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 84,
+          "dot_pixels": 7,
+          "px": [
+            2174.7,
+            1597.96
+          ],
+          "data": [
+            2.291928514865009,
+            0.0189083703626813
+          ],
+          "affine_data": [
+            2.294006067358605,
+            0.019113445326092326
+          ],
+          "value": {
+            "CL": 0.09192851486500864,
+            "CD": 0.0189083703626813
+          },
+          "note": "Two quarter discs at CL 0.09 to 0.10 (this and the next point), as the doubled disc of figure 6(a); both dots clean."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            2182.14,
+            1576.85
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 85,
+          "dot_pixels": 10,
+          "px": [
+            2182.01,
+            1576.85
+          ],
+          "data": [
+            2.3035469841988516,
+            0.022240620162456794
+          ],
+          "affine_data": [
+            2.305797151869055,
+            0.022446906622827223
+          ],
+          "value": {
+            "CL": 0.10354698419885144,
+            "CD": 0.022240620162456794
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            2275.67,
+            1548.68
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 89,
+          "dot_pixels": 8,
+          "px": [
+            2275.71,
+            1548.79
+          ],
+          "data": [
+            2.45531856672151,
+            0.02671358256065041
+          ],
+          "affine_data": [
+            2.4545616660340883,
+            0.026865816049619073
+          ],
+          "value": {
+            "CL": 0.25531856672150965,
+            "CD": 0.02671358256065041
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            2399.75,
+            1399.63
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 93,
+          "dot_pixels": 11,
+          "px": [
+            2399.64,
+            1399.61
+          ],
+          "data": [
+            2.6540460157780217,
+            0.05040471237125676
+          ],
+          "affine_data": [
+            2.6524184931031125,
+            0.05041235302318117
+          ],
+          "value": {
+            "CL": 0.4540460157780215,
+            "CD": 0.05040471237125676
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            2449.0,
+            1322.51
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 94,
+          "dot_pixels": 7,
+          "px": [
+            2449.05,
+            1322.68
+          ],
+          "data": [
+            2.733259928984491,
+            0.06256165810599167
+          ],
+          "affine_data": [
+            2.7314734470026525,
+            0.06255704174405857
+          ],
+          "value": {
+            "CL": 0.5332599289844908,
+            "CD": 0.06256165810599167
+          }
         }
       ]
     }
