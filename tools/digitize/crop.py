@@ -11,6 +11,8 @@ Usage:
 --tick   draw a faint ruler line every N native pixels
 --label  print the coordinate every N native pixels (multiple of --tick)
 --mark   draw a small cross at native pixel x,y (repeatable), for checking picks
+--candidates  a candidates.json from candidates.py: draw each candidate inside the
+         crop as a small red circle with its number
 """
 
 from __future__ import annotations
@@ -35,6 +37,7 @@ def main() -> None:
     ap.add_argument("--tick", type=int, default=10)
     ap.add_argument("--label", type=int, default=50)
     ap.add_argument("--mark", action="append", default=[])
+    ap.add_argument("--candidates", type=Path, default=None)
     args = ap.parse_args()
 
     src = Image.open(args.scan).convert("L")
@@ -74,6 +77,17 @@ def main() -> None:
         d.line([(ox - r, oy), (ox + r, oy)], fill=(220, 0, 0), width=1)
         d.line([(ox, oy - r), (ox, oy + r)], fill=(220, 0, 0), width=1)
 
+    if args.candidates:
+        import json
+        cands = json.loads(args.candidates.read_text(encoding="utf-8"))["candidates"]
+        cfont = ImageFont.load_default(size=max(11, 5 * z))
+        for c in cands:
+            cx, cy = c["px"]
+            if x0 <= cx < x1 and y0 <= cy < y1:
+                ox, oy = to_out(cx - 0.5, cy - 0.5)
+                r = max(3, z)
+                d.ellipse([ox - r, oy - r, ox + r, oy + r], outline=(220, 0, 0), width=2)
+                d.text((ox + 4 * z, oy - 9 * z), str(c["id"]), fill=(220, 0, 0), font=cfont)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     out.save(args.out)
     print(f"{args.out.name}: native ({x0},{y0})-({x1},{y1}), zoom {z}, output {out.width}x{out.height}")

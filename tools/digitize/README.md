@@ -43,19 +43,27 @@ SHA-256 as downloaded: `e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e
    python -I tools/digitize/crop.py .cache/scans/p31.png 700 1100 1000 1260 .cache/look/a.png --zoom 4 --tick 5 --label 25
    ```
 
-3. **Write a spec** (one JSON file per figure and pass, format below) and run it:
+3. **Find candidate symbols** (figures with data symbols). `candidates.py` lists every small isolated ink blob with ink around it in most directions, which is what a NACA centre dot inside a hollow symbol looks like, and numbers them. It also finds decimal points and specks, and misses dots that touch a line: the reader keeps only real symbols and adds the missed ones by hand. `crop.py --candidates <candidates.json>` draws the numbers on any crop.
+
+   ```bash
+   python -I tools/digitize/candidates.py .cache/scans/p25.png tools/digitize/figures/fig06b/pass-a.json tools/digitize/figures/fig06b/candidates.json .cache/tiles/fig06b
+   ```
+
+   The candidates file is deterministic for a scan and committed, so both passes see the same numbers; they differ in which numbers they assign to which series.
+
+4. **Write a spec** (one JSON file per figure and pass, format below) and run it:
 
    ```bash
    python -I tools/digitize/digitize.py tools/digitize/figures/fig09/pass-a.json .cache/scans/p31.png tools/digitize/figures/fig09/pass-a.result.json
    ```
 
-4. **Compare the passes** and write the CSV rows:
+5. **Compare the passes** and write the CSV rows:
 
    ```bash
    python -I tools/digitize/compare.py <pass-a.result.json> <pass-b.result.json> <out.csv> --md <out.md>
    ```
 
-5. **Overlay** both passes on the scan, with the same axis mapping (pass A's calibration):
+6. **Overlay** both passes on the scan, with the same axis mapping (pass A's calibration):
 
    ```bash
    python -I tools/digitize/overlay.py .cache/scans/p31.png <pass-a.result.json> <pass-b.result.json> <out.png>
@@ -66,9 +74,9 @@ SHA-256 as downloaded: `e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e
 `digitize.py` never invents a value. It only refines and converts what the reader picked:
 
 - **Grid intersections** are refined to the centre of both printed lines (ink profile across each line, with the crossing itself left out).
-- **Mesh calibration.** When the spec describes the grid, every grid line is traced along its whole length and fitted with a cubic. A pixel's x value comes from the two vertical lines around it on its own row; its y value from the two horizontal lines around it in its own column, by linear interpolation inside the cell. This follows skew and warping of the scanned paper. The picked intersections only seed the line search through an affine fit; the affine residuals and the mesh residuals at the intersections are both reported.
+- **Mesh calibration.** When the spec describes the grid, every grid line is fitted along its whole length in two passes: a robust cubic through the printed line nearest the affine prediction at each step (a curve or symbol a few pixels away is rejected, not followed), then a smooth local correction for paper warping (running median of the residuals over about 250 px). Where a grid line is not printed (erased under a curve or a label), it is bridged. A pixel's x value comes from the two vertical lines around it on its own row; its y value from the two horizontal lines around it in its own column, by linear interpolation inside the cell. The picked intersections only seed the line search through an affine fit; the affine residuals and the mesh residuals at the intersections are both reported, and a large mesh residual means a bad pick. A grid line that cannot be used (for example the top of a label box with lettering against it) is listed under `skip` and the mesh interpolates across it.
 - **Curve samples** (for faired curves without symbols): the reader gives the x value and a hint pixel near the intended line. The script finds the pixel column of that x value and the centre of the inked line nearest the hint, by a straight-line fit over clean columns within ±8 px. Columns on a vertical grid line are skipped. `side: "right"` or `"left"` uses one side only, for a curve that starts or ends there. The reader decides which line is which; the script only centres on it.
-- **Symbols**: the reader picks the symbol centre. With `snap: "dot"` the script moves the pick to the centre dot NACA drew inside each symbol (an isolated ink blob within 5 px; outlines and lines through the symbol are rejected). `dot_level` lowers the ink threshold when a line touches the dot. With `snap: "none"` the pick is used as is, and the spec should say why in `note`.
+- **Symbols**: the reader names a candidate (`"candidate": 17`) or picks the symbol centre. With `snap: "dot"` (the default for candidates) the script moves the pick to the centre dot NACA drew inside each symbol (an isolated ink blob within `dot_radius`, default 5 px; outlines and lines through the symbol are rejected); `dot_level` changes the ink threshold for a faint dot or one a line touches. With `snap: "candidate"` the candidate's own centroid is used as is (for two dots a few pixels apart, which the dot snap would merge). With `snap: "none"` the pick is used as is, and the spec says why in `note` (for example a dot hidden under a line: the centre is then the outline centroid).
 
 ## Spec format
 
@@ -95,7 +103,7 @@ SHA-256 as downloaded: `e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e
 }
 ```
 
-- `grid` lists the values of the printed grid lines, from the lowest value upward, including the frame lines when they are on the grid.
+- `grid` lists the values of the printed grid lines, from the lowest value upward, including the frame lines when they are on the grid. `"skip": [-3.0]` leaves out lines that are not usable.
 - Staggered scales: some figures shift each curve's x origin along a common axis. Define the grid on the common axis, and give each series an `x_offset`: the common-axis value of that series' zero. The reported value is common-axis value minus offset.
 - Result files keep the picked pixel, the refined pixel, the value by the mesh and by the affine fit, and the calibration residuals.
 

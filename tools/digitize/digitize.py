@@ -120,11 +120,27 @@ def _interp_extrap(v: float, xp: np.ndarray, fp: np.ndarray) -> float:
     return float(np.interp(v, xp, fp))
 
 
+class TracedLine:
+    """Position of one printed grid line as a function of the coordinate along it.
+
+    Piecewise-linear through the tracked ink samples (after outlier rejection
+    and a 5-sample running median), extended linearly beyond its ends. Local,
+    so it follows a warped scan without the overshoot of a global polynomial.
+    """
+
+    def __init__(self, t: np.ndarray, u: np.ndarray):
+        self.t = np.asarray(t, float)
+        self.u = np.asarray(u, float)
+
+    def __call__(self, s: float) -> float:
+        return _interp_extrap(float(s), self.t, self.u)
+
+
 @dataclass
 class Mesh:
     """Calibration on the printed grid itself.
 
-    Every grid line is traced along its length and fitted with a cubic, so a
+    Every grid line is followed along its whole length in the scan, so a
     warped or skewed scan is followed line by line. A pixel's x value comes
     from the two vertical lines that bracket it on its own row, and its y
     value from the two horizontal lines that bracket it in its own column,
@@ -181,61 +197,122 @@ def _line_profile_peak(profile: np.ndarray, max_width: int) -> tuple[float, floa
     return float((np.arange(lo, hi + 1) * w).sum() / w.sum()), float(p[i])
 
 
-def _robust_cubic(t: np.ndarray, u: np.ndarray) -> tuple[np.polynomial.Polynomial, dict]:
-    keep = np.ones(len(t), bool)
-    fit = np.polynomial.Polynomial.fit(t, u, 3)
-    for thr in (3.0, 1.5, 1.5):
-        r = u - fit(t)
-        keep = np.abs(r) < thr
-        fit = np.polynomial.Polynomial.fit(t[keep], u[keep], 3)
-    r = u[keep] - fit(t[keep])
-    info = {"samples": int(len(t)), "used": int(keep.sum()), "rms_px": round(float(np.sqrt((r ** 2).mean())), 3)}
-    return fit, info, t[keep]
+def _profile_peaks(profile: np.ndarray, max_width: int) -> list[tuple[float, float]]:
+    """All single printed lines in a darkness profile: (centre index, contrast)."""
+    base = float(np.median(profile))
+    p = profile - base
+    out = []
+    i = 1
+    n = len(p)
+    while i < n - 1:
+        if p[i] >= 40.0 and p[i] >= p[i - 1] and p[i] >= p[i + 1]:
+            half = 0.5 * p[i]
+            lo, hi = i, i
+            while lo > 0 and p[lo - 1] >= half:
+                lo -= 1
+            while hi < n - 1 and p[hi + 1] >= half:
+                hi += 1
+            if hi - lo + 1 <= max_width and lo > 0 and hi < n - 1:
+                w = np.clip(p[lo : hi + 1], 0, None)
+                out.append((float((np.arange(lo, hi + 1) * w).sum() / w.sum()), float(p[i])))
+            i = hi + 1
+        else:
+            i += 1
+    return out
 
 
-def build_mesh(g: np.ndarray, aff: Affine, grid: dict, step: int = 6, half_window: int = 9) -> tuple[Mesh, list[dict]]:
-    xv = np.array([grid["x_lines"]["start"] + k * grid["x_lines"]["step"] for k in range(grid["x_lines"]["count"])])
-    yv = np.array([grid["y_lines"]["start"] + k * grid["y_lines"]["step"] for k in range(grid["y_lines"]["count"])])
+def _sample_line(g: np.ndarray, along: np.ndarray, center, horizontal: bool, half: int,
+                 max_width: int = 9) -> tuple[np.ndarray, np.ndarray]:
+    """Line centre at each position along it: the printed line nearest center(s) within +/- half px."""
+    ss, uu = [], []
+    for s in along:
+        si = int(round(s))
+        c = center(s)
+        u0 = int(round(c)) - half
+        if u0 < 0:
+            continue
+        if horizontal:
+            prof = (255.0 - g[u0 : u0 + 2 * half + 1, si - 2 : si + 3]).mean(axis=1)
+        else:
+            prof = (255.0 - g[si - 2 : si + 3, u0 : u0 + 2 * half + 1]).mean(axis=0)
+        peaks = _profile_peaks(prof, max_width)
+        if not peaks:
+            continue
+        ss.append(float(s))
+        uu.append(u0 + min(peaks, key=lambda pk: abs(u0 + pk[0] - c))[0])
+    return np.array(ss), np.array(uu)
+
+
+def _fit_line(g: np.ndarray, along: np.ndarray, predict, horizontal: bool) -> tuple[TracedLine, dict, np.ndarray]:
+    """Two passes: a robust global cubic, then a smooth local correction for warping.
+
+    Pass 1 takes, at each step, the printed line nearest the affine prediction
+    (+/- 12 px) and fits a cubic with outlier rejection, so a curve or symbol a
+    few pixels from the grid line is rejected rather than followed. Pass 2
+    samples again within +/- 5 px of that cubic, rejects samples more than
+    2 px from it, and adds the running median (41 samples, about 250 px) of
+    the residuals: a slow warp of the paper is followed, a short stretch of
+    curve is not. Where the grid line is not printed, the line is bridged.
+    """
+    s1, u1 = _sample_line(g, along, predict, horizontal, 12)
+    if len(s1) < 8:
+        raise ValueError("grid line not found")
+    keep = np.ones(len(s1), bool)
+    fit = np.polynomial.Polynomial.fit(s1, u1, 3)
+    for thr in (4.0, 2.5, 2.0):
+        keep = np.abs(u1 - fit(s1)) < thr
+        fit = np.polynomial.Polynomial.fit(s1[keep], u1[keep], 3)
+    s2, u2 = _sample_line(g, along, fit, horizontal, 5)
+    r2 = u2 - fit(s2)
+    ok = np.abs(r2) < 2.0
+    s_k, r_k = s2[ok], r2[ok]
+    if len(r_k) >= 5:
+        med = np.array([np.median(r_k[max(0, i - 20) : i + 21]) for i in range(len(r_k))])
+    else:
+        med = np.zeros(len(r_k))
+    u_line = fit(s_k) + med
+    resid = r_k - med
+    info = {"samples": int(len(s2)), "used": int(ok.sum()),
+            "rms_px": round(float(np.sqrt((resid ** 2).mean())), 3) if len(resid) else None,
+            "max_warp_px": round(float(np.abs(med).max()), 2) if len(med) else 0.0}
+    return TracedLine(s_k, u_line), info, s_k
+
+
+def build_mesh(g: np.ndarray, aff: Affine, grid: dict, step: int = 6) -> tuple[Mesh, list[dict]]:
+    def values(spec: dict) -> np.ndarray:
+        # "skip" lists line values that are not usable in the scan (e.g. hidden
+        # behind a label box); the mesh then interpolates across them.
+        vals = [round(spec["start"] + k * spec["step"], 9) for k in range(spec["count"])]
+        skip = {round(v, 9) for v in spec.get("skip", [])}
+        return np.array([v for v in vals if v not in skip])
+
+    xv = values(grid["x_lines"])
+    yv = values(grid["y_lines"])
     report: list[dict] = []
-    # Horizontal lines: row as a function of column.
-    y_lines = []
-    y_inked = []
+    y_lines, y_inked = [], []
+    a1, b1, c1 = aff.m[1]
     for v in yv:
         left = aff.to_pixel(xv[0], v)[0] + 8
         right = aff.to_pixel(xv[-1], v)[0] - 8
-        cs, rs = [], []
-        for c in np.arange(left, right, step):
-            ci = int(round(c))
-            a, b, cc = aff.m[1]
-            py = (v - a * ci - cc) / b
-            r0 = int(round(py)) - half_window
-            prof = (255.0 - g[r0 : r0 + 2 * half_window + 1, ci - 2 : ci + 3]).mean(axis=1)
-            hit = _line_profile_peak(prof, max_width=9)
-            if hit is not None:
-                cs.append(ci)
-                rs.append(r0 + hit[0])
-        fit, info, inked = _robust_cubic(np.array(cs, float), np.array(rs))
-        y_lines.append(fit)
+
+        def predict(c: float, v: float = v) -> float:
+            return (v - a1 * c - c1) / b1
+
+        line, info, inked = _fit_line(g, np.arange(left, right, step), predict, True)
+        y_lines.append(line)
         y_inked.append(inked)
         report.append({"line": "horizontal", "value": round(float(v), 6)} | info)
-    # Vertical lines: column as a function of row.
     x_lines = []
+    a0, b0, c0 = aff.m[0]
     for v in xv:
         top = aff.to_pixel(v, yv[-1])[1] + 8
         bottom = aff.to_pixel(v, yv[0])[1] - 8
-        rs, cs = [], []
-        for r in np.arange(top, bottom, step):
-            ri = int(round(r))
-            a, b, cc = aff.m[0]
-            px = (v - b * ri - cc) / a
-            c0 = int(round(px)) - half_window
-            prof = (255.0 - g[ri - 2 : ri + 3, c0 : c0 + 2 * half_window + 1]).mean(axis=0)
-            hit = _line_profile_peak(prof, max_width=9)
-            if hit is not None:
-                rs.append(ri)
-                cs.append(c0 + hit[0])
-        fit, info, _ = _robust_cubic(np.array(rs, float), np.array(cs))
-        x_lines.append(fit)
+
+        def predict_v(r: float, v: float = v) -> float:
+            return (v - b0 * r - c0) / a0
+
+        line, info, _ = _fit_line(g, np.arange(top, bottom, step), predict_v, False)
+        x_lines.append(line)
         report.append({"line": "vertical", "value": round(float(v), 6)} | info)
     return Mesh(xv, x_lines, yv, y_lines, y_inked), report
 
@@ -481,13 +558,24 @@ def run(spec: dict, g: np.ndarray) -> dict:
                 x, y = p["px"]
                 snap = p.get("snap", "none")
                 r = {"id": p["id"], "picked_px": [x, y], "snap": snap, "found": True}
-                if snap == "dot":
+                if "candidate" in p:
+                    r["candidate"] = p["candidate"]
+                if snap == "candidate":
+                    # Use the candidate's own centroid (darker threshold): for two
+                    # dots a few pixels apart, which the dot snap would merge.
+                    r["snap"] = "candidate-centroid"
+                elif snap == "dot":
                     d = snap_dot(g, float(x), float(y), r=int(p.get("dot_radius", 5)), level=float(p.get("dot_level", 200)))
-                    if not d["found"]:
-                        raise SystemExit(f"{s['id']} {p['id']}: no isolated centre dot within 5 px of {x},{y}; "
+                    if d["found"]:
+                        x, y = d["px"]
+                        r["dot_pixels"] = d["dot_pixels"]
+                    elif "candidate" in p:
+                        # Two dots a few px apart merge at this threshold; the
+                        # candidate's own centroid (darker threshold) separates them.
+                        r["snap"] = "candidate-centroid"
+                    else:
+                        raise SystemExit(f"{s['id']} {p['id']}: no isolated centre dot near {x},{y}; "
                                          "move the pick or use snap 'none' with a note")
-                    x, y = d["px"]
-                    r["dot_pixels"] = d["dot_pixels"]
                 r["px"] = [x, y]
                 conv = convert(float(x), float(y))
                 xv, yv = conv["data"]
@@ -509,8 +597,8 @@ def run(spec: dict, g: np.ndarray) -> dict:
         "digitizer": spec.get("digitizer", ""),
         "scan": spec["scan"],
         "calibration": {
-            "model": ("mesh: every grid line traced and fitted with a cubic, linear interpolation inside the grid cell "
-                      "(affine fit over the picked intersections used only to predict line positions)")
+            "model": ("mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; "
+                      "linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)")
                      if mesh_report is not None else "affine, least squares over grid intersections",
             "grid": spec["calibration"].get("grid"),
             "affine_matrix": aff.m.tolist(),
@@ -531,6 +619,17 @@ def main() -> None:
     ap.add_argument("out", type=Path)
     args = ap.parse_args()
     spec = json.loads(args.spec.read_text(encoding="utf-8"))
+    # Symbols may name a candidate from candidates.py instead of a pixel:
+    # {"id": "p1", "candidate": 17}. The candidate's pixel becomes the pick and
+    # the centre-dot snap then refines it, exactly as for a hand pick.
+    if "candidates_file" in spec and any("candidate" in p for s in spec["series"] for p in s.get("points", [])):
+        cfile = (args.spec.parent / spec["candidates_file"]).resolve()
+        cands = {c["id"]: c for c in json.loads(cfile.read_text(encoding="utf-8"))["candidates"]}
+        for s in spec["series"]:
+            for p in s.get("points", []):
+                if "candidate" in p:
+                    p["px"] = list(cands[p["candidate"]]["px"])
+                    p.setdefault("snap", "dot")
     g = load_gray(args.scan)
     result = run(spec, g)
     args.out.parent.mkdir(parents=True, exist_ok=True)
