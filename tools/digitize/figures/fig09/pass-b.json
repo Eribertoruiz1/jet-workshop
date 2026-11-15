@@ -1,0 +1,69 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53"
+  },
+  "figure": {
+    "id": "fig09",
+    "number": "9",
+    "title": "Effect of sweep angle on the variation of drag coefficient at zero lift with Mach number for the wing-body configuration.",
+    "pdf_page": 31,
+    "printed_page": 29,
+    "x_axis": "Mach number, M (grid 0.40 to 1.20 by 0.05; frame lines at 0.40 and 1.20)",
+    "y_axis": "C_D0, drag coefficient at zero lift (grid 0 to 0.030 by 0.005; frame lines at 0 and 0.030)",
+    "content_note": "Three faired curves without symbols, for sweep 10.8, 35 and 47 deg. Line identity read by tracing: below M = 0.82 the 35 deg curve is the middle of the three lines (below the 10.8 deg line, above the 47 deg line), crosses the CD0 = 0.010 grid line near M = 0.79 and runs along it from about M = 0.65 to 0.81; from about M = 0.83 to 0.87 it lies alongside the 10.8 deg line as one two-stroke band (band width never drops to a single stroke, so the lines do not cross; 35 deg is the lower stroke); from M = 0.88 it is the middle curve of the transonic rise (legend '35' sits at the right end of this middle curve). It is solid to M = 1.037, dashed from M = 1.04 to 1.081 (three short dashes, level near CD0 = 0.0200), absent between M = 1.081 and 1.088, and solid again from M = 1.088 to 1.131 (a single long stroke, about 0.043 in M, falling to the right; read as the faired line through the supersonic points, unlike the short dashes before it). Sample M = 1.085 is left out: its column (about x = 2394 px) falls in the gap between the last dash (ends x = 2385) and the start of the final solid stroke (x = 2404, M = 1.088). Cross-check of line identity against figure 6(b) (35 deg polars, my own rough reading, not part of this result): the M = 0.50 faired polar crosses CL = 0 at CD about 0.0090 and the M = 0.70 polar at about 0.0099, closer to the middle line (0.0096, 0.0100) than to the upper line (0.0102, 0.0103); the M = 0.90 polar gives about 0.011, matching the middle curve there."
+  },
+  "scan": {
+    "pdf_page": 31,
+    "size_px": [3062, 2342],
+    "extraction": "tools/digitize/extract_scan.py .cache/bielat-L52B08.pdf 31 .cache/scans/p31.png"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "calibration": {
+    "grid": {
+      "x_lines": {"start": 0.40, "step": 0.05, "count": 17},
+      "y_lines": {"start": 0.000, "step": 0.005, "count": 7}
+    },
+    "points": [
+      {"px": [610, 1334], "x": 0.45, "y": 0.005},
+      {"px": [605, 1052], "x": 0.45, "y": 0.015},
+      {"px": [601, 770], "x": 0.45, "y": 0.025},
+      {"px": [1027, 907], "x": 0.60, "y": 0.020},
+      {"px": [1597, 1326], "x": 0.80, "y": 0.005},
+      {"px": [1593, 1042], "x": 0.80, "y": 0.015},
+      {"px": [1590, 760], "x": 0.80, "y": 0.025},
+      {"px": [2021, 1322], "x": 0.95, "y": 0.005},
+      {"px": [2441, 1318], "x": 1.10, "y": 0.005},
+      {"px": [2438, 1034], "x": 1.10, "y": 0.015},
+      {"px": [2434, 752], "x": 1.10, "y": 0.025},
+      {"px": [2579, 1174], "x": 1.15, "y": 0.010}
+    ]
+  },
+  "series": [
+    {
+      "id": "fig09-35deg",
+      "wing": "35",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "samples": [
+        {"id": "M0.500", "x": 0.500, "hint_px": [755, 1205], "side": "right", "note": "Curve starts on the M = 0.50 grid line; right-side columns only, extrapolated a few px to the start."},
+        {"id": "M0.700", "x": 0.700, "hint_px": [1313, 1189], "note": "Here the 35 deg line runs along the CD0 = 0.010 grid line (merged ink band about 7 px wide, two strokes). The value is the centre of the merged band. Interpolating the clean parts of both lines, the grid stroke is near row 1186.3 and the 35 deg stroke near row 1189.3 here (it crosses the grid line upward near M = 0.79), so the 35 deg stroke is about 1 px below the band centre and the true value may be lower by about 0.00004."},
+        {"id": "M0.850", "x": 0.850, "hint_px": [1737, 1171], "note": "Here the 35 deg line lies alongside the 10.8 deg line (one ink band about 9 px wide). The two strokes never narrow to a single stroke between M = 0.82 and 0.87, so I read them as not crossing, with 35 deg the lower stroke. The value is the centre of the two-stroke band; the 35 deg stroke itself is about 2 px lower, i.e. the true value may be lower by about 0.00007."},
+        {"id": "M0.900", "x": 0.900, "hint_px": [1878, 1154], "note": "Lower of two close lines (10.8 deg is about 7 px above); M = 0.90 column is on a vertical grid line, neighbouring columns used."},
+        {"id": "M0.925", "x": 0.925, "hint_px": [1948, 1134]},
+        {"id": "M0.950", "x": 0.950, "hint_px": [2018, 1102], "note": "Drawn corner of the curve (slope changes sharply) just at M = 0.95, which is also on a vertical grid line; straight-line fit over neighbouring columns on both sides."},
+        {"id": "M0.975", "x": 0.975, "hint_px": [2088, 997], "note": "Steep part of the rise."},
+        {"id": "M1.000", "x": 1.000, "hint_px": [2157, 926], "note": "On a vertical grid line, neighbouring columns used."},
+        {"id": "M1.020", "x": 1.020, "hint_px": [2213, 906]},
+        {"id": "M1.035", "x": 1.035, "hint_px": [2254, 899], "side": "left", "note": "Solid line ends about 6 px to the right (M = 1.037); left-side columns only. The CD0 = 0.020 grid line is not printed here (it is interrupted from about x = 2190 to 2431 px for the legend), so no grid ink touches the curve at this column; a near-grid-line flag here comes from the fitted grid line bridging that gap."},
+        {"id": "M1.100", "x": 1.100, "hint_px": [2437, 913], "note": "On the final solid stroke (M = 1.088 to 1.131), on a vertical grid line; neighbouring columns used."},
+        {"id": "M1.130", "x": 1.130, "hint_px": [2520, 935], "side": "left", "note": "End of the final solid stroke is about 3 px to the right (M = 1.131); left-side columns only."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087036/downloads/19930087036.pdf",
+    "pdf_sha256_as_downloaded": "e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25",
+    "pdf_sha256_stripped": "7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF-1.6; the stripped copy (bytes 437 onward) is the file read."
+  },
+  "figure": {
+    "id": "fig06b",
+    "number": "6(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 35 deg sweptback wing. (b) Drag coefficient.",
+    "pdf_page": 25,
+    "printed_page": 23,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot, one symbol shape per Mach number, joined by faired curves."
+  },
+  "scan": {
+    "pdf_page": 25,
+    "size_px": [
+      3060,
+      2340
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image, rotated by the page /Rotate value (90) to read upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 33
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "x_definition": "Global staggered x: the leftmost frame line is labelled -.2; grid lines every 0.1; the 0 labels sit at x = 0.0 (M 0.50), 0.2 (0.70), 0.4 (0.85), 0.6 (0.90), 0.8 (0.925), 1.0 (0.95), 1.2 (0.975), 1.4 (1.00), 1.6 (1.02), 1.8 (1.035), 2.0 (1.085), 2.2 (1.10), 2.4 (1.13); the .2 .4 .6 labels of M 1.13 at 2.6, 2.8, 3.0.",
+    "points": [
+      {
+        "px": [
+          665,
+          1528
+        ],
+        "x": -0.1,
+        "y": 0.03
+      },
+      {
+        "px": [
+          665,
+          1149
+        ],
+        "x": -0.1,
+        "y": 0.09
+      },
+      {
+        "px": [
+          665,
+          770
+        ],
+        "x": -0.1,
+        "y": 0.15
+      },
+      {
+        "px": [
+          665,
+          391
+        ],
+        "x": -0.1,
+        "y": 0.21
+      },
+      {
+        "px": [
+          1358,
+          391
+        ],
+        "x": 1.0,
+        "y": 0.21
+      },
+      {
+        "px": [
+          1988,
+          897
+        ],
+        "x": 2.0,
+        "y": 0.13
+      },
+      {
+        "px": [
+          1988,
+          391
+        ],
+        "x": 2.0,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2492,
+          1149
+        ],
+        "x": 2.8,
+        "y": 0.09
+      },
+      {
+        "px": [
+          2492,
+          897
+        ],
+        "x": 2.8,
+        "y": 0.13
+      },
+      {
+        "px": [
+          2492,
+          391
+        ],
+        "x": 2.8,
+        "y": 0.21
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06b-35deg-M0.90",
+      "wing": "35",
+      "mach": 0.9,
+      "kind": "symbols",
+      "symbol": "triangle, apex up",
+      "x_offset": 0.6,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            1046.5,
+            1626.5
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "px": [
+            1173,
+            1659.5
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p3",
+          "px": [
+            1287,
+            1623
+          ],
+          "snap": "none",
+          "note": "Centre dot hidden under a line through the symbol; geometric centroid of the triangle (apex y 1609, base y 1630, axis x 1287)."
+        },
+        {
+          "id": "p4",
+          "px": [
+            1432,
+            1456
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p5",
+          "px": [
+            1511,
+            1229
+          ],
+          "snap": "dot",
+          "note": "Two apex-up triangles close together on the M 0.90 curve here; this is the lower one."
+        },
+        {
+          "id": "p6",
+          "px": [
+            1523,
+            1207
+          ],
+          "snap": "none",
+          "note": "Lower of two overlapping triangles at CL about 0.66: apex at the upper triangle's centre, base on the CD 0.08 grid line, right leg visible below the upper triangle's base. Missed in the first pass A reading; added after pass B reported it, confirmed on both the NTRS and the UNT scans. Centre placed from the outline (base centre line about y 1213.5, dot about 7.5 px above the base), after seeing pass B's report, so this pick is not independent of pass B."
+        },
+        {
+          "id": "p7",
+          "px": [
+            1523,
+            1195
+          ],
+          "snap": "dot",
+          "dot_level": 100,
+          "note": "Upper of two overlapping triangles at CL about 0.66. The dark spot snapped here is also where the lower triangle's apex meets the faired curve, so it may not be this symbol's own dot; from the outline (base centre line about y 1204.5, dot about 7.5 px above the base on clean triangles) the centre would be about y 1197. Treat this point's reading uncertainty as about 2 px (0.0003 in CD). Only the darkest pixels (grey < 100) are used for the snap."
+        },
+        {
+          "id": "p8",
+          "px": [
+            1583,
+            931
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p9",
+          "px": [
+            1627,
+            650
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p10",
+          "px": [
+            1666,
+            342
+          ],
+          "snap": "dot"
+        }
+      ]
+    }
+  ]
+}

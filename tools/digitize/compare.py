@@ -67,6 +67,8 @@ def main() -> None:
     ap.add_argument("pass_b", type=Path)
     ap.add_argument("out_csv", type=Path)
     ap.add_argument("--md", type=Path, default=None)
+    ap.add_argument("--label-a", default="Pass A")
+    ap.add_argument("--label-b", default="Pass B")
     args = ap.parse_args()
     ra = json.loads(args.pass_a.read_text(encoding="utf-8"))
     rb = json.loads(args.pass_b.read_text(encoding="utf-8"))
@@ -94,6 +96,7 @@ def main() -> None:
         else:
             pairs = match_symbols([p for p in sa["points"] if p.get("found")],
                                   [p for p in sb["points"] if p.get("found")], xvar, yvar)
+            pairs.sort(key=lambda ab: (ab[0] or ab[1])["value"][xvar])
             variables = [xvar, yvar]
             data_class = "measured"
             method = "symbol centre dot located by tools/digitize/digitize.py (snap 'dot' unless noted)"
@@ -101,7 +104,7 @@ def main() -> None:
             if a is None or b is None or not a.get("found") or not b.get("found"):
                 which = "A" if (a is not None and a.get("found")) else "B"
                 pid = (a or b)["id"]
-                unmatched.append(f"{sa['id']} {pid}: found only in pass {which}")
+                unmatched.append(f"{sa['id']} {pid}: only in {args.label_a if which == 'A' else args.label_b}")
                 continue
             exceeded_here = False
             flags = []
@@ -158,7 +161,7 @@ def main() -> None:
     lines = [
         f"### Figure {fig['number']} (PDF page {fig['pdf_page']}, printed page {fig['printed_page']})",
         "",
-        "| Series | Point | Variable | Pass A | Pass B | Pass difference | 1 px floor | Declared accuracy | Difference / accuracy | Flags |",
+        f"| Series | Point | Variable | {args.label_a} | {args.label_b} | Difference | 1 px floor | Declared accuracy | Difference / accuracy | Flags |",
         "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
     for r in rows:

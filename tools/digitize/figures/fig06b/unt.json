@@ -1,0 +1,174 @@
+{
+  "source": {
+    "document": "NACA RM L52B08",
+    "author": "R. P. Bielat",
+    "year": 1952,
+    "url": "https://digital.library.unt.edu/ark:/67531/metadc59179/m2/1/high_res_d/19930087036.pdf",
+    "pdf_sha256": "56090a4072223798886cea1ce9e423630de95c6327ab7122f0fedbb8e2d58439",
+    "note": "UNT Digital Library copy: a different scan from the NTRS file (35 pages, 1-bit images, PDF 1.3). Used only as an independent check of the NTRS digitization."
+  },
+  "figure": {
+    "id": "fig06b",
+    "number": "6(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for the 35 deg sweptback wing. (b) Drag coefficient.",
+    "pdf_page": 24,
+    "printed_page": 23,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot, joined by faired curves. Bitonal scan."
+  },
+  "scan": {
+    "pdf_page": 24,
+    "size_px": [
+      2912,
+      2592
+    ],
+    "extraction": "tools/digitize/extract_scan.py on the UNT PDF: the page's single embedded 1-bit image, page /Rotate 0"
+  },
+  "pass": "UNT",
+  "digitizer": "main session, UNT scan (independent scan, same reader as pass A)",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 33
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "x_definition": "Same staggered common axis as the NTRS specs: leftmost frame line -0.2, grid every 0.1, M 0.90 zero at 0.6.",
+    "points": [
+      {
+        "px": [
+          604,
+          1664
+        ],
+        "x": -0.1,
+        "y": 0.03
+      },
+      {
+        "px": [
+          604,
+          1283
+        ],
+        "x": -0.1,
+        "y": 0.09
+      },
+      {
+        "px": [
+          604,
+          901
+        ],
+        "x": -0.1,
+        "y": 0.15
+      },
+      {
+        "px": [
+          604,
+          520
+        ],
+        "x": -0.1,
+        "y": 0.21
+      },
+      {
+        "px": [
+          1263,
+          520
+        ],
+        "x": 1.0,
+        "y": 0.21
+      },
+      {
+        "px": [
+          1862,
+          1028
+        ],
+        "x": 2.0,
+        "y": 0.13
+      },
+      {
+        "px": [
+          1862,
+          520
+        ],
+        "x": 2.0,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2341,
+          1283
+        ],
+        "x": 2.8,
+        "y": 0.09
+      },
+      {
+        "px": [
+          2341,
+          1028
+        ],
+        "x": 2.8,
+        "y": 0.13
+      },
+      {
+        "px": [
+          2341,
+          520
+        ],
+        "x": 2.8,
+        "y": 0.21
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06b-35deg-M0.90",
+      "wing": "35",
+      "mach": 0.9,
+      "kind": "symbols",
+      "symbol": "triangle, apex up",
+      "x_offset": 0.6,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            964,
+            1762
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1330,
+            1590
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p5",
+          "px": [
+            1410,
+            1361
+          ],
+          "snap": "dot"
+        },
+        {
+          "id": "p8",
+          "px": [
+            1479,
+            1062
+          ],
+          "snap": "dot"
+        }
+      ],
+      "omitted": "p2, p3, p6, p7, p9, p10: in this 1-bit scan the centre dot merges with the faired curve or a grid line, so no isolated dot exists; reading those centres by eye was judged not cheap (brief 001, Amendment 2, point 5) and is listed in Tickets."
+    }
+  ]
+}

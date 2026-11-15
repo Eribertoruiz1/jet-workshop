@@ -135,6 +135,7 @@ class Mesh:
     x_lines: list         # pixel column of each vertical line as a function of row
     y_values: np.ndarray  # values of the horizontal lines, increasing
     y_lines: list         # pixel row of each horizontal line as a function of column
+    y_inked: list = None  # columns where each horizontal line was actually found in ink
 
     def to_data(self, px: float, py: float) -> tuple[float, float]:
         xs = np.array([f(py) for f in self.x_lines])
@@ -188,7 +189,8 @@ def _robust_cubic(t: np.ndarray, u: np.ndarray) -> tuple[np.polynomial.Polynomia
         keep = np.abs(r) < thr
         fit = np.polynomial.Polynomial.fit(t[keep], u[keep], 3)
     r = u[keep] - fit(t[keep])
-    return fit, {"samples": int(len(t)), "used": int(keep.sum()), "rms_px": round(float(np.sqrt((r ** 2).mean())), 3)}
+    info = {"samples": int(len(t)), "used": int(keep.sum()), "rms_px": round(float(np.sqrt((r ** 2).mean())), 3)}
+    return fit, info, t[keep]
 
 
 def build_mesh(g: np.ndarray, aff: Affine, grid: dict, step: int = 6, half_window: int = 9) -> tuple[Mesh, list[dict]]:
@@ -197,6 +199,7 @@ def build_mesh(g: np.ndarray, aff: Affine, grid: dict, step: int = 6, half_windo
     report: list[dict] = []
     # Horizontal lines: row as a function of column.
     y_lines = []
+    y_inked = []
     for v in yv:
         left = aff.to_pixel(xv[0], v)[0] + 8
         right = aff.to_pixel(xv[-1], v)[0] - 8
@@ -211,8 +214,9 @@ def build_mesh(g: np.ndarray, aff: Affine, grid: dict, step: int = 6, half_windo
             if hit is not None:
                 cs.append(ci)
                 rs.append(r0 + hit[0])
-        fit, info = _robust_cubic(np.array(cs, float), np.array(rs))
+        fit, info, inked = _robust_cubic(np.array(cs, float), np.array(rs))
         y_lines.append(fit)
+        y_inked.append(inked)
         report.append({"line": "horizontal", "value": round(float(v), 6)} | info)
     # Vertical lines: column as a function of row.
     x_lines = []
@@ -230,10 +234,10 @@ def build_mesh(g: np.ndarray, aff: Affine, grid: dict, step: int = 6, half_windo
             if hit is not None:
                 rs.append(ri)
                 cs.append(c0 + hit[0])
-        fit, info = _robust_cubic(np.array(rs, float), np.array(cs))
+        fit, info, _ = _robust_cubic(np.array(rs, float), np.array(cs))
         x_lines.append(fit)
         report.append({"line": "vertical", "value": round(float(v), 6)} | info)
-    return Mesh(xv, x_lines, yv, y_lines), report
+    return Mesh(xv, x_lines, yv, y_lines, y_inked), report
 
 
 # --------------------------------------------------------------------------
@@ -460,8 +464,12 @@ def run(spec: dict, g: np.ndarray) -> dict:
                         rows = np.array([f(c0) for f in mapper.y_lines])
                         k = int(np.argmin(np.abs(rows - y_at)))
                         dist = float(abs(rows[k] - y_at))
-                        r["nearest_grid_line"] = {"value": float(mapper.y_values[k]), "distance_px": round(dist, 2)}
-                        r["near_grid_line"] = bool(dist < r["line_width_px"])
+                        # Was the grid line actually printed here? (It can be erased, e.g. where a
+                        # curve or a legend was drawn over it.) Look for traced ink within 12 px.
+                        inked = bool(np.any(np.abs(mapper.y_inked[k] - c0) <= 12))
+                        r["nearest_grid_line"] = {"value": float(mapper.y_values[k]), "distance_px": round(dist, 2),
+                                                  "inked_here": inked}
+                        r["near_grid_line"] = bool(dist < r["line_width_px"] and inked)
                 r["id"] = p.get("id", f"x={p['x']}")
                 if "note" in p:
                     r["note"] = p["note"]
