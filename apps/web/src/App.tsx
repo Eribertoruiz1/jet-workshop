@@ -7,7 +7,7 @@ import {
   type TestedWingId,
   type WingBody,
 } from "@jet-workshop/physics";
-import { LOW_LIFT, kornMasonLockBand, reliability, transonicLimitMach } from "@jet-workshop/validation";
+import { SYMBOL_WINDOW, kornMasonLockBand, reliability, transonicLimitMach } from "@jet-workshop/validation";
 import { loadBundledData } from "./data.ts";
 import { Planform } from "./Planform.tsx";
 import { DragMachChart, type MachBandPoint } from "./charts/DragMachChart.tsx";
@@ -20,8 +20,6 @@ const TESTED: { id: TestedWingId; label: string }[] = [
   { id: "47", label: "NACA wing · 47° sweep" },
 ];
 const UNTESTED_MACHS = [0.5, 0.85, 0.95, 1.0, 1.1];
-/** Measured symbols shown on the drag-vs-Mach chart: within this of the selected CL. */
-const SYMBOL_WINDOW = 0.06;
 
 export function App() {
   const [sweep, setSweep] = useState(35);
@@ -114,7 +112,7 @@ export function App() {
         <section className="column-right" aria-label="Results">
           <div className="figure">
             <h2 className="panel-title">Drag coefficient vs Mach</h2>
-            <DragMachChart band={view.band} limitMach={view.limit} measured={view.measured} faired={view.faired} segments={view.segments} clSelected={cl} symbolWindow={SYMBOL_WINDOW} stripWindow={LOW_LIFT} />
+            <DragMachChart band={view.band} limitMach={view.limit} measured={view.measured} faired={view.faired} segments={view.segments} clSelected={cl} symbolWindow={SYMBOL_WINDOW} />
             <div className="legend">
               <span><svg width="14" height="10" aria-hidden="true"><circle cx="7" cy="5" r="3.6" fill="var(--surface)" stroke="var(--ink)" strokeWidth="1.2" /></svg>Measured (NACA, 1952)</span>
               <span><svg width="22" height="12" aria-hidden="true"><rect x="1" y="1" width="20" height="10" fill="var(--accent)" fillOpacity="0.18" stroke="var(--accent)" strokeWidth="0.8" /></svg>Model range</span>

@@ -22,10 +22,8 @@ interface Props {
   faired: FairedSample[];
   segments: Segment[];
   clSelected: number;
-  /** Measured symbols drawn: within this of the selected CL */
+  /** Measured symbols drawn, and scored by the reliability strip (decision 0001): within this of the selected CL */
   symbolWindow: number;
-  /** Symbols the reliability strip scores: within this of the selected CL */
-  stripWindow: number;
 }
 
 /** The red limit line and its note, on the side of the line with more room, in two lines. */
@@ -45,7 +43,7 @@ function LimitNote({ x }: { x: number }) {
 
 const COLOR = { validated: "var(--ok)", estimate: "var(--warn)", "outside model range": "var(--stop)" } as const;
 
-export function DragMachChart({ band, limitMach, measured, faired, segments, clSelected, symbolWindow, stripWindow }: Props) {
+export function DragMachChart({ band, limitMach, measured, faired, segments, clSelected, symbolWindow }: Props) {
   const x = scaleLinear().domain(MACH).range([M.l, W - M.r]);
   const validMax = Math.max(0, ...band.filter((c) => c.valid).map((c) => c.max));
   const dataMax = Math.max(0, ...measured.map((p) => p.cd + p.uCd), ...faired.map((s) => s.cd0));
@@ -109,7 +107,7 @@ export function DragMachChart({ band, limitMach, measured, faired, segments, clS
         model at CL <tspan className="num">{clSelected.toFixed(2)}</tspan>
         {segments.some((s) => s.n > 0) || measured.length ? (
           <tspan>
-            ; symbols drawn within <tspan className="num">{symbolWindow.toFixed(2)}</tspan>, strip scores those within <tspan className="num">{stripWindow.toFixed(2)}</tspan>
+            ; symbols within <tspan className="num">{symbolWindow.toFixed(2)}</tspan>, drawn and scored by the strip
           </tspan>
         ) : null}
       </text>
