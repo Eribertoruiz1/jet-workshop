@@ -1,0 +1,318 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig06b",
+    "number": "6(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for wing 1. (b) Drag coefficient.",
+    "pdf_page": 20,
+    "printed_page": 19,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Wing 1: 47 deg, t/c 0.04 (configuration 47deg-t04). Measured points: hollow symbols with a centre dot, one shape per Mach number, joined by faired curves."
+  },
+  "scan": {
+    "pdf_page": 20,
+    "size_px": [
+      3075,
+      2194
+    ],
+    "extraction": "tools/digitize/extract_scan.py --turn cw: the page's single embedded image (page /Rotate 0), turned a quarter turn clockwise so that the sideways figure reads upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session (lane B)",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 31
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.2, grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.2 (M 1.112); then .2 .4 .6 of M 1.112 at 2.4 to 2.8 (right frame). Test Mach numbers 0.50, 0.696, 0.843, 0.892, 0.916, 0.941, 0.965, 0.990, 1.010, 1.024, 1.088, 1.112.",
+    "points": [
+      {
+        "px": [
+          737,
+          279
+        ],
+        "x": -0.1,
+        "y": 0.21
+      },
+      {
+        "px": [
+          737,
+          831
+        ],
+        "x": -0.1,
+        "y": 0.12
+      },
+      {
+        "px": [
+          737,
+          1383
+        ],
+        "x": -0.1,
+        "y": 0.03
+      },
+      {
+        "px": [
+          1175,
+          279
+        ],
+        "x": 0.6,
+        "y": 0.21
+      },
+      {
+        "px": [
+          987,
+          1199
+        ],
+        "x": 0.3,
+        "y": 0.06
+      },
+      {
+        "px": [
+          1550,
+          279
+        ],
+        "x": 1.2,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2300,
+          647
+        ],
+        "x": 2.4,
+        "y": 0.15
+      },
+      {
+        "px": [
+          2300,
+          1015
+        ],
+        "x": 2.4,
+        "y": 0.09
+      },
+      {
+        "px": [
+          2487,
+          279
+        ],
+        "x": 2.7,
+        "y": 0.21
+      },
+      {
+        "px": [
+          2487,
+          1199
+        ],
+        "x": 2.7,
+        "y": 0.06
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06b-47deg-t04-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 2
+        },
+        {
+          "id": "p2",
+          "candidate": 4
+        },
+        {
+          "id": "p3",
+          "candidate": 6
+        },
+        {
+          "id": "p4",
+          "candidate": 9
+        },
+        {
+          "id": "p5",
+          "candidate": 16
+        },
+        {
+          "id": "p6",
+          "candidate": 22
+        },
+        {
+          "id": "p7",
+          "candidate": 25
+        },
+        {
+          "id": "p8",
+          "candidate": 32
+        }
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 12
+        },
+        {
+          "id": "p2",
+          "candidate": 17
+        },
+        {
+          "id": "p3",
+          "candidate": 24
+        },
+        {
+          "id": "p4",
+          "candidate": 35
+        },
+        {
+          "id": "p5",
+          "candidate": 42
+        },
+        {
+          "id": "p6",
+          "candidate": 45
+        },
+        {
+          "id": "p7",
+          "candidate": 51
+        },
+        {
+          "id": "p8",
+          "candidate": 56
+        }
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 39
+        },
+        {
+          "id": "p2",
+          "candidate": 50
+        },
+        {
+          "id": "p3",
+          "candidate": 64
+        },
+        {
+          "id": "p4",
+          "candidate": 71
+        },
+        {
+          "id": "p5",
+          "candidate": 78
+        },
+        {
+          "id": "p6",
+          "candidate": 83
+        },
+        {
+          "id": "p7",
+          "candidate": 85
+        },
+        {
+          "id": "p8",
+          "candidate": 89
+        }
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 62
+        },
+        {
+          "id": "p2",
+          "candidate": 75
+        },
+        {
+          "id": "p3",
+          "candidate": 81
+        },
+        {
+          "id": "p4",
+          "candidate": 88
+        }
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "quarter circle, flat edges at top and left",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 95
+        },
+        {
+          "id": "p2",
+          "candidate": 101
+        },
+        {
+          "id": "p3",
+          "candidate": 104
+        },
+        {
+          "id": "p4",
+          "candidate": 105
+        }
+      ]
+    }
+  ]
+}
