@@ -34,11 +34,12 @@ import json
 import math
 from pathlib import Path
 
-# Declared accuracy of the balance data, NACA RM L52B08 p. 5 ("Measurements").
-DECLARED = {"CL": 0.01, "CD": 0.001, "CD0": 0.001, "Cm": 0.004}
+# Declared accuracy, NACA RM L52B08 p. 5 ("Measurements"): balance data CL, CD
+# and Cm; the model angle "set within +/-0.1 deg for all test Mach numbers".
+DECLARED = {"CL": 0.01, "CD": 0.001, "CD0": 0.001, "Cm": 0.004, "alpha": 0.1}
 
 FIELDS = [
-    "document", "figure", "pdf_page", "printed_page", "wing", "mach", "series", "point_id",
+    "document", "figure_id", "figure", "pdf_page", "printed_page", "wing", "mach", "series", "point_id",
     "variable", "value_pass_a", "value_pass_b", "value_adopted", "pass_difference", "u_pixel_floor",
     "u_digitization", "u_declared", "u_total", "data_class", "method", "flags", "note",
 ]
@@ -61,17 +62,8 @@ def match_symbols(pa: list[dict], pb: list[dict], xvar: str, yvar: str) -> list[
     return out
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("pass_a", type=Path)
-    ap.add_argument("pass_b", type=Path)
-    ap.add_argument("out_csv", type=Path)
-    ap.add_argument("--md", type=Path, default=None)
-    ap.add_argument("--label-a", default="Pass A")
-    ap.add_argument("--label-b", default="Pass B")
-    args = ap.parse_args()
-    ra = json.loads(args.pass_a.read_text(encoding="utf-8"))
-    rb = json.loads(args.pass_b.read_text(encoding="utf-8"))
+def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = "Pass B") -> dict:
+    """Rows and summary for two passes of one figure."""
     fig = ra["figure"]
     if fig["id"] != rb["figure"]["id"]:
         raise SystemExit("the two results are for different figures")
@@ -83,7 +75,7 @@ def main() -> None:
     for sa in ra["series"]:
         sb = next((s for s in rb["series"] if s["id"] == sa["id"]), None)
         if sb is None:
-            unmatched.append(f"series {sa['id']} only in pass A")
+            unmatched.append(f"series {sa['id']} only in {label_a}")
             continue
         xvar, yvar = sa["x_variable"], sa["y_variable"]
         if sa["kind"] == "curve_samples":
@@ -104,7 +96,7 @@ def main() -> None:
             if a is None or b is None or not a.get("found") or not b.get("found"):
                 which = "A" if (a is not None and a.get("found")) else "B"
                 pid = (a or b)["id"]
-                unmatched.append(f"{sa['id']} {pid}: only in {args.label_a if which == 'A' else args.label_b}")
+                unmatched.append(f"{sa['id']} {pid}: only in {label_a if which == 'A' else label_b}")
                 continue
             exceeded_here = False
             flags = []
@@ -127,6 +119,7 @@ def main() -> None:
                     mach = a["value"]["M"]
                 rows.append({
                     "document": ra["source"]["document"],
+                    "figure_id": fig["id"],
                     "figure": fig["number"],
                     "pdf_page": fig["pdf_page"],
                     "printed_page": fig["printed_page"],
@@ -150,18 +143,25 @@ def main() -> None:
                 })
             compared += 1
             exceed += int(exceeded_here)
+    return {"figure": fig, "rows": rows, "compared": compared, "exceed": exceed, "unmatched": unmatched,
+            "label_a": label_a, "label_b": label_b}
 
-    args.out_csv.parent.mkdir(parents=True, exist_ok=True)
-    with args.out_csv.open("w", newline="", encoding="utf-8") as f:
+
+def write_csv(rows: list[dict], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS, lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 
+
+def markdown(res: dict) -> str:
+    fig, rows, compared, exceed, unmatched = res["figure"], res["rows"], res["compared"], res["exceed"], res["unmatched"]
     frac = exceed / compared if compared else 0.0
     lines = [
         f"### Figure {fig['number']} (PDF page {fig['pdf_page']}, printed page {fig['printed_page']})",
         "",
-        f"| Series | Point | Variable | {args.label_a} | {args.label_b} | Difference | 1 px floor | Declared accuracy | Difference / accuracy | Flags |",
+        f"| Series | Point | Variable | {res['label_a']} | {res['label_b']} | Difference | 1 px floor | Declared accuracy | Difference / accuracy | Flags |",
         "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
     for r in rows:
@@ -175,7 +175,23 @@ def main() -> None:
     ]
     if unmatched:
         lines += ["", "Unmatched:"] + [f"- {u}" for u in unmatched]
-    md = "\n".join(lines) + "\n"
+    return "\n".join(lines) + "\n"
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("pass_a", type=Path)
+    ap.add_argument("pass_b", type=Path)
+    ap.add_argument("out_csv", type=Path)
+    ap.add_argument("--md", type=Path, default=None)
+    ap.add_argument("--label-a", default="Pass A")
+    ap.add_argument("--label-b", default="Pass B")
+    args = ap.parse_args()
+    ra = json.loads(args.pass_a.read_text(encoding="utf-8"))
+    rb = json.loads(args.pass_b.read_text(encoding="utf-8"))
+    res = compare_results(ra, rb, args.label_a, args.label_b)
+    write_csv(res["rows"], args.out_csv)
+    md = markdown(res)
     if args.md:
         args.md.write_text(md, encoding="utf-8", newline="\n")
     print(md)

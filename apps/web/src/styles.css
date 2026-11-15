@@ -1,0 +1,232 @@
+/* Colour has a role; the interface stays neutral. Only these tokens are used. */
+:root {
+  --page: #f5f6f8;
+  --surface: #ffffff;
+  --ink: #15181c;
+  --ink-2: #5b6470;
+  --grid: #dde1e6;
+  --accent: #1f5fbf;
+  --ok: #1e8e5a;
+  --warn: #b7791f;
+  --stop: #c0392b;
+  --text: "B612", system-ui, sans-serif;
+  --mono: "B612 Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.bench {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 32px 24px;
+}
+
+.head h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.head p {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) 2fr;
+  gap: 32px;
+  margin-top: 20px;
+}
+
+.column-left,
+.column-right {
+  min-width: 0;
+}
+
+.panel-title {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.figure {
+  background: var(--surface);
+  border-top: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+  padding: 12px 12px 8px;
+}
+
+.figure + .figure {
+  margin-top: 16px;
+}
+
+svg text {
+  font-family: var(--text);
+  fill: var(--ink-2);
+  font-size: 11px;
+}
+
+svg .num {
+  font-family: var(--mono);
+}
+
+svg .ink {
+  fill: var(--ink);
+}
+
+.wings {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 18px 0 14px;
+}
+
+.wings button {
+  font-family: var(--text);
+  font-size: 13px;
+  text-align: left;
+  padding: 7px 10px;
+  border: 1px solid var(--grid);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.wings button[aria-pressed="true"] {
+  border-color: var(--ink);
+  border-left: 4px solid var(--ink);
+  padding-left: 7px;
+}
+
+.wings button:focus-visible,
+.control input:focus-visible,
+.mach-picker button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--grid);
+}
+
+.control label {
+  font-size: 13px;
+}
+
+.control output {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.control input[type="range"] {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: var(--ink);
+}
+
+.status {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  min-height: 1.4em;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: 12px;
+  color: var(--ink-2);
+  margin: 4px 0 0;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.small-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.small-charts .figure + .figure {
+  margin-top: 0;
+}
+
+.mach-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.mach-picker button {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 3px 7px;
+  border: 1px solid var(--grid);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.mach-picker button[aria-pressed="true"] {
+  border-color: var(--ink);
+}
+
+.foot {
+  margin-top: 22px;
+  padding-top: 10px;
+  border-top: 1px solid var(--grid);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.error {
+  color: var(--ink);
+  border-left: 3px solid var(--ink);
+  padding: 4px 10px;
+  margin: 12px 0;
+}
+
+@media (max-width: 900px) {
+  .bench {
+    padding: 18px 16px;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .small-charts {
+    grid-template-columns: 1fr;
+  }
+}
