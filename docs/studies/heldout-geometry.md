@@ -159,7 +159,7 @@ Reynolds number in RM L51I04a figure 5, `read by eye` once from the scan (about 
 | RM L51I04a | 10, 12 to 15 | lift-curve slope, drag due to lift, maximum lift-drag ratio, its lift coefficient, and stability parameter against Mach number | not digitized (other quantities) |
 | RM L51I04a | 16 | body alone; 16(b) is already open data (`packages/validation/data/bielat-l51i04a-body.csv`) | not changed |
 | RM L51K16a | 6(a) to 6(f) (one per configuration) | Cm, CD and angle of attack against CL, one polar at M 1.60, common CL axis | CD and angle of attack: measured symbols |
-| RM L51K16a | 9 to 11, Table II | lift-drag ratios, minimum drag against thickness ratio squared, summary of characteristics | not digitized (other quantities, or NACA's own reduction) |
+| RM L51K16a | 9 to 11, Table II | NACA's own reductions, not digitized | |
 
 ## Held-out data files
 
