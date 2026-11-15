@@ -75,7 +75,7 @@ export function DragMachChart({ band, limitMach, measured, faired, segments, clS
             </g>
           ) : (
             <g key={i}>
-              <title>Model outside its range: the transonic drag-rise method is not valid here</title>
+              <title>Model outside its range (the reliability strip gives the reason)</title>
               <path d={fill(r.points) ?? ""} fill="url(#hatch-drag)" stroke="none" />
               <path d={edge("min")(r.points) ?? ""} fill="none" stroke="var(--stop)" strokeWidth={1} strokeDasharray="5 4" />
               <path d={edge("max")(r.points) ?? ""} fill="none" stroke="var(--stop)" strokeWidth={1} strokeDasharray="5 4" />
