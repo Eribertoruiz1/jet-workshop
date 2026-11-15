@@ -472,6 +472,71 @@ def snap_dot(g: np.ndarray, x: float, y: float, r: int = 5, level: float = 200.0
     return {"found": True, "px": [round(xi - r + bx, 2), round(yi - r + by, 2)], "dot_pixels": size}
 
 
+def snap_ring(g: np.ndarray, x: float, y: float, r: int = 26, level: float = 100.0, tol: float = 2.5,
+              search: int = 6, radii: tuple[int, int] = (8, 18)) -> dict:
+    """Refine a pick to the centre of a hollow circle drawn without a centre dot.
+
+    For figures whose symbols carry no centre dot (NACA RM L51K16a: plain
+    circles on fine-ruled graph paper). Takes the pixels darker than `level`
+    within r px of the pick (the printed graph-paper lines are lighter and
+    mostly drop out). A coarse search over centres within `search` px of the
+    pick and radii in `radii` finds the ring that holds the most dark pixels
+    (within 1.5 px of it); a least-squares circle (algebraic fit) is then
+    refined from there, keeping only pixels within `tol` px of the fitted ring
+    and refitting until the kept set stops changing. A curve stub or a grid
+    line crossing the window is rejected that way, and the result does not
+    depend on where inside the circle the pick fell.
+
+    Returns the fitted centre, the radius, the number of ring pixels, the rms
+    distance of those pixels from the ring, and how many of 16 equal sectors
+    around the centre hold ring pixels. found=False when fewer than 12 of 16
+    sectors are covered or the rms is above 1.5 px: then the reader picks the
+    centre by eye (snap "none") and says why.
+    """
+    xi, yi = int(round(x)), int(round(y))
+    win = g[yi - r : yi + r + 1, xi - r : xi + r + 1]
+    ys, xs = np.nonzero(win < level)
+    px = xs.astype(float) + xi - r
+    py = ys.astype(float) + yi - r
+    if len(px) < 12:
+        return {"found": False, "px": [float(x), float(y)], "reason": "too few dark pixels"}
+    best = None
+    for oy in range(-search, search + 1):
+        for ox in range(-search, search + 1):
+            d = np.hypot(px - (xi + ox), py - (yi + oy))
+            for rr in range(radii[0], radii[1] + 1):
+                score = int(np.count_nonzero(np.abs(d - rr) < 1.5))
+                key = (score, -(ox * ox + oy * oy))
+                if best is None or key > best[0]:
+                    best = (key, xi + ox, yi + oy, rr)
+    _, cx, cy, rad = best
+    cx, cy, rad = float(cx), float(cy), float(rad)
+    d = np.hypot(px - cx, py - cy)
+    keep = np.abs(d - rad) < tol
+    for _ in range(20):
+        if keep.sum() < 12:
+            return {"found": False, "px": [float(x), float(y)], "reason": "ring not found"}
+        a = np.column_stack([2 * px[keep], 2 * py[keep], np.ones(int(keep.sum()))])
+        b = px[keep] ** 2 + py[keep] ** 2
+        (cx, cy, c), *_ = np.linalg.lstsq(a, b, rcond=None)
+        rad = float(np.sqrt(c + cx**2 + cy**2))
+        d = np.hypot(px - cx, py - cy)
+        new_keep = np.abs(d - rad) < tol
+        if np.array_equal(new_keep, keep):
+            break
+        keep = new_keep
+    res = d[keep] - rad
+    rms = float(np.sqrt(np.mean(res**2)))
+    ang = np.arctan2(py[keep] - cy, px[keep] - cx)
+    sectors = int(len(np.unique(np.floor((ang + np.pi) / (2 * np.pi) * 16).astype(int) % 16)))
+    out = {"px": [round(float(cx), 2), round(float(cy), 2)], "ring_radius_px": round(rad, 2),
+           "ring_pixels": int(keep.sum()), "ring_rms_px": round(rms, 2), "ring_sectors_of_16": sectors}
+    out["found"] = bool(sectors >= 12 and rms <= 1.5)
+    if not out["found"]:
+        out["reason"] = f"ring covers {sectors} of 16 sectors, rms {rms:.2f} px"
+    return out
+
+
 # --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
@@ -576,6 +641,14 @@ def run(spec: dict, g: np.ndarray) -> dict:
                     else:
                         raise SystemExit(f"{s['id']} {p['id']}: no isolated centre dot near {x},{y}; "
                                          "move the pick or use snap 'none' with a note")
+                elif snap == "ring":
+                    d = snap_ring(g, float(x), float(y), r=int(p.get("ring_window", 20)),
+                                  level=float(p.get("ring_level", 100)))
+                    if not d["found"]:
+                        raise SystemExit(f"{s['id']} {p['id']}: no circle outline fitted near {x},{y} "
+                                         f"({d.get('reason')}); move the pick or use snap 'none' with a note")
+                    x, y = d["px"]
+                    r["ring"] = {k: d[k] for k in ("ring_radius_px", "ring_pixels", "ring_rms_px", "ring_sectors_of_16")}
                 r["px"] = [x, y]
                 conv = convert(float(x), float(y))
                 xv, yv = conv["data"]
@@ -651,6 +724,10 @@ def main() -> None:
             if p.get("found"):
                 vals = ", ".join(f"{k}={v:.5f}" for k, v in p["value"].items())
                 extra = f" width {p['line_width_px']:.0f}px rms {p['fit_rms_px']}" if "line_width_px" in p else ""
+                if "ring" in p:
+                    q = p["ring"]
+                    extra += (f" ring r {q['ring_radius_px']} px, {q['ring_pixels']} px, rms {q['ring_rms_px']}, "
+                              f"{q['ring_sectors_of_16']}/16 sectors")
                 if p.get("near_grid_line"):
                     g_ = p["nearest_grid_line"]
                     extra += f" NEAR GRID LINE {g_['value']} ({g_['distance_px']} px)"

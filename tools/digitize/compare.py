@@ -37,8 +37,20 @@ from pathlib import Path
 # Declared accuracy, NACA RM L52B08 p. 5 ("Measurements"): balance data CL, CD
 # and Cm; the model angle "set within +/-0.1 deg for all test Mach numbers".
 # NACA RM L51I04a (same tunnel, balance and models) declares the same values
-# on its p. 4 and 5.
+# on its p. 4 and 5. A report with other values gives them in its specs'
+# source block, as "declared_accuracy" (NACA RM L51K16a: CL 0.005, Cm 0.001).
 DECLARED = {"CL": 0.01, "CD": 0.001, "CD0": 0.001, "Cm": 0.004, "alpha": 0.1}
+
+METHOD_DOT = "symbol centre dot located by tools/digitize/digitize.py (snap 'dot' unless noted)"
+METHOD_RING = "symbol centre by a circle fitted to the outline by tools/digitize/digitize.py (snap 'ring')"
+
+
+def declared_for(ra: dict, rb: dict) -> dict:
+    """Declared accuracy for the figure: the default table, overridden by the specs' source block."""
+    da = ra["source"].get("declared_accuracy", {})
+    if da != rb["source"].get("declared_accuracy", {}):
+        raise SystemExit("the two passes state different declared accuracies")
+    return {**DECLARED, **da}
 
 FIELDS = [
     "document", "figure_id", "figure", "pdf_page", "printed_page", "wing", "mach", "series", "point_id",
@@ -47,10 +59,13 @@ FIELDS = [
 ]
 
 
-def match_symbols(pa: list[dict], pb: list[dict], xvar: str, yvar: str) -> list[tuple[dict | None, dict | None]]:
+def match_symbols(pa: list[dict], pb: list[dict], xvar: str, yvar: str,
+                  declared: dict | None = None) -> list[tuple[dict | None, dict | None]]:
+    dec = declared or DECLARED
+
     def dist(a: dict, b: dict) -> float:
-        return math.hypot((a["value"][xvar] - b["value"][xvar]) / DECLARED[xvar],
-                          (a["value"][yvar] - b["value"][yvar]) / DECLARED[yvar])
+        return math.hypot((a["value"][xvar] - b["value"][xvar]) / dec[xvar],
+                          (a["value"][yvar] - b["value"][yvar]) / dec[yvar])
     pairs = sorted(((dist(a, b), i, j) for i, a in enumerate(pa) for j, b in enumerate(pb)), key=lambda t: t[0])
     used_a, used_b, matched = set(), set(), []
     for d, i, j in pairs:
@@ -84,6 +99,7 @@ def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = 
     fig = ra["figure"]
     if fig["id"] != rb["figure"]["id"]:
         raise SystemExit("the two results are for different figures")
+    declared = declared_for(ra, rb)
 
     rows: list[dict] = []
     exceed = 0
@@ -104,11 +120,11 @@ def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = 
             method = "curve sampled at the stated x by the column-snap of tools/digitize/digitize.py"
         else:
             pairs = match_symbols([p for p in sa["points"] if p.get("found")],
-                                  [p for p in sb["points"] if p.get("found")], xvar, yvar)
+                                  [p for p in sb["points"] if p.get("found")], xvar, yvar, declared)
             pairs.sort(key=lambda ab: (ab[0] or ab[1])["value"][xvar])
             variables = [xvar, yvar]
             data_class = "measured"
-            method = "symbol centre dot located by tools/digitize/digitize.py (snap 'dot' unless noted)"
+            method = METHOD_DOT
         for a, b in pairs:
             if a is None or b is None or not a.get("found") or not b.get("found"):
                 which = "A" if (a is not None and a.get("found")) else "B"
@@ -128,7 +144,7 @@ def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = 
                 axis = 0 if var == xvar else 1
                 floor = max(abs(ra["calibration"]["data_per_px"][axis]), abs(rb["calibration"]["data_per_px"][axis]))
                 u_dig = max(diff, floor)
-                u_dec = DECLARED[var]
+                u_dec = declared[var]
                 if diff > u_dec:
                     exceeded_here = True
                 mach = sa.get("mach")
@@ -154,7 +170,7 @@ def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = 
                     "u_declared": f"{u_dec:.3f}",
                     "u_total": f"{math.hypot(u_dig, u_dec):.5f}",
                     "data_class": data_class,
-                    "method": method,
+                    "method": METHOD_RING if "ring" in (a.get("snap"), b.get("snap")) else method,
                     "flags": "; ".join(flags),
                     "note": " / ".join(n for n in (a.get("note", ""), b.get("note", "")) if n),
                 })
