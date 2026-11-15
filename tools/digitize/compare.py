@@ -1,11 +1,21 @@
 """Compare two independent digitization passes of one figure.
 
 Writes one CSV row per point and variable, with both pass values, the
-adopted value (mean of the two passes), the digitization uncertainty (the
-absolute difference between passes), the report's declared accuracy and the
-total uncertainty (root-sum-square of the two). Prints a Markdown table and
-applies the stop rule of brief 001: if the passes differ by more than the
-declared accuracy in more than 10% of a figure's points, stop and report.
+adopted value (mean of the two passes), the pass difference, the one-pixel
+floor in data units, the digitization uncertainty, the report's declared
+accuracy and the total uncertainty.
+
+Digitization uncertainty = max(pass difference, one scan pixel along that
+axis in data units) (brief 001, Amendment 2, point 4). Both passes share the
+centre-dot snap and the traced grid, so their difference can be near zero by
+construction; it then only guards against gross errors (wrong symbol, wrong
+line, wrong axis origin), and the pixel floor carries the reading resolution.
+Total uncertainty = root-sum-square of digitization uncertainty and declared
+accuracy.
+
+Prints a Markdown table and applies the stop rule of brief 001: if the passes
+differ by more than the declared accuracy in more than 10% of a figure's
+points, stop and report.
 
 Curve samples are matched by sample id (both passes sample the same x values).
 Symbols are matched one to one by nearest neighbour in data space, scaled by
@@ -29,8 +39,8 @@ DECLARED = {"CL": 0.01, "CD": 0.001, "CD0": 0.001, "Cm": 0.004}
 
 FIELDS = [
     "document", "figure", "pdf_page", "printed_page", "wing", "mach", "series", "point_id",
-    "variable", "value_pass_a", "value_pass_b", "value_adopted", "u_digitization",
-    "u_declared", "u_total", "data_class", "method", "note",
+    "variable", "value_pass_a", "value_pass_b", "value_adopted", "pass_difference", "u_pixel_floor",
+    "u_digitization", "u_declared", "u_total", "data_class", "method", "flags", "note",
 ]
 
 
@@ -94,11 +104,20 @@ def main() -> None:
                 unmatched.append(f"{sa['id']} {pid}: found only in pass {which}")
                 continue
             exceeded_here = False
+            flags = []
+            for label, p in (("A", a), ("B", b)):
+                if p.get("near_grid_line"):
+                    flags.append(f"pass {label}: within one line width of grid line {p['nearest_grid_line']['value']}")
+                if p.get("snap") == "none":
+                    flags.append(f"pass {label}: centre picked by eye (no dot snap)")
             for var in variables:
                 va, vb = a["value"][var], b["value"][var]
-                u_dig = abs(va - vb)
+                diff = abs(va - vb)
+                axis = 0 if var == xvar else 1
+                floor = max(abs(ra["calibration"]["data_per_px"][axis]), abs(rb["calibration"]["data_per_px"][axis]))
+                u_dig = max(diff, floor)
                 u_dec = DECLARED[var]
-                if u_dig > u_dec:
+                if diff > u_dec:
                     exceeded_here = True
                 mach = sa.get("mach")
                 if mach is None and xvar == "M":
@@ -116,11 +135,14 @@ def main() -> None:
                     "value_pass_a": f"{va:.5f}",
                     "value_pass_b": f"{vb:.5f}",
                     "value_adopted": f"{(va + vb) / 2:.5f}",
-                    "u_digitization": f"{u_dig:.5f}",
+                    "pass_difference": f"{diff:.6f}",
+                    "u_pixel_floor": f"{floor:.6f}",
+                    "u_digitization": f"{u_dig:.6f}",
                     "u_declared": f"{u_dec:.3f}",
                     "u_total": f"{math.hypot(u_dig, u_dec):.5f}",
                     "data_class": data_class,
                     "method": method,
+                    "flags": "; ".join(flags),
                     "note": " / ".join(n for n in (a.get("note", ""), b.get("note", "")) if n),
                 })
             compared += 1
@@ -136,13 +158,13 @@ def main() -> None:
     lines = [
         f"### Figure {fig['number']} (PDF page {fig['pdf_page']}, printed page {fig['printed_page']})",
         "",
-        "| Series | Point | Variable | Pass A | Pass B | Difference | Declared accuracy | Difference / accuracy |",
-        "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |",
+        "| Series | Point | Variable | Pass A | Pass B | Pass difference | 1 px floor | Declared accuracy | Difference / accuracy | Flags |",
+        "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
     for r in rows:
-        ratio = float(r["u_digitization"]) / float(r["u_declared"])
+        ratio = float(r["pass_difference"]) / float(r["u_declared"])
         lines.append(f"| {r['series']} | {r['point_id']} | {r['variable']} | {r['value_pass_a']} | {r['value_pass_b']} | "
-                     f"{r['u_digitization']} | {r['u_declared']} | {ratio:.2f} |")
+                     f"{r['pass_difference']} | {r['u_pixel_floor']} | {r['u_declared']} | {ratio:.2f} | {r['flags']} |")
     lines += [
         "",
         f"Points compared: {compared}. Points where the passes differ by more than the declared accuracy: {exceed} "

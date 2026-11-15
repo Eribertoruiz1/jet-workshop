@@ -101,7 +101,11 @@ SHA-256 as downloaded: `e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e
 
 ## Uncertainty
 
-- Digitization uncertainty of a point: absolute difference between pass A and pass B.
-- Declared accuracy of the balance data (report p. 5): CL ±0.01, CD ±0.001, Cm ±0.004.
-- Total uncertainty: root-sum-square of the two.
-- Stop rule: if the passes differ by more than the declared accuracy in more than 10% of a figure's points, stop and report.
+- **Pass difference**: absolute difference between pass A and pass B for each point and variable.
+- **Why it can be near zero.** Both passes run the same script. A symbol picked within a few pixels of its centre dot snaps to the same dot; the mesh comes from the same printed grid lines, traced automatically; a curve sample centres on the same inked line. Two careful readers therefore land on almost the same pixel by construction. The pass difference stays as a control of gross errors: a wrong symbol, a wrong line where curves merge, a wrong origin on a staggered scale, a misread grid. It is not, on its own, a measure of reading resolution.
+- **Pixel floor**: one scan pixel along each axis, in data units (from the calibration of each pass; the larger of the two). On figure 9 that is about 0.00035 in M and 0.000035 in CD0; on figure 6(b) about 0.0016 in CL and 0.00016 in CD.
+- **Digitization uncertainty** = max(pass difference, pixel floor) (brief 001, Amendment 2, point 4).
+- **Declared accuracy** of the balance data (report p. 5): CL ±0.01, CD ±0.001, Cm ±0.004.
+- **Total uncertainty**: root-sum-square of digitization uncertainty and declared accuracy.
+- **Flags** in the CSV: curve samples whose line centre is within one line width of a horizontal grid line (the two inked lines touch or merge there), and symbols whose centre was picked by eye because no isolated dot was found.
+- **Stop rule**: if the passes differ by more than the declared accuracy in more than 10% of a figure's points, stop and report.

@@ -453,6 +453,15 @@ def run(spec: dict, g: np.ndarray) -> dict:
                                  side=p.get("side", "both"))
                 if r["found"]:
                     r["affine_data"] = convert(*r["px"])["affine_data"]
+                    if isinstance(mapper, Mesh):
+                        # Flag samples whose line centre lies within one line width of a
+                        # horizontal grid line: there the two inked lines touch or merge.
+                        c0, y_at = r["px"]
+                        rows = np.array([f(c0) for f in mapper.y_lines])
+                        k = int(np.argmin(np.abs(rows - y_at)))
+                        dist = float(abs(rows[k] - y_at))
+                        r["nearest_grid_line"] = {"value": float(mapper.y_values[k]), "distance_px": round(dist, 2)}
+                        r["near_grid_line"] = bool(dist < r["line_width_px"])
                 r["id"] = p.get("id", f"x={p['x']}")
                 if "note" in p:
                     r["note"] = p["note"]
@@ -535,6 +544,9 @@ def main() -> None:
             if p.get("found"):
                 vals = ", ".join(f"{k}={v:.5f}" for k, v in p["value"].items())
                 extra = f" width {p['line_width_px']:.0f}px rms {p['fit_rms_px']}" if "line_width_px" in p else ""
+                if p.get("near_grid_line"):
+                    g_ = p["nearest_grid_line"]
+                    extra += f" NEAR GRID LINE {g_['value']} ({g_['distance_px']} px)"
                 print(f"  {s['id']} {p['id']}: px {p['px']} -> {vals}{extra}")
             else:
                 print(f"  {s['id']} {p['id']}: NOT FOUND ({p.get('reason')})")

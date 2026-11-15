@@ -306,3 +306,16 @@ Decisión del dueño para la compuerta 2, si las superposiciones del paso 0 se v
 8. Cuando entre la primera prueba, quita `--passWithNoTests` del comando de pruebas.
 
 Revisión del punto 3 (15 de noviembre de 2026, aprobada por el dueño): los símbolos de baja sustentación están en CL ≈ −0.1 (α = −2°) y CL ≈ +0.1 (α = 0°, por la curvatura), no en CL = 0, y su resistencia difiere del CD0 por la resistencia debida a la sustentación. La comprobación cruzada pasa a ser: una parábola ajustada a los símbolos de la polar con |CL| ≤ 0.3, evaluada en CL = 0, debe coincidir con la curva de la figura 9 dentro de ±0.001. Si no, hay un error de lectura. La parábola es solo una comprobación: nunca se muestra ni se guarda como dato medido.
+
+## Enmienda 2 (15 de noviembre de 2026)
+
+Prevalece sobre el texto anterior y sobre la Enmienda 1 donde lo contradiga.
+
+1. Punto 3 de la Enmienda 1: aceptada la comprobación por parábola por los símbolos con |CL| ≤ 0.3, evaluada en CL = 0, contra la figura 9, dentro de ±0.001. Solo como comprobación, nunca como dato.
+2. Punto 4 de la Enmienda 1: las bandas de CD0 se reportan de dos formas, por separado: el modelo en CL = 0 contra la curva de la figura 9, rotulada como curva de la NACA; y el modelo contra los símbolos medidos con |CL| ≤ 0.3.
+3. El modelo necesita una polar desplazada: resistencia mínima en el CL de diseño de la línea media, sacado de la geometría del perfil y no ajustado a los datos. Si se ajusta, se aplica la regla de calibración.
+4. Si la diferencia entre pasadas sale casi cero, es por construcción: las dos comparten el ajuste al punto central y la rejilla. Queda como control de errores gruesos. Como incertidumbre de digitalización se usa el mayor de: esa diferencia y ±1 px por eje en unidades del dato. Se explica en el README de la herramienta.
+5. Prueba independiente: digitalizar la figura 6(b) desde el escaneo de la UNT con la misma herramienta y comparar. Si no es barato, a Tickets.
+6. En el muestreo de curvas, se marcan las muestras a menos de un ancho de línea de una línea horizontal de la rejilla.
+7. Al cerrar la pasada B, se suben los specs y resultados de ambas pasadas a `tools/digitize/figures/`.
+8. La sesión se mueve a una carpeta permanente del dueño.
