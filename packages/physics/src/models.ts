@@ -5,10 +5,15 @@
  * measured data. Two models ship:
  *
  * - korn-mason-lock: parasite build-up, displaced parabolic polar with Oswald
- *   efficiency, and the Korn-Mason / Lock transonic drag rise by strips.
+ *   efficiency, and the Korn-Mason / Lock transonic drag rise by strips. The
+ *   drag rise is computed, but every condition where it acts is reported as
+ *   outside the model's range (see transonic.ts).
  * - baseline-incompressible: the same parasite and induced terms with every
  *   Mach-dependent term frozen at M 0.50 (the lowest test Mach number) and no
- *   drag rise. It exists to show what the transonic terms add.
+ *   drag rise. It exists to show what the Mach-dependent terms add.
+ *
+ * Both take the parasite-drag options (wing form factor, boundary layer). The
+ * validation package builds each model's band from its eight variants.
  */
 
 import type { WingBody } from "./geometry.ts";
@@ -29,6 +34,8 @@ export interface ModelResult {
   valid: boolean;
   /** Why the result is outside the model's range, when it is */
   reasons: string[];
+  /** Beyond Lock's own limit (Mdd + 0.05): not to be drawn at all, not even as outside the range */
+  beyondLock: boolean;
   parts: { parasite: number; induced: number; wave: number; minimumDragCl: number };
 }
 
@@ -71,6 +78,7 @@ function kornMasonLockWith(w: WingBody, c: Condition, options: ParasiteOptions):
   const clMin = minimumDragCl(w, c.mach);
   const induced = inducedDragFactor(w.planform) * (c.cl - clMin) ** 2;
   const wave = waveDrag(w, c.mach, c.cl);
+  if (c.mach > wave.mcritMin) reasons.push(`Mach number above the critical Mach number (${wave.mcritMin.toFixed(3)}): the transonic drag-rise method (Korn-Mason with Lock's law) is outside its demonstrated range on thin, low-aspect-ratio wings`);
   if (wave.beyondLock) reasons.push(`Mach number above the drag-divergence Mach number plus 0.05 (${(wave.mddMin + 0.05).toFixed(3)}): Lock's law not valid`);
   if (c.mach > MAX_MACH) reasons.push("Mach number above the tested range");
   polarRange(w, c.cl, clMin, reasons);
@@ -79,15 +87,23 @@ function kornMasonLockWith(w: WingBody, c: Condition, options: ParasiteOptions):
     cd: parasite + induced + wave.cd,
     valid: reasons.length === 0,
     reasons,
+    beyondLock: wave.beyondLock,
     parts: { parasite, induced, wave: wave.cd, minimumDragCl: clMin },
   };
 }
 
 export const BASELINE_REFERENCE_MACH = 0.5;
 
-export const baselineIncompressible: DragModel = (w, c) => {
+/** The incompressible baseline with a choice of wing form factor and boundary layer. */
+export function makeBaseline(options: ParasiteOptions = {}): DragModel {
+  return (w, c) => baselineWith(w, c, options);
+}
+
+export const baselineIncompressible: DragModel = (w, c) => baselineWith(w, c, {});
+
+function baselineWith(w: WingBody, c: Condition, options: ParasiteOptions): ModelResult {
   const reasons: string[] = [];
-  const parasite = parasiteDrag(w, c.mach, BASELINE_REFERENCE_MACH).total;
+  const parasite = parasiteDrag(w, c.mach, BASELINE_REFERENCE_MACH, options).total;
   const clMin = minimumDragCl(w, BASELINE_REFERENCE_MACH);
   const induced = inducedDragFactor(w.planform) * (c.cl - clMin) ** 2;
   if (c.mach > MAX_MACH) reasons.push("Mach number above the tested range");
@@ -97,9 +113,10 @@ export const baselineIncompressible: DragModel = (w, c) => {
     cd: parasite + induced,
     valid: reasons.length === 0,
     reasons,
+    beyondLock: false,
     parts: { parasite, induced, wave: 0, minimumDragCl: clMin },
   };
-};
+}
 
 export const MODELS: Record<string, DragModel> = {
   "korn-mason-lock": kornMasonLock,

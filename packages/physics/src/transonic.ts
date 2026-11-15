@@ -14,6 +14,15 @@
  * Lock's law grows without bound; beyond about Mdd + 0.05 it no longer
  * describes the drag. The model reports that as outside its range instead
  * of extending the curve.
+ *
+ * The method as a whole is outside its demonstrated range on the wings of
+ * this bench (brief 001, gate 4, and Amendment 3, point 4). Korn's relation is
+ * empirical, from transonic transport airfoils; the strip method is shown on
+ * transport wings (Mason: Boeing 747-100 and 777). On the three tested wings,
+ * 4 percent thick with aspect ratio 3.5, its drag-divergence Mach number
+ * misses the measured drag rise in both directions as sweep changes. So the
+ * models report every condition where the drag-rise term acts, above the
+ * critical Mach number of the first strip to diverge, as outside their range.
  */
 
 import { strips, sweepAtDeg, geometry, type WingBody } from "./geometry.ts";
@@ -59,6 +68,8 @@ export interface WaveDrag {
   mddMin: number;
   /** Wing divergence Mach number with the section cl equal to the wing CL */
   mddWing: number;
+  /** Critical Mach number of the first strip to diverge: the drag-rise term is zero below it */
+  mcritMin: number;
   /** True when M exceeds the lowest strip Mdd by more than the validity margin */
   beyondLock: boolean;
 }
@@ -75,5 +86,5 @@ export function waveDrag(w: WingBody, mach: number, wingCl: number, kA = KORN_FA
     cd += lockRise(mach, criticalMach(mdd)) * (s.areaIn2 / p.areaIn2);
   }
   const mddWing = dragDivergenceMach(kA, p.thicknessRatio, wingCl, half);
-  return { cd, mddMin, mddWing, beyondLock: mach > mddMin + LOCK_VALIDITY_MARGIN };
+  return { cd, mddMin, mddWing, mcritMin: criticalMach(mddMin), beyondLock: mach > mddMin + LOCK_VALIDITY_MARGIN };
 }

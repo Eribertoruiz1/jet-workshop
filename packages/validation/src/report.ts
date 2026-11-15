@@ -4,29 +4,36 @@
  */
 
 import {
+  BIELAT_AREA_IN2,
+  BIELAT_BODY,
+  BOUNDARY_LAYERS,
   KORN_FACTOR_NACA6,
   WING_FORM_FACTORS,
-  baselineIncompressible,
   bielatWing,
+  bodyAloneDrag,
   dragDivergenceMach,
   dragRiseMach,
   kornMasonLock,
   liftCurveSlope,
   parasiteDrag,
   sweepAtDeg,
-  type DragModel,
+  type BoundaryLayer,
   type TestedWingId,
 } from "@jet-workshop/physics";
-import type { Dataset } from "./data.ts";
+import type { BodyPoint, Dataset } from "./data.ts";
 import {
   ACCEPTANCE_RANGES,
+  BAND_MODELS,
   CD0_BANDS,
   DISTINCT_CL,
   LOW_LIFT,
   PARASITE_VARIANTS,
+  bandError,
   bandOf,
+  baselineBand,
   criticalMachAtZeroLift,
   fairedComparison,
+  kornMasonLockBand,
   measuredLiftSlope,
   modelRange,
   outsideBy,
@@ -38,10 +45,6 @@ import {
 } from "./score.ts";
 
 const WINGS: TestedWingId[] = ["10.8", "35", "47"];
-const MODELS: { id: string; model: DragModel }[] = [
-  { id: "korn-mason-lock", model: kornMasonLock },
-  { id: "baseline-incompressible", model: baselineIncompressible },
-];
 
 const f4 = (v: number): string => (Number.isFinite(v) ? v.toFixed(4) : "n/a");
 const f3 = (v: number): string => (Number.isFinite(v) ? v.toFixed(3) : "n/a");
@@ -52,7 +55,7 @@ export interface ReportSummary {
   cd0Symbols: Record<string, { range: string; maxAbs: number; band: number; n: number }[]>;
 }
 
-export function buildReport(data: Dataset, inputLabel: string): { markdown: string; summary: ReportSummary } {
+export function buildReport(data: Dataset, inputLabel: string, body: { points: BodyPoint[]; label: string } | null = null): { markdown: string; summary: ReportSummary } {
   const L: string[] = [];
   const summary: ReportSummary = { cd0Faired: {}, cd0Symbols: {} };
   L.push("# Validation report: wing bench against NACA RM L52B08");
@@ -61,27 +64,34 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
   L.push("");
   L.push(`Data: ${data.polar.length} measured drag-polar symbols (figures 5(b), 6(b), 7(b)), ${data.lift.length} measured lift symbols (figures 5(a), 6(a), 7(a)), ${data.faired.length} samples of the NACA faired curves of figure 9 (not measured points).`);
   L.push("");
-  L.push("Models: `korn-mason-lock` (ours) and `baseline-incompressible` (friction and induced drag only, Mach terms frozen at M 0.50, no drag rise). Errors are model minus measured, in drag coefficient. A point is scored only where the model claims validity; the rest are counted as outside the model's range.");
+  L.push("Models: `korn-mason-lock` (ours) and `baseline-incompressible` (friction and induced drag only, Mach terms frozen at M 0.50, no drag rise).");
   L.push("");
-  L.push(`CD0 bands (brief 001, check 3): ${CD0_BANDS.map((b, i) => `${i + 1} = ${b.label}`).join("; ")}. A set of points falls in the band of its largest absolute error.`);
+  L.push("Each model is scored as a band (brief 001, Amendment 3, point 1): the range of its eight parasite-drag variants, four textbook wing form factors (Raymer, Torenbeek, Hoerner, Shevell), each with a fully turbulent boundary layer and with a laminar run to the standard critical Reynolds number of 5e5. No variant is chosen and nothing is fitted to the data. The error at a measured value is its distance to the band, model minus measured, 0 inside; the band's spread is given next to it. The two bands share the same eight parasite variants, so they differ only in their Mach-dependent terms.");
+  L.push("");
+  L.push("Validity: ours is outside its range wherever its transonic drag rise acts, above the critical Mach number of the first strip to diverge, because the transonic method (Korn-Mason with Lock's law) is outside its demonstrated range on these wings (Amendment 3, point 4; section 8). Points there are counted, never scored. The baseline has no Mach limit below M 1.13: it is a reference, not a claim.");
+  L.push("");
+  L.push(`CD0 bands (brief 001, check 3): ${CD0_BANDS.map((b, i) => `${i + 1} = ${b.label}`).join("; ")}. A set of points falls in the band of its largest distance to the model band.`);
   L.push("");
 
   // 1. Every measured symbol, per wing and Mach number.
   L.push("## 1. Drag at the measured symbols, per wing and Mach number");
   L.push("");
-  L.push("Each symbol is scored at its own lift coefficient and Mach number, with no interpolation. Columns per model: points scored (of all), mean and largest absolute error, mean error in multiples of each point's total uncertainty. Improvement = baseline mean absolute error minus ours (positive means ours is closer).");
+  L.push("Each symbol is scored at its own lift coefficient and Mach number, with no interpolation. Columns per model: symbols scored (of all), how many lie inside the band, mean and largest distance to the band, mean distance in multiples of each symbol's total uncertainty, mean width of the band. Improvement = baseline mean distance minus ours, over the symbols both score (positive means ours is closer).");
   L.push("");
-  L.push("| Wing | Mach | Symbols | Ours: scored | Ours: mean abs | Ours: max abs | Ours: mean / u | Baseline: scored | Baseline: mean abs | Baseline: max abs | Improvement |");
-  L.push("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |");
+  L.push("| Wing | Mach | Symbols | Ours: scored | Ours: inside | Ours: mean distance | Ours: max distance | Ours: mean / u | Ours: mean spread | Baseline: scored | Baseline: inside | Baseline: mean distance | Baseline: max distance | Improvement |");
+  L.push("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |");
   for (const wid of WINGS) {
     const w = bielatWing(wid);
     const machs = [...new Set(data.polar.filter((p) => p.wing === wid).map((p) => p.mach))].sort((a, b) => a - b);
     for (const m of machs) {
       const pts = data.polar.filter((p) => p.wing === wid && p.mach === m);
-      const ours = stats(pts.map((p) => scorePolarPoint(kornMasonLock, w, p)));
-      const base = stats(pts.map((p) => scorePolarPoint(baselineIncompressible, w, p)));
-      const imp = ours && base ? sgn(base.meanAbs - ours.meanAbs) : "n/a";
-      L.push(`| ${wid} deg | ${f3(m)} | ${pts.length} | ${ours?.n ?? 0} | ${ours ? f4(ours.meanAbs) : "n/a"} | ${ours ? f4(ours.maxAbs) : "n/a"} | ${ours ? ours.meanRatio.toFixed(1) : "n/a"} | ${base?.n ?? 0} | ${base ? f4(base.meanAbs) : "n/a"} | ${base ? f4(base.maxAbs) : "n/a"} | ${imp} |`);
+      const os = pts.map((p) => scorePolarPoint(kornMasonLockBand, w, p));
+      const bs = pts.map((p) => scorePolarPoint(baselineBand, w, p));
+      const ours = stats(os);
+      const base = stats(bs);
+      const both = os.map((o, i) => [o, bs[i]!] as const).filter(([o, b]) => o.band.valid && b.band.valid);
+      const imp = both.length ? sgn(both.reduce((a, [o, b]) => a + Math.abs(b.error) - Math.abs(o.error), 0) / both.length) : "n/a";
+      L.push(`| ${wid} deg | ${f3(m)} | ${pts.length} | ${ours?.n ?? 0} | ${ours?.inside ?? "n/a"} | ${ours ? f4(ours.meanAbs) : "n/a"} | ${ours ? f4(ours.maxAbs) : "n/a"} | ${ours ? ours.meanRatio.toFixed(1) : "n/a"} | ${ours ? f4(ours.meanSpread) : "n/a"} | ${base?.n ?? 0} | ${base?.inside ?? "n/a"} | ${base ? f4(base.meanAbs) : "n/a"} | ${base ? f4(base.maxAbs) : "n/a"} | ${imp} |`);
     }
   }
   L.push("");
@@ -89,50 +99,52 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
   // 2. CD0 bands, two ways (Amendment 2, point 2).
   L.push("## 2. CD0, reported two ways");
   L.push("");
-  L.push("### 2a. Model at CL = 0 against the NACA faired curve (figure 9)");
+  L.push("### 2a. Model band at CL = 0 against the NACA faired curve (figure 9)");
   L.push("");
   L.push("The figure 9 curve is NACA's 1952 crossplot of the polars, faired by hand; it is a NACA curve, not measured points.");
   L.push("");
-  for (const { id, model } of MODELS) {
+  for (const { id, band: model } of BAND_MODELS) {
     L.push(`**${id}**`);
     L.push("");
-    L.push("| Wing | Range | Samples scored | Largest abs error | Band | Mean signed error |");
-    L.push("| --- | --- | ---: | ---: | --- | ---: |");
+    L.push("| Wing | Range | Samples scored | Inside the band | Largest distance | Band | Mean signed distance | Largest half-spread |");
+    L.push("| --- | --- | ---: | ---: | ---: | --- | ---: | ---: |");
     for (const wid of WINGS) {
       const cmp = fairedComparison(model, wid, data.faired);
       for (const r of ACCEPTANCE_RANGES) {
-        const v = cmp.filter((c) => c.sample.mach > r.lo && c.sample.mach <= r.hi && c.result.valid);
+        const v = cmp.filter((c) => c.sample.mach > r.lo && c.sample.mach <= r.hi && c.band.valid);
         const n = cmp.filter((c) => c.sample.mach > r.lo && c.sample.mach <= r.hi).length;
         if (!v.length) {
-          L.push(`| ${wid} deg | ${r.label} | 0 of ${n} | n/a | outside model range | n/a |`);
+          L.push(`| ${wid} deg | ${r.label} | 0 of ${n} | n/a | n/a | outside model range | n/a | n/a |`);
           continue;
         }
         const maxAbs = Math.max(...v.map((c) => Math.abs(c.error)));
         const mean = v.reduce((a, c) => a + c.error, 0) / v.length;
+        const half = Math.max(...v.map((c) => (c.band.max - c.band.min) / 2));
         const band = bandOf(maxAbs);
         if (id === "korn-mason-lock") (summary.cd0Faired[wid] ??= []).push({ range: r.id, maxAbs, band });
-        L.push(`| ${wid} deg | ${r.label} | ${v.length} of ${n} | ${f4(maxAbs)} | ${band + 1}: ${CD0_BANDS[band]!.label} | ${sgn(mean)} |`);
+        L.push(`| ${wid} deg | ${r.label} | ${v.length} of ${n} | ${v.filter((c) => c.error === 0).length} | ${f4(maxAbs)} | ${band + 1}: ${CD0_BANDS[band]!.label} | ${sgn(mean)} | ${f4(half)} |`);
       }
     }
     L.push("");
   }
   L.push("Sample by sample (ours):");
   L.push("");
-  L.push("| Wing | Mach | NACA curve | Model | Error | Valid |");
-  L.push("| --- | ---: | ---: | ---: | ---: | --- |");
+  L.push("| Wing | Mach | NACA curve | Model band | Distance | Valid |");
+  L.push("| --- | ---: | ---: | --- | ---: | --- |");
   for (const wid of WINGS) {
-    for (const c of fairedComparison(kornMasonLock, wid, data.faired)) {
-      L.push(`| ${wid} deg | ${f3(c.sample.mach)} | ${f4(c.sample.cd0)} | ${f4(c.result.cd)} | ${sgn(c.error)} | ${c.result.valid ? "yes" : "no: " + c.result.reasons[0]} |`);
+    for (const c of fairedComparison(kornMasonLockBand, wid, data.faired)) {
+      const shown = Number.isFinite(c.band.min) && Number.isFinite(c.band.max) ? `${f4(c.band.min)} to ${f4(c.band.max)}` : "not computed";
+      L.push(`| ${wid} deg | ${f3(c.sample.mach)} | ${f4(c.sample.cd0)} | ${shown} | ${c.band.valid ? sgn(c.error) : "not scored"} | ${c.band.valid ? "yes" : "no: " + shortReason(c.band.reasons)} |`);
     }
   }
   L.push("");
-  L.push(`### 2b. Model against the measured symbols with |CL| <= ${LOW_LIFT}`);
+  L.push(`### 2b. Model band against the measured symbols with |CL| <= ${LOW_LIFT}`);
   L.push("");
-  for (const { id, model } of MODELS) {
+  for (const { id, band: model } of BAND_MODELS) {
     L.push(`**${id}**`);
     L.push("");
-    L.push("| Wing | Range | Symbols scored | Largest abs error | Band | Mean abs error | Mean signed error |");
-    L.push("| --- | --- | ---: | ---: | --- | ---: | ---: |");
+    L.push("| Wing | Range | Symbols scored | Inside the band | Largest distance | Band | Mean distance | Mean signed distance | Largest half-spread |");
+    L.push("| --- | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |");
     for (const wid of WINGS) {
       const w = bielatWing(wid);
       for (const r of ACCEPTANCE_RANGES) {
@@ -140,17 +152,17 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
         const sc: PointScore[] = pts.map((p) => scorePolarPoint(model, w, p));
         const st = stats(sc);
         if (!st) {
-          L.push(`| ${wid} deg | ${r.label} | 0 of ${pts.length} | n/a | outside model range | n/a | n/a |`);
+          L.push(`| ${wid} deg | ${r.label} | 0 of ${pts.length} | n/a | n/a | outside model range | n/a | n/a | n/a |`);
           continue;
         }
         const band = bandOf(st.maxAbs);
         if (id === "korn-mason-lock") (summary.cd0Symbols[wid] ??= []).push({ range: r.id, maxAbs: st.maxAbs, band, n: st.n });
-        L.push(`| ${wid} deg | ${r.label} | ${st.n} of ${pts.length} | ${f4(st.maxAbs)} | ${band + 1}: ${CD0_BANDS[band]!.label} | ${f4(st.meanAbs)} | ${sgn(st.meanSigned)} |`);
+        L.push(`| ${wid} deg | ${r.label} | ${st.n} of ${pts.length} | ${st.inside} | ${f4(st.maxAbs)} | ${band + 1}: ${CD0_BANDS[band]!.label} | ${f4(st.meanAbs)} | ${sgn(st.meanSigned)} | ${f4(st.maxHalfSpread)} |`);
       }
     }
     L.push("");
   }
-  L.push("Range targets (brief 001): up to M 0.90 the bands above; between M 0.90 and 1.12 a target of 0.003 (our proposal, no published precedent).");
+  L.push("Range targets (brief 001): up to M 0.90 the bands above; between M 0.90 and 1.12 a target of 0.003 (our proposal, no published precedent). A distance of 0 means inside the band; the band's half-spread, in the last column, is what that is worth.");
   L.push("");
 
   // 3. Lift-curve slope.
@@ -181,15 +193,22 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
   // 4. Drag-rise Mach number.
   L.push("## 4. Drag-rise Mach number");
   L.push("");
-  L.push("Defined as in the report: the Mach number where dCD/dM = 0.1 at zero lift. NACA value: from the figure 9 samples (slope between consecutive samples, interpolated to 0.1). The report's text gives 0.92 for the 10.8 deg wing and 0.97 for the 47 deg wing. Target: within 0.03 (our proposal).");
+  L.push("Defined as in the report: the Mach number where dCD/dM = 0.1 at zero lift. NACA value: from the figure 9 samples (slope between consecutive samples, interpolated to 0.1). The report's text gives 0.92 for the 10.8 deg wing and 0.97 for the 47 deg wing. Target: within 0.03 (our proposal). Ours comes from the transonic method, which is outside its range on these wings (Amendment 3, point 4): this table is a diagnostic of that method, not a score. Its drag-rise term is the same in every parasite variant; the range over the eight variants is shown.");
   L.push("");
-  L.push("| Wing | From figure 9 samples | Ours (korn-mason-lock) | Difference | Within 0.03 |");
+  L.push("| Wing | From figure 9 samples | Ours (korn-mason-lock), eight variants | Difference | Within 0.03 |");
   L.push("| --- | ---: | ---: | ---: | --- |");
+  const signed3 = (v: number): string => (v >= 0 ? "+" : "") + v.toFixed(3);
+  const span3 = (lo: number, hi: number, f: (v: number) => string): string => (f(lo) === f(hi) ? f(lo) : `${f(lo)} to ${f(hi)}`);
   for (const wid of WINGS) {
     const naca = sampledDragRiseMach(data.faired.filter((s) => s.wing === wid).map((s) => ({ mach: s.mach, cd: s.cd0 })));
-    const ours = dragRiseMach(kornMasonLock, bielatWing(wid), 0);
-    const d = naca !== null && ours !== null ? ours - naca : Number.NaN;
-    L.push(`| ${wid} deg | ${naca !== null ? f3(naca) : "not reached"} | ${ours !== null ? f3(ours) : "not reached"} | ${Number.isFinite(d) ? (d >= 0 ? "+" : "") + d.toFixed(3) : "n/a"} | ${Number.isFinite(d) ? (Math.abs(d) <= 0.03 ? "yes" : "no") : "n/a"} |`);
+    const all = PARASITE_VARIANTS.map((v) => dragRiseMach(v.model, bielatWing(wid), 0));
+    const ours = all.every((m) => m !== null) ? (all as number[]) : null;
+    const lo = ours ? Math.min(...ours) : Number.NaN;
+    const hi = ours ? Math.max(...ours) : Number.NaN;
+    const shown = ours ? span3(lo, hi, f3) : all.some((m) => m !== null) ? "not reached by every variant" : "not reached";
+    const d = naca !== null && ours ? [lo - naca, hi - naca] : null;
+    const within = d ? (Math.abs(d[0]!) <= 0.03 && Math.abs(d[1]!) <= 0.03 ? "yes" : Math.abs(d[0]!) > 0.03 && Math.abs(d[1]!) > 0.03 ? "no" : "partly") : "n/a";
+    L.push(`| ${wid} deg | ${naca !== null ? f3(naca) : "not reached"} | ${shown} | ${d ? span3(d[0]!, d[1]!, signed3) : "n/a"} | ${within} |`);
   }
   L.push("");
 
@@ -225,7 +244,7 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
     for (const p of data.polar.filter((q) => q.wing === wid)) {
       const r = kornMasonLock(w, { mach: p.mach, cl: p.cl });
       for (const why of r.reasons) {
-        const key = why.replace(/\(\d\.\d+\)/, "").trim();
+        const key = why.replace(/ \(\d\.\d+\)/, "").trim();
         reasons.set(key, (reasons.get(key) ?? 0) + 1);
       }
     }
@@ -236,14 +255,20 @@ export function buildReport(data: Dataset, inputLabel: string): { markdown: stri
 
   cd0Sensitivity(data, L);
   transonicBasis(data, L);
+  bodyAlone(body, L);
   return { markdown: L.join("\n"), summary };
 }
 
 /** Upper end of the subsonic range of the CD0 sensitivity (the precedent's range). */
 const SUBSONIC_LIMIT = 0.9 + 1e-9;
 
-/** Half a drag count: a transonic term below this does not change a value printed to four decimals. */
-const TRANSONIC_SHOWN = 0.00005;
+/** A short label for why a band is outside the model's range. */
+const shortReason = (reasons: string[]): string =>
+  reasons.some((r) => r.includes("Lock's law not valid"))
+    ? "beyond Lock's limit (Mdd + 0.05)"
+    : reasons.some((r) => r.includes("critical Mach number"))
+      ? "transonic method outside its range (above the critical Mach number)"
+      : (reasons[0] ?? "");
 
 const where = (d: number): string => (d === 0 ? "inside" : d < 0 ? `below by ${(-d).toFixed(4)}` : `above by ${d.toFixed(4)}`);
 
@@ -251,7 +276,7 @@ const where = (d: number): string => (d === 0 ? "inside" : d < 0 ? `below by ${(
 function cd0Sensitivity(data: Dataset, L: string[]): void {
   L.push("## 7. CD0 sensitivity: wing form factor and boundary-layer transition (gate 4)");
   L.push("");
-  L.push("The model's CD0 rests on two choices that the report does not settle. The wing form factor differs between textbooks. The boundary layer is taken as fully turbulent, but the report does not say that transition was fixed (it mentions no roughness strip), so part of it was probably laminar. Each variant below is a book method used as published: four wing form factors (Raymer, Torenbeek, Hoerner, Shevell), each with a fully turbulent boundary layer and with a laminar run up to the standard critical Reynolds number of 5e5 followed by turbulent flow (Prandtl-Schlichting, A = 1700). No constant is moved. The default model, the one scored above and shown in the app, is Raymer with fully turbulent flow.");
+  L.push("The model's CD0 rests on two choices that the report does not settle. The wing form factor differs between textbooks. The boundary layer is taken as fully turbulent, but the report does not say that transition was fixed (it mentions no roughness strip), so part of it was probably laminar. Each variant below is a book method used as published: four wing form factors (Raymer, Torenbeek, Hoerner, Shevell), each with a fully turbulent boundary layer and with a laminar run up to the standard critical Reynolds number of 5e5 followed by turbulent flow (Prandtl-Schlichting, A = 1700). No constant is moved. Sections 1 and 2 and the app score and show the band of all eight; no variant is singled out.");
   L.push("");
 
   // 7a. Components at M 0.50.
@@ -283,7 +308,7 @@ function cd0Sensitivity(data: Dataset, L: string[]): void {
   // 7b. Every variant at CL = 0 against figure 9.
   L.push("### 7b. Model at CL = 0 against the NACA faired curve (figure 9), M up to 0.90");
   L.push("");
-  L.push("Columns: the eight variants (form factor / boundary layer), the range they span, its spread, and where the NACA curve falls. The transonic term (Korn-Mason with Lock's law) is the same in every variant; where it reaches half a drag count (0.00005) the range moves as a whole, so those rows say nothing about the parasite drag.");
+  L.push("Columns: the eight variants (form factor / boundary layer), the range they span, its spread, and where the NACA curve falls. The transonic term (Korn-Mason with Lock's law) is the same in every variant. Rows above the critical Mach number are outside the model's range (Amendment 3, point 4): listed, not counted in 7c.");
   L.push("");
   L.push(`| Wing | Mach | NACA curve | Transonic term | ${PARASITE_VARIANTS.map((v) => v.id).join(" | ")} | Range | Spread | NACA curve against range |`);
   L.push(`| --- | ---: | ---: | ---: | ${PARASITE_VARIANTS.map(() => "---:").join(" | ")} | --- | ---: | --- |`);
@@ -294,11 +319,7 @@ function cd0Sensitivity(data: Dataset, L: string[]): void {
       const r = modelRange(w, { mach: s.mach, cl: 0 });
       const wave = kornMasonLock(w, { mach: s.mach, cl: 0 }).parts.wave;
       if (!r.valid) {
-        L.push(`| ${wid} deg | ${f3(s.mach)} | ${f4(s.cd0)} | n/a | ${PARASITE_VARIANTS.map(() => "n/a").join(" | ")} | outside model range | n/a | n/a |`);
-        continue;
-      }
-      if (wave >= TRANSONIC_SHOWN) {
-        L.push(`| ${wid} deg | ${f3(s.mach)} | ${f4(s.cd0)} | ${f4(wave)} | ${r.values.map((v) => f4(v.cd)).join(" | ")} | ${f4(r.min)} to ${f4(r.max)} | ${f4(r.max - r.min)} | ${where(outsideBy(s.cd0, r.min, r.max))} (transonic term acting) |`);
+        L.push(`| ${wid} deg | ${f3(s.mach)} | ${f4(s.cd0)} | ${f4(wave)} | ${r.values.map((v) => f4(v.cd)).join(" | ")} | ${f4(r.min)} to ${f4(r.max)} | ${f4(r.max - r.min)} | outside model range, not counted |`);
         continue;
       }
       for (const v of r.values) {
@@ -314,7 +335,7 @@ function cd0Sensitivity(data: Dataset, L: string[]): void {
   // 7c. Mean signed error of each variant.
   L.push("### 7c. Mean signed error of each variant against figure 9, M up to 0.90");
   L.push("");
-  L.push("Model minus NACA curve, over the samples of 7b where the model is valid and its transonic term is below half a drag count, 0.00005 (number of samples in brackets). This table describes the variants; it does not pick one. Picking the closest would be a calibration, and under the brief's rule it could only be chosen on the 35 deg wing and then validated on the 10.8 and 47 deg wings.");
+  L.push("Model minus NACA curve, over the samples of 7b where the model is valid (number of samples in brackets). This table describes the variants; it does not pick one. Picking the closest would be a calibration, and under the brief's rule it could only be chosen on the 35 deg wing and then validated on the 10.8 and 47 deg wings.");
   L.push("");
   L.push("| Variant | 10.8 deg | 35 deg | 47 deg |");
   L.push("| --- | ---: | ---: | ---: |");
@@ -331,9 +352,9 @@ function cd0Sensitivity(data: Dataset, L: string[]): void {
   // 7d. Measured symbols against the range.
   L.push(`### 7d. Measured symbols with |CL| <= ${LOW_LIFT}, M up to 0.90, against the range`);
   L.push("");
-  L.push("Each symbol at its own CL and Mach number, counted only where the model is valid and its transonic term is below half a drag count (symbols left out for the transonic term in the last column). Inside with u: the range widened by the symbol's total uncertainty in CD.");
+  L.push("Each symbol at its own CL and Mach number, counted only where the model is valid (symbols outside the model's range in the last column). Inside with u: the range widened by the symbol's total uncertainty in CD.");
   L.push("");
-  L.push("| Wing | Symbols counted | Inside the range | Inside with u | Largest distance outside the range | Mean spread of the range | Left out: transonic term acting |");
+  L.push("| Wing | Symbols counted | Inside the range | Inside with u | Largest distance outside the range | Mean spread of the range | Left out: outside model range |");
   L.push("| --- | ---: | ---: | ---: | ---: | ---: | ---: |");
   for (const wid of WINGS) {
     const w = bielatWing(wid);
@@ -343,12 +364,11 @@ function cd0Sensitivity(data: Dataset, L: string[]): void {
     let insideU = 0;
     let worst = 0;
     let spread = 0;
-    let transonic = 0;
+    let left = 0;
     for (const p of pts) {
       const r = modelRange(w, { mach: p.mach, cl: p.cl });
-      if (!r.valid) continue;
-      if (kornMasonLock(w, { mach: p.mach, cl: p.cl }).parts.wave >= TRANSONIC_SHOWN) {
-        transonic++;
+      if (!r.valid) {
+        left++;
         continue;
       }
       n++;
@@ -358,7 +378,7 @@ function cd0Sensitivity(data: Dataset, L: string[]): void {
       if (Math.abs(d) <= p.uCd) insideU++;
       if (Math.abs(d) > Math.abs(worst)) worst = d;
     }
-    L.push(`| ${wid} deg | ${n} of ${pts.length} | ${inside} | ${insideU} | ${n ? where(worst) : "n/a"} | ${n ? f4(spread / n) : "n/a"} | ${transonic} |`);
+    L.push(`| ${wid} deg | ${n} of ${pts.length} | ${inside} | ${insideU} | ${n ? where(worst) : "n/a"} | ${n ? f4(spread / n) : "n/a"} | ${left} |`);
   }
   L.push("");
 }
@@ -400,6 +420,64 @@ function transonicBasis(data: Dataset, L: string[]): void {
     const peak = s.reduce((a, b) => (b.cd0 > a.cd0 ? b : a));
     if (!sub) continue;
     L.push(`| ${wid} deg | ${f4(sub.cd0)} (M ${f3(sub.mach)}) | ${f4(peak.cd0)} | ${f3(peak.mach)} | ${sgn(peak.cd0 - sub.cd0)} |`);
+  }
+  L.push("");
+}
+
+/** Symbols within this of zero angle of attack are the body's zero-lift drag, scored against the body term. */
+const ZERO_ALPHA = 0.5;
+
+/** 9. Amendment 3, point 2: the body term against the body-alone data of NACA RM L51I04a. */
+function bodyAlone(body: { points: BodyPoint[]; label: string } | null, L: string[]): void {
+  L.push("## 9. Body alone against NACA RM L51I04a, figure 16(b)");
+  L.push("");
+  if (!body || !body.points.length) {
+    L.push("No body-alone dataset was given.");
+    L.push("");
+    return;
+  }
+  const doc = body.points[0]!;
+  L.push(`Measured: ${body.points.length} symbols of ${doc.document}, figure ${doc.figure} (PDF page ${doc.pdfPage}, printed page ${doc.printedPage}), from \`${body.label}\`, digitized twice. The body of the three wing-body models tested without wings: the same cylinder of 2.25 in with a 6.61 in ogive nose, 25.15 in long, and the drag given on the wing area of 1.143 sq ft, corrected to free-stream base pressure, as in NACA RM L52B08. Only the symbols at the nominal angles of attack of -2, 0 and +2 deg were read.`);
+  L.push("");
+  L.push(`Model: the body term of the wing-body model applied to the body alone (nothing covered by the wing roots), at the Reynolds number of the wing-body tests, with a fully turbulent boundary layer and with a laminar run to Re 5e5: the two states that make up the body's share of the model band. Only Raymer's body form factor is used (a ticket). The body term has no compressibility or wave drag (brief 002), so above M 0.90 the comparison is listed but not scored. Scored: the symbols within ${ZERO_ALPHA} deg of zero angle of attack, where the body carries no lift; the symbols at -2 and +2 deg are listed to show how flat the drag is near zero lift.`);
+  L.push("");
+  const bls = Object.keys(BOUNDARY_LAYERS) as BoundaryLayer[];
+  const range = (m: number): { min: number; max: number } => {
+    const v = bls.map((bl) => bodyAloneDrag(BIELAT_BODY, m, BIELAT_AREA_IN2, bl).cd);
+    return { min: Math.min(...v), max: Math.max(...v) };
+  };
+  const inWingBody = (m: number): { min: number; max: number } => {
+    const v = bls.map((bl) => parasiteDrag(bielatWing("35"), m, m, { boundaryLayer: bl }).body);
+    return { min: Math.min(...v), max: Math.max(...v) };
+  };
+  L.push("| Mach | Point | Angle of attack, deg | Measured CD | u | Model, body alone | Distance | Scored |");
+  L.push("| ---: | --- | ---: | ---: | ---: | --- | ---: | --- |");
+  const scored: { mach: number; error: number; cd: number; half: number }[] = [];
+  for (const p of body.points) {
+    const r = range(p.mach);
+    const d = bandError({ values: [], min: r.min, max: r.max, valid: true, beyondLock: false, reasons: [] }, p.cd);
+    const atZero = Math.abs(p.alpha) <= ZERO_ALPHA;
+    const subsonic = p.mach <= SUBSONIC_LIMIT;
+    if (atZero && subsonic) scored.push({ mach: p.mach, error: d, cd: p.cd, half: (r.max - r.min) / 2 });
+    const why = !atZero ? "no: not at zero lift" : !subsonic ? "no: above M 0.90, no body wave-drag term" : "yes";
+    L.push(`| ${f3(p.mach)} | ${p.pointId} | ${p.alpha.toFixed(2)} | ${f4(p.cd)} | ${f4(p.uCd)} | ${f4(r.min)} to ${f4(r.max)} | ${sgn(d)} | ${why} |`);
+  }
+  L.push("");
+  if (scored.length) {
+    const maxAbs = Math.max(...scored.map((x) => Math.abs(x.error)));
+    const mean = scored.reduce((a, x) => a + x.error, 0) / scored.length;
+    const band = bandOf(maxAbs);
+    L.push(`Scored symbols (zero lift, M up to 0.90): ${scored.length}; inside the model range: ${scored.filter((x) => x.error === 0).length}; largest distance ${f4(maxAbs)} (${band + 1}: ${CD0_BANDS[band]!.label}); mean signed distance ${sgn(mean)}; half-spread of the range up to ${f4(Math.max(...scored.map((x) => x.half)))}.`);
+    L.push("");
+  }
+  L.push("Model body term at the scored Mach numbers, body alone and as used inside the wing-body model (the roots of the wing cover part of the body side there):");
+  L.push("");
+  L.push("| Mach | Body alone, turbulent to mixed | Inside the wing-body model, turbulent to mixed |");
+  L.push("| ---: | --- | --- |");
+  for (const m of new Set(body.points.filter((p) => p.mach <= SUBSONIC_LIMIT).map((p) => p.mach))) {
+    const a = range(m);
+    const b = inWingBody(m);
+    L.push(`| ${f3(m)} | ${f4(a.max)} to ${f4(a.min)} | ${f4(b.max)} to ${f4(b.min)} |`);
   }
   L.push("");
 }

@@ -2,9 +2,15 @@
  * The one scoring function. `pnpm validate` and the wing bench both use it,
  * so the reliability strip on screen is computed exactly as the report is.
  *
- * Errors are model minus measured. A point is scored only where the model
- * claims validity; points outside the model's range are counted and listed,
- * never mixed into the error statistics.
+ * Every model is scored as a band (brief 001, Amendment 3, point 1): the range
+ * its eight parasite-drag variants span (four textbook wing form factors, each
+ * with a fully turbulent boundary layer and with a laminar run to the standard
+ * critical Reynolds number). No variant is chosen and nothing is fitted. The
+ * error at a measured point is its distance to the band, 0 inside, signed as
+ * model minus measured; the band's spread is reported next to it.
+ *
+ * A point is scored only where the model claims validity; points outside the
+ * model's range are counted and listed, never mixed into the error statistics.
  */
 
 import {
@@ -12,12 +18,12 @@ import {
   WING_FORM_FACTORS,
   bielatWing,
   criticalMach,
+  makeBaseline,
   makeKornMasonLock,
   waveDrag,
   type BoundaryLayer,
   type Condition,
   type DragModel,
-  type ModelResult,
   type ParasiteOptions,
   type TestedWingId,
   type WingBody,
@@ -26,39 +32,70 @@ import {
 import type { Dataset, FairedSample, LiftPoint, PolarPoint } from "./data.ts";
 
 /**
- * The parasite-drag variants of the gate 4 sensitivity: every textbook wing
- * form factor with each boundary-layer state. Each is a book method used as
- * published; none is chosen to match the data.
+ * The parasite-drag variants: every textbook wing form factor with each
+ * boundary-layer state. Each is a book method used as published.
  */
-export const PARASITE_VARIANTS: { id: string; label: string; options: ParasiteOptions; model: DragModel }[] = (
+export const PARASITE_OPTIONS: { id: string; label: string; options: ParasiteOptions }[] = (
   Object.keys(BOUNDARY_LAYERS) as BoundaryLayer[]
 ).flatMap((bl) =>
   (Object.keys(WING_FORM_FACTORS) as WingFormFactorId[]).map((ff) => ({
     id: `${ff}/${bl}`,
     label: `${WING_FORM_FACTORS[ff].label}, ${BOUNDARY_LAYERS[bl].label}`,
     options: { wingFormFactor: ff, boundaryLayer: bl },
-    model: makeKornMasonLock({ wingFormFactor: ff, boundaryLayer: bl }),
   })),
 );
 
-export interface ModelRange {
+/** The korn-mason-lock model with each parasite variant (the gate 4 sensitivity). */
+export const PARASITE_VARIANTS: { id: string; label: string; options: ParasiteOptions; model: DragModel }[] = PARASITE_OPTIONS.map((v) => ({
+  ...v,
+  model: makeKornMasonLock(v.options),
+}));
+
+export interface Band {
   values: { id: string; cd: number }[];
   min: number;
   max: number;
-  /** False if any variant is outside the model's range (they share the validity rules) */
+  /** False if the model is outside its range here (all variants share the validity rules) */
   valid: boolean;
+  /** Beyond Lock's own limit: computed, but not drawn even as outside the range */
+  beyondLock: boolean;
+  /** Why the band is outside the model's range, when it is */
+  reasons: string[];
 }
 
-/** Drag of every parasite variant at one condition, and the range they span. */
-export function modelRange(wing: WingBody, c: Condition): ModelRange {
-  const results = PARASITE_VARIANTS.map((v) => ({ id: v.id, r: v.model(wing, c) }));
-  const cds = results.map((x) => x.r.cd);
-  return {
-    values: results.map((x) => ({ id: x.id, cd: x.r.cd })),
-    min: Math.min(...cds),
-    max: Math.max(...cds),
-    valid: results.every((x) => x.r.valid),
+/** A model scored as a band: `(wing, condition) => Band`. A single model is a band of zero width. */
+export type BandModel = (wing: WingBody, c: Condition) => Band;
+
+/** The band spanned by a set of models that share their validity rules. */
+export function makeBand(variants: { id: string; model: DragModel }[]): BandModel {
+  return (wing, c) => {
+    const results = variants.map((v) => ({ id: v.id, r: v.model(wing, c) }));
+    const cds = results.map((x) => x.r.cd);
+    return {
+      values: results.map((x) => ({ id: x.id, cd: x.r.cd })),
+      min: Math.min(...cds),
+      max: Math.max(...cds),
+      valid: results.every((x) => x.r.valid),
+      beyondLock: results.some((x) => x.r.beyondLock),
+      reasons: [...new Set(results.flatMap((x) => x.r.reasons))],
+    };
   };
+}
+
+/** Our model as shown and scored: the band of its eight parasite variants. */
+export const kornMasonLockBand: BandModel = makeBand(PARASITE_VARIANTS);
+
+/** The incompressible baseline over the same eight parasite variants, so the two bands differ only in their Mach terms. */
+export const baselineBand: BandModel = makeBand(PARASITE_OPTIONS.map((v) => ({ id: v.id, model: makeBaseline(v.options) })));
+
+export const BAND_MODELS: { id: string; band: BandModel }[] = [
+  { id: "korn-mason-lock", band: kornMasonLockBand },
+  { id: "baseline-incompressible", band: baselineBand },
+];
+
+/** Drag of every parasite variant of our model at one condition, and the range they span. */
+export function modelRange(wing: WingBody, c: Condition): Band {
+  return kornMasonLockBand(wing, c);
 }
 
 /** Signed distance from a value to a range: 0 inside, negative below, positive above. */
@@ -85,19 +122,27 @@ export function bandOf(absError: number): number {
   return CD0_BANDS.findIndex((b) => absError <= b.limit);
 }
 
+/** Error of a band at a measured value, as model minus measured: 0 inside, positive when the band lies above the value. */
+export function bandError(band: Band, value: number): number {
+  const d = outsideBy(value, band.min, band.max);
+  return d === 0 ? 0 : -d;
+}
+
 export interface PointScore {
   point: PolarPoint;
-  result: ModelResult;
-  /** model minus measured */
+  band: Band;
+  /** Distance from the measured value to the band, model minus measured, 0 inside */
   error: number;
   /** |error| in multiples of the point's total uncertainty */
   ratio: number;
+  /** Width of the band at the point */
+  spread: number;
 }
 
-export function scorePolarPoint(model: DragModel, wing: WingBody, p: PolarPoint): PointScore {
-  const result = model(wing, { mach: p.mach, cl: p.cl });
-  const error = result.cd - p.cd;
-  return { point: p, result, error, ratio: Math.abs(error) / p.uCd };
+export function scorePolarPoint(model: BandModel, wing: WingBody, p: PolarPoint): PointScore {
+  const band = model(wing, { mach: p.mach, cl: p.cl });
+  const error = bandError(band, p.cd);
+  return { point: p, band, error, ratio: Math.abs(error) / p.uCd, spread: band.max - band.min };
 }
 
 export interface Stats {
@@ -107,10 +152,16 @@ export interface Stats {
   rms: number;
   meanRatio: number;
   meanSigned: number;
+  /** Mean width of the band over the scored points */
+  meanSpread: number;
+  /** Largest half-width of the band over the scored points */
+  maxHalfSpread: number;
+  /** Scored points inside the band */
+  inside: number;
 }
 
 export function stats(scores: PointScore[]): Stats | null {
-  const v = scores.filter((s) => s.result.valid);
+  const v = scores.filter((s) => s.band.valid);
   if (!v.length) return null;
   const abs = v.map((s) => Math.abs(s.error));
   return {
@@ -120,6 +171,9 @@ export function stats(scores: PointScore[]): Stats | null {
     rms: Math.sqrt(v.reduce((a, s) => a + s.error * s.error, 0) / v.length),
     meanRatio: v.reduce((a, s) => a + s.ratio, 0) / v.length,
     meanSigned: v.reduce((a, s) => a + s.error, 0) / v.length,
+    meanSpread: v.reduce((a, s) => a + s.spread, 0) / v.length,
+    maxHalfSpread: Math.max(...v.map((s) => s.spread / 2)),
+    inside: v.filter((s) => s.error === 0).length,
   };
 }
 
@@ -132,14 +186,14 @@ export function pointsFor(data: Dataset, wing: TestedWingId): PolarPoint[] {
   return data.polar.filter((p) => p.wing === wing);
 }
 
-/** Model at CL = 0 against the NACA faired curve of figure 9. */
-export function fairedComparison(model: DragModel, wing: TestedWingId, samples: FairedSample[]): { sample: FairedSample; result: ModelResult; error: number }[] {
+/** Model band at CL = 0 against the NACA faired curve of figure 9. */
+export function fairedComparison(model: BandModel, wing: TestedWingId, samples: FairedSample[]): { sample: FairedSample; band: Band; error: number }[] {
   const w = bielatWing(wing);
   return samples
     .filter((s) => s.wing === wing)
     .map((s) => {
-      const result = model(w, { mach: s.mach, cl: 0 });
-      return { sample: s, result, error: result.cd - s.cd0 };
+      const band = model(w, { mach: s.mach, cl: 0 });
+      return { sample: s, band, error: bandError(band, s.cd0) };
     });
 }
 
@@ -230,7 +284,7 @@ export interface Segment {
   lo: number;
   hi: number;
   state: Reliability;
-  /** Measured symbols in the segment disagree with the model beyond the band */
+  /** Measured symbols in the segment lie farther than the published precedent (0.0020) from the model band */
   disagrees: boolean;
   n: number;
   reason: string;
@@ -240,17 +294,20 @@ export interface Segment {
 export const SEGMENT_EDGES = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0, 1.05, 1.1, 1.15];
 
 /**
- * Reliability strip for a geometry at a selected lift coefficient.
+ * Reliability strip for a geometry at a selected lift coefficient, computed
+ * on the model band (Amendment 3, point 1):
  *
  * - outside model range: the model is not valid somewhere in the segment
- *   (Mach above Mdd + 0.05, or outside the range of one of its equations);
+ *   (the transonic drag rise acts, or an equation is outside its range);
  * - validated: the geometry is a tested wing, the segment holds measured
- *   symbols within 0.3 of the selected CL, and the model is within 0.0020 of
- *   every one of them (each scored at its own CL and Mach);
- * - estimate: otherwise, with `disagrees` set when there are measured symbols
- *   and the model misses at least one of them by more than 0.0020.
+ *   symbols within 0.3 of the selected CL, every one of them lies inside the
+ *   band (each scored at its own CL and Mach), and the band's half-spread at
+ *   each of them is within the published precedent, 0.0020, so a wide band
+ *   cannot pass by its width alone;
+ * - estimate: otherwise. `disagrees` is set when a symbol lies more than
+ *   0.0020 outside the band.
  */
-export function reliability(model: DragModel, wing: WingBody, tested: TestedWingId | null, data: Dataset | null, clSelected: number): Segment[] {
+export function reliability(model: BandModel, wing: WingBody, tested: TestedWingId | null, data: Dataset | null, clSelected: number): Segment[] {
   const out: Segment[] = [];
   for (let i = 1; i < SEGMENT_EDGES.length; i++) {
     const lo = SEGMENT_EDGES[i - 1]!;
@@ -262,20 +319,23 @@ export function reliability(model: DragModel, wing: WingBody, tested: TestedWing
       continue;
     }
     const pts = tested && data ? data.polar.filter((p) => p.wing === tested && p.mach >= lo - 1e-9 && p.mach < hi - 1e-9 && Math.abs(p.cl - clSelected) <= LOW_LIFT) : [];
-    const scores = pts.map((p) => scorePolarPoint(model, wing, p)).filter((s) => s.result.valid);
+    const scores = pts.map((p) => scorePolarPoint(model, wing, p)).filter((s) => s.band.valid);
     if (!scores.length) {
       out.push({ lo, hi, state: "estimate", disagrees: false, n: 0, reason: "no measured data in this Mach range" });
       continue;
     }
     const worst = Math.max(...scores.map((s) => Math.abs(s.error)));
-    if (worst <= VALIDATED_BAND) out.push({ lo, hi, state: "validated", disagrees: false, n: scores.length, reason: `largest error ${worst.toFixed(4)}` });
-    else out.push({ lo, hi, state: "estimate", disagrees: true, n: scores.length, reason: `largest error ${worst.toFixed(4)} exceeds ${VALIDATED_BAND}` });
+    const outside = scores.filter((s) => s.error !== 0).length;
+    const half = Math.max(...scores.map((s) => s.spread / 2));
+    const detail = `${scores.length - outside} of ${scores.length} symbols inside the band, largest distance ${worst.toFixed(4)}; band half-spread up to ${half.toFixed(4)}`;
+    if (outside === 0 && half <= VALIDATED_BAND) out.push({ lo, hi, state: "validated", disagrees: false, n: scores.length, reason: detail });
+    else out.push({ lo, hi, state: "estimate", disagrees: worst > VALIDATED_BAND, n: scores.length, reason: detail });
   }
   return out;
 }
 
-/** Lowest Mach number at which the model stops being valid at a lift coefficient (for the dashed red curve). */
-export function modelLimitMach(model: DragModel, wing: WingBody, cl: number, from = 0.5, to = 1.15, step = 0.001): number | null {
+/** Lowest Mach number at which the model stops being valid at a lift coefficient (where the band stops). */
+export function modelLimitMach(model: BandModel, wing: WingBody, cl: number, from = 0.5, to = 1.15, step = 0.001): number | null {
   for (let m = from; m <= to + 1e-9; m += step) if (!model(wing, { mach: m, cl }).valid) return m;
   return null;
 }

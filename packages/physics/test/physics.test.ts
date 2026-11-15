@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   bielatWing,
+  bodyAloneDrag,
   dragDivergenceMach,
   dragRiseMach,
   geometry,
@@ -172,12 +173,21 @@ describe("model contract", () => {
     expect(kornMasonLock(withPlanform(bielatWing("35"), { aspectRatio: 6.5, sweepQuarterChordDeg: 60 }), { mach: 0.6, cl: 0.1 }).valid).toBe(false);
     expect(kornMasonLock(withPlanform(bielatWing("35"), { aspectRatio: 2 }), { mach: 0.6, cl: 0.1 }).valid).toBe(false);
   });
-  it("marks the Korn-Mason-Lock model outside its range beyond Mdd + 0.05 and keeps the baseline flat in Mach", () => {
+  it("marks the Korn-Mason-Lock model outside its range wherever the drag rise acts, and stops drawing it beyond Mdd + 0.05", () => {
     const w = bielatWing("10.8");
-    const mdd = waveDrag(w, 0.8, 0).mddMin;
-    expect(kornMasonLock(w, { mach: mdd + 0.04, cl: 0 }).valid).toBe(true);
-    expect(kornMasonLock(w, { mach: mdd + 0.06, cl: 0 }).valid).toBe(false);
+    const { mddMin, mcritMin } = waveDrag(w, 0.8, 0);
+    expect(mcritMin).toBeCloseTo(criticalMach(mddMin), 12);
+    const below = kornMasonLock(w, { mach: mcritMin - 0.001, cl: 0 });
+    expect(below.valid).toBe(true);
+    expect(below.parts.wave).toBe(0);
+    const above = kornMasonLock(w, { mach: mcritMin + 0.001, cl: 0 });
+    expect(above.valid).toBe(false);
+    expect(above.beyondLock).toBe(false);
+    expect(above.reasons.join(" ")).toMatch(/outside its demonstrated range/);
+    expect(kornMasonLock(w, { mach: mddMin + 0.04, cl: 0 }).beyondLock).toBe(false);
+    expect(kornMasonLock(w, { mach: mddMin + 0.06, cl: 0 }).beyondLock).toBe(true);
     expect(baselineIncompressible(w, { mach: 1.0, cl: 0 }).parts.wave).toBe(0);
+    expect(baselineIncompressible(w, { mach: 1.0, cl: 0 }).valid).toBe(true);
   });
   it("drag-rise Mach number of the model rises with sweep", () => {
     const m = (["10.8", "35", "47"] as const).map((id) => dragRiseMach(kornMasonLock, bielatWing(id), 0));
@@ -207,6 +217,18 @@ describe("parasite variants (gate 4 sensitivity)", () => {
     for (const mach of [0.5, 0.85, 0.95]) {
       expect(makeKornMasonLock({ wingFormFactor: "raymer", boundaryLayer: "turbulent" })(w, { mach, cl: 0.1 }).cd).toBe(kornMasonLock(w, { mach, cl: 0.1 }).cd);
     }
+  });
+
+  it("the body alone is the wing-body body term with nothing covered", () => {
+    const w = bielatWing("35");
+    for (const bl of ["turbulent", "mixed"] as const) {
+      const wb = parasiteDrag(w, 0.6, 0.6, { boundaryLayer: bl });
+      const alone = bodyAloneDrag(w.body, 0.6, w.planform.areaIn2, bl);
+      expect(alone.reynolds).toBeCloseTo(wb.bodyReynolds, 6);
+      expect(alone.wettedIn2).toBeGreaterThan(wb.bodyWettedIn2);
+      expect(alone.cd).toBeCloseTo((wb.body * alone.wettedIn2) / wb.bodyWettedIn2, 15);
+    }
+    expect(bodyAloneDrag(w.body, 0.6, w.planform.areaIn2, "mixed").cd).toBeLessThan(bodyAloneDrag(w.body, 0.6, w.planform.areaIn2).cd);
   });
 
   it("the breakdown adds up: wing + body = total, each = Cf FF Swet / S", () => {

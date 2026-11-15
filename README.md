@@ -8,6 +8,8 @@ Spike 1, the wing bench, is in progress. See `docs/briefs/001-spike-wing-bench.m
 
 The wing bench compares a fast drag model (Korn–Mason drag divergence with Lock's fourth-power drag rise) against three wing–body configurations measured by NACA in 1952 (R. P. Bielat, NACA RM L52B08, Langley 8-foot transonic tunnel).
 
+The model is shown and scored as a band: the spread of four textbook wing form factors and two boundary-layer states, none fitted to the data. Its transonic drag rise is computed but marked outside the model's range: the method is outside its demonstrated range on these thin, low-aspect-ratio wings. The body term is also checked against the body tested alone (NACA RM L51I04a).
+
 ## Requirements
 
 - Node.js 24 or later, with Corepack (`corepack enable` once, so `pnpm` resolves to the version pinned in `package.json`)

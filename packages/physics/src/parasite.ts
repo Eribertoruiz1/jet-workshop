@@ -14,7 +14,7 @@
  * so there is no base drag term.
  */
 
-import { geometry, sweepAtDeg, type WingBody } from "./geometry.ts";
+import { geometry, sweepAtDeg, type Body, type WingBody } from "./geometry.ts";
 import { reynoldsPerInch } from "./tunnel.ts";
 
 const DEG = Math.PI / 180;
@@ -120,6 +120,52 @@ export function bodyFormFactor(fineness: number): number {
   return 1 + 60 / Math.pow(fineness, 3) + fineness / 400;
 }
 
+interface BodyTerm {
+  wettedIn2: number;
+  reynolds: number;
+  cf: number;
+  formFactor: number;
+  /** Cf times form factor times wetted area, square inches (divide by the reference area) */
+  drag: number;
+}
+
+/**
+ * Cylinder with an ogive nose, as a body of revolution with friction and a
+ * form factor, the path of Gur, Mason and Schetz. The nose is given 2/3 of the
+ * area of a cylinder of the same length; `coveredIn2` is the body side hidden
+ * by the wing roots (0 for the body alone). No wave or base drag: the tested
+ * drag was corrected to free-stream base pressure, and the body's own
+ * compressibility drag is not modelled (brief 002).
+ */
+function bodyTerm(b: Body, rePerIn: number, machForFactors: number, cf: (re: number, m: number) => number, coveredIn2: number): BodyTerm {
+  // UNVERIFIED: check against Raymer, Aircraft Design, 6th ed.
+  const wettedIn2 = Math.PI * b.diameterIn * (b.lengthIn - b.noseLengthIn) + (2 / 3) * Math.PI * b.diameterIn * b.noseLengthIn - coveredIn2;
+  const reynolds = rePerIn * b.lengthIn;
+  const c = cf(reynolds, machForFactors);
+  const formFactor = bodyFormFactor(b.lengthIn / b.diameterIn);
+  return { wettedIn2, reynolds, cf: c, formFactor, drag: c * formFactor * wettedIn2 };
+}
+
+export interface BodyAloneDrag {
+  /** Drag coefficient on the given reference area */
+  cd: number;
+  wettedIn2: number;
+  reynolds: number;
+  cf: number;
+  formFactor: number;
+}
+
+/**
+ * Drag of the body alone, at zero angle of attack, on a reference area: the
+ * body term of the wing-body model with nothing covered. NACA RM L51I04a gives
+ * the tested body's drag on the wing area of 1.143 sq ft, at the tunnel
+ * Reynolds number of the wing-body tests.
+ */
+export function bodyAloneDrag(b: Body, mach: number, refAreaIn2: number, boundaryLayer: BoundaryLayer = "turbulent"): BodyAloneDrag {
+  const t = bodyTerm(b, reynoldsPerInch(mach), mach, BOUNDARY_LAYERS[boundaryLayer].cf, 0);
+  return { cd: t.drag / refAreaIn2, wettedIn2: t.wettedIn2, reynolds: t.reynolds, cf: t.cf, formFactor: t.formFactor };
+}
+
 export interface ParasiteBreakdown {
   wing: number;
   body: number;
@@ -161,17 +207,14 @@ export function parasiteDrag(w: WingBody, mach: number, machForFactors: number =
   });
   const wing = (wingCf * ffWing * wingWet) / S;
 
-  // Body: cylinder with an ogive nose, as a body of revolution. The nose is
-  // given 2/3 of the area of a cylinder of the same length; the wing roots
-  // cover two airfoil-shaped patches of the body side.
-  // UNVERIFIED: check against Raymer, Aircraft Design, 6th ed.
-  const b = w.body;
+  // Body: the wing roots cover two airfoil-shaped patches of the body side.
   const rootPatch = w.airfoil.areaFactor * p.thicknessRatio * g.sideChordIn * g.sideChordIn;
-  const bodyWet = Math.PI * b.diameterIn * (b.lengthIn - b.noseLengthIn) + (2 / 3) * Math.PI * b.diameterIn * b.noseLengthIn - 2 * rootPatch;
-  const bodyRe = rePerIn * b.lengthIn;
-  const bodyCf = cf(bodyRe, machForFactors);
-  const ffBody = bodyFormFactor(b.lengthIn / b.diameterIn);
-  const body = (bodyCf * ffBody * bodyWet) / S;
+  const b = bodyTerm(w.body, rePerIn, machForFactors, cf, 2 * rootPatch);
+  const bodyWet = b.wettedIn2;
+  const bodyRe = b.reynolds;
+  const bodyCf = b.cf;
+  const ffBody = b.formFactor;
+  const body = b.drag / S;
 
   return {
     wing,

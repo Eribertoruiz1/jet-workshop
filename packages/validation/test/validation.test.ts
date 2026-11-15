@@ -1,9 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { bielatWing, kornMasonLock } from "@jet-workshop/physics";
+import { bielatWing, kornMasonLock, waveDrag } from "@jet-workshop/physics";
 import {
   assemble,
+  bandError,
   bandOf,
+  baselineBand,
+  kornMasonLockBand,
+  loadBodyDataset,
   measuredLiftSlope,
+  modelLimitMach,
   modelRange,
   outsideBy,
   PARASITE_VARIANTS,
@@ -13,6 +18,9 @@ import {
   reliability,
   sampledDragRiseMach,
   scorePolarPoint,
+  type Band,
+  type BandModel,
+  type Dataset,
   type LiftPoint,
   type PolarPoint,
 } from "../src/index.ts";
@@ -40,6 +48,18 @@ describe("dataset parsing", () => {
     expect(d.lift).toHaveLength(1);
     expect(d.faired).toHaveLength(1);
     expect(d.faired[0]!.cd0).toBe(0.011);
+  });
+  it("reads the body-alone file as its own dataset and refuses wing-body rows in it", () => {
+    const csv = [
+      HEADER.replace("document,", "document,"),
+      row("fig16b", "body alone", "0.500", "fig16b-body-M0.500", "p2", "CD", 0.0029).replace("NACA RM L52B08", "NACA RM L51I04a"),
+      row("fig16b", "body alone", "0.500", "fig16b-body-M0.500", "p2", "alpha", 0.1).replace("NACA RM L52B08", "NACA RM L51I04a"),
+    ].join("\n");
+    const b = loadBodyDataset(csv);
+    expect(b).toHaveLength(1);
+    expect(b[0]!).toMatchObject({ document: "NACA RM L51I04a", mach: 0.5, cd: 0.0029, alpha: 0.1 });
+    expect(() => loadBodyDataset(csv.replaceAll("body alone", "35 deg"))).toThrow();
+    expect(() => parseRows(csv)).toThrow();
   });
 });
 
@@ -76,29 +96,43 @@ describe("scoring helpers", () => {
     expect(m).toBeGreaterThan(0.875);
     expect(m).toBeLessThan(0.925);
   });
-  it("scores a point as model minus measured with its uncertainty ratio", () => {
-    const p = { wing: "35", mach: 0.6, cl: 0.1, uCl: 0.01, cd: 0.01, uCd: 0.001 } as PolarPoint;
-    const s = scorePolarPoint(kornMasonLock, bielatWing("35"), p);
-    expect(s.error).toBeCloseTo(s.result.cd - 0.01, 12);
-    expect(s.ratio).toBeCloseTo(Math.abs(s.error) / 0.001, 12);
+  it("scores a point by its distance to the band, model minus measured, 0 inside", () => {
+    const band: Band = { values: [], min: 0.009, max: 0.011, valid: true, beyondLock: false, reasons: [] };
+    expect(bandError(band, 0.010)).toBe(0);
+    expect(bandError(band, 0.008)).toBeCloseTo(0.001, 12);
+    expect(bandError(band, 0.0125)).toBeCloseTo(-0.0015, 12);
+    const p = { wing: "35", mach: 0.6, cl: 0.1, uCl: 0.01, cd: 0.008, uCd: 0.001 } as PolarPoint;
+    const s = scorePolarPoint(() => band, bielatWing("35"), p);
+    expect(s.error).toBeCloseTo(0.001, 12);
+    expect(s.ratio).toBeCloseTo(1, 12);
+    expect(s.spread).toBeCloseTo(0.002, 12);
   });
 });
 
+/** A band of fixed position for the strip rules: centre and half-width in CD. */
+const fixedBand = (centre: number, half: number): BandModel => () => ({ values: [], min: centre - half, max: centre + half, valid: true, beyondLock: false, reasons: [] });
+const oneSymbol = (cd: number): Dataset => ({ rows: [], lift: [], faired: [], polar: [{ wing: "35", mach: 0.52, cl: 0.1, uCl: 0.01, cd, uCd: 0.001 } as PolarPoint] });
+
 describe("reliability strip", () => {
-  it("is computed, never assigned: estimate without data, outside range beyond the model's limit", () => {
-    const segs = reliability(kornMasonLock, bielatWing("10.8"), null, null, 0);
+  it("is computed, never assigned: estimate without data, outside range where the transonic drag rise acts", () => {
+    const segs = reliability(kornMasonLockBand, bielatWing("10.8"), null, null, 0);
     expect(segs[0]!.state).toBe("estimate");
     expect(segs.at(-1)!.state).toBe("outside model range");
-  });
-  it("calls a segment validated only when every symbol in it is within 0.0020", () => {
     const w = bielatWing("35");
-    const exact = kornMasonLock(w, { mach: 0.52, cl: 0.1 }).cd;
-    const data = { rows: [], lift: [], faired: [], polar: [{ wing: "35", mach: 0.52, cl: 0.1, uCl: 0.01, cd: exact + 0.001, uCd: 0.001 } as PolarPoint] };
-    expect(reliability(kornMasonLock, w, "35", data, 0.1)[0]!.state).toBe("validated");
-    data.polar[0]!.cd = exact + 0.003;
-    const s = reliability(kornMasonLock, w, "35", data, 0.1)[0]!;
-    expect(s.state).toBe("estimate");
-    expect(s.disagrees).toBe(true);
+    const limit = modelLimitMach(kornMasonLockBand, w, 0)!;
+    expect(limit).toBeCloseTo(waveDrag(w, 0.8, 0).mcritMin, 2);
+    for (const s of reliability(kornMasonLockBand, w, null, null, 0)) if (s.hi > limit + 0.001) expect(s.state).toBe("outside model range");
+  });
+  it("validated only when every symbol lies inside the band and the band's half-spread is within 0.0020", () => {
+    const w = bielatWing("35");
+    const first = (band: BandModel, cd: number) => reliability(band, w, "35", oneSymbol(cd), 0.1)[0]!;
+    expect(first(fixedBand(0.010, 0.0015), 0.011)).toMatchObject({ state: "validated", disagrees: false });
+    // inside, but the band is too wide to validate anything
+    expect(first(fixedBand(0.010, 0.0025), 0.011)).toMatchObject({ state: "estimate", disagrees: false });
+    // just outside the band: an estimate, not a disagreement beyond the precedent
+    expect(first(fixedBand(0.010, 0.0015), 0.0125)).toMatchObject({ state: "estimate", disagrees: false });
+    // more than 0.0020 outside the band: the disagreement text applies
+    expect(first(fixedBand(0.010, 0.0015), 0.0140)).toMatchObject({ state: "estimate", disagrees: true });
   });
 });
 
@@ -113,7 +147,17 @@ describe("CD0 sensitivity range (gate 4)", () => {
       expect(r.min).toBeLessThanOrEqual(d.cd);
       expect(r.max).toBeGreaterThanOrEqual(d.cd);
       expect(r.valid).toBe(d.valid);
+      expect(r.beyondLock).toBe(d.beyondLock);
     }
+  });
+
+  it("the baseline band uses the same parasite variants: at M 0.50 the two bands coincide below the critical Mach number", () => {
+    const w = bielatWing("47");
+    const a = kornMasonLockBand(w, { mach: 0.5, cl: 0.05 });
+    const b = baselineBand(w, { mach: 0.5, cl: 0.05 });
+    expect(a.min).toBeCloseTo(b.min, 12);
+    expect(a.max).toBeCloseTo(b.max, 12);
+    expect(a.max - a.min).toBeGreaterThan(0.001);
   });
 
   it("signed distance to a range is zero inside and negative below", () => {
