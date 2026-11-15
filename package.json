@@ -11,7 +11,8 @@
     "typecheck": "tsc -p packages/physics && tsc -p packages/validation && tsc -p apps/web",
     "lint": "oxlint --deny-warnings packages apps",
     "validate": "tsx packages/validation/src/cli.ts",
-    "dev": "pnpm --filter @jet-workshop/web dev"
+    "dev": "pnpm --filter @jet-workshop/web dev",
+    "check:browser": "node apps/web/scripts/audit.mjs"
   },
   "devDependencies": {
     "@types/node": "26.6.6",
