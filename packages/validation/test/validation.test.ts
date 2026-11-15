@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { bielatWing, kornMasonLock, waveDrag } from "@jet-workshop/physics";
 import {
@@ -60,6 +61,21 @@ describe("dataset parsing", () => {
     expect(b[0]!).toMatchObject({ document: "NACA RM L51I04a", mach: 0.5, cd: 0.0029, alpha: 0.1 });
     expect(() => loadBodyDataset(csv.replaceAll("body alone", "35 deg"))).toThrow();
     expect(() => parseRows(csv)).toThrow();
+  });
+});
+
+describe("the committed datasets", () => {
+  it("the body-alone file loads: 52 measured symbols, 4 per Mach number, each with CD and alpha", () => {
+    const body = loadBodyDataset(readFileSync(new URL("../data/bielat-l51i04a-body.csv", import.meta.url), "utf8"));
+    expect(body).toHaveLength(52);
+    const machs = new Set(body.map((p) => p.mach));
+    expect(machs.size).toBe(13);
+    for (const m of machs) expect(body.filter((p) => p.mach === m)).toHaveLength(4);
+    for (const p of body) {
+      expect(p.document).toBe("NACA RM L51I04a");
+      expect(Number.isFinite(p.cd) && Number.isFinite(p.alpha)).toBe(true);
+      expect(p.uCd).toBeGreaterThanOrEqual(0.001);
+    }
   });
 });
 

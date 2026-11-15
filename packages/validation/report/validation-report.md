@@ -283,5 +283,73 @@ Size of the transonic term on figure 9 (NACA faired curve):
 
 ## 9. Body alone against NACA RM L51I04a, figure 16(b)
 
-No body-alone dataset was given.
+Measured: 52 symbols of NACA RM L51I04a, figure 16(b) (PDF page 38, printed page 37), from `packages/validation/data/bielat-l51i04a-body.csv`, digitized twice. The body of the three wing-body models tested without wings: the same cylinder of 2.25 in with a 6.61 in ogive nose, 25.15 in long, and the drag given on the wing area of 1.143 sq ft, corrected to free-stream base pressure, as in NACA RM L52B08. Only the symbols at the nominal angles of attack of -2, 0 and +2 deg were read.
+
+Model: the body term of the wing-body model applied to the body alone (nothing covered by the wing roots), at the Reynolds number of the wing-body tests, with a fully turbulent boundary layer and with a laminar run to Re 5e5: the two states that make up the body's share of the model band. Only Raymer's body form factor is used (a ticket). The body term has no compressibility or wave drag (brief 002), so above M 0.90 the comparison is listed but not scored. Scored: the symbols within 0.5 deg of zero angle of attack, where the body carries no lift; the symbols at -2 and +2 deg are listed to show how flat the drag is near zero lift.
+
+| Mach | Point | Angle of attack, deg | Measured CD | u | Model, body alone | Distance | Scored |
+| ---: | --- | ---: | ---: | ---: | --- | ---: | --- |
+| 0.500 | p1 | -1.86 | 0.0022 | 0.0010 | 0.0031 to 0.0033 | +0.0009 | no: not at zero lift |
+| 0.500 | p2 | 0.09 | 0.0019 | 0.0010 | 0.0031 to 0.0033 | +0.0012 | yes |
+| 0.500 | p3 | 0.10 | 0.0029 | 0.0010 | 0.0031 to 0.0033 | +0.0002 | yes |
+| 0.500 | p4 | 2.14 | 0.0031 | 0.0010 | 0.0031 to 0.0033 | +0.0000 | no: not at zero lift |
+| 0.700 | p1 | -1.92 | 0.0031 | 0.0010 | 0.0030 to 0.0032 | +0.0000 | no: not at zero lift |
+| 0.700 | p3 | 0.12 | 0.0031 | 0.0010 | 0.0030 to 0.0032 | +0.0000 | yes |
+| 0.700 | p2 | 0.14 | 0.0030 | 0.0010 | 0.0030 to 0.0032 | +0.0000 | yes |
+| 0.700 | p4 | 2.14 | 0.0033 | 0.0010 | 0.0030 to 0.0032 | -0.0001 | no: not at zero lift |
+| 0.850 | p1 | -1.86 | 0.0031 | 0.0010 | 0.0029 to 0.0031 | +0.0000 | no: not at zero lift |
+| 0.850 | p3 | 0.11 | 0.0031 | 0.0010 | 0.0029 to 0.0031 | +0.0000 | yes |
+| 0.850 | p2 | 0.25 | 0.0033 | 0.0010 | 0.0029 to 0.0031 | -0.0001 | yes |
+| 0.850 | p4 | 2.06 | 0.0033 | 0.0010 | 0.0029 to 0.0031 | -0.0002 | no: not at zero lift |
+| 0.900 | p1 | -1.91 | 0.0030 | 0.0010 | 0.0029 to 0.0031 | +0.0000 | no: not at zero lift |
+| 0.900 | p2 | 0.20 | 0.0031 | 0.0010 | 0.0029 to 0.0031 | -0.0000 | yes |
+| 0.900 | A:p4|B:p3 | 0.21 | 0.0032 | 0.0010 | 0.0029 to 0.0031 | -0.0001 | yes |
+| 0.900 | A:p3|B:p4 | 2.12 | 0.0033 | 0.0010 | 0.0029 to 0.0031 | -0.0002 | no: not at zero lift |
+| 0.925 | p1 | -1.87 | 0.0032 | 0.0010 | 0.0028 to 0.0031 | -0.0001 | no: not at zero lift |
+| 0.925 | A:p2|B:p3 | 0.05 | 0.0032 | 0.0010 | 0.0028 to 0.0031 | -0.0001 | no: above M 0.90, no body wave-drag term |
+| 0.925 | A:p4|B:p2 | 0.14 | 0.0032 | 0.0010 | 0.0028 to 0.0031 | -0.0001 | no: above M 0.90, no body wave-drag term |
+| 0.925 | A:p3|B:p4 | 2.22 | 0.0033 | 0.0010 | 0.0028 to 0.0031 | -0.0002 | no: not at zero lift |
+| 0.950 | p1 | -1.86 | 0.0033 | 0.0010 | 0.0028 to 0.0031 | -0.0002 | no: not at zero lift |
+| 0.950 | A:p4|B:p3 | 0.13 | 0.0034 | 0.0010 | 0.0028 to 0.0031 | -0.0003 | no: above M 0.90, no body wave-drag term |
+| 0.950 | p2 | 0.17 | 0.0032 | 0.0010 | 0.0028 to 0.0031 | -0.0002 | no: above M 0.90, no body wave-drag term |
+| 0.950 | A:p3|B:p4 | 2.12 | 0.0034 | 0.0010 | 0.0028 to 0.0031 | -0.0003 | no: not at zero lift |
+| 0.975 | p1 | -1.94 | 0.0037 | 0.0010 | 0.0028 to 0.0030 | -0.0007 | no: not at zero lift |
+| 0.975 | A:p2|B:p3 | 0.13 | 0.0037 | 0.0010 | 0.0028 to 0.0030 | -0.0006 | no: above M 0.90, no body wave-drag term |
+| 0.975 | A:p4|B:p2 | 0.15 | 0.0037 | 0.0010 | 0.0028 to 0.0030 | -0.0006 | no: above M 0.90, no body wave-drag term |
+| 0.975 | A:p3|B:p4 | 2.25 | 0.0038 | 0.0010 | 0.0028 to 0.0030 | -0.0007 | no: not at zero lift |
+| 1.000 | p1 | -1.86 | 0.0045 | 0.0010 | 0.0028 to 0.0030 | -0.0015 | no: not at zero lift |
+| 1.000 | p3 | 0.02 | 0.0044 | 0.0010 | 0.0028 to 0.0030 | -0.0013 | no: above M 0.90, no body wave-drag term |
+| 1.000 | p2 | 0.22 | 0.0044 | 0.0010 | 0.0028 to 0.0030 | -0.0014 | no: above M 0.90, no body wave-drag term |
+| 1.000 | p4 | 2.12 | 0.0046 | 0.0010 | 0.0028 to 0.0030 | -0.0016 | no: not at zero lift |
+| 1.020 | p1 | -1.84 | 0.0048 | 0.0010 | 0.0028 to 0.0030 | -0.0018 | no: not at zero lift |
+| 1.020 | p2 | 0.17 | 0.0049 | 0.0010 | 0.0028 to 0.0030 | -0.0019 | no: above M 0.90, no body wave-drag term |
+| 1.020 | p3 | 0.24 | 0.0053 | 0.0010 | 0.0028 to 0.0030 | -0.0023 | no: above M 0.90, no body wave-drag term |
+| 1.020 | p4 | 2.23 | 0.0050 | 0.0010 | 0.0028 to 0.0030 | -0.0020 | no: not at zero lift |
+| 1.035 | p1 | -1.94 | 0.0055 | 0.0010 | 0.0028 to 0.0030 | -0.0025 | no: not at zero lift |
+| 1.035 | A:p4|B:p3 | 0.03 | 0.0055 | 0.0010 | 0.0028 to 0.0030 | -0.0025 | no: above M 0.90, no body wave-drag term |
+| 1.035 | p2 | 0.09 | 0.0054 | 0.0010 | 0.0028 to 0.0030 | -0.0024 | no: above M 0.90, no body wave-drag term |
+| 1.035 | A:p3|B:p4 | 2.25 | 0.0057 | 0.0010 | 0.0028 to 0.0030 | -0.0027 | no: not at zero lift |
+| 1.085 | p1 | -1.96 | 0.0060 | 0.0010 | 0.0027 to 0.0030 | -0.0030 | no: not at zero lift |
+| 1.085 | A:p4|B:p3 | 0.04 | 0.0062 | 0.0010 | 0.0027 to 0.0030 | -0.0032 | no: above M 0.90, no body wave-drag term |
+| 1.085 | p2 | 0.11 | 0.0061 | 0.0010 | 0.0027 to 0.0030 | -0.0031 | no: above M 0.90, no body wave-drag term |
+| 1.085 | A:p3|B:p4 | 2.13 | 0.0063 | 0.0010 | 0.0027 to 0.0030 | -0.0033 | no: not at zero lift |
+| 1.100 | p1 | -1.84 | 0.0065 | 0.0010 | 0.0027 to 0.0030 | -0.0035 | no: not at zero lift |
+| 1.100 | A:p2|B:p3 | 0.06 | 0.0064 | 0.0010 | 0.0027 to 0.0030 | -0.0034 | no: above M 0.90, no body wave-drag term |
+| 1.100 | A:p4|B:p2 | 0.07 | 0.0064 | 0.0010 | 0.0027 to 0.0030 | -0.0035 | no: above M 0.90, no body wave-drag term |
+| 1.100 | A:p3|B:p4 | 2.13 | 0.0065 | 0.0010 | 0.0027 to 0.0030 | -0.0035 | no: not at zero lift |
+| 1.130 | p1 | -1.84 | 0.0061 | 0.0010 | 0.0027 to 0.0029 | -0.0032 | no: not at zero lift |
+| 1.130 | p3 | 0.04 | 0.0061 | 0.0010 | 0.0027 to 0.0029 | -0.0031 | no: above M 0.90, no body wave-drag term |
+| 1.130 | p2 | 0.15 | 0.0063 | 0.0010 | 0.0027 to 0.0029 | -0.0033 | no: above M 0.90, no body wave-drag term |
+| 1.130 | p4 | 2.25 | 0.0064 | 0.0010 | 0.0027 to 0.0029 | -0.0034 | no: not at zero lift |
+
+Scored symbols (zero lift, M up to 0.90): 8; inside the model range: 3; largest distance 0.0012 (2: within the charter target (0.0015)); mean signed distance +0.0001; half-spread of the range up to 0.0001.
+
+Model body term at the scored Mach numbers, body alone and as used inside the wing-body model (the roots of the wing cover part of the body side there):
+
+| Mach | Body alone, turbulent to mixed | Inside the wing-body model, turbulent to mixed |
+| ---: | --- | --- |
+| 0.500 | 0.0033 to 0.0031 | 0.0032 to 0.0029 |
+| 0.700 | 0.0032 to 0.0030 | 0.0031 to 0.0028 |
+| 0.850 | 0.0031 to 0.0029 | 0.0030 to 0.0028 |
+| 0.900 | 0.0031 to 0.0029 | 0.0030 to 0.0027 |
 

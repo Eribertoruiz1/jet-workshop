@@ -29,6 +29,23 @@ tail -c +437 .cache/NACA-RM-L52B08.pdf > .cache/bielat-L52B08.pdf
 
 SHA-256 as downloaded: `e7ea320bad9c2ce07cb7cb61ca23f8a9ea4c15e6048bd61d905a8b5e6df73f25`. After stripping: `7c213cf56fb064b8547fac754adaa42b7dc4cd06826bd08547da589a4a245a53`.
 
+### Second report: NACA RM L51I04a (body alone)
+
+Bielat, Harrison and Coppolino, NACA RM L51I04a (1951), tested the same body without wings (brief 001, Amendment 3, point 2). Only figure 16(b), the body-alone drag, is digitized; its specs and results are in `figures-l51i04a/fig16b/`, apart from the wing-body figures, and its rows go to their own dataset, `packages/validation/data/bielat-l51i04a-body.csv`.
+
+```bash
+curl -L -o .cache/l51i04a/NACA-RM-L51I04a.ntrs.pdf https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf
+```
+
+This NTRS file has no wrapper (it starts with `%PDF`) and is read as downloaded. SHA-256: `70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f`.
+
+Figure 16 is printed sideways on an upright page (the page has no /Rotate). `extract_scan.py --turn cw` turns the extracted image a quarter turn clockwise, which only moves pixels, so the figure reads upright and the grid lines run along the pixel axes as the mesh calibration expects:
+
+```bash
+python -I tools/digitize/extract_scan.py .cache/l51i04a/NACA-RM-L51I04a.ntrs.pdf 38 .cache/l51i04a/scans/p38-cw.png --turn cw
+python -I tools/digitize/consolidate.py tools/digitize/figures-l51i04a packages/validation/data/bielat-l51i04a-body.csv
+```
+
 ## Workflow
 
 1. **Extract the scan** of a page at native resolution (about 300 dpi). Pixel coordinates everywhere refer to this image.

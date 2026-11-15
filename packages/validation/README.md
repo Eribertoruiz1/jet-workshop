@@ -119,6 +119,34 @@ The declared accuracy of the balance dominates `u_total`: about ±0.001 in CD an
 - **Not digitized.** Figure 4 (Reynolds number), figure 8 (faired lift-curve slope), pitching moment, and the polars at Mach numbers beyond the five per wing. Listed under Tickets in `docs/cp/001.md`.
 - **Scan.** One scan (NTRS). An independent scan (UNT) agrees on figure 6(b) within one pixel on the 4 symbols whose dot survives it (`tools/digitize/figures/fig06b/unt-vs-pass-a.md`).
 
+## Second dataset: the body alone, NACA RM L51I04a
+
+`data/bielat-l51i04a-body.csv` holds the drag of the same body tested without wings, read twice from one figure of a second report (brief 001, Amendment 3, point 2). It is a separate file and is never mixed with the wing-body data. `pnpm validate` compares the model's body term with it (report section 9).
+
+### Source
+
+R. P. Bielat, D. E. Harrison and D. A. Coppolino, NACA RM L51I04a, 1951: the 47 deg wing of the series at three thickness ratios and with a thickened root, Langley 8-foot high-speed tunnel, slotted test section, with body-alone data in its figure 16. The report is the reference 4 of NACA RM L52B08. Same tunnel, balance, models and corrections: the drag is referred to a base pressure equal to free-stream static pressure. Declared accuracy (p. 4): CL ±0.01, CD ±0.001, Cm ±0.004; angle of attack set within ±0.1 deg. Its figure 3 gives the same body (cylinder 2.25 in in diameter, ogive nose 6.61 in long with a 20 in radius, 25.15 in long) and the same wing area, 1.143 sq ft, on which the body's drag coefficient is given. The PDF is not stored here; `tools/digitize/README.md` gives the download and its SHA-256.
+
+How to cite a value: Bielat, Harrison and Coppolino, NACA RM L51I04a (1951), figure 16(b), p. 37 (PDF page 38); digitized in jet-workshop, `fig16b-body-M0.700 p2`.
+
+### What was read
+
+Figure 16(b): drag coefficient against angle of attack, one polar per Mach number on a staggered CD scale (each Mach number has its own CD = 0, 0.004 apart on a common axis). The figure is printed sideways; the scan is turned a quarter turn to read it (lossless). Only the symbols at the nominal angles of attack of -2, 0 and +2 deg were read, at all 13 Mach numbers (0.50, 0.70, 0.85, 0.90, 0.925, 0.95, 0.975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.13). Every Mach number has two symbols near zero angle of attack (a repeated test point, as near 6 deg), so 4 symbols per Mach number: 52 symbols, 104 rows (CD and alpha of each symbol), all `measured`.
+
+### Schema
+
+The columns are those of the wing-body file. `wing` is `body alone`; `series` is `fig16b-body-M<mach>`; the variables are `CD` (on the wing area) and `alpha` (deg, angle of attack of the body centre line, as plotted).
+
+### Uncertainty
+
+As for the wing-body file: digitization uncertainty = max(pass difference, one pixel), total = root-sum-square with the declared accuracy. One pixel is 0.000027 in CD and 0.013 deg in alpha. Largest pass differences: 0.00029 in CD and 0.13 deg in alpha, both at the doubled symbols near zero angle of attack at M 1.10. One point of 52 exceeds the declared accuracy, in alpha only (stop rule not triggered). Total uncertainty in CD: 0.0010 for every point.
+
+### Known limitations
+
+- **Doubled symbols.** At every Mach number there are two symbols near zero angle of attack; at 12 of the 13 (all but M 0.50) their outlines overlap. 17 symbols have a centre placed by eye in both passes (the same 17), because the centre dot is hidden or merged. The M 1.10 and 1.13 pairs are the least certain: the passes disagree on how the two outlines are offset, which the pass difference records.
+- **Points not independent of pass B.** Pass A first read seven of these pairs as one symbol with a doubled outline. After pass B's report the second symbol was confirmed on the scan and added to pass A, and five first picks were moved; those 12 picks say in their note that they are not independent of pass B.
+- **Not read:** the symbols above 2 deg, figure 16(a) (lift) and 16(c) (pitching moment), and the rest of the report (the thickness series of the 47 deg wing: Tickets, brief 002).
+
 ## License
 
 License: not yet chosen. All rights reserved until a license is added. This covers the digitized values and this card, not the NACA report.

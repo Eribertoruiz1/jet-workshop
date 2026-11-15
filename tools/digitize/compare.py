@@ -36,6 +36,8 @@ from pathlib import Path
 
 # Declared accuracy, NACA RM L52B08 p. 5 ("Measurements"): balance data CL, CD
 # and Cm; the model angle "set within +/-0.1 deg for all test Mach numbers".
+# NACA RM L51I04a (same tunnel, balance and models) declares the same values
+# on its p. 4 and 5.
 DECLARED = {"CL": 0.01, "CD": 0.001, "CD0": 0.001, "Cm": 0.004, "alpha": 0.1}
 
 FIELDS = [
@@ -50,13 +52,28 @@ def match_symbols(pa: list[dict], pb: list[dict], xvar: str, yvar: str) -> list[
         return math.hypot((a["value"][xvar] - b["value"][xvar]) / DECLARED[xvar],
                           (a["value"][yvar] - b["value"][yvar]) / DECLARED[yvar])
     pairs = sorted(((dist(a, b), i, j) for i, a in enumerate(pa) for j, b in enumerate(pb)), key=lambda t: t[0])
-    used_a, used_b, out = set(), set(), []
+    used_a, used_b, matched = set(), set(), []
     for d, i, j in pairs:
         if i in used_a or j in used_b or d > 5.0:
             continue
         used_a.add(i)
         used_b.add(j)
-        out.append((pa[i], pb[j]))
+        matched.append([i, j])
+    # The greedy pass can cross two pairs of nearly coincident symbols (a
+    # repeated test point drawn twice): swap partners while that lowers the
+    # total distance, so each symbol is compared with the same symbol.
+    improved = True
+    while improved:
+        improved = False
+        for m in range(len(matched)):
+            for n in range(m + 1, len(matched)):
+                (i1, j1), (i2, j2) = matched[m], matched[n]
+                now = dist(pa[i1], pb[j1]) + dist(pa[i2], pb[j2])
+                swapped = dist(pa[i1], pb[j2]) + dist(pa[i2], pb[j1])
+                if swapped < now - 1e-12 and max(dist(pa[i1], pb[j2]), dist(pa[i2], pb[j1])) <= 5.0:
+                    matched[m][1], matched[n][1] = j2, j1
+                    improved = True
+    out = [(pa[i], pb[j]) for i, j in matched]
     out += [(pa[i], None) for i in range(len(pa)) if i not in used_a]
     out += [(None, pb[j]) for j in range(len(pb)) if j not in used_b]
     return out
@@ -123,7 +140,7 @@ def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = 
                     "figure": fig["number"],
                     "pdf_page": fig["pdf_page"],
                     "printed_page": fig["printed_page"],
-                    "wing": f"{sa['wing']} deg",
+                    "wing": "body alone" if sa["wing"] == "body" else f"{sa['wing']} deg",
                     "mach": f"{mach:.3f}",
                     "series": sa["id"],
                     "point_id": f"A:{a['id']}|B:{b['id']}" if a["id"] != b["id"] else a["id"],

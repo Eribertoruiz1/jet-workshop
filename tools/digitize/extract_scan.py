@@ -6,10 +6,15 @@ pixel coordinates reproducible: they refer to the embedded image, turned by
 the page's /Rotate value so that it reads upright, as a PDF viewer shows it.
 
 Usage:
-    python -I tools/digitize/extract_scan.py <pdf> <pdf_page> <out.png>
+    python -I tools/digitize/extract_scan.py <pdf> <pdf_page> <out.png> [--turn cw|ccw]
 
 <pdf_page> is the 1-based page index in the PDF file (not the printed page number).
 Prints the image size, the page rotation and the SHA-256 of the PDF.
+
+--turn turns the image a further quarter turn, clockwise or counter-clockwise,
+for a figure printed sideways on an upright page (NACA RM L51I04a, figure 16).
+A quarter turn only moves pixels (no resampling), so it is lossless; a spec
+that reads such a scan records the turn in its "scan" block.
 """
 
 from __future__ import annotations
@@ -50,11 +55,15 @@ def main() -> None:
     ap.add_argument("pdf", type=Path)
     ap.add_argument("pdf_page", type=int)
     ap.add_argument("out", type=Path)
+    ap.add_argument("--turn", choices=["cw", "ccw"], default=None)
     args = ap.parse_args()
     img, rotation = extract(args.pdf, args.pdf_page)
+    if args.turn:
+        img = img.transpose(Image.Transpose.ROTATE_270 if args.turn == "cw" else Image.Transpose.ROTATE_90)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     img.save(args.out)
-    print(f"pdf page {args.pdf_page}: {img.width}x{img.height} px, rotation {rotation}, pdf sha256 {sha256(args.pdf)}")
+    turned = f", turned {args.turn}" if args.turn else ""
+    print(f"pdf page {args.pdf_page}: {img.width}x{img.height} px, rotation {rotation}{turned}, pdf sha256 {sha256(args.pdf)}")
 
 
 if __name__ == "__main__":

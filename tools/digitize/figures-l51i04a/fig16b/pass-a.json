@@ -1,0 +1,586 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig16b",
+    "number": "16(b)",
+    "title": "Aerodynamic characteristics of the body alone. (b) Drag coefficient.",
+    "pdf_page": 38,
+    "printed_page": 37,
+    "x_axis": "Drag coefficient, CD, on the wing area of 1.143 sq ft (staggered: each Mach number has its own CD = 0)",
+    "y_axis": "Angle of attack of the body centre line, deg (common to all Mach numbers)",
+    "content_note": "Measured points: hollow symbols with a centre dot, one shape per Mach number, joined by faired curves."
+  },
+  "scan": {
+    "pdf_page": 38,
+    "size_px": [
+      3074,
+      2201
+    ],
+    "extraction": "tools/digitize/extract_scan.py --turn cw: the page's single embedded image (page /Rotate 0), turned a quarter turn clockwise so that the sideways figure reads upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": 0.0,
+        "step": 0.002,
+        "count": 31
+      },
+      "y_lines": {
+        "start": -2.0,
+        "step": 1.0,
+        "count": 17
+      }
+    },
+    "points": [
+      {
+        "px": [
+          593,
+          460
+        ],
+        "x": 0.004,
+        "y": 11.0
+      },
+      {
+        "px": [
+          593,
+          1350
+        ],
+        "x": 0.004,
+        "y": -1.0
+      },
+      {
+        "px": [
+          1187,
+          462
+        ],
+        "x": 0.02,
+        "y": 11.0
+      },
+      {
+        "px": [
+          1634,
+          1353
+        ],
+        "x": 0.032,
+        "y": -1.0
+      },
+      {
+        "px": [
+          2527,
+          466
+        ],
+        "x": 0.056,
+        "y": 11.0
+      },
+      {
+        "px": [
+          2527,
+          1357
+        ],
+        "x": 0.056,
+        "y": -1.0
+      },
+      {
+        "px": [
+          2080,
+          910
+        ],
+        "x": 0.044,
+        "y": 5.0
+      },
+      {
+        "px": [
+          890,
+          905
+        ],
+        "x": 0.012,
+        "y": 5.0
+      }
+    ],
+    "x_definition": "Common staggered axis: left frame 0.000, grid every 0.002, heavy line every 0.004. Each heavy line from 0.000 to 0.048 is the CD = 0 of one Mach number, in the order labelled under the axis: 0.50, 0.70, 0.85, 0.90, 0.925, 0.95, 0.975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.13; then .004 .008 .012 of M 1.13 at 0.052 to 0.060 (right frame)."
+  },
+  "series": [
+    {
+      "id": "fig16b-body-M0.500",
+      "wing": "body",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 3
+        },
+        {
+          "id": "p2",
+          "candidate": 2,
+          "note": "alpha 0: left of two circles"
+        },
+        {
+          "id": "p3",
+          "candidate": 4,
+          "note": "alpha 0: right of two circles"
+        },
+        {
+          "id": "p4",
+          "candidate": 6
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.700",
+      "wing": "body",
+      "mach": 0.7,
+      "kind": "symbols",
+      "symbol": "square",
+      "x_offset": 0.004,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 17
+        },
+        {
+          "id": "p2",
+          "candidate": 16,
+          "snap": "candidate",
+          "note": "alpha 0: two squares drawn almost on top of each other, two dots 5 px apart; left dot"
+        },
+        {
+          "id": "p3",
+          "candidate": 18,
+          "snap": "candidate",
+          "note": "alpha 0: two squares drawn almost on top of each other, two dots 5 px apart; right dot"
+        },
+        {
+          "id": "p4",
+          "candidate": 19
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.850",
+      "wing": "body",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.008,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 27
+        },
+        {
+          "id": "p2",
+          "px": [
+            866,
+            1257.5
+          ],
+          "snap": "none",
+          "note": "alpha 0: upper-right of two overlapping diamonds; no centre dot visible, centre of the outline by eye"
+        },
+        {
+          "id": "p3",
+          "px": [
+            859,
+            1271
+          ],
+          "snap": "none",
+          "note": "alpha 0: lower-left of two overlapping diamonds; no centre dot visible, centre of the outline by eye"
+        },
+        {
+          "id": "p4",
+          "candidate": 28
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.900",
+      "wing": "body",
+      "mach": 0.9,
+      "kind": "symbols",
+      "symbol": "triangle, apex up",
+      "x_offset": 0.012,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 33
+        },
+        {
+          "id": "p2",
+          "px": [
+            1007.5,
+            1264.5
+          ],
+          "snap": "none",
+          "note": "alpha 0: left of two almost coincident triangles (strokes twice the normal width, the two dots merged in one blob, candidate 34); centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1012.5,
+            1264.5
+          ],
+          "snap": "none",
+          "note": "alpha 0: right of two almost coincident triangles; centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 35
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.925",
+      "wing": "body",
+      "mach": 0.925,
+      "kind": "symbols",
+      "symbol": "triangle, apex down",
+      "x_offset": 0.016,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 42
+        },
+        {
+          "id": "p2",
+          "candidate": 43,
+          "note": "alpha 0: lower of two triangles offset about 6 px vertically (two top edges)"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1161,
+            1269.7
+          ],
+          "snap": "none",
+          "note": "alpha 0: upper of two triangles; its dot is under the lower triangle's top edge, centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 44
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.950",
+      "wing": "body",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 0.02,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 50
+        },
+        {
+          "id": "p2",
+          "px": [
+            1312,
+            1267
+          ],
+          "snap": "none",
+          "note": "alpha 0: left of two triangles offset about 5 px (two left edges); no separate dot, centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1317,
+            1270
+          ],
+          "snap": "none",
+          "note": "alpha 0: right of two triangles; no separate dot, centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 51
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M0.975",
+      "wing": "body",
+      "mach": 0.975,
+      "kind": "symbols",
+      "symbol": "triangle pointing left",
+      "x_offset": 0.024,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 58
+        },
+        {
+          "id": "p2",
+          "px": [
+            1471.5,
+            1271
+          ],
+          "snap": "none",
+          "note": "alpha 0: left of two triangles offset about 5 px, crossed by the faired curve; no separate dot, centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1476.5,
+            1269
+          ],
+          "snap": "none",
+          "note": "alpha 0: right of two triangles; no separate dot, centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 59
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.000",
+      "wing": "body",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle top left",
+      "x_offset": 0.028,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 71
+        },
+        {
+          "id": "p2",
+          "candidate": 70,
+          "note": "alpha 0: upper of two triangles"
+        },
+        {
+          "id": "p3",
+          "px": [
+            1649,
+            1280
+          ],
+          "snap": "none",
+          "note": "alpha 0: lower of two triangles; centre dot under the alpha = 0 grid line, centroid of the outline by eye"
+        },
+        {
+          "id": "p4",
+          "candidate": 72
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.020",
+      "wing": "body",
+      "mach": 1.02,
+      "kind": "symbols",
+      "symbol": "right triangle",
+      "x_offset": 0.032,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 79
+        },
+        {
+          "id": "p2",
+          "candidate": 80,
+          "note": "alpha 0: left of two triangles"
+        },
+        {
+          "id": "p3",
+          "candidate": 82,
+          "note": "alpha 0: right of two triangles"
+        },
+        {
+          "id": "p4",
+          "candidate": 81
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.035",
+      "wing": "body",
+      "mach": 1.035,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle bottom left",
+      "x_offset": 0.036,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            1985,
+            1426
+          ],
+          "snap": "dot",
+          "note": "alpha -2: dot not found by the candidate detector (touches the outline); picked by hand"
+        },
+        {
+          "id": "p2",
+          "px": [
+            1984,
+            1274
+          ],
+          "snap": "none",
+          "note": "alpha 0: upper of two triangles offset about 5 px vertically; centre placed at the dot position of the alpha -2 symbol relative to its outline (8 px right of the vertical side), which moves pass A's first pick 9 px left. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1984,
+            1279.5
+          ],
+          "snap": "none",
+          "note": "alpha 0: lower of two triangles; the two dots merge with each other and the alpha 0 grid line, centre by eye. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 89
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.085",
+      "wing": "body",
+      "mach": 1.085,
+      "kind": "symbols",
+      "symbol": "right triangle, right angle bottom right",
+      "x_offset": 0.04,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            2156,
+            1427
+          ],
+          "snap": "dot",
+          "note": "alpha -2: dot not found by the candidate detector; picked by hand"
+        },
+        {
+          "id": "p2",
+          "px": [
+            2159,
+            1275
+          ],
+          "snap": "none",
+          "note": "alpha 0: inner of two triangles offset about 5 px; centre placed at the alpha -2 symbol's dot position relative to its outline. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p4",
+          "px": [
+            2164,
+            1280
+          ],
+          "snap": "none",
+          "note": "alpha 0: outer of two triangles; centre placed the same way. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 96
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.100",
+      "wing": "body",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter disc",
+      "x_offset": 0.044,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 105
+        },
+        {
+          "id": "p2",
+          "candidate": 104,
+          "note": "alpha 0: upper-left of two symbols offset about 7 px"
+        },
+        {
+          "id": "p4",
+          "px": [
+            2324.5,
+            1283
+          ],
+          "snap": "none",
+          "note": "alpha 0: lower-right of two symbols; no separate dot, centre placed at the alpha +2 symbol's dot position relative to its outline. added after pass B's report (pass A had read the doubled outline as one symbol); confirmed on the scan, but this pick is not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 106
+        }
+      ]
+    },
+    {
+      "id": "fig16b-body-M1.130",
+      "wing": "body",
+      "mach": 1.13,
+      "kind": "symbols",
+      "symbol": "quarter disc",
+      "x_offset": 0.048,
+      "x_variable": "CD",
+      "y_variable": "alpha",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 112
+        },
+        {
+          "id": "p2",
+          "px": [
+            2463,
+            1276
+          ],
+          "snap": "none",
+          "note": "alpha 0: upper-right of two symbols of the same size offset by about 8 px; no centre dot visible, centre by eye"
+        },
+        {
+          "id": "p3",
+          "px": [
+            2455,
+            1283
+          ],
+          "snap": "none",
+          "note": "alpha 0: lower-left of two symbols of the same size offset by about 8 px; no centre dot visible, centre by eye"
+        },
+        {
+          "id": "p4",
+          "candidate": 114
+        }
+      ]
+    }
+  ],
+  "candidates_file": "candidates.json",
+  "scope": "Body-alone drag only (brief 001, Amendment 3, point 2): every symbol at the nominal angles of attack -2, 0 and 2 deg, at all 13 Mach numbers. The symbols at higher angles are not read.",
+  "assignment_method": "Each Mach number has its own symbol shape and its own CD origin; the angle of attack is read on the common vertical axis. Every Mach number has two symbols near alpha 0 (a repeated test point, as near alpha 6). Pass A first read seven of these pairs as one symbol with a doubled outline; after pass B's report each was checked on the scan and the second symbol added (see the notes)."
+}
