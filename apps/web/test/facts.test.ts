@@ -1,18 +1,19 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { SYMBOL_WINDOW, loadDataset } from "@jet-workshop/validation";
+import { NACA_TEXT_DRAG_RISE, SYMBOL_WINDOW, loadDataset, sampledDragRiseMach } from "@jet-workshop/validation";
 import { mach2, percent0, ratio1 } from "../src/format.ts";
 import {
   GAP_FROM,
   GAP_TO,
   LESSON_CL,
+  LIFT_WINDOWS_DEG,
   WINGS,
   dragRise,
   drawnSymbols,
   fairedAt,
   fairedCurve,
   formulaAgreement,
-  liftLoss,
+  liftLossRange,
   rightSymbolsLower,
   sweepDragCut,
   wallRatio,
@@ -35,20 +36,31 @@ describe("lesson figures, fixed at today's values (brief 002)", () => {
     expect(percent0(f.value.percent)).toBe("37");
   });
 
-  it("step 5: the rise starts at M 0.92 and 0.95; the 47 deg curve never reaches dCD/dM = 0.1 (NACA faired)", () => {
+  it("step 5: the rise starts at M 0.92 and 0.95 on the faired curves; the 47 deg curve never reaches dCD/dM = 0.1, so its 0.97 comes from the report's text", () => {
     const f = dragRise(data);
-    expect(f.dataClass).toBe("NACA faired");
-    expect(f.value["10.8"]!).toBeCloseTo(0.921, 3);
-    expect(f.value["35"]!).toBeCloseTo(0.951, 3);
-    expect(f.value["47"]).toBeNull();
-    expect([mach2(f.value["10.8"]!), mach2(f.value["35"]!)]).toEqual(["0.92", "0.95"]);
+    expect(f["10.8"]!.dataClass).toBe("NACA faired");
+    expect(f["35"]!.dataClass).toBe("NACA faired");
+    expect(f["10.8"]!.value).toBeCloseTo(0.921, 3);
+    expect(f["35"]!.value).toBeCloseTo(0.951, 3);
+    expect(f["47"]!.dataClass).toBe("NACA report text");
+    expect(f["47"]!.value).toBe(0.97);
+    expect([mach2(f["10.8"]!.value), mach2(f["35"]!.value), mach2(f["47"]!.value)]).toEqual(["0.92", "0.95", "0.97"]);
   });
 
-  it("step 6: the 47 deg wing gives 13 % less lift per degree than the 10.8 deg wing at M 0.50, measured", () => {
-    const f = liftLoss(data)!;
-    expect(f.dataClass).toBe("measured");
-    expect(f.value.percent).toBeCloseTo(12.92, 1);
-    expect(percent0(f.value.percent)).toBe("13");
+  it("step 5: the report-text figure carries its document, page and sentence, and the sentence states it", () => {
+    const s = dragRise(data)["47"]!.source!;
+    expect([s.document, s.printedPage, s.pdfPage, s.section]).toEqual(["NACA RM L52B08", 8, 10, "Drag Characteristics"]);
+    expect(s.quote).toContain(`drag-rise Mach number from ${NACA_TEXT_DRAG_RISE["10.8"]!.value.toFixed(2)} to ${s.value.toFixed(2)}`);
+    expect(sampledDragRiseMach(fairedCurve(data, "47").map((x) => ({ mach: x.mach, cd: x.cd0 })))).toBeNull();
+  });
+
+  it("step 6: the 47 deg wing gives between 4 and 13 % less lift per degree than the 10.8 deg wing at M 0.50, over four angle windows (computed)", () => {
+    const f = liftLossRange(data)!;
+    expect(f.dataClass).toBe("computed");
+    expect(f.value.windows.map((w) => w.limitDeg)).toEqual([...LIFT_WINDOWS_DEG]);
+    expect(f.value.windows.map((w) => Number(w.percent.toFixed(2)))).toEqual([7.84, 12.92, 6.98, 4.13]);
+    expect(f.value.windows.map((w) => w.n)).toEqual([[2, 3], [3, 4], [5, 5], [9, 8]]);
+    expect([percent0(f.value.min), percent0(f.value.max)]).toEqual(["4", "13"]);
   });
 
   it("step 7: drawn symbols below the critical Mach number with |E| <= u_val, computed", () => {

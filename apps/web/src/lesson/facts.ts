@@ -7,23 +7,28 @@
 
 import { bielatWing, type TestedWingId } from "@jet-workshop/physics";
 import {
+  NACA_TEXT_DRAG_RISE,
   SYMBOL_WINDOW,
   compare,
   kornMasonLockBand,
-  measuredLiftSlope,
   sampledDragRiseMach,
   transonicLimitMach,
   withinUval,
   type Dataset,
   type FairedSample,
+  type LiftPoint,
   type PolarPoint,
+  type ReportTextValue,
 } from "@jet-workshop/validation";
 
-export type FactClass = "measured" | "NACA faired" | "computed" | "model";
+/** "NACA report text": a figure the report states in its text, with its page and sentence (`ReportTextValue`). */
+export type FactClass = "measured" | "NACA faired" | "NACA report text" | "computed" | "model";
 
 export interface Fact<T> {
   value: T;
   dataClass: FactClass;
+  /** Where a "NACA report text" figure is printed */
+  source?: ReportTextValue;
 }
 
 export const WINGS: TestedWingId[] = ["10.8", "35", "47"];
@@ -102,25 +107,71 @@ export function sweepDragCut(data: Dataset): Fact<{ percent: number; mach: numbe
 }
 
 /**
- * Step 5: Mach number where each NACA faired curve starts to rise
- * (dCD/dM = 0.1, the report's definition), with `sampledDragRiseMach`. Null
- * for a wing whose curve never gets that steep between its samples: today the
- * 47 deg curve (steepest stretch 0.096). The report's text gives 0.97 for that
- * wing; that figure is not computed from the curve, so it is not shown.
+ * Step 5: Mach number where each wing's drag starts to rise (dCD/dM = 0.1,
+ * the report's definition). From the NACA faired curve with
+ * `sampledDragRiseMach`, class "NACA faired". A curve that never gets that
+ * steep between its samples (today the 47 deg curve, steepest stretch 0.096)
+ * takes the figure the report states in its text, class "NACA report text",
+ * with its page and sentence (the rule of lane C's pre-registration, PM review
+ * of gate 2). Null if neither gives one.
  */
-export function dragRise(data: Dataset): Fact<Record<TestedWingId, number | null>> {
-  const out = {} as Record<TestedWingId, number | null>;
-  for (const w of WINGS) out[w] = sampledDragRiseMach(fairedCurve(data, w).map((s) => ({ mach: s.mach, cd: s.cd0 })));
-  return { value: out, dataClass: "NACA faired" };
+export function dragRise(data: Dataset): Record<TestedWingId, Fact<number> | null> {
+  const out = {} as Record<TestedWingId, Fact<number> | null>;
+  for (const w of WINGS) {
+    const sampled = sampledDragRiseMach(fairedCurve(data, w).map((s) => ({ mach: s.mach, cd: s.cd0 })));
+    const text = NACA_TEXT_DRAG_RISE[w];
+    out[w] = sampled !== null ? { value: sampled, dataClass: "NACA faired" } : text ? { value: text.value, dataClass: "NACA report text", source: text } : null;
+  }
+  return out;
 }
 
-/** Step 6: how much less lift per degree the 47 deg wing gives than the 10.8 deg wing at M 0.50, in percent (slopes fitted through the measured symbols). */
-export function liftLoss(data: Dataset): Fact<{ percent: number; mach: number }> | null {
-  const slope = (w: TestedWingId) => measuredLiftSlope(data.lift.filter((p) => p.wing === w && near(p.mach, LOW_MACH)));
-  const straight = slope("10.8");
-  const swept = slope("47");
-  if (!straight || !swept) return null;
-  return { value: { percent: 100 * (1 - swept.slope / straight.slope), mach: LOW_MACH }, dataClass: "measured" };
+/**
+ * Angle-of-attack windows of the step 6 fits, deg: the measured symbols with
+ * |alpha| at most each one. Infinity: every tested angle. With three or four
+ * symbols in a window and CL read to about 0.01, one window alone would give
+ * a misleading single figure, so the step shows the range (PM review of gate 2).
+ */
+export const LIFT_WINDOWS_DEG = [2.5, 4.5, 6.5, Infinity] as const;
+
+/** Least-squares slope dCL/dalpha (per deg) of the measured symbols with |alpha| <= limit; at least two symbols. */
+export function liftSlopeWithin(points: LiftPoint[], limitDeg: number): { slope: number; n: number } | null {
+  const v = points.filter((p) => Math.abs(p.alpha) <= limitDeg);
+  if (v.length < 2) return null;
+  const ma = mean(v.map((p) => p.alpha));
+  const mc = mean(v.map((p) => p.cl));
+  let sxy = 0;
+  let sxx = 0;
+  for (const p of v) {
+    sxy += (p.alpha - ma) * (p.cl - mc);
+    sxx += (p.alpha - ma) ** 2;
+  }
+  return sxx > 0 ? { slope: sxy / sxx, n: v.length } : null;
+}
+
+export interface LiftLossWindow {
+  limitDeg: number;
+  percent: number;
+  /** Symbols in the fit: 10.8 deg wing, 47 deg wing */
+  n: [number, number];
+}
+
+/**
+ * Step 6: how much less lift per degree the 47 deg wing gives than the
+ * 10.8 deg wing at M 0.50, in percent, in each window of LIFT_WINDOWS_DEG,
+ * and the smallest and largest of them. Slopes fitted through the measured
+ * symbols: computed from measured data. Null if a window has no fit.
+ */
+export function liftLossRange(data: Dataset): Fact<{ min: number; max: number; mach: number; windows: LiftLossWindow[] }> | null {
+  const at = (w: TestedWingId) => data.lift.filter((p) => p.wing === w && near(p.mach, LOW_MACH));
+  const windows: LiftLossWindow[] = [];
+  for (const limitDeg of LIFT_WINDOWS_DEG) {
+    const straight = liftSlopeWithin(at("10.8"), limitDeg);
+    const swept = liftSlopeWithin(at("47"), limitDeg);
+    if (!straight || !swept) return null;
+    windows.push({ limitDeg, percent: 100 * (1 - swept.slope / straight.slope), n: [straight.n, swept.n] });
+  }
+  const p = windows.map((w) => w.percent);
+  return { value: { min: Math.min(...p), max: Math.max(...p), mach: LOW_MACH, windows }, dataClass: "computed" };
 }
 
 /**

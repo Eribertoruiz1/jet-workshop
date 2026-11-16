@@ -22,7 +22,7 @@ import {
   drawnSymbols,
   fairedCurve,
   formulaAgreement,
-  liftLoss,
+  liftLossRange,
   sweepDragCut,
   wallRatio,
 } from "./facts.ts";
@@ -32,6 +32,8 @@ export const STEPS = 8;
 
 const SHAPE: Record<TestedWingId, MarkShape> = { "10.8": "circle", "35": "square", "47": "triangle" };
 const label = (w: TestedWingId): string => sweepLabel(TESTED_SWEEPS[w]);
+/** The wings step 6 compares. */
+const LIFT_PAIR: TestedWingId[] = ["10.8", "47"];
 
 /** The figures of the text, computed once from the dataset; null if any cannot be computed. */
 function computeFacts(data: Dataset | null) {
@@ -39,12 +41,12 @@ function computeFacts(data: Dataset | null) {
   const wall = wallRatio(data);
   const cut = sweepDragCut(data);
   const rise = dragRise(data);
-  const lift = liftLoss(data);
+  const lift = liftLossRange(data);
   const agree = Object.fromEntries(WINGS.map((w) => [w, formulaAgreement(data, w)])) as Record<TestedWingId, ReturnType<typeof formulaAgreement>>;
   if (!wall || !cut || !lift || WINGS.some((w) => !agree[w])) return null;
   const drawn = Object.fromEntries(WINGS.map((w) => [w, drawnSymbols(data, w)])) as Record<TestedWingId, PolarPoint[]>;
   const yMax = Math.ceil((Math.max(...WINGS.flatMap((w) => drawn[w].map((p) => p.cd))) * 1.15) / 0.005) * 0.005;
-  return { wall: wall.value, cut: cut.value, rise: rise.value, lift: lift.value, agree, drawn, yMax, data };
+  return { wall: wall.value, cut: cut.value, rise, lift: lift.value, agree, drawn, yMax, data };
 }
 
 type Facts = NonNullable<ReturnType<typeof computeFacts>>;
@@ -211,11 +213,12 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
     }
     case 5: {
       const rises = WINGS.map((w) => f.rise[w]);
-      const all = rises.every((r) => r !== null);
-      const onlyLastMissing = rises[0] !== null && rises[1] !== null && rises[2] === null;
+      const faired = (r: (typeof rises)[number] | undefined) => r?.dataClass === "NACA faired";
+      // The sentence names its source: the faired curves, or the report's text for the last wing.
+      const text: StringKey = rises.every(faired) ? "s5Text" : faired(rises[0]) && faired(rises[1]) && rises[2]?.dataClass === "NACA report text" ? "s5TextReportLast" : "s5TextShort";
       return {
-        text: all ? "s5Text" : onlyLastMissing ? "s5TextNoRiseLast" : "s5TextShort",
-        vars: { mach: mach2(f.cut.mach), cut: percent0(f.cut.percent), riseA: rises[0] !== null ? mach2(rises[0]!) : "", riseB: rises[1] !== null ? mach2(rises[1]!) : "", riseC: rises[2] !== null ? mach2(rises[2]!) : "" },
+        text,
+        vars: { mach: mach2(f.cut.mach), cut: percent0(f.cut.percent), riseA: rises[0] ? mach2(rises[0].value) : "", riseB: rises[1] ? mach2(rises[1].value) : "", riseC: rises[2] ? mach2(rises[2].value) : "" },
         figure: dragChart({
           measured: [],
           curves: WINGS.map((w) => ({ id: w, points: fairedCurve(f.data, w).map((s) => ({ mach: s.mach, cd: s.cd0 })), tone: w === c.wing ? "ink" : "ink-2", label: t("wingName", { sweep: label(w) }), gap: [GAP_FROM, GAP_TO] })),
@@ -227,12 +230,15 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
     case 6:
       return {
         text: "s6Text",
-        vars: { loss: percent0(f.lift.percent) },
+        vars: { lossMin: percent0(f.lift.min), lossMax: percent0(f.lift.max) },
+        // Only the two wings the sentence compares, on a tight, taller plot, so that a difference of that size shows.
         figure: (
           <LiftChart
             width={W}
             errorBars={false}
-            groups={WINGS.map((w) => ({ id: w, points: f.data.lift.filter((p) => p.wing === w && Math.abs(p.mach - LOW_MACH) < 1e-6), shape: SHAPE[w], tone: w === c.wing ? "ink" : "ink-2", label: t("wingName", { sweep: label(w) }) }))}
+            tight
+            plotH={Math.round(Math.min(340, Math.max(240, W * 0.78)))}
+            groups={LIFT_PAIR.map((w) => ({ id: w, points: f.data.lift.filter((p) => p.wing === w && Math.abs(p.mach - LOW_MACH) < 1e-6), shape: SHAPE[w], tone: w === "10.8" ? "ink" : "ink-2", label: t("wingName", { sweep: label(w) }) }))}
             text={{ xLabel: t("alphaPlain"), yLabel: t("liftPlain"), ariaLabel: t("s6Aria", { mach: mach2(LOW_MACH) }), markTitle: () => "" }}
           />
         ),

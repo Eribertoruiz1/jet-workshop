@@ -10,12 +10,11 @@ const M = { l: 44, r: 12 };
 /** Plot height for a chart width: wide enough to read, never squat. */
 const plotHeight = (w: number): number => Math.round(Math.min(240, Math.max(170, (w - M.l - M.r) * 0.62)));
 
-function frame(width: number, xLabel: string, yLabel: string, rightRoom = M.r) {
+function frame(width: number, xLabel: string, yLabel: string, rightRoom = M.r, plotH = plotHeight(width)) {
   const plotW = width - M.l - rightRoom;
   const yLines = wrapText(yLabel, width - 8, CHART_TEXT).length;
   const xLines = wrapText(xLabel, plotW, CHART_TEXT).length;
   const top = yLabelHeight(yLines) + 4;
-  const plotH = plotHeight(width);
   const bottom = top + plotH;
   return { top, bottom, plotW, plotH, H: bottom + xAxisHeight(xLines) };
 }
@@ -109,16 +108,19 @@ interface LiftText {
   markTitle: (p: LiftPoint) => string;
 }
 
-/** Lift curve at one Mach number: CL against angle of attack; the model dashed red where it is outside its range. */
-export function LiftChart({ width, curve = [], groups, modelNote = null, errorBars = true, text, maxAlpha }: { width: number; curve?: LiftCurvePoint[]; groups: LiftGroup[]; modelNote?: string | null; errorBars?: boolean; text: LiftText; maxAlpha?: number }) {
+/**
+ * Lift curve at one Mach number: CL against angle of attack; the model dashed red where it is outside its range.
+ * `tight`: the axes fit the symbols drawn, with no fixed minimum range; `plotH` overrides the plot height.
+ */
+export function LiftChart({ width, curve = [], groups, modelNote = null, errorBars = true, text, maxAlpha, tight = false, plotH }: { width: number; curve?: LiftCurvePoint[]; groups: LiftGroup[]; modelNote?: string | null; errorBars?: boolean; text: LiftText; maxAlpha?: number; tight?: boolean; plotH?: number }) {
   const all = groups.flatMap((g) => g.points);
   const labelRoom = groups.some((g) => g.label) ? Math.max(...groups.map((g) => textWidth(g.label ?? "", CHART_TEXT))) + 12 : M.r;
-  const f = frame(width, text.xLabel, text.yLabel, labelRoom);
-  const aLo = Math.min(-3, ...all.map((p) => p.alpha - 0.5));
-  const aHi = maxAlpha ?? Math.max(14, ...all.map((p) => p.alpha + 0.5));
+  const f = frame(width, text.xLabel, text.yLabel, labelRoom, plotH);
+  const aLo = Math.min(tight ? Infinity : -3, ...all.map((p) => p.alpha - 0.5));
+  const aHi = maxAlpha ?? Math.max(tight ? -Infinity : 14, ...all.map((p) => p.alpha + 0.5));
   const x = scaleLinear().domain([aLo, aHi]).range([M.l, width - labelRoom]);
-  const clLo = Math.min(-0.3, ...all.map((p) => p.cl - 0.05));
-  const clHi = Math.max(1.0, ...all.filter((p) => p.alpha <= aHi).map((p) => p.cl + 0.05));
+  const clLo = Math.min(tight ? Infinity : -0.3, ...all.map((p) => p.cl - 0.05));
+  const clHi = Math.max(tight ? -Infinity : 1.0, ...all.filter((p) => p.alpha <= aHi).map((p) => p.cl + 0.05));
   const y = scaleLinear().domain([clLo, clHi]).range([f.bottom, f.top]);
   const path = line<LiftCurvePoint>().x((d) => x(d.alpha)).y((d) => y(d.cl));
   const uid = useId().replace(/:/g, "");

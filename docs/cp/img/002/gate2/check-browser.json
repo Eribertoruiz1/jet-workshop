@@ -61,7 +61,7 @@
       "lang": "es",
       "width": 390,
       "screen": "6-step",
-      "texts": 14,
+      "texts": 12,
       "minPx": 11,
       "minText": "0"
     },
@@ -141,7 +141,7 @@
       "lang": "es",
       "width": 1360,
       "screen": "6-step",
-      "texts": 14,
+      "texts": 12,
       "minPx": 11,
       "minText": "0"
     },
@@ -221,7 +221,7 @@
       "lang": "en",
       "width": 390,
       "screen": "6-step",
-      "texts": 14,
+      "texts": 12,
       "minPx": 11,
       "minText": "0"
     },
@@ -301,7 +301,7 @@
       "lang": "en",
       "width": 1360,
       "screen": "6-step",
-      "texts": 14,
+      "texts": 12,
       "minPx": 11,
       "minText": "0"
     },

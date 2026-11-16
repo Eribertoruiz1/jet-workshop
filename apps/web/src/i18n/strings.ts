@@ -55,21 +55,21 @@ export const es = {
 
   // Step 4
   s4Title: "Inclina el ala",
-  s4Text: "Ahora pulsa el ala de 47° y mira los mismos círculos. Los de la derecha han bajado.",
+  s4Text: "Ahora pulsa el ala de 47° y mira las mismas medidas. Las de la derecha han bajado.",
   s4Aria: "Las medidas del ala de {sweep}°; en gris, las del ala anterior",
 
   // Step 5
   s5Title: "Las tres juntas",
   s5Text: "Estas son las curvas que la NACA trazó con sus medidas, las tres en la misma gráfica. A Mach {mach}, el ala de 47° frena un {cut} % menos que la casi recta. Con más flecha, el muro llega más tarde: la subida empieza en Mach {riseA}, {riseB} y {riseC}.",
-  s5TextNoRiseLast: "Estas son las curvas que la NACA trazó con sus medidas, las tres en la misma gráfica. A Mach {mach}, el ala de 47° frena un {cut} % menos que la casi recta. Con más flecha, el muro llega más tarde: la subida empieza en Mach {riseA} y {riseB}, y la curva de 47° sube tan despacio que nunca llega a dispararse.",
+  s5TextReportLast: "Estas son las curvas que la NACA trazó con sus medidas, las tres en la misma gráfica. A Mach {mach}, el ala de 47° frena un {cut} % menos que la casi recta. Con más flecha, el muro llega más tarde: la subida empieza en Mach {riseA} y {riseB}; para el ala de 47°, el informe la sitúa en {riseC}.",
   s5TextShort: "Estas son las curvas que la NACA trazó con sus medidas, las tres en la misma gráfica. A Mach {mach}, el ala de 47° frena un {cut} % menos que la casi recta.",
   s5Aria: "Las tres curvas trazadas por la NACA, con una línea vertical en Mach {mach}",
   s5Line: "Mach {mach}",
 
   // Step 6
   s6Title: "El precio",
-  s6Text: "La flecha no sale gratis. Con el ala inclinada el mismo ángulo contra el aire, la de 47° sustenta un {loss} % menos por grado que la casi recta. Para sostener el mismo peso necesita más ángulo o más velocidad.",
-  s6Aria: "Sustentación contra el ángulo del ala: las medidas de las tres alas a Mach {mach}",
+  s6Text: "La flecha no sale gratis. Con el ala inclinada el mismo ángulo contra el aire, la de 47° sustenta entre un {lossMin} y un {lossMax} % menos por cada grado que la casi recta. Para sostener el mismo peso necesita más ángulo o más velocidad.",
+  s6Aria: "Sustentación contra el ángulo del ala: las medidas del ala casi recta y del ala de 47° a Mach {mach}",
 
   // Step 7
   s7Title: "Lo que saben las fórmulas",
@@ -200,19 +200,19 @@ export const en: Strings = {
   s3Aria: "The same measurements, with the stretch from Mach {from} to {to} marked",
 
   s4Title: "Sweep the wing",
-  s4Text: "Now tap the 47° wing and watch the same circles. The ones on the right have come down.",
+  s4Text: "Now tap the 47° wing and watch the same measurements. The ones on the right have come down.",
   s4Aria: "The measurements of the {sweep}° wing; in grey, those of the previous wing",
 
   s5Title: "All three together",
   s5Text: "These are the curves NACA drew through its measurements, all three on one chart. At Mach {mach}, the 47° wing drags {cut} % less than the almost straight one. With more sweep, the wall comes later: the rise starts at Mach {riseA}, {riseB} and {riseC}.",
-  s5TextNoRiseLast: "These are the curves NACA drew through its measurements, all three on one chart. At Mach {mach}, the 47° wing drags {cut} % less than the almost straight one. With more sweep, the wall comes later: the rise starts at Mach {riseA} and {riseB}, and the 47° curve climbs so slowly that it never shoots up.",
+  s5TextReportLast: "These are the curves NACA drew through its measurements, all three on one chart. At Mach {mach}, the 47° wing drags {cut} % less than the almost straight one. With more sweep, the wall comes later: the rise starts at Mach {riseA} and {riseB}; for the 47° wing, the report puts it at {riseC}.",
   s5TextShort: "These are the curves NACA drew through its measurements, all three on one chart. At Mach {mach}, the 47° wing drags {cut} % less than the almost straight one.",
   s5Aria: "The three curves drawn by NACA, with a vertical line at Mach {mach}",
   s5Line: "Mach {mach}",
 
   s6Title: "The price",
-  s6Text: "Sweep does not come free. With the wing at the same angle to the airflow, the 47° wing gives {loss} % less lift per degree than the almost straight one. To carry the same weight it needs more angle or more speed.",
-  s6Aria: "Lift against wing angle: the measurements of the three wings at Mach {mach}",
+  s6Text: "Sweep does not come free. With the wing at the same angle to the airflow, the 47° wing gives between {lossMin} and {lossMax} % less lift for each degree than the almost straight one. To carry the same weight it needs more angle or more speed.",
+  s6Aria: "Lift against wing angle: the measurements of the almost straight wing and the 47° wing at Mach {mach}",
 
   s7Title: "What the formulas know",
   s7Text: "The blue band is what the textbook formulas predict for this wing. At low speed, {inside} of {total} measurements fall within its margin. Near the wall they do not: that is why that zone is hatched in red. Teaching the formulas to cross the wall is what we build next.",
