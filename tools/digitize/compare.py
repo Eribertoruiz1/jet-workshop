@@ -43,6 +43,8 @@ DECLARED = {"CL": 0.01, "CD": 0.001, "CD0": 0.001, "Cm": 0.004, "alpha": 0.1}
 
 METHOD_DOT = "symbol centre dot located by tools/digitize/digitize.py (snap 'dot' unless noted)"
 METHOD_RING = "symbol centre by a circle fitted to the outline by tools/digitize/digitize.py (snap 'ring')"
+CURVE_HOW = {"column": "column snap", "rows": "row fit on a steep stretch (fit 'rows')",
+             "eye": "line centre placed by eye where curves merge (snap 'none')"}
 
 
 def declared_for(ra: dict, rb: dict) -> dict:
@@ -137,7 +139,13 @@ def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = 
                 if p.get("near_grid_line"):
                     flags.append(f"pass {label}: within one line width of grid line {p['nearest_grid_line']['value']}")
                 if p.get("snap") == "none":
-                    flags.append(f"pass {label}: centre picked by eye (no dot snap)")
+                    flags.append(f"pass {label}: line centre placed by eye (curves merged)" if sa["kind"] == "curve_samples"
+                                 else f"pass {label}: centre picked by eye (no dot snap)")
+            row_method = method
+            if sa["kind"] == "curve_samples" and any(p.get("fit") == "rows" or p.get("snap") == "none" for p in (a, b)):
+                how = {lab: CURVE_HOW["rows" if p.get("fit") == "rows" else "eye" if p.get("snap") == "none" else "column"]
+                       for lab, p in (("A", a), ("B", b))}
+                row_method = f"curve sampled at the stated x by tools/digitize/digitize.py: pass A {how['A']}; pass B {how['B']}"
             for var in variables:
                 va, vb = a["value"][var], b["value"][var]
                 diff = abs(va - vb)
@@ -170,14 +178,18 @@ def compare_results(ra: dict, rb: dict, label_a: str = "Pass A", label_b: str = 
                     "u_declared": f"{u_dec:.3f}",
                     "u_total": f"{math.hypot(u_dig, u_dec):.5f}",
                     "data_class": data_class,
-                    "method": METHOD_RING if "ring" in (a.get("snap"), b.get("snap")) else method,
+                    "method": METHOD_RING if "ring" in (a.get("snap"), b.get("snap")) else row_method,
                     "flags": "; ".join(flags),
                     "note": " / ".join(n for n in (a.get("note", ""), b.get("note", "")) if n),
                 })
             compared += 1
             exceed += int(exceeded_here)
+    # A series marked "check_only" in pass A's spec (for example a curve drawn
+    # twice, read again only to compare the two drawings) is compared like any
+    # other, but consolidate.py keeps its rows out of the dataset.
+    check_series = sorted(s["id"] for s in ra["series"] if s.get("check_only"))
     return {"figure": fig, "rows": rows, "compared": compared, "exceed": exceed, "unmatched": unmatched,
-            "label_a": label_a, "label_b": label_b}
+            "label_a": label_a, "label_b": label_b, "check_series": check_series}
 
 
 def write_csv(rows: list[dict], path: Path) -> None:
@@ -208,6 +220,9 @@ def markdown(res: dict) -> str:
     ]
     if unmatched:
         lines += ["", "Unmatched:"] + [f"- {u}" for u in unmatched]
+    if res.get("check_series"):
+        lines += ["", "Check-only series (compared here, kept out of the dataset): "
+                  + ", ".join(f"`{s}`" for s in res["check_series"]) + "."]
     return "\n".join(lines) + "\n"
 
 

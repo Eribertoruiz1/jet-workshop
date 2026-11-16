@@ -362,6 +362,101 @@ def _is_vertical_rule(g: np.ndarray, c: int, y: float, half_height: int = 30) ->
     return bool((seg < INK).mean() > 0.8)
 
 
+def _is_horizontal_rule(g: np.ndarray, r: int, x: float, half_width: int = 30) -> bool:
+    """True when row r sits on a printed horizontal line (grid or axis)."""
+    xi = int(round(x))
+    seg = g[r, xi - half_width : xi + half_width + 1]
+    return bool((seg < INK).mean() > 0.8)
+
+
+def _row_hit(g: np.ndarray, r: int, x_pred: float, win: int) -> tuple[float, int] | None:
+    """Centre (ink-weighted) and length of the inked run nearest x_pred in row r.
+
+    Runs that touch a printed vertical line (grid or axis) are left out, as
+    the column fit leaves out columns on a vertical line.
+    """
+    x0 = int(round(x_pred)) - win
+    x1 = int(round(x_pred)) + win
+    seg = g[r, x0 : x1 + 1]
+    runs = _runs(seg < INK)
+    if not runs:
+        return None
+    best = None
+    for s, e in runs:
+        if any(_is_vertical_rule(g, c, r) for c in range(x0 + s, x0 + e + 1)):
+            continue
+        w = 255.0 - seg[s : e + 1]
+        xc = x0 + float((np.arange(s, e + 1) * w).sum() / w.sum())
+        d = abs(xc - x_pred)
+        if best is None or d < best[0]:
+            best = (d, xc, e - s + 1)
+    return None if best is None else (best[1], best[2])
+
+
+def sample_curve_rows(g: np.ndarray, aff: Affine, x_value: float, hint: tuple[float, float],
+                      half: int = 12, win: int = 7) -> dict:
+    """Locate a steep curve by rows and intersect it with the column of x_value.
+
+    On a steep stretch a column cuts the inked line along its length, and
+    where the line crosses a horizontal grid line the run of ink in a column
+    takes in the grid line too. Here the centre of the ink is found along
+    each row within `half` rows of the hint (rows on a printed horizontal line
+    are skipped, so the curve is bridged across it), a straight line x(y) is
+    fitted, and the row where it meets the target column is returned.
+    """
+    hy = float(hint[1])
+    for _ in range(3):
+        c0 = aff.column_for_x(x_value, hy)
+        ri = int(round(hy))
+        rows: list[int] = []
+        xs: list[float] = []
+        widths: list[int] = []
+        for direction in (+1, -1):
+            x_pred = c0
+            local_r: list[int] = []
+            local_x: list[float] = []
+            rng = range(ri, ri + half + 1) if direction > 0 else range(ri - 1, ri - half - 1, -1)
+            for r in rng:
+                if _is_horizontal_rule(g, r, x_pred):
+                    continue
+                hit = _row_hit(g, r, x_pred, win)
+                if hit is None:
+                    continue
+                xc, length = hit
+                local_r.append(r)
+                local_x.append(xc)
+                widths.append(length)
+                if len(local_r) >= 2:
+                    s = np.polyfit(local_r, local_x, 1)
+                    x_pred = float(np.polyval(s, r + direction))
+                else:
+                    x_pred = xc
+            rows += local_r
+            xs += local_x
+        if len(rows) < 3:
+            return {"x_value": x_value, "hint": list(hint), "found": False,
+                    "reason": "fewer than 3 clean rows with ink near the hint"}
+        fit = np.polyfit(np.array(rows, float) - hy, np.array(xs), 1)  # x = fit[0] * (y - hy) + fit[1]
+        if abs(fit[0]) < 1e-6:
+            return {"x_value": x_value, "hint": list(hint), "found": False, "reason": "the line is horizontal: use column fitting"}
+        y_at = hy + (c0 - float(fit[1])) / float(fit[0])
+        resid = np.array(xs) - np.polyval(fit, np.array(rows, float) - hy)
+        hy = y_at
+    xv, yv = aff.to_data(c0, y_at)
+    return {
+        "x_value": x_value,
+        "hint": list(hint),
+        "found": True,
+        "fit": "rows",
+        "px": [round(c0, 2), round(y_at, 2)],
+        "rows_used": len(rows),
+        "line_width_px": float(np.median(widths)),
+        "fit_rms_px": round(float(np.sqrt((resid ** 2).mean())), 3),
+        "slope_px_per_px": round(1.0 / float(fit[0]), 4),
+        "data": [xv, yv],
+    }
+
+
 def sample_curve(g: np.ndarray, aff: Affine, x_value: float, hint: tuple[float, float],
                  half: int = 8, win: int = 7, side: str = "both") -> dict:
     """Locate the inked curve through the reader's hint at data x = x_value.
@@ -595,9 +690,21 @@ def run(spec: dict, g: np.ndarray) -> dict:
         pts_out = []
         if s["kind"] == "curve_samples":
             for p in s["samples"]:
-                r = sample_curve(g, mapper, float(p["x"]) + offset, tuple(p["hint_px"]),
-                                 side=p.get("side", "both"))
-                if r["found"]:
+                if p.get("snap") == "none":
+                    # Two curves merged into one band of ink: the reader places the
+                    # line centre by eye (the hint itself); flagged in the dataset.
+                    hy = float(p["hint_px"][1])
+                    hx = mapper.column_for_x(float(p["x"]) + offset, hy)
+                    conv = convert(hx, hy)
+                    r = {"x_value": float(p["x"]) + offset, "hint": list(p["hint_px"]), "found": True,
+                         "snap": "none", "px": [round(hx, 2), hy], "data": conv["data"],
+                         "affine_data": conv["affine_data"]}
+                elif p.get("fit") == "rows":
+                    r = sample_curve_rows(g, mapper, float(p["x"]) + offset, tuple(p["hint_px"]))
+                else:
+                    r = sample_curve(g, mapper, float(p["x"]) + offset, tuple(p["hint_px"]),
+                                     side=p.get("side", "both"))
+                if r["found"] and r.get("snap") != "none":
                     r["affine_data"] = convert(*r["px"])["affine_data"]
                     if isinstance(mapper, Mesh):
                         # Flag samples whose line centre lies within one line width of a
@@ -724,6 +831,10 @@ def main() -> None:
             if p.get("found"):
                 vals = ", ".join(f"{k}={v:.5f}" for k, v in p["value"].items())
                 extra = f" width {p['line_width_px']:.0f}px rms {p['fit_rms_px']}" if "line_width_px" in p else ""
+                if p.get("fit") == "rows":
+                    extra += f" (fitted by rows, {p['rows_used']} rows)"
+                if "x_value" in p and p.get("snap") == "none":
+                    extra += " (line centre placed by eye)"
                 if "ring" in p:
                     q = p["ring"]
                     extra += (f" ring r {q['ring_radius_px']} px, {q['ring_pixels']} px, rms {q['ring_rms_px']}, "
