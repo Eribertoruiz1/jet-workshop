@@ -17,7 +17,10 @@
  * layer and says it is out of range.
  */
 
-// UNVERIFIED: constants and layer table of the 1976 standard, check against NASA-TM-X-74335, part 1, tables I and 4.
+// Checked (test/flight/atmosphere.test.ts, check 3): the model rounds to the printed tables of
+// Part 4 of the standard at 0, 10, 15 and 20 km (temperature, pressure, density, speed of sound,
+// viscosity), as reproduced by PDAS (https://www.pdas.com/bigtables.html), and to the standard's
+// layer table at 11 and 20 km geopotential. The document itself was not opened (a PDF download).
 /** Standard acceleration of gravity, m/s^2 (also the gravity of the flight model). */
 export const G0 = 9.80665;
 /** Effective Earth radius of the standard for the geopotential, m. */

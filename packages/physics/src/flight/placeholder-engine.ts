@@ -19,15 +19,15 @@ import { G0, R_AIR, SEA_LEVEL_DENSITY } from "./atmosphere.ts";
 import { KG_PER_LB, N_PER_LBF } from "./units.ts";
 
 /**
- * Thrust-specific fuel consumption, kg/(N s): 1.0 lb of fuel per lbf of
- * thrust per hour, the order of the J47 turbojet at military thrust (the
- * development engine of decision 0006).
+ * Thrust-specific fuel consumption, kg/(N s): 1.014 lb of fuel per lbf of
+ * thrust per hour, the J47-GE-27 turbojet (the development engine of
+ * decision 0006). Source: Wikipedia, "General Electric J47",
+ * Specifications (J47-GE-27), read on 16 November 2026. `report text` of a
+ * secondary source; the NACA reports of decision 0006 are lane E's.
  */
-// UNVERIFIED: check the J47-GE-27 specific fuel consumption against a public source.
-export const PLACEHOLDER_TSFC = (1.0 * KG_PER_LB) / (N_PER_LBF * 3600);
+export const PLACEHOLDER_TSFC = (1.014 * KG_PER_LB) / (N_PER_LBF * 3600);
 
-/** Thrust-to-weight ratio of the bare engine: J47-GE-27, 5970 lbf for 2554 lb dry. */
-// UNVERIFIED: check the J47-GE-27 thrust and dry weight against a public source.
+/** Thrust-to-weight ratio of the bare engine: J47-GE-27, 5970 lbf for 2554 lb dry (same source). */
 export const PLACEHOLDER_THRUST_TO_WEIGHT = 5970 / 2554;
 
 export const PLACEHOLDER_ID = "placeholder";

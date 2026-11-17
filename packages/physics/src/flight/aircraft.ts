@@ -14,11 +14,11 @@ import { M_PER_FT, scaleFactor, scaledLength } from "./units.ts";
 
 /**
  * Mass of everything that is not engine or fuel, per square metre of wing:
- * structure, systems, gear, pilot. Scales with the square of size, like the
- * skin. `estimated`; compared in order of magnitude with real aircraft in
- * docs/cp/006.md (it is not fitted to them).
+ * structure, systems, gear. Scales with the square of size, like the skin.
+ * `estimated`. Declared before the comparison and not fitted to it: empty
+ * mass less engine dry mass, over wing area, is 134 kg/m^2 for the F-86F and
+ * 136 kg/m^2 for the MiG-15bis (docs/cp/006.md gives the figures and sources).
  */
-// UNVERIFIED: the comparison aircraft (empty mass, engine dry mass, wing area) are from public sources listed in docs/cp/006.md.
 export const STRUCTURE_MASS_PER_WING_AREA = 150;
 
 /** Density of jet fuel, kg/m^3 (kerosene, about 0.8 kg per litre). */
@@ -42,11 +42,11 @@ export const MAX_LOAD_FACTOR = 7.33;
 export const MIN_LOAD_FACTOR = -3.0;
 
 /**
- * Sink speed the landing gear takes: 10 ft/s, the limit descent velocity at
- * the design landing weight of 14 CFR 25.473 (and of land-based military
- * aircraft in MIL-A-8862).
+ * Sink speed the landing gear takes: 10 ft/s, "a limit descent velocity of
+ * 10 fps at the design landing weight", 14 CFR 25.473(a)(2). A civil
+ * transport rule standing in for the fighter's own, `report text`
+ * (Cornell LII e-CFR, read on 16 November 2026).
  */
-// UNVERIFIED: check the wording of 14 CFR 25.473(a) (eCFR).
 export const GEAR_SINK_LIMIT = 10 * M_PER_FT;
 
 /** Tangent-ogive radius of the nose of the tested body, inches (NACA RM L51I04a figure 3, packages/validation/README.md). */

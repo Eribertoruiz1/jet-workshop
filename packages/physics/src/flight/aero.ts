@@ -155,7 +155,9 @@ export function checkTables(t: WingAeroTables): void {
  * Angles are measured from zero lift, a declared simplification.
  */
 export function viterna(alpha: number, alphaStall: number, clStall: number, cdStall: number, aspectRatio: number): { cl: number; cd: number } {
-  // UNVERIFIED: check against L. A. Viterna and R. D. Corrigan, NASA CP-2230 (1982), and the AeroDyn theory manual (NREL).
+  // Checked against NREL's open implementation, AirfoilPrep.py (WISDEM/AirfoilPreppy,
+  // airfoilprep.py, `extrapolate` and `__Viterna`), which cites Viterna and Janetzke,
+  // NASA TM-82944 (1982). The original reports were not opened.
   const cdMax = 1.11 + 0.018 * aspectRatio;
   const ss = Math.sin(alphaStall);
   const cs = Math.cos(alphaStall);
@@ -200,11 +202,11 @@ export interface LiftState {
 
 /**
  * Speed margin of the stall warning: it starts at a speed 5 percent above the
- * stall, the larger of the two margins of 14 CFR 25.207(c) (5 knots or 5
- * percent) at fighter speeds. At constant weight that is a lift coefficient
- * of CL_max / 1.05^2.
+ * stall. 14 CFR 25.207(c): "not less than five knots or five percent CAS,
+ * whichever is greater"; above a stall speed of 100 knots, as here, five
+ * percent is the greater. At constant weight that is a lift coefficient of
+ * CL_max / 1.05^2. `report text` (Cornell LII e-CFR, read on 16 November 2026).
  */
-// UNVERIFIED: check the wording of 14 CFR 25.207(c) (eCFR).
 export const STALL_WARNING_SPEED_MARGIN = 1.05;
 
 export function liftSlopeAt(aero: WingAeroTables, wing: WingBody, mach: number): { slope: number; placement: Placement } {
