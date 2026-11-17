@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { TESTED_SWEEPS, bielatWing, type TestedWingId } from "@jet-workshop/physics";
 import { kornMasonLockBand, type Dataset, type PolarPoint } from "@jet-workshop/validation";
 import { Planform } from "../Planform.tsx";
@@ -23,6 +23,7 @@ import {
   fairedCurve,
   formulaAgreement,
   liftLossRange,
+  rightSymbolsLower,
   sweepDragCut,
   wallRatio,
 } from "./facts.ts";
@@ -46,7 +47,9 @@ function computeFacts(data: Dataset | null) {
   if (!wall || !cut || !lift || WINGS.some((w) => !agree[w])) return null;
   const drawn = Object.fromEntries(WINGS.map((w) => [w, drawnSymbols(data, w)])) as Record<TestedWingId, PolarPoint[]>;
   const yMax = Math.ceil((Math.max(...WINGS.flatMap((w) => drawn[w].map((p) => p.cd))) * 1.15) / 0.005) * 0.005;
-  return { wall: wall.value, cut: cut.value, rise, lift: lift.value, agree, drawn, yMax, data };
+  /** Step 4's second sentence holds for a wing only if its symbols on the right sit below the almost straight wing's. */
+  const lowerRight = Object.fromEntries(WINGS.map((w) => [w, w !== "10.8" && rightSymbolsLower(data, "10.8", w).value])) as Record<TestedWingId, boolean>;
+  return { wall: wall.value, cut: cut.value, rise, lift: lift.value, agree, drawn, yMax, lowerRight, data };
 }
 
 type Facts = NonNullable<ReturnType<typeof computeFacts>>;
@@ -57,18 +60,21 @@ export function Lesson({ data, onBench }: { data: Dataset | null; onBench: () =>
   const [step, setStep] = useState(0);
   const [sweep, setSweep] = useState(TESTED_SWEEPS["10.8"]);
   const [wing, setWing] = useState<TestedWingId>("10.8");
-  const [prev, setPrev] = useState<TestedWingId | null>(null);
   const [answers, setAnswers] = useState<(number | null)[]>([null, null, null]);
   const [figRef, figW] = useWidth<HTMLDivElement>(560);
+  /** After Siguiente or Atrás, focus moves to the new step's title, so keyboard and screen-reader users land on it. */
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const moved = useRef(false);
+  useEffect(() => {
+    if (moved.current) titleRef.current?.focus();
+  }, [step]);
 
-  if (!facts) return <p className="error">{t("dataError")}</p>;
+  if (!data) return <p className="error">{t("dataError")}</p>;
+  if (!facts) return <p className="error">{t("factsError")}</p>;
 
-  const pick = (w: TestedWingId) => {
-    if (w === wing) return;
-    setPrev(wing);
-    setWing(w);
-  };
+  const pick = (w: TestedWingId) => setWing(w);
   const go = (n: number) => {
+    moved.current = true;
     setStep(Math.max(0, Math.min(STEPS, n)));
     window.scrollTo({ top: 0 });
   };
@@ -77,7 +83,7 @@ export function Lesson({ data, onBench }: { data: Dataset | null; onBench: () =>
     return (
       <div className="lesson cover">
         <div className="cover-text">
-          <h1 className="cover-title">{t("s0Title")}</h1>
+          <h1 className="cover-title" ref={titleRef} tabIndex={-1}>{t("s0Title")}</h1>
           <p className="lesson-body"><Rich k="s0Text" /></p>
         </div>
         <div className="lesson-figure" ref={figRef}>
@@ -91,13 +97,13 @@ export function Lesson({ data, onBench }: { data: Dataset | null; onBench: () =>
     );
   }
 
-  const s = stepContent(step, facts, { t, sweep, setSweep, wing, prev, pick, answers, setAnswers, width: figW, onBench });
+  const s = stepContent(step, facts, { t, sweep, setSweep, wing, pick, answers, setAnswers, width: figW, onBench });
 
   return (
     <div className="lesson">
       <div className="lesson-text">
         <p className="step-of">{t("stepOf", { n: step, total: STEPS })}</p>
-        <h1 className="step-title">{t(`s${step}Title` as StringKey)}</h1>
+        <h1 className="step-title" ref={titleRef} tabIndex={-1}>{t(`s${step}Title` as StringKey)}</h1>
         <p className="lesson-body" aria-live="polite">
           <Rich k={s.text} vars={s.vars} />
         </p>
@@ -122,7 +128,6 @@ interface Ctx {
   sweep: number;
   setSweep: (v: number) => void;
   wing: TestedWingId;
-  prev: TestedWingId | null;
   pick: (w: TestedWingId) => void;
   answers: (number | null)[];
   setAnswers: (a: (number | null)[]) => void;
@@ -181,7 +186,7 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
             <label htmlFor="lesson-sweep">{t("sweepPlain")}</label>
             <output htmlFor="lesson-sweep" className="num">{c.sweep.toFixed(1)}°</output>
             <input id="lesson-sweep" type="range" min={0} max={55} step={0.1} value={c.sweep} onChange={(e) => c.setSweep(Number(e.target.value))} />
-            <button type="button" onClick={() => c.setSweep(base)} disabled={c.sweep === base}>{t("s1Reset", { sweep: label("10.8") })}</button>
+            {c.sweep !== base && <button type="button" onClick={() => c.setSweep(base)}>{t("s1Reset", { sweep: label("10.8") })}</button>}
           </div>
         ),
       };
@@ -198,9 +203,10 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
         figure: dragChart({ measured: f.drawn["10.8"], markStyle: style(() => "ink"), yMax: f.yMax, highlight: { from: WALL_FROM, to: WALL_TO }, ariaLabel: t("s3Aria", { from: mach2(WALL_FROM), to: mach2(WALL_TO) }) }),
       };
     case 4: {
-      const shown = c.prev && c.prev !== c.wing ? [c.prev, c.wing] : [c.wing];
+      // The almost straight wing stays in grey as the reference; the conclusion shows only once another wing is picked, and only if it holds.
+      const shown: TestedWingId[] = c.wing === "10.8" ? ["10.8"] : ["10.8", c.wing];
       return {
-        text: "s4Text",
+        text: c.wing !== "10.8" && f.lowerRight[c.wing] ? "s4TextAfter" : "s4Text",
         figure: dragChart({
           measured: shown.flatMap((w) => f.drawn[w]),
           markStyle: style((w) => (w === c.wing ? "ink" : "ink-2")),
@@ -221,7 +227,8 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
         vars: { mach: mach2(f.cut.mach), cut: percent0(f.cut.percent), riseA: rises[0] ? mach2(rises[0].value) : "", riseB: rises[1] ? mach2(rises[1].value) : "", riseC: rises[2] ? mach2(rises[2].value) : "" },
         figure: dragChart({
           measured: [],
-          curves: WINGS.map((w) => ({ id: w, points: fairedCurve(f.data, w).map((s) => ({ mach: s.mach, cd: s.cd0 })), tone: w === c.wing ? "ink" : "ink-2", label: t("wingName", { sweep: label(w) }), gap: [GAP_FROM, GAP_TO] })),
+          // Up to the stretch without data: the step is about where the rise starts, and the short pieces after the gap read as stray strokes.
+          curves: WINGS.map((w) => ({ id: w, points: fairedCurve(f.data, w).filter((s) => s.mach < GAP_FROM).map((s) => ({ mach: s.mach, cd: s.cd0 })), tone: w === "47" ? "ink" : "ink-2", label: t("wingName", { sweep: label(w) }), gap: [GAP_FROM, GAP_TO] })),
           vLine: { mach: WALL_MACH, label: t("s5Line", { mach: mach2(WALL_MACH) }) },
           ariaLabel: t("s5Aria", { mach: mach2(WALL_MACH) }),
         }),
@@ -229,7 +236,7 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
     }
     case 6:
       return {
-        text: "s6Text",
+        text: percent0(f.lift.min) === percent0(f.lift.max) ? "s6TextOne" : "s6Text",
         vars: { lossMin: percent0(f.lift.min), lossMax: percent0(f.lift.max) },
         // Only the two wings the sentence compares, on a tight, taller plot, so that a difference of that size shows.
         figure: (
@@ -252,9 +259,10 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
         band.push({ mach: m, min: r.min, max: r.max, valid: r.valid, beyondLock: r.beyondLock });
       }
       return {
-        text: a.inside === 0 ? "s7TextNone" : "s7Text",
+        text: a.total === 0 ? "s7TextNoData" : a.inside === 0 ? "s7TextNone" : a.total === 1 ? "s7TextOne" : "s7Text",
         vars: { inside: a.inside, total: a.total },
-        figure: dragChart({ measured: f.drawn[c.wing], markStyle: style(() => "ink"), band, ariaLabel: t("s7Aria", { sweep: label(c.wing) }) }),
+        // The hatched zone is named in words inside the chart, not by its red alone (PM, rule 9).
+        figure: dragChart({ measured: f.drawn[c.wing], markStyle: style((w) => (w === c.wing ? "ink" : "ink-2")), band, zoneLabel: t("legendOutside"), ariaLabel: t("s7Aria", { sweep: label(c.wing) }) }),
         controls: <WingButtons c={c} />,
       };
     }

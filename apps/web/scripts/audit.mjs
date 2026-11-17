@@ -21,8 +21,8 @@ const [url = "http://localhost:5173", out] = process.argv.slice(2);
 if (out) mkdirSync(out, { recursive: true });
 
 const LABELS = {
-  es: { start: "Empezar", next: "Siguiente", wing47: "Ala de 47°", bench: "Banco libre", answers: ["Se dispara", "La de 47°", "Sustentación a un mismo ángulo"] },
-  en: { start: "Start", next: "Next", wing47: "47° wing", bench: "Free bench", answers: ["It shoots up", "The 47° one", "Lift at the same angle"] },
+  es: { start: "Empezar", next: "Siguiente", wing47: "Ala de 47°", bench: "Banco libre", answers: ["Se dispara", "La de 47°", "Sustentación con el morro igual de levantado"] },
+  en: { start: "Start", next: "Next", wing47: "47° wing", bench: "Free bench", answers: ["It shoots up", "The 47° one", "Lift at the same nose-up angle"] },
 };
 
 /** Measure the SVG text on the page, in the page. */

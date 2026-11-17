@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { NACA_TEXT_DRAG_RISE, SYMBOL_WINDOW, loadDataset, sampledDragRiseMach } from "@jet-workshop/validation";
+import { bielatWing } from "@jet-workshop/physics";
+import { NACA_TEXT_DRAG_RISE, SYMBOL_WINDOW, kornMasonLockBand, loadDataset, sampledDragRiseMach } from "@jet-workshop/validation";
 import { mach2, percent0, ratio1 } from "../src/format.ts";
 import {
   GAP_FROM,
@@ -73,6 +74,38 @@ describe("lesson figures, fixed at today's values (brief 002)", () => {
     const f = rightSymbolsLower(data);
     expect(f.dataClass).toBe("measured");
     expect(f.value).toBe(true);
+  });
+});
+
+describe("the claims the sentences make around their figures hold on today's data", () => {
+  it("step 3: drag shoots up (ratio above 1); step 5: the swept wing drags less, and the rise comes later with more sweep", () => {
+    expect(wallRatio(data)!.value.ratio).toBeGreaterThan(1);
+    expect(sweepDragCut(data)!.value.percent).toBeGreaterThan(0);
+    const r = dragRise(data);
+    const v = WINGS.map((w) => r[w]!.value);
+    expect(v[0]!).toBeLessThan(v[1]!);
+    expect(v[1]!).toBeLessThan(v[2]!);
+  });
+
+  it("step 6: every window gives the swept wing less lift per degree", () => {
+    expect(liftLossRange(data)!.value.min).toBeGreaterThan(0);
+  });
+
+  it("step 4: 'the ones on the right have come down' holds for the 35 and 47 deg wings against the almost straight one", () => {
+    expect(rightSymbolsLower(data, "10.8", "35").value).toBe(true);
+    expect(rightSymbolsLower(data, "10.8", "47").value).toBe(true);
+  });
+
+  it("step 7: the symbols counted are exactly those left of the hatched zone the picture draws at CL 0.10", () => {
+    for (const w of WINGS) {
+      const a = formulaAgreement(data, w)!.value;
+      const wing = bielatWing(w);
+      const hatchFrom = drawnSymbols(data, w).map((p) => p.mach);
+      for (const m of hatchFrom) {
+        const band = kornMasonLockBand(wing, { mach: m, cl: LESSON_CL });
+        expect(band.valid, `${w} M ${m}`).toBe(m < a.limit);
+      }
+    }
   });
 });
 

@@ -65,6 +65,8 @@ interface Props {
   labels?: { mach: number; cd: number; text: string; tone: MarkTone }[];
   /** Fixed top of the drag axis, so pictures that follow one another share a scale */
   yMax?: number;
+  /** Words naming the hatched zone of the band (model outside its range), drawn above the plot where the zone starts */
+  zoneLabel?: string;
 }
 
 const COLOR = { validated: "var(--ok)", estimate: "var(--warn)", "outside model range": "var(--stop)" } as const;
@@ -77,7 +79,7 @@ interface Row {
 }
 
 export function DragMachChart(props: Props) {
-  const { width: W, xLabel, yLabel, ariaLabel, measured, markStyle, markTitle, errorBars = true, band = [], curves = [], segments, stripText, limit, note, highlight, vLine, labels = [] } = props;
+  const { width: W, xLabel, yLabel, ariaLabel, measured, markStyle, markTitle, errorBars = true, band = [], curves = [], segments, stripText, limit, note, highlight, vLine, labels = [], zoneLabel } = props;
   const uid = useId().replace(/:/g, "");
   const narrow = W < 520;
   const labelRoom = curves.some((c) => c.label) || labels.length ? Math.max(...[...curves.map((c) => c.label ?? ""), ...labels.map((l) => l.text)].map((t) => textWidth(t, CHART_TEXT))) + 10 : 0;
@@ -95,6 +97,13 @@ export function DragMachChart(props: Props) {
     rows.push({ lines: wrapText(limit.note, Math.max(room, 150), CHART_TEXT), x: right ? Math.min(lx + 6, W - 150) : Math.max(lx - 6, 150), anchor: right ? "start" : "end", ink: true });
   }
   if (vLine) rows.push({ lines: [vLine.label], x: x(vLine.mach), anchor: "start", ink: true });
+  const zoneFrom = zoneLabel ? bandRuns(band).find((r) => !r.valid)?.points[0]?.mach : undefined;
+  const zx = zoneFrom !== undefined && zoneFrom < MACH[1] ? x(zoneFrom) : null;
+  const zoneRow = zoneLabel && zx !== null ? rows.length : -1;
+  if (zoneLabel && zx !== null) {
+    const room = W - 8 - zx;
+    rows.push(room >= 110 ? { lines: wrapText(zoneLabel, room, CHART_TEXT), x: zx + 4, anchor: "start", ink: true } : { lines: wrapText(zoneLabel, W - 8 - M.l, CHART_TEXT), x: W - 4, anchor: "end", ink: true });
+  }
   const yLines = wrapText(yLabel, W - 8, CHART_TEXT);
   rows.push({ lines: yLines, x: 4, anchor: "start", ink: true });
   const rowY: number[] = [];
@@ -214,6 +223,9 @@ export function DragMachChart(props: Props) {
       })()}
 
       {vLine && <line x1={x(vLine.mach)} x2={x(vLine.mach)} y1={rowY[rows.findIndex((r) => r.lines[0] === vLine.label)]! + 4} y2={axisBottom} stroke="var(--ink)" strokeWidth={1} />}
+      {zoneRow >= 0 && zx !== null && (
+        <line x1={zx} x2={zx} y1={rowY[zoneRow]! - CHART_TEXT + 2} y2={top} stroke="var(--stop)" strokeWidth={1} strokeDasharray="5 4" />
+      )}
       {limit && lx !== null && <line x1={lx} x2={lx} y1={top - 4} y2={axisBottom} stroke="var(--stop)" strokeWidth={0.8} strokeDasharray="2 3" />}
 
       {rows.map((r, i) => {
