@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./flight": "./src/flight/index.ts",
+    "./propulsion": "./src/propulsion/index.ts"
   }
 }
