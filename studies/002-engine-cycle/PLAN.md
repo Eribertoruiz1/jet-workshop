@@ -83,6 +83,8 @@ Los tres candidatos comparten el ciclo y el gas. Cambia cómo se describe el com
 - **B. A, con las tendencias empíricas de Morris** (NASA TM 78653) para los rendimientos fuera de diseño. Según su ficha, supone que el compresor trabaja en su línea de máximo rendimiento.
 - **C. Mapas genéricos escalados**, como GENENG (NASA TN D-6552), con el emparejamiento completo.
 
+**Nota del 16 de noviembre, tras leer las fuentes de método y antes de abrir ningún dato del J47.** El modelo de compresor de B son tres gráficos de Robbins y Dugan, de ocho compresores que Morris no nombra. Los mapas del listado de GENENG son ilustrativos, según el propio informe, así que C necesita otra fuente de mapas. Las dos cosas están preguntadas al PM (`docs/cp/007.md`, preguntas 13 y 14). No cambian el motor v0, que es A, ni el criterio de acierto.
+
 **Previsión.** A acierta cerca del régimen máximo, digamos por encima del 85 % de las vueltas, y se degrada a pocas vueltas, donde el rendimiento del compresor cae y la tobera se desbloquea. En altura, el error dominante es el de Reynolds, y afecta a los tres por igual si no se corrige. C es más fiel a pocas vueltas, pero su mapa es de otro compresor: gana forma y pierde procedencia.
 
 **Qué se construye.** El motor v0 de la compuerta 2 es A. El estudio de la compuerta 3 mide A, B y C contra el J47 y recomienda.
