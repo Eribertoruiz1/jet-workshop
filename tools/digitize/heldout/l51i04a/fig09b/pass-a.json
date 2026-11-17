@@ -1,0 +1,406 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig09b",
+    "number": "9(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for wing 4. (b) Drag coefficient.",
+    "pdf_page": 29,
+    "printed_page": 28,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Wing 4: 47 deg, t/c 0.12 at the root to 0.06 at 40 percent semispan, 0.06 outboard (configuration 47deg-root12-t06). Measured points: hollow symbols with a centre dot, one shape per Mach number, joined by faired curves. Test Mach numbers as labelled: 0.50, 0.70, 0.85, 0.90, 0.925, 0.95, 0.975, 1.00, 1.02, 1.035, 1.085, 1.10, 1.121."
+  },
+  "scan": {
+    "pdf_page": 29,
+    "size_px": [
+      3085,
+      2195
+    ],
+    "extraction": "tools/digitize/extract_scan.py --turn cw: the page's single embedded image (page /Rotate 0), turned a quarter turn clockwise so that the sideways figure reads upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session (lane B)",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 33
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 21
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.2 (labelled -.2), grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.4 (M 1.121); then .2 .4 .6 of M 1.121 at 2.6 to 3.0 (right frame).",
+    "points": [
+      {
+        "px": [
+          654,
+          340
+        ],
+        "x": -0.1,
+        "y": 0.19
+      },
+      {
+        "px": [
+          717.1,
+          773
+        ],
+        "x": 0.0,
+        "y": 0.12
+      },
+      {
+        "px": [
+          779,
+          1206
+        ],
+        "x": 0.1,
+        "y": 0.05
+      },
+      {
+        "px": [
+          904.5,
+          587
+        ],
+        "x": 0.3,
+        "y": 0.15
+      },
+      {
+        "px": [
+          968,
+          1021
+        ],
+        "x": 0.4,
+        "y": 0.08
+      },
+      {
+        "px": [
+          1343.5,
+          340
+        ],
+        "x": 1.0,
+        "y": 0.19
+      },
+      {
+        "px": [
+          1968,
+          403
+        ],
+        "x": 2.0,
+        "y": 0.18
+      },
+      {
+        "px": [
+          2405.9,
+          588
+        ],
+        "x": 2.7,
+        "y": 0.15
+      },
+      {
+        "px": [
+          2531.5,
+          899.5
+        ],
+        "x": 2.9,
+        "y": 0.1
+      },
+      {
+        "px": [
+          2343.5,
+          403
+        ],
+        "x": 2.6,
+        "y": 0.18
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig09b-47deg-root12-t06-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            680.5,
+            1455.7
+          ],
+          "snap": "none",
+          "note": "centre from the outline (left 669, right 692, top 1444, bottom 1467.4 px): candidate 2, first taken by pass A, is a speck 4.6 px from the centre; the centre dot touches a stroke; added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p2",
+          "candidate": 4,
+          "snap": "dot",
+          "note": "circle drawn with a doubled, concentric outline: one symbol"
+        },
+        {
+          "id": "p3",
+          "candidate": 11,
+          "snap": "candidate",
+          "note": "candidates 10 and 12 inside the same circle are specks"
+        },
+        {
+          "id": "p4",
+          "px": [
+            907.8,
+            1407.5
+          ],
+          "snap": "none",
+          "note": "the vertical grid line runs into the circle and the centre dot touches it, so no isolated dot: centre placed by eye on the visible dot (outline centre 906.3, 1409.6 px)"
+        },
+        {
+          "id": "p5",
+          "candidate": 19,
+          "snap": "candidate",
+          "note": "two circles drawn about 4 px apart (candidates 19 and 20), each with its centre dot: two test points"
+        },
+        {
+          "id": "p6",
+          "candidate": 20,
+          "snap": "candidate",
+          "note": "the second of the two circles drawn about 4 px apart"
+        },
+        {
+          "id": "p7",
+          "candidate": 23,
+          "snap": "dot"
+        },
+        {
+          "id": "p8",
+          "px": [
+            1095.0,
+            1000.2
+          ],
+          "snap": "none",
+          "note": "circle on a vertical grid line; the centre dot touches the line, so no isolated dot: centre placed by eye on the visible dot (outline centre 1094.7, 1001 px)"
+        },
+        {
+          "id": "p9",
+          "candidate": 28,
+          "snap": "dot"
+        }
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M0.850",
+      "wing": "47",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 15,
+          "snap": "candidate",
+          "note": "candidate 16, 4 px away, is part of a faired curve"
+        },
+        {
+          "id": "p2",
+          "px": [
+            1031.7,
+            1468.0
+          ],
+          "snap": "none",
+          "note": "the vertical grid line runs into the diamond and the centre dot touches it: centre placed by eye on the visible dot"
+        },
+        {
+          "id": "p3",
+          "candidate": 26,
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "candidate": 31,
+          "snap": "dot"
+        },
+        {
+          "id": "p5",
+          "candidate": 35,
+          "snap": "dot",
+          "note": "three diamonds drawn close together (candidates 35, 36, 38): three test points"
+        },
+        {
+          "id": "p6",
+          "candidate": 36,
+          "snap": "dot"
+        },
+        {
+          "id": "p7",
+          "candidate": 38,
+          "snap": "candidate",
+          "note": "candidate 37, a speck 4 px away, is not a dot"
+        },
+        {
+          "id": "p8",
+          "candidate": 44,
+          "snap": "dot"
+        },
+        {
+          "id": "p9",
+          "candidate": 47,
+          "snap": "dot"
+        },
+        {
+          "id": "p10",
+          "candidate": 52,
+          "snap": "dot"
+        }
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M0.950",
+      "wing": "47",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 33,
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "px": [
+            1413.0,
+            1457.0
+          ],
+          "snap": "none",
+          "note": "a faired curve runs into the triangle and the centre dot touches it: centre placed by eye on the visible dot (outline centroid 1410.3, 1455.6 px)"
+        },
+        {
+          "id": "p3",
+          "candidate": 49,
+          "snap": "candidate",
+          "note": "a second right-pointing triangle 19 px right of the previous one (both on this polar): two test points; candidate 48 is a grid remnant; added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p4",
+          "candidate": 62,
+          "snap": "dot"
+        },
+        {
+          "id": "p5",
+          "candidate": 71,
+          "snap": "dot"
+        },
+        {
+          "id": "p6",
+          "px": [
+            1715.0,
+            1025.0
+          ],
+          "snap": "none",
+          "note": "grid lines and a faired curve cross the triangle and the centre dot merges with a stroke: centre placed by eye on the visible dot (outline centroid 1713.9, 1024.2 px)"
+        },
+        {
+          "id": "p7",
+          "candidate": 79,
+          "snap": "dot"
+        },
+        {
+          "id": "p8",
+          "candidate": 81,
+          "snap": "dot"
+        },
+        {
+          "id": "p9",
+          "candidate": 86,
+          "snap": "dot"
+        }
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M1.000",
+      "wing": "47",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle with the right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 63,
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "candidate": 74,
+          "snap": "candidate",
+          "note": "right triangle with its own centre dot under a mirrored right triangle of M 1.02 and a left-pointing triangle of M 0.975; pass A had first taken the outline of the M 1.02 symbol above it; added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "candidate": 78,
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "candidate": 85,
+          "snap": "candidate",
+          "note": "candidate 84, a 1-px speck 4 px away, is not a dot"
+        }
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M1.100",
+      "wing": "47",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter circle with the corner at top left",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 94,
+          "snap": "dot",
+          "note": "overlaps the symbols of other polars on its left"
+        },
+        {
+          "id": "p2",
+          "candidate": 98,
+          "snap": "dot"
+        },
+        {
+          "id": "p3",
+          "candidate": 103,
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "candidate": 107,
+          "snap": "candidate",
+          "note": "candidate 106, a speck 7 px away, is not a dot"
+        }
+      ]
+    }
+  ]
+}

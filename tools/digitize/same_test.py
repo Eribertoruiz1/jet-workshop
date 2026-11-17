@@ -11,6 +11,10 @@ Usage:
     python -I tools/digitize/same_test.py <a.csv> <a_series_prefix> <b.csv> <b_series_prefix> [--md out.md]
 
 Example: same_test.py heldout/l51i04a.csv fig06b-47deg-t04-M bielat-l52b08.csv fig07b-47deg-M
+
+A second mode compares two readings of one faired CD0 curve drawn twice (for
+example wing 2 in both panels of RM L51I04a figure 11), sample by sample:
+    python -I tools/digitize/same_test.py --curves <a.csv> <a_series> <b.csv> <b_series> [--md out.md]
 """
 
 from __future__ import annotations
@@ -58,7 +62,44 @@ def pair(a: list[dict], b: list[dict]) -> list[tuple[dict | None, dict | None]]:
     return sorted(out, key=lambda t: (t[0] or t[1])["CL"])
 
 
+def curves(a_path: Path, a_series: str, b_path: Path, b_series: str, md: Path | None) -> None:
+    """Two readings of the same faired CD0 curve (series ids given in full): pair the samples by id."""
+    def load_cd0(path: Path, series: str) -> dict[str, float]:
+        with path.open(encoding="utf-8", newline="") as f:
+            return {r["point_id"]: float(r["value_adopted"]) for r in csv.DictReader(f)
+                    if r["series"] == series and r["variable"] == "CD0"}
+    a, b = load_cd0(a_path, a_series), load_cd0(b_path, b_series)
+    lines = [f"`{a_series}` against `{b_series}`, adopted values of both passes, paired by sample (no model).", "",
+             "| Sample | CD0 A | CD0 B | dCD0 | dCD0 / 0.001 |", "| --- | ---: | ---: | ---: | ---: |"]
+    diffs = []
+    for k in sorted(set(a) & set(b), key=lambda s: float(s[1:])):
+        d = a[k] - b[k]
+        diffs.append(abs(d))
+        lines.append(f"| {k} | {a[k]:.5f} | {b[k]:.5f} | {d:+.5f} | {abs(d) / 0.001:.2f} |")
+    srt = sorted(diffs)
+    lines += ["", f"Pairs: {len(diffs)}. Largest |dCD0| {max(diffs, default=0):.5f}, median {srt[len(srt) // 2] if srt else 0:.5f}."]
+    only = sorted(set(a) ^ set(b))
+    if only:
+        lines += ["", "In one reading only: " + ", ".join(only)]
+    text = "\n".join(lines) + "\n"
+    if md:
+        md.write_text(text, encoding="utf-8", newline="\n")
+    print(text)
+
+
 def main() -> None:
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "--curves":
+        ap = argparse.ArgumentParser(prog="same_test.py --curves")
+        sys.argv.pop(1)
+        ap.add_argument("a", type=Path)
+        ap.add_argument("a_series")
+        ap.add_argument("b", type=Path)
+        ap.add_argument("b_series")
+        ap.add_argument("--md", type=Path, default=None)
+        args = ap.parse_args()
+        curves(args.a, args.a_series, args.b, args.b_series, args.md)
+        return
     ap = argparse.ArgumentParser()
     ap.add_argument("a", type=Path)
     ap.add_argument("a_prefix")

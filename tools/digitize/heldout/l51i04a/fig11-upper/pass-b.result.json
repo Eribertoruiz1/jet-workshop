@@ -1,0 +1,1929 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig11-upper",
+    "number": "11 (upper panel)",
+    "title": "Figure 11. Effect of thickness ratio and thickened root sections on the variation of drag coefficient at zero lift with Mach number for the wing-body configuration.",
+    "pdf_page": 32,
+    "printed_page": 31,
+    "x_axis": "Mach number, M (scale shared with the lower panel, labels under the lower panel). Grid every 0.05 from 0.40 (left frame) to 1.20 (right frame), 17 vertical lines about 96.6 px apart; labels every 0.1.",
+    "y_axis": "Drag coefficient at zero lift, C_D0, upper panel scale. Grid every 0.005 from 0 (bottom frame) to 0.04 (top frame), 9 horizontal lines about 96.6 px apart; labels every 0.01.",
+    "content_note": "NACA faired curves only, no symbols, for wings 1, 2 and 3 (47 deg sweep; 4, 6 and 9 percent thick), each labelled with its wing number at both ends ('Wing 2 1 3' from top to bottom on the left, '3 2 1' from top to bottom on the right). All three curves start at M = 0.50 and end at about M = 1.122. Each curve is solid up to about M = 1.04, dashed from about M = 1.045 to about M = 1.09 (two dashes and gaps), then solid to its end. Subsonic order from the top: wing 2 (just below the C_D0 = 0.01 line), wing 1, wing 3; the three curves converge and cross between M = 0.89 and 0.94, where they run inside one band of ink with the C_D0 = 0.01 line."
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "scan": {
+    "pdf_page": 32,
+    "size_px": [
+      2198,
+      3075
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51i04a/NACA-RM-L51I04a.ntrs.pdf 32 .cache/l51i04a/scans/p32.png: the page's single embedded image, upright"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": 0.4,
+        "step": 0.05,
+        "count": 17
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.005,
+        "count": 9
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0005164215020376256,
+        3.212665906348857e-06,
+        0.21106051110201002
+      ],
+      [
+        2.453236282726814e-07,
+        -5.1715589976300414e-05,
+        0.06948018530566158
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          459,
+          670
+        ],
+        "px": [
+          459.0,
+          670.0
+        ],
+        "x": 0.45,
+        "y": 0.035,
+        "residual_data": [
+          0.0002504666945339351,
+          -5.665643308253726e-05
+        ],
+        "residual_px": [
+          0.48,
+          1.1
+        ],
+        "mesh_residual_data": [
+          8.334539678245267e-05,
+          -2.0496004282319347e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1039,
+          671
+        ],
+        "px": [
+          1039.5,
+          671.5
+        ],
+        "x": 0.75,
+        "y": 0.035,
+        "residual_data": [
+          3.7967626235202445e-05,
+          8.180548165301338e-06
+        ],
+        "residual_px": [
+          0.07,
+          -0.16
+        ],
+        "mesh_residual_data": [
+          0.00010107472539910844,
+          -5.200999046293953e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1814,
+          677
+        ],
+        "px": [
+          1814.29,
+          676.0
+        ],
+        "x": 1.15,
+        "y": 0.035,
+        "residual_data": [
+          0.00016842695153695963,
+          -3.4466364165638974e-05
+        ],
+        "residual_px": [
+          0.32,
+          0.67
+        ],
+        "mesh_residual_data": [
+          0.00013589861642859802,
+          6.521100983439276e-06
+        ]
+      },
+      {
+        "picked_px": [
+          746,
+          767
+        ],
+        "px": [
+          747.5,
+          766.0
+        ],
+        "x": 0.6,
+        "y": 0.03,
+        "residual_data": [
+          -0.00045351404060156586,
+          4.942279594929294e-05
+        ],
+        "residual_px": [
+          -0.87,
+          -0.96
+        ],
+        "mesh_residual_data": [
+          3.753339346568296e-05,
+          6.457984521906351e-06
+        ]
+      },
+      {
+        "picked_px": [
+          651,
+          961
+        ],
+        "px": [
+          650.45,
+          959.5
+        ],
+        "x": 0.55,
+        "y": 0.02,
+        "residual_data": [
+          5.0262977431825284e-05,
+          1.8647873094568973e-05
+        ],
+        "residual_px": [
+          0.1,
+          -0.36
+        ],
+        "mesh_residual_data": [
+          7.36474559182021e-06,
+          -6.958815450642392e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1909,
+          966
+        ],
+        "px": [
+          1908.5,
+          965.0
+        ],
+        "x": 1.2,
+        "y": 0.02,
+        "residual_data": [
+          -0.0002488296595546391,
+          4.2841123090092e-05
+        ],
+        "residual_px": [
+          -0.48,
+          -0.83
+        ],
+        "mesh_residual_data": [
+          -1.6526178040709993e-05,
+          1.1903995711926713e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1232,
+          1058
+        ],
+        "px": [
+          1231.0,
+          1059.0
+        ],
+        "x": 0.85,
+        "y": 0.015,
+        "residual_data": [
+          0.0001775933051505474,
+          1.5368907163117174e-05
+        ],
+        "residual_px": [
+          0.35,
+          -0.3
+        ],
+        "mesh_residual_data": [
+          7.170798028488523e-05,
+          1.1549993460601565e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1812,
+          1158
+        ],
+        "px": [
+          1811.0,
+          1158.71
+        ],
+        "x": 1.15,
+        "y": 0.01,
+        "residual_data": [
+          2.241317306372892e-05,
+          8.734967815952205e-07
+        ],
+        "residual_px": [
+          0.04,
+          -0.02
+        ],
+        "mesh_residual_data": [
+          2.489357324608754e-05,
+          2.1167794528129807e-06
+        ]
+      },
+      {
+        "picked_px": [
+          843,
+          1250
+        ],
+        "px": [
+          841.71,
+          1250.5
+        ],
+        "x": 0.65,
+        "y": 0.005,
+        "residual_data": [
+          -0.0002426944670020914,
+          1.6332442838292056e-05
+        ],
+        "residual_px": [
+          -0.47,
+          -0.32
+        ],
+        "mesh_residual_data": [
+          -7.002000410760711e-05,
+          3.36503830286692e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1715,
+          1256
+        ],
+        "px": [
+          1713.52,
+          1255.5
+        ],
+        "x": 1.1,
+        "y": 0.005,
+        "residual_data": [
+          -5.447361048904753e-06,
+          -2.837003149957617e-05
+        ],
+        "residual_px": [
+          -0.01,
+          0.55
+        ],
+        "mesh_residual_data": [
+          -5.54454305521368e-05,
+          3.1402572277933194e-07
+        ]
+      },
+      {
+        "picked_px": [
+          1133,
+          1350
+        ],
+        "px": [
+          1132.5,
+          1349.5
+        ],
+        "x": 0.8,
+        "y": 0.0,
+        "residual_data": [
+          0.00024335480023873757,
+          -3.2174358337022646e-05
+        ],
+        "residual_px": [
+          0.47,
+          0.62
+        ],
+        "mesh_residual_data": [
+          4.600617424121989e-05,
+          -9.801625241047662e-06
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.00021592377955069233,
+      3.224097309819578e-05
+    ],
+    "affine_max_abs_residual_data": [
+      0.00045351404060156586,
+      5.665643308253726e-05
+    ],
+    "data_per_px": [
+      0.0005164215020374563,
+      -5.171558997630471e-05
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 248,
+        "used": 248,
+        "rms_px": 0.237,
+        "max_warp_px": 0.22
+      },
+      {
+        "line": "horizontal",
+        "value": 0.005,
+        "samples": 255,
+        "used": 255,
+        "rms_px": 0.181,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "horizontal",
+        "value": 0.01,
+        "samples": 245,
+        "used": 245,
+        "rms_px": 0.243,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "horizontal",
+        "value": 0.015,
+        "samples": 255,
+        "used": 255,
+        "rms_px": 0.168,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "horizontal",
+        "value": 0.02,
+        "samples": 256,
+        "used": 256,
+        "rms_px": 0.193,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "horizontal",
+        "value": 0.025,
+        "samples": 255,
+        "used": 255,
+        "rms_px": 0.204,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "horizontal",
+        "value": 0.03,
+        "samples": 254,
+        "used": 254,
+        "rms_px": 0.193,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "horizontal",
+        "value": 0.035,
+        "samples": 255,
+        "used": 255,
+        "rms_px": 0.193,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.04,
+        "samples": 254,
+        "used": 254,
+        "rms_px": 0.251,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.176,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.45,
+        "samples": 126,
+        "used": 126,
+        "rms_px": 0.307,
+        "max_warp_px": 0.1
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 122,
+        "used": 122,
+        "rms_px": 0.2,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.55,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.168,
+        "max_warp_px": 0.1
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.253,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": 0.65,
+        "samples": 126,
+        "used": 126,
+        "rms_px": 0.174,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.204,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.75,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.229,
+        "max_warp_px": 0.09
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.183,
+        "max_warp_px": 0.08
+      },
+      {
+        "line": "vertical",
+        "value": 0.85,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.176,
+        "max_warp_px": 0.09
+      },
+      {
+        "line": "vertical",
+        "value": 0.9,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.208,
+        "max_warp_px": 0.1
+      },
+      {
+        "line": "vertical",
+        "value": 0.95,
+        "samples": 125,
+        "used": 125,
+        "rms_px": 0.227,
+        "max_warp_px": 0.09
+      },
+      {
+        "line": "vertical",
+        "value": 1.0,
+        "samples": 124,
+        "used": 124,
+        "rms_px": 0.263,
+        "max_warp_px": 0.1
+      },
+      {
+        "line": "vertical",
+        "value": 1.05,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.223,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 1.1,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.214,
+        "max_warp_px": 0.09
+      },
+      {
+        "line": "vertical",
+        "value": 1.15,
+        "samples": 127,
+        "used": 127,
+        "rms_px": 0.212,
+        "max_warp_px": 0.09
+      },
+      {
+        "line": "vertical",
+        "value": 1.2,
+        "samples": 126,
+        "used": 126,
+        "rms_px": 0.276,
+        "max_warp_px": 0.12
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig11-upper-47deg-t04",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "note": "wing 1 (4 percent thick): the middle curve at subsonic speeds, the lowest one above M = 0.94",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            554,
+            1181
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            553.57,
+            1180.86
+          ],
+          "columns_used": 7,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.138,
+          "slope_px_per_px": -0.0536,
+          "data": [
+            0.5,
+            0.008527380754647007
+          ],
+          "affine_data": [
+            0.5007296706471496,
+            0.008547117527150386
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 28.47,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.500",
+          "note": "the curve starts here",
+          "value": {
+            "M": 0.5,
+            "CD0": 0.008527380754647007
+          }
+        },
+        {
+          "x_value": 0.696,
+          "hint": [
+            932,
+            1173.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            931.75,
+            1173.76
+          ],
+          "columns_used": 14,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.189,
+          "slope_px_per_px": 0.0396,
+          "data": [
+            0.6960000000000023,
+            0.008985516273294636
+          ],
+          "affine_data": [
+            0.6960071443598037,
+            0.009007074705722276
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 19.66,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.696",
+          "value": {
+            "M": 0.6960000000000023,
+            "CD0": 0.008985516273294636
+          }
+        },
+        {
+          "x_value": 0.843,
+          "hint": [
+            1218,
+            1170
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1216.61,
+            1170.13
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.175,
+          "slope_px_per_px": -0.0245,
+          "data": [
+            0.8430000000000217,
+            0.00924069252755408
+          ],
+          "affine_data": [
+            0.8431033114530018,
+            0.009264685186085996
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 14.75,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.843",
+          "value": {
+            "M": 0.8430000000000217,
+            "CD0": 0.00924069252755408
+          }
+        },
+        {
+          "x_value": 0.892,
+          "hint": [
+            1311,
+            1168.5
+          ],
+          "found": true,
+          "snap": "none",
+          "px": [
+            1310.12,
+            1168.5
+          ],
+          "data": [
+            0.892,
+            0.009355262189790166
+          ],
+          "affine_data": [
+            0.8913867502371939,
+            0.00937192090800873
+          ],
+          "id": "M0.892",
+          "note": "wing 1 and wing 3 run together here in one band (rows 1167-1174); line centre placed by eye on the upper part of the band, continuing the wing 1 line (1168-1170 at x 1300), wing 3 being the lower part",
+          "value": {
+            "M": 0.892,
+            "CD0": 0.009355262189790166
+          }
+        },
+        {
+          "x_value": 0.916,
+          "hint": [
+            1357,
+            1165.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1356.62,
+            1165.89
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.191,
+          "slope_px_per_px": -0.0895,
+          "data": [
+            0.9160000000001712,
+            0.009507761292712814
+          ],
+          "affine_data": [
+            0.9153938642498467,
+            0.00951830704877997
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 9.55,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.916",
+          "note": "wing 1 is the lowest line here (rows 1164-1167), just below the band where wings 2 and 3 cross the C_D0 = 0.01 line",
+          "value": {
+            "M": 0.9160000000001712,
+            "CD0": 0.009507761292712814
+          }
+        },
+        {
+          "x_value": 0.941,
+          "hint": [
+            1406,
+            1156.5
+          ],
+          "found": true,
+          "snap": "none",
+          "px": [
+            1405.52,
+            1156.5
+          ],
+          "data": [
+            0.941,
+            0.010009198397355257
+          ],
+          "affine_data": [
+            0.9406169325701914,
+            0.010015912870396812
+          ],
+          "id": "M0.941",
+          "note": "the curve crosses the C_D0 = 0.01 line here and merges with it; line centre placed by eye on the straight line between its clean positions at x 1388 (row 1163) and x 1420 (row 1151.5)",
+          "value": {
+            "M": 0.941,
+            "CD0": 0.010009198397355257
+          }
+        },
+        {
+          "x_value": 0.965,
+          "hint": [
+            1452,
+            1131.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1452.27,
+            1131.89
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.187,
+          "slope_px_per_px": -0.7243,
+          "data": [
+            0.9650000000005882,
+            0.011307235834161614
+          ],
+          "affine_data": [
+            0.9646803502789298,
+            0.011300102313018465
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 25.17,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.965",
+          "value": {
+            "M": 0.9650000000005882,
+            "CD0": 0.011307235834161614
+          }
+        },
+        {
+          "x_value": 0.99,
+          "hint": [
+            1501,
+            1085.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1501.04,
+            1085.67
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.178,
+          "slope_px_per_px": -1.0699,
+          "data": [
+            0.9900000000074649,
+            0.013728291135174358
+          ],
+          "affine_data": [
+            0.9897177375151134,
+            0.013702361315073928
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 24.47,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.990",
+          "value": {
+            "M": 0.9900000000074649,
+            "CD0": 0.013728291135174358
+          }
+        },
+        {
+          "x_value": 1.01,
+          "hint": [
+            1540,
+            1048.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1539.78,
+            1049.16
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.233,
+          "slope_px_per_px": -0.6985,
+          "data": [
+            1.01000000001873,
+            0.01562854634848093
+          ],
+          "affine_data": [
+            1.0096066120718101,
+            0.015600001342467945
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 12.29,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.010",
+          "value": {
+            "M": 1.01000000001873,
+            "CD0": 0.01562854634848093
+          }
+        },
+        {
+          "x_value": 1.024,
+          "hint": [
+            1566,
+            1033.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1566.67,
+            1033.26
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.208,
+          "slope_px_per_px": -0.4387,
+          "data": [
+            1.0239999999912552,
+            0.0164505892249866
+          ],
+          "affine_data": [
+            1.023442104873691,
+            0.01642887597545538
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 28.39,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.024",
+          "value": {
+            "M": 1.0239999999912552,
+            "CD0": 0.0164505892249866
+          }
+        },
+        {
+          "x_value": 1.088,
+          "hint": [
+            1691,
+            1018
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1691.31,
+            1019.99
+          ],
+          "columns_used": 4,
+          "line_width_px": 3.5,
+          "fit_rms_px": 0.112,
+          "slope_px_per_px": -0.2,
+          "data": [
+            1.0880000000031327,
+            0.01716709762936715
+          ],
+          "affine_data": [
+            1.0877662488110833,
+            0.017145718991468786
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 42.46,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.088",
+          "note": "dashed part: the sample column falls in a gap between the last dash (ends x 1681) and the final solid stretch (starts x 1695)",
+          "value": {
+            "M": 1.0880000000031327,
+            "CD0": 0.01716709762936715
+          }
+        },
+        {
+          "x_value": 1.112,
+          "hint": [
+            1738,
+            1019.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1738.2,
+            1019.74
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.125,
+          "slope_px_per_px": 0.0441,
+          "data": [
+            1.1120000000000245,
+            0.017190094613516827
+          ],
+          "affine_data": [
+            1.111980449875151,
+            0.017170151113892564
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 42.95,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.112",
+          "note": "final stretch after the dashes",
+          "value": {
+            "M": 1.1120000000000245,
+            "CD0": 0.017190094613516827
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig11-upper-47deg-t06",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "note": "wing 2 (6 percent thick): the top curve at subsonic speeds, the middle one above M = 0.94",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            554,
+            1162
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            553.62,
+            1162.36
+          ],
+          "columns_used": 7,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.124,
+          "slope_px_per_px": -0.1071,
+          "data": [
+            0.5000000000000843,
+            0.009484347687919802
+          ],
+          "affine_data": [
+            0.500696057402984,
+            0.009503868207893354
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 9.97,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.500",
+          "note": "the curve starts here; the sample column is the grid line at M = 0.50",
+          "value": {
+            "M": 0.5000000000000843,
+            "CD0": 0.009484347687919802
+          }
+        },
+        {
+          "x_value": 0.7,
+          "hint": [
+            940,
+            1162.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            939.55,
+            1162.5
+          ],
+          "columns_used": 13,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.0,
+          "slope_px_per_px": 0.0,
+          "data": [
+            0.7,
+            0.009568502730759263
+          ],
+          "affine_data": [
+            0.6999990574575917,
+            0.009591305773155943
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 8.36,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.700",
+          "note": "sample column on the grid line at M = 0.70; the curve runs 6 to 8 px below the C_D0 = 0.01 line",
+          "value": {
+            "M": 0.7,
+            "CD0": 0.009568502730759263
+          }
+        },
+        {
+          "x_value": 0.85,
+          "hint": [
+            1231,
+            1161.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1230.3,
+            1161.59
+          ],
+          "columns_used": 13,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.146,
+          "slope_px_per_px": 0.0191,
+          "data": [
+            0.8500000000000024,
+            0.00968427086420487
+          ],
+          "affine_data": [
+            0.8501456856490566,
+            0.009709694804954663
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 6.13,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.850",
+          "note": "sample column on the grid line at M = 0.85",
+          "value": {
+            "M": 0.8500000000000024,
+            "CD0": 0.00968427086420487
+          }
+        },
+        {
+          "x_value": 0.9,
+          "hint": [
+            1326,
+            1161
+          ],
+          "found": true,
+          "side": "left",
+          "px": [
+            1325.37,
+            1161.36
+          ],
+          "columns_used": 7,
+          "line_width_px": 3.0,
+          "fit_rms_px": 0.138,
+          "slope_px_per_px": 0.0536,
+          "data": [
+            0.9000000000000992,
+            0.009730558932432751
+          ],
+          "affine_data": [
+            0.8992411389346151,
+            0.009744912307989101
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 5.23,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.900",
+          "note": "sample column on the grid line at M = 0.90; right of it the curve merges with the C_D0 = 0.01 line and the other two curves, so only the clean columns on the left are used (the curve is flat there)",
+          "value": {
+            "M": 0.9000000000000992,
+            "CD0": 0.009730558932432751
+          }
+        },
+        {
+          "x_value": 0.925,
+          "hint": [
+            1375,
+            1153
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            1374.27,
+            1153.83
+          ],
+          "columns_used": 9,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.577,
+          "slope_px_per_px": 0.4917,
+          "data": [
+            0.925000000024339,
+            0.010136790195537142
+          ],
+          "affine_data": [
+            0.9244699590099803,
+            0.010146327025933176
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 2.63,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M0.925",
+          "note": "the curve touches the C_D0 = 0.01 line from above here (merged with it left of x 1376); only the columns on the right, where it is separate, are used",
+          "value": {
+            "M": 0.925000000024339,
+            "CD0": 0.010136790195537142
+          }
+        },
+        {
+          "x_value": 0.95,
+          "hint": [
+            1423,
+            1137.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1423.16,
+            1137.11
+          ],
+          "columns_used": 14,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.496,
+          "slope_px_per_px": -0.4421,
+          "data": [
+            0.9499999999648739,
+            0.01102391141423464
+          ],
+          "affine_data": [
+            0.9496640904706457,
+            0.01102300556252317
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 19.7,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.950",
+          "note": "sample column on the grid line at M = 0.95",
+          "value": {
+            "M": 0.9499999999648739,
+            "CD0": 0.01102391141423464
+          }
+        },
+        {
+          "x_value": 0.975,
+          "hint": [
+            1472,
+            1095.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1471.9,
+            1095.05
+          ],
+          "columns_used": 17,
+          "line_width_px": 7.0,
+          "fit_rms_px": 0.575,
+          "slope_px_per_px": -1.3738,
+          "data": [
+            0.9749999999087301,
+            0.01322940743955209
+          ],
+          "affine_data": [
+            0.9746993497519385,
+            0.013210120350568372
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 34.08,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.975",
+          "value": {
+            "M": 0.9749999999087301,
+            "CD0": 0.01322940743955209
+          }
+        },
+        {
+          "x_value": 1.0,
+          "hint": [
+            1520,
+            995
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1520.91,
+            994.72
+          ],
+          "columns_used": 14,
+          "line_width_px": 9.0,
+          "fit_rms_px": 1.731,
+          "slope_px_per_px": -2.0751,
+          "data": [
+            0.9999999999430871,
+            0.018404279047326017
+          ],
+          "affine_data": [
+            0.9996868407964186,
+            0.018410768803912236
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 31.22,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.000",
+          "note": "sample column on the grid line at M = 1.00, steep stretch",
+          "value": {
+            "M": 0.9999999999430871,
+            "CD0": 0.018404279047326017
+          }
+        },
+        {
+          "x_value": 1.02,
+          "hint": [
+            1559,
+            951
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1559.38,
+            950.72
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.278,
+          "slope_px_per_px": -0.652,
+          "data": [
+            1.0199999999983875,
+            0.020679293609718673
+          ],
+          "affine_data": [
+            1.0194122186799268,
+            0.0206956923628491
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 13.04,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.020",
+          "value": {
+            "M": 1.0199999999983875,
+            "CD0": 0.020679293609718673
+          }
+        },
+        {
+          "x_value": 1.035,
+          "hint": [
+            1587.5,
+            939.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1588.18,
+            938.83
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.242,
+          "slope_px_per_px": -0.2855,
+          "data": [
+            1.0349999999982622,
+            0.021307067179412786
+          ],
+          "affine_data": [
+            1.0342469593409838,
+            0.02131765604816157
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 25.09,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.035",
+          "value": {
+            "M": 1.0349999999982622,
+            "CD0": 0.021307067179412786
+          }
+        },
+        {
+          "x_value": 1.088,
+          "hint": [
+            1691,
+            920
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1691.72,
+            919.77
+          ],
+          "columns_used": 13,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.248,
+          "slope_px_per_px": -0.1374,
+          "data": [
+            1.0879999999997871,
+            0.02232512256647514
+          ],
+          "affine_data": [
+            1.0876560082497846,
+            0.022328756001581206
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 44.71,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.088",
+          "note": "dashed part: start of the last dash (from x 1688)",
+          "value": {
+            "M": 1.0879999999997871,
+            "CD0": 0.02232512256647514
+          }
+        },
+        {
+          "x_value": 1.1,
+          "hint": [
+            1715,
+            917.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1715.32,
+            917.7
+          ],
+          "columns_used": 13,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.204,
+          "slope_px_per_px": -0.0561,
+          "data": [
+            1.1000000000000372,
+            0.022438007268139867
+          ],
+          "affine_data": [
+            1.0998369054794463,
+            0.022441596910459383
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 46.87,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.100",
+          "note": "sample column on the grid line at M = 1.10; end of the dashed part",
+          "value": {
+            "M": 1.1000000000000372,
+            "CD0": 0.022438007268139867
+          }
+        },
+        {
+          "x_value": 1.12,
+          "hint": [
+            1754,
+            916.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1754.19,
+            916.41
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.176,
+          "slope_px_per_px": -0.0147,
+          "data": [
+            1.1199999999999979,
+            0.022512014244305996
+          ],
+          "affine_data": [
+            1.1199060649246297,
+            0.022517845750959775
+          ],
+          "nearest_grid_line": {
+            "value": 0.025,
+            "distance_px": 47.82,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.120",
+          "value": {
+            "M": 1.1199999999999979,
+            "CD0": 0.022512014244305996
+          }
+        }
+      ]
+    },
+    {
+      "id": "fig11-upper-47deg-t09",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "note": "wing 3 (9 percent thick): the lowest curve at subsonic speeds, the steepest and highest one above M = 0.93",
+      "points": [
+        {
+          "x_value": 0.5,
+          "hint": [
+            554,
+            1202
+          ],
+          "found": true,
+          "side": "right",
+          "px": [
+            553.51,
+            1202.5
+          ],
+          "columns_used": 7,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.0,
+          "slope_px_per_px": 0.0,
+          "data": [
+            0.5,
+            0.007408171261031747
+          ],
+          "affine_data": [
+            0.5007682074472407,
+            0.007427977440645543
+          ],
+          "nearest_grid_line": {
+            "value": 0.005,
+            "distance_px": 46.56,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.500",
+          "note": "the curve starts here",
+          "value": {
+            "M": 0.5,
+            "CD0": 0.007408171261031747
+          }
+        },
+        {
+          "x_value": 0.696,
+          "hint": [
+            932,
+            1199.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            931.71,
+            1199.4
+          ],
+          "columns_used": 14,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.168,
+          "slope_px_per_px": 0.0374,
+          "data": [
+            0.6959999999999993,
+            0.007662798811154803
+          ],
+          "affine_data": [
+            0.6960688602535611,
+            0.007681077165784797
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 45.3,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.696",
+          "value": {
+            "M": 0.6959999999999993,
+            "CD0": 0.007662798811154803
+          }
+        },
+        {
+          "x_value": 0.843,
+          "hint": [
+            1218,
+            1190.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1216.51,
+            1190.62
+          ],
+          "columns_used": 17,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.202,
+          "slope_px_per_px": -0.1238,
+          "data": [
+            0.8430000000000278,
+            0.00818545279056635
+          ],
+          "affine_data": [
+            0.843117496827219,
+            0.008205008215108785
+          ],
+          "nearest_grid_line": {
+            "value": 0.01,
+            "distance_px": 35.24,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.843",
+          "value": {
+            "M": 0.8430000000000278,
+            "CD0": 0.00818545279056635
+          }
+        },
+        {
+          "x_value": 0.892,
+          "hint": [
+            1311,
+            1172.8
+          ],
+          "found": true,
+          "snap": "none",
+          "px": [
+            1310.09,
+            1172.8
+          ],
+          "data": [
+            0.8919999999999999,
+            0.009133768153301861
+          ],
+          "affine_data": [
+            0.8913865981809905,
+            0.009149537236380574
+          ],
+          "id": "M0.892",
+          "note": "wing 3 and wing 1 run together here in one band (rows 1167-1174); line centre placed by eye on the lower part of the band, continuing the wing 3 line (1180.5 at x 1280, 1175.5 at x 1300)",
+          "value": {
+            "M": 0.8919999999999999,
+            "CD0": 0.009133768153301861
+          }
+        },
+        {
+          "x_value": 0.916,
+          "hint": [
+            1357,
+            1154.5
+          ],
+          "found": true,
+          "snap": "none",
+          "px": [
+            1356.68,
+            1154.5
+          ],
+          "data": [
+            0.916,
+            0.010095391828429771
+          ],
+          "affine_data": [
+            0.9153870310963821,
+            0.010107361755537149
+          ],
+          "id": "M0.916",
+          "note": "the curve crosses the C_D0 = 0.01 line and the wing 2 curve here, inside one band of ink; line centre placed by eye on the straight continuation of its steep stretch (1151 at x 1364, 1145.5 at x 1372)",
+          "value": {
+            "M": 0.916,
+            "CD0": 0.010095391828429771
+          }
+        },
+        {
+          "x_value": 0.941,
+          "hint": [
+            1406,
+            1094.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1405.86,
+            1094.49
+          ],
+          "columns_used": 17,
+          "line_width_px": 8.0,
+          "fit_rms_px": 0.345,
+          "slope_px_per_px": -2.0049,
+          "data": [
+            0.9409999999952134,
+            0.013232469215127595
+          ],
+          "affine_data": [
+            0.9405930746644662,
+            0.013222879908543969
+          ],
+          "nearest_grid_line": {
+            "value": 0.015,
+            "distance_px": 34.0,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.941",
+          "value": {
+            "M": 0.9409999999952134,
+            "CD0": 0.013232469215127595
+          }
+        },
+        {
+          "x_value": 0.965,
+          "hint": [
+            1452,
+            968
+          ],
+          "found": true,
+          "fit": "rows",
+          "px": [
+            1453.11,
+            966.76
+          ],
+          "rows_used": 22,
+          "line_width_px": 4.0,
+          "fit_rms_px": 0.173,
+          "slope_px_per_px": -3.5564,
+          "data": [
+            0.9650000010953232,
+            0.01980948307438097
+          ],
+          "affine_data": [
+            0.964583636819526,
+            0.01984010375765271
+          ],
+          "nearest_grid_line": {
+            "value": 0.02,
+            "distance_px": 3.73,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M0.965",
+          "note": "steep stretch crossing the C_D0 = 0.02 line: row fit",
+          "value": {
+            "M": 0.9650000010953232,
+            "CD0": 0.01980948307438097
+          }
+        },
+        {
+          "x_value": 0.99,
+          "hint": [
+            1501,
+            801.5
+          ],
+          "found": true,
+          "fit": "rows",
+          "px": [
+            1502.32,
+            800.41
+          ],
+          "rows_used": 25,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.575,
+          "slope_px_per_px": -1.4501,
+          "data": [
+            0.990000000938349,
+            0.028447567924590644
+          ],
+          "affine_data": [
+            0.9894623119612764,
+            0.028455064525957578
+          ],
+          "nearest_grid_line": {
+            "value": 0.03,
+            "distance_px": 30.25,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M0.990",
+          "note": "steep stretch (slope about -1.7 px/px): row fit",
+          "value": {
+            "M": 0.990000000938349,
+            "CD0": 0.028447567924590644
+          }
+        },
+        {
+          "x_value": 1.01,
+          "hint": [
+            1540,
+            771
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1541.06,
+            770.25
+          ],
+          "columns_used": 17,
+          "line_width_px": 6.0,
+          "fit_rms_px": 0.166,
+          "slope_px_per_px": -0.2047,
+          "data": [
+            1.0099999999997984,
+            0.030008195077291244
+          ],
+          "affine_data": [
+            1.0093715869464785,
+            0.03002431055700209
+          ],
+          "nearest_grid_line": {
+            "value": 0.03,
+            "distance_px": 0.16,
+            "inked_here": true
+          },
+          "near_grid_line": true,
+          "id": "M1.010",
+          "note": "the curve runs along the C_D0 = 0.03 line here",
+          "value": {
+            "M": 1.0099999999997984,
+            "CD0": 0.030008195077291244
+          }
+        },
+        {
+          "x_value": 1.024,
+          "hint": [
+            1566,
+            761
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1567.89,
+            760.06
+          ],
+          "columns_used": 17,
+          "line_width_px": 5.0,
+          "fit_rms_px": 0.356,
+          "slope_px_per_px": -0.3015,
+          "data": [
+            1.0239999999990073,
+            0.03054739648171839
+          ],
+          "affine_data": [
+            1.0231944387805625,
+            0.030557874451807146
+          ],
+          "nearest_grid_line": {
+            "value": 0.03,
+            "distance_px": 10.49,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.024",
+          "value": {
+            "M": 1.0239999999990073,
+            "CD0": 0.03054739648171839
+          }
+        },
+        {
+          "x_value": 1.088,
+          "hint": [
+            1691,
+            735.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1692.56,
+            735.25
+          ],
+          "columns_used": 8,
+          "line_width_px": 3.5,
+          "fit_rms_px": 0.25,
+          "slope_px_per_px": -0.0,
+          "data": [
+            1.088,
+            0.031873034886131885
+          ],
+          "affine_data": [
+            1.0874970011984566,
+            0.03187152273585591
+          ],
+          "nearest_grid_line": {
+            "value": 0.03,
+            "distance_px": 35.8,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.088",
+          "note": "dashed part: the sample column falls in the gap between the last dash (ends x 1683) and the final solid stretch (starts x 1694)",
+          "value": {
+            "M": 1.088,
+            "CD0": 0.031873034886131885
+          }
+        },
+        {
+          "x_value": 1.112,
+          "hint": [
+            1738,
+            731
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1739.6,
+            730.92
+          ],
+          "columns_used": 17,
+          "line_width_px": 3.0,
+          "fit_rms_px": 0.208,
+          "slope_px_per_px": -0.1054,
+          "data": [
+            1.1119999999998869,
+            0.032109290021631404
+          ],
+          "affine_data": [
+            1.111775557810932,
+            0.03210699126392724
+          ],
+          "nearest_grid_line": {
+            "value": 0.03,
+            "distance_px": 40.26,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.112",
+          "note": "final stretch after the dashes",
+          "value": {
+            "M": 1.1119999999998869,
+            "CD0": 0.032109290021631404
+          }
+        },
+        {
+          "x_value": 1.122,
+          "hint": [
+            1757.5,
+            729.5
+          ],
+          "found": true,
+          "side": "both",
+          "px": [
+            1759.11,
+            729.37
+          ],
+          "columns_used": 16,
+          "line_width_px": 3.0,
+          "fit_rms_px": 0.319,
+          "slope_px_per_px": -0.0537,
+          "data": [
+            1.121999999999892,
+            0.03219440044250448
+          ],
+          "affine_data": [
+            1.1218459616835312,
+            0.032191936692378104
+          ],
+          "nearest_grid_line": {
+            "value": 0.03,
+            "distance_px": 41.87,
+            "inked_here": true
+          },
+          "near_grid_line": false,
+          "id": "M1.122",
+          "note": "about 7 px before the end of the curve",
+          "value": {
+            "M": 1.121999999999892,
+            "CD0": 0.03219440044250448
+          }
+        }
+      ]
+    }
+  ]
+}

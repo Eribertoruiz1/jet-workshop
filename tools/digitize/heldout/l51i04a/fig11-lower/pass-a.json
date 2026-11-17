@@ -1,0 +1,372 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig11-lower",
+    "number": "11 (lower panel)",
+    "pdf_page": 32,
+    "printed_page": 31,
+    "title": "Effect of thickness ratio and thickened root sections on the variation of drag coefficient at zero lift with Mach number for the wing-body configuration.",
+    "x_axis": "Mach number, M (0.4 to 1.2, grid every 0.05; common to both panels)",
+    "y_axis": "Drag coefficient at zero lift, CD0 (lower panel: 0 to 0.03, grid every 0.005)",
+    "content_note": "NACA's faired curves of CD0 against M, lower panel: wings 2 and 4 (47deg-t06, 47deg-root12-t06), labelled at both ends. Wing 4 sampled at its test Mach numbers as labelled on figure 9; wing 2 sampled again as a check only."
+  },
+  "scan": {
+    "pdf_page": 32,
+    "size_px": [
+      2198,
+      3075
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image (page /Rotate 0), upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session (lane B)",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": 0.4,
+        "step": 0.05,
+        "count": 17
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.005,
+        "count": 7
+      }
+    },
+    "points": [
+      {
+        "px": [
+          454.5,
+          1636
+        ],
+        "x": 0.45,
+        "y": 0.025
+      },
+      {
+        "px": [
+          743,
+          1734.5
+        ],
+        "x": 0.6,
+        "y": 0.02
+      },
+      {
+        "px": [
+          1130.5,
+          1830.5
+        ],
+        "x": 0.8,
+        "y": 0.015
+      },
+      {
+        "px": [
+          1323.5,
+          1638
+        ],
+        "x": 0.9,
+        "y": 0.025
+      },
+      {
+        "px": [
+          1808,
+          1834
+        ],
+        "x": 1.15,
+        "y": 0.015
+      },
+      {
+        "px": [
+          454.5,
+          2022
+        ],
+        "x": 0.45,
+        "y": 0.005
+      },
+      {
+        "px": [
+          937.5,
+          2023.5
+        ],
+        "x": 0.7,
+        "y": 0.005
+      },
+      {
+        "px": [
+          1517.5,
+          2026
+        ],
+        "x": 1.0,
+        "y": 0.005
+      },
+      {
+        "px": [
+          1612.5,
+          1738.5
+        ],
+        "x": 1.05,
+        "y": 0.02
+      },
+      {
+        "px": [
+          1808,
+          1739.5
+        ],
+        "x": 1.15,
+        "y": 0.02
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig11-lower-47deg-root12-t06",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "samples": [
+        {
+          "id": "M0.500",
+          "x": 0.5,
+          "hint_px": [
+            551.5,
+            1958
+          ],
+          "side": "right",
+          "note": "the curve starts at M 0.50"
+        },
+        {
+          "id": "M0.700",
+          "x": 0.7,
+          "hint_px": [
+            937.5,
+            1959.5
+          ]
+        },
+        {
+          "id": "M0.850",
+          "x": 0.85,
+          "hint_px": [
+            1228.0,
+            1952
+          ]
+        },
+        {
+          "id": "M0.900",
+          "x": 0.9,
+          "hint_px": [
+            1323.5,
+            1944
+          ]
+        },
+        {
+          "id": "M0.925",
+          "x": 0.925,
+          "hint_px": [
+            1372.0,
+            1934.8
+          ],
+          "snap": "none",
+          "note": "wing 4 and wing 2 merge into one band under the 0.010 grid line (lower edge 1936.5 px); wing 4 placed by eye half a line width above the lower edge"
+        },
+        {
+          "id": "M0.950",
+          "x": 0.95,
+          "hint_px": [
+            1420.5,
+            1900
+          ]
+        },
+        {
+          "id": "M0.975",
+          "x": 0.975,
+          "hint_px": [
+            1469.0,
+            1784
+          ],
+          "fit": "rows",
+          "note": "steep stretch: fitted by rows"
+        },
+        {
+          "id": "M1.000",
+          "x": 1.0,
+          "hint_px": [
+            1517.5,
+            1699
+          ]
+        },
+        {
+          "id": "M1.020",
+          "x": 1.02,
+          "hint_px": [
+            1555.5,
+            1657
+          ]
+        },
+        {
+          "id": "M1.035",
+          "x": 1.035,
+          "hint_px": [
+            1584.0,
+            1638
+          ],
+          "note": "wing 4 curve crosses the 0.025 grid line here"
+        },
+        {
+          "id": "M1.085",
+          "x": 1.085,
+          "hint_px": [
+            1681.8,
+            1598.5
+          ],
+          "note": "at the start of the last segment of the curve, just after its dashed part (report p. 7: no data between M 1.04 and 1.08, curves dashed there)"
+        },
+        {
+          "id": "M1.100",
+          "x": 1.1,
+          "hint_px": [
+            1711.5,
+            1595
+          ]
+        },
+        {
+          "id": "M1.121",
+          "x": 1.121,
+          "hint_px": [
+            1752.0,
+            1592.5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fig11-lower-47deg-t06",
+      "wing": "47",
+      "kind": "curve_samples",
+      "x_variable": "M",
+      "y_variable": "CD0",
+      "samples": [
+        {
+          "id": "M0.500",
+          "x": 0.5,
+          "hint_px": [
+            551.5,
+            1936
+          ],
+          "side": "right",
+          "note": "the curve starts at M 0.50"
+        },
+        {
+          "id": "M0.700",
+          "x": 0.7,
+          "hint_px": [
+            937.5,
+            1936.5
+          ]
+        },
+        {
+          "id": "M0.850",
+          "x": 0.85,
+          "hint_px": [
+            1228.0,
+            1938
+          ]
+        },
+        {
+          "id": "M0.900",
+          "x": 0.9,
+          "hint_px": [
+            1323.5,
+            1936.5
+          ]
+        },
+        {
+          "id": "M0.925",
+          "x": 0.925,
+          "hint_px": [
+            1372.0,
+            1931.5
+          ],
+          "snap": "none",
+          "note": "wing 2 and wing 4 merge into one band under the 0.010 grid line; wing 2 placed by eye at the top of the band, against the grid line"
+        },
+        {
+          "id": "M0.950",
+          "x": 0.95,
+          "hint_px": [
+            1420.5,
+            1912
+          ]
+        },
+        {
+          "id": "M0.975",
+          "x": 0.975,
+          "hint_px": [
+            1469.0,
+            1873
+          ],
+          "fit": "rows",
+          "note": "steep stretch: fitted by rows"
+        },
+        {
+          "id": "M1.000",
+          "x": 1.0,
+          "hint_px": [
+            1517.5,
+            1777
+          ]
+        },
+        {
+          "id": "M1.020",
+          "x": 1.02,
+          "hint_px": [
+            1555.5,
+            1729
+          ],
+          "note": "wing 2 curve just above the 0.020 grid line"
+        },
+        {
+          "id": "M1.035",
+          "x": 1.035,
+          "hint_px": [
+            1584.0,
+            1711
+          ]
+        },
+        {
+          "id": "M1.088",
+          "x": 1.088,
+          "hint_px": [
+            1687.7,
+            1687
+          ],
+          "note": "at the start of the last segment of the curve, just after its dashed part (report p. 7: no data between M 1.04 and 1.08, curves dashed there)"
+        },
+        {
+          "id": "M1.100",
+          "x": 1.1,
+          "hint_px": [
+            1711.5,
+            1684
+          ]
+        },
+        {
+          "id": "M1.120",
+          "x": 1.12,
+          "hint_px": [
+            1750.1,
+            1683
+          ]
+        }
+      ],
+      "check_only": true,
+      "check_note": "wing 2 drawn again in the lower panel; compared with fig11-upper-47deg-t06, kept out of the dataset"
+    }
+  ]
+}
