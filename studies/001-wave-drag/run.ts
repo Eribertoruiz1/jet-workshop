@@ -20,6 +20,8 @@ import { areaFigure, decompositionFigure, waveLevelsMarkdown } from "./src/lesso
 import { freezeMarkdown } from "./src/report-freeze.ts";
 import { verificationMarkdown } from "./src/report-verification.ts";
 import { waveRequests } from "./src/requests.ts";
+import { renderStudy } from "./src/render.ts";
+import { runStudy } from "./src/study.ts";
 import { runVerification } from "./src/verification.ts";
 import { buildWaveTable } from "./src/wavetable.ts";
 import { loadConfigs } from "./src/config.ts";
@@ -61,3 +63,19 @@ const area = areaFigure();
 writeFileSync(`${OUT}fig-area-35.svg`, area.svg);
 writeFileSync(`${OUT}fig-decomposition-35.svg`, decompositionFigure(table));
 console.log(`wave levels: wrote out/wave-levels.md, out/fig-area-35.svg, out/fig-decomposition-35.svg`);
+
+// Open-data study (steps 4 to 6, after the freeze commit): the only part that reads drag data.
+const study = runStudy(table, OUT, (s) => console.log(s));
+writeFileSync(`${OUT}study-snippets.json`, JSON.stringify(study.snippets, null, 1));
+console.log(`study: recommended ${study.numbers.recommended} (${study.numbers.verdict})`);
+
+// Study text (step 6): the template filled with the generated tables and numbers.
+renderStudy(
+  fileURLToPath(new URL("./study.template.md", import.meta.url)),
+  fileURLToPath(new URL("../../docs/studies/001-wave-drag-method.md", import.meta.url)),
+  study.snippets,
+  study.numbers,
+  study.results,
+  readFileSync(`${OUT}verification.md`, "utf8"),
+);
+console.log("study: wrote docs/studies/001-wave-drag-method.md");
