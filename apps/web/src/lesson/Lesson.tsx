@@ -186,7 +186,18 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
             <label htmlFor="lesson-sweep">{t("sweepPlain")}</label>
             <output htmlFor="lesson-sweep" className="num">{c.sweep.toFixed(1)}°</output>
             <input id="lesson-sweep" type="range" min={0} max={55} step={0.1} value={c.sweep} onChange={(e) => c.setSweep(Number(e.target.value))} />
-            {c.sweep !== base && <button type="button" onClick={() => c.setSweep(base)}>{t("s1Reset", { sweep: label("10.8") })}</button>}
+            {c.sweep !== base && (
+              <button
+                type="button"
+                onClick={() => {
+                  c.setSweep(base);
+                  // The button goes away once pressed; keep keyboard focus on the slider.
+                  document.getElementById("lesson-sweep")?.focus();
+                }}
+              >
+                {t("s1Reset", { sweep: label("10.8") })}
+              </button>
+            )}
           </div>
         ),
       };
@@ -212,7 +223,7 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
           markStyle: style((w) => (w === c.wing ? "ink" : "ink-2")),
           labels: shown.map((w) => rightmost(w, w === c.wing ? "ink" : "ink-2")),
           yMax: f.yMax,
-          ariaLabel: t("s4Aria", { sweep: label(c.wing) }),
+          ariaLabel: t(c.wing === "10.8" ? "s4AriaBase" : "s4Aria", { sweep: label(c.wing) }),
         }),
         controls: <WingButtons c={c} />,
       };
@@ -262,7 +273,7 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
         text: a.total === 0 ? "s7TextNoData" : a.inside === 0 ? "s7TextNone" : a.total === 1 ? "s7TextOne" : "s7Text",
         vars: { inside: a.inside, total: a.total },
         // The hatched zone is named in words inside the chart, not by its red alone (PM, rule 9).
-        figure: dragChart({ measured: f.drawn[c.wing], markStyle: style((w) => (w === c.wing ? "ink" : "ink-2")), band, zoneLabel: t("legendOutside"), ariaLabel: t("s7Aria", { sweep: label(c.wing) }) }),
+        figure: dragChart({ measured: f.drawn[c.wing], markStyle: style((w) => (w === c.wing ? "ink" : "ink-2")), band, zoneLabel: t("s7Zone"), ariaLabel: t("s7Aria", { sweep: label(c.wing) }) }),
         controls: <WingButtons c={c} />,
       };
     }

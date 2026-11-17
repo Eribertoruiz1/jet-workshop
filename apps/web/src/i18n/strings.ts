@@ -58,6 +58,7 @@ export const es = {
   s4Text: "Ahora pulsa el ala de 47° y mira las mismas medidas.",
   s4TextAfter: "Ahora pulsa el ala de 47° y mira las mismas medidas. Las de la derecha han bajado.",
   s4Aria: "Las medidas del ala de {sweep}°; en gris, las del ala casi recta",
+  s4AriaBase: "Las medidas del ala de {sweep}°",
 
   // Step 5
   s5Title: "Las tres juntas",
@@ -69,16 +70,17 @@ export const es = {
 
   // Step 6
   s6Title: "El precio",
-  s6Text: "La flecha no sale gratis. Por cada grado que se levanta el morro contra el aire, el ala de 47° da entre un {lossMin} y un {lossMax} % menos de **sustentación**, la fuerza que sostiene el avión, que la casi recta. Para sostener el mismo peso tiene que levantar más el morro o ir más rápido.",
-  s6TextOne: "La flecha no sale gratis. Por cada grado que se levanta el morro contra el aire, el ala de 47° da un {lossMin} % menos de **sustentación**, la fuerza que sostiene el avión, que la casi recta. Para sostener el mismo peso tiene que levantar más el morro o ir más rápido.",
+  s6Text: "La flecha no sale gratis. Por cada grado que se levanta el morro contra el aire, el ala de 47° da entre un {lossMin} y un {lossMax} % menos de **sustentación** (la fuerza que sostiene el avión) que la casi recta. Para sostener el mismo peso tiene que levantar más el morro o ir más rápido.",
+  s6TextOne: "La flecha no sale gratis. Por cada grado que se levanta el morro contra el aire, el ala de 47° da un {lossMin} % menos de **sustentación** (la fuerza que sostiene el avión) que la casi recta. Para sostener el mismo peso tiene que levantar más el morro o ir más rápido.",
   s6Aria: "Sustentación contra el morro levantado: las medidas del ala casi recta y del ala de 47° a Mach {mach}",
 
   // Step 7
   s7Title: "Lo que saben las fórmulas",
-  s7Text: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad, la banda acierta {inside} de las {total} medidas. Cerca del muro las fórmulas dejan de valer: por eso esa zona está rayada en rojo. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
-  s7TextOne: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad hay una sola medida, y cae dentro de la banda. Cerca del muro las fórmulas dejan de valer: por eso esa zona está rayada en rojo. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
-  s7TextNone: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad, ninguna medida cae dentro de la banda. Cerca del muro las fórmulas dejan de valer: por eso esa zona está rayada en rojo. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
-  s7TextNoData: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad no hay medidas de esta ala con las que compararla. Cerca del muro las fórmulas dejan de valer: por eso esa zona está rayada en rojo. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
+  s7Text: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad, la banda acierta {inside} de las {total} medidas. En la zona rayada en rojo, que llega hasta el muro, las fórmulas dejan de valer. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
+  s7TextOne: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad hay una sola medida, y la banda la acierta. En la zona rayada en rojo, que llega hasta el muro, las fórmulas dejan de valer. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
+  s7TextNone: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad, la banda no acierta ninguna medida. En la zona rayada en rojo, que llega hasta el muro, las fórmulas dejan de valer. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
+  s7TextNoData: "La banda azul es lo que predicen las fórmulas de los libros para esta ala. A baja velocidad no hay medidas de esta ala con las que compararla. En la zona rayada en rojo, que llega hasta el muro, las fórmulas dejan de valer. Enseñar a las fórmulas a cruzar el muro es lo siguiente que vamos a construir.",
+  s7Zone: "Aquí las fórmulas no valen",
   s7Aria: "La banda de las fórmulas y las medidas del ala de {sweep}°; rayada en rojo, la zona donde las fórmulas no valen",
 
   // Step 8
@@ -208,6 +210,7 @@ export const en: Strings = {
   s4Text: "Now pick the 47° wing and watch the same measurements.",
   s4TextAfter: "Now pick the 47° wing and watch the same measurements. The ones on the right have come down.",
   s4Aria: "The measurements of the {sweep}° wing; in grey, those of the almost straight wing",
+  s4AriaBase: "The measurements of the {sweep}° wing",
 
   s5Title: "All three together",
   s5Text: "These are the curves NACA drew through its measurements, all three on one chart. At Mach {mach}, the 47° wing has {cut}% less drag than the almost straight one. With more sweep, the barrier comes later: the rise starts at Mach {riseA}, {riseB} and {riseC}, from least to most sweep.",
@@ -217,15 +220,16 @@ export const en: Strings = {
   s5Line: "Mach {mach}",
 
   s6Title: "The price",
-  s6Text: "Sweep has a price. For each degree the nose is raised against the airflow, the 47° wing gives between {lossMin}% and {lossMax}% less **lift**, the force that holds the aircraft up, than the almost straight one. To carry the same weight it has to raise its nose more or fly faster.",
-  s6TextOne: "Sweep has a price. For each degree the nose is raised against the airflow, the 47° wing gives {lossMin}% less **lift**, the force that holds the aircraft up, than the almost straight one. To carry the same weight it has to raise its nose more or fly faster.",
+  s6Text: "Sweep has a price. For each degree the nose is raised against the airflow, the 47° wing gives between {lossMin}% and {lossMax}% less **lift** (the force that holds the aircraft up) than the almost straight one. To carry the same weight it has to raise its nose more or fly faster.",
+  s6TextOne: "Sweep has a price. For each degree the nose is raised against the airflow, the 47° wing gives {lossMin}% less **lift** (the force that holds the aircraft up) than the almost straight one. To carry the same weight it has to raise its nose more or fly faster.",
   s6Aria: "Lift against nose-up angle: the measurements of the almost straight wing and the 47° wing at Mach {mach}",
 
   s7Title: "What the formulas know",
-  s7Text: "The blue band is what the textbook formulas predict for this wing. At low speed, the band gets {inside} of the {total} measurements right. Near the barrier the formulas stop holding: that is why that zone is hatched in red. Teaching the formulas to cross the barrier is what we will build next.",
-  s7TextOne: "The blue band is what the textbook formulas predict for this wing. At low speed there is a single measurement, and it falls inside the band. Near the barrier the formulas stop holding: that is why that zone is hatched in red. Teaching the formulas to cross the barrier is what we will build next.",
-  s7TextNone: "The blue band is what the textbook formulas predict for this wing. At low speed, no measurement falls inside the band. Near the barrier the formulas stop holding: that is why that zone is hatched in red. Teaching the formulas to cross the barrier is what we will build next.",
-  s7TextNoData: "The blue band is what the textbook formulas predict for this wing. At low speed there are no measurements of this wing to compare it with. Near the barrier the formulas stop holding: that is why that zone is hatched in red. Teaching the formulas to cross the barrier is what we will build next.",
+  s7Text: "The blue band is what the textbook formulas predict for this wing. At low speed, the band gets {inside} of the {total} measurements right. In the red hatched zone, which runs into the barrier, the formulas stop holding. Teaching the formulas to cross the barrier is what we will build next.",
+  s7TextOne: "The blue band is what the textbook formulas predict for this wing. At low speed there is a single measurement, and the band gets it right. In the red hatched zone, which runs into the barrier, the formulas stop holding. Teaching the formulas to cross the barrier is what we will build next.",
+  s7TextNone: "The blue band is what the textbook formulas predict for this wing. At low speed, the band gets none of the measurements right. In the red hatched zone, which runs into the barrier, the formulas stop holding. Teaching the formulas to cross the barrier is what we will build next.",
+  s7TextNoData: "The blue band is what the textbook formulas predict for this wing. At low speed there are no measurements of this wing to compare it with. In the red hatched zone, which runs into the barrier, the formulas stop holding. Teaching the formulas to cross the barrier is what we will build next.",
+  s7Zone: "The formulas do not hold here",
   s7Aria: "The formulas' band and the measurements of the {sweep}° wing; hatched in red, the zone where the formulas do not hold",
 
   s8Title: "Check",
