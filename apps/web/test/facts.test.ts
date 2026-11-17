@@ -42,7 +42,7 @@ describe("lesson figures, fixed at today's values (brief 002)", () => {
     expect(f["35"]!.dataClass).toBe("NACA faired");
     expect(f["10.8"]!.value).toBeCloseTo(0.921, 3);
     expect(f["35"]!.value).toBeCloseTo(0.951, 3);
-    expect(f["47"]!.dataClass).toBe("NACA report text");
+    expect(f["47"]!.dataClass).toBe("report text");
     expect(f["47"]!.value).toBe(0.97);
     expect([mach2(f["10.8"]!.value), mach2(f["35"]!.value), mach2(f["47"]!.value)]).toEqual(["0.92", "0.95", "0.97"]);
   });

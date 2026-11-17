@@ -2,7 +2,7 @@ import type { TestedWingId } from "@jet-workshop/physics";
 
 /**
  * A figure the report states in its text, not read from one of its figures.
- * Data class "NACA report text". It carries the document, the page and the
+ * Data class "report text". It carries the document, the page and the
  * sentence it comes from, so that it is never written as a bare number.
  */
 export interface ReportTextValue {

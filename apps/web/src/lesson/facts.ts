@@ -21,13 +21,13 @@ import {
   type ReportTextValue,
 } from "@jet-workshop/validation";
 
-/** "NACA report text": a figure the report states in its text, with its page and sentence (`ReportTextValue`). */
-export type FactClass = "measured" | "NACA faired" | "NACA report text" | "computed" | "model";
+/** "report text": a figure the report states in its text, with its page and sentence (`ReportTextValue`). */
+export type FactClass = "measured" | "NACA faired" | "report text" | "computed" | "model";
 
 export interface Fact<T> {
   value: T;
   dataClass: FactClass;
-  /** Where a "NACA report text" figure is printed */
+  /** Where a "report text" figure is printed */
   source?: ReportTextValue;
 }
 
@@ -111,7 +111,7 @@ export function sweepDragCut(data: Dataset): Fact<{ percent: number; mach: numbe
  * the report's definition). From the NACA faired curve with
  * `sampledDragRiseMach`, class "NACA faired". A curve that never gets that
  * steep between its samples (today the 47 deg curve, steepest stretch 0.096)
- * takes the figure the report states in its text, class "NACA report text",
+ * takes the figure the report states in its text, class "report text",
  * with its page and sentence (the rule of lane C's pre-registration, PM review
  * of gate 2). Null if neither gives one.
  */
@@ -120,7 +120,7 @@ export function dragRise(data: Dataset): Record<TestedWingId, Fact<number> | nul
   for (const w of WINGS) {
     const sampled = sampledDragRiseMach(fairedCurve(data, w).map((s) => ({ mach: s.mach, cd: s.cd0 })));
     const text = NACA_TEXT_DRAG_RISE[w];
-    out[w] = sampled !== null ? { value: sampled, dataClass: "NACA faired" } : text ? { value: text.value, dataClass: "NACA report text", source: text } : null;
+    out[w] = sampled !== null ? { value: sampled, dataClass: "NACA faired" } : text ? { value: text.value, dataClass: "report text", source: text } : null;
   }
   return out;
 }

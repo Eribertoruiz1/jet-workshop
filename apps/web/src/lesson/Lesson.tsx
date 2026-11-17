@@ -215,7 +215,7 @@ function stepContent(step: number, f: Facts, c: Ctx): StepView {
       const rises = WINGS.map((w) => f.rise[w]);
       const faired = (r: (typeof rises)[number] | undefined) => r?.dataClass === "NACA faired";
       // The sentence names its source: the faired curves, or the report's text for the last wing.
-      const text: StringKey = rises.every(faired) ? "s5Text" : faired(rises[0]) && faired(rises[1]) && rises[2]?.dataClass === "NACA report text" ? "s5TextReportLast" : "s5TextShort";
+      const text: StringKey = rises.every(faired) ? "s5Text" : faired(rises[0]) && faired(rises[1]) && rises[2]?.dataClass === "report text" ? "s5TextReportLast" : "s5TextShort";
       return {
         text,
         vars: { mach: mach2(f.cut.mach), cut: percent0(f.cut.percent), riseA: rises[0] ? mach2(rises[0].value) : "", riseB: rises[1] ? mach2(rises[1].value) : "", riseC: rises[2] ? mach2(rises[2].value) : "" },
