@@ -1,5 +1,5 @@
 import { TESTED_SWEEPS, type TestedWingId } from "@jet-workshop/physics";
-import { G0, estimatedTakeoffSpeed, type Aircraft } from "@jet-workshop/physics/flight";
+import { hangarFigures, type Aircraft } from "@jet-workshop/physics/flight";
 import * as fmt from "./format.ts";
 import { halfPlanform, profile, type Point } from "./profile.ts";
 import { t, type Lang } from "./strings.ts";
@@ -18,6 +18,16 @@ export const THRUST_RANGE = { min: 5000, max: 120000, step: 1000 } as const;
 export const FUEL_STEP = 10;
 
 export const defaultDesign: Design = { wing: "35", area_m2: 25, fuel_kg: 700, thrust_N: 30000 };
+
+/** The fuel slider's top: the capacity, down to a whole step. */
+export function fuelSliderMax(ac: Aircraft): number {
+  return Math.floor(ac.fuelCapacity_kg / FUEL_STEP) * FUEL_STEP;
+}
+
+/** The fuel the hangar shows and the flight carries: the chosen fuel, no more than the slider's top. */
+export function fuelLoad(design: Design, ac: Aircraft): number {
+  return Math.min(design.fuel_kg, fuelSliderMax(ac));
+}
 
 function WingButton({ id, active, lang, onPick }: { id: TestedWingId; active: boolean; lang: Lang; onPick: () => void }) {
   const half = halfPlanform(wingBody(id));
@@ -68,11 +78,9 @@ function SideView({ aircraft, lang }: { aircraft: Aircraft; lang: Lang }) {
 }
 
 export function Hangar({ lang, design, aircraft, onChange, onBoard }: { lang: Lang; design: Design; aircraft: Aircraft; onChange: (d: Design) => void; onBoard: () => void }) {
-  const capacity = Math.floor(aircraft.fuelCapacity_kg / FUEL_STEP) * FUEL_STEP;
-  const fuel = Math.min(design.fuel_kg, capacity);
-  const mass = aircraft.emptyMass_kg + fuel;
-  const tw = design.thrust_N / (mass * G0);
-  const vto = estimatedTakeoffSpeed(aircraft, mass);
+  const capacity = fuelSliderMax(aircraft);
+  const fuel = fuelLoad(design, aircraft);
+  const figures = hangarFigures(aircraft, fuel);
   const set = (patch: Partial<Design>): void => {
     const next = { ...design, ...patch };
     onChange(next);
@@ -102,9 +110,9 @@ export function Hangar({ lang, design, aircraft, onChange, onBoard }: { lang: La
       </label>
 
       <div className="flight-readings" aria-live="polite">
-        <p>{t(lang, "takeoffWeight", { W: fmt.kg(mass) })}</p>
-        <p>{t(lang, "thrustToWeight", { tw: fmt.ratio(tw) })}</p>
-        <p>{t(lang, "takeoffSpeed", { v: fmt.kmh(vto) })}</p>
+        <p>{t(lang, "takeoffWeight", { W: fmt.kg(figures.mass_kg) })}</p>
+        <p>{t(lang, "thrustToWeight", { tw: fmt.ratio(figures.thrustToWeight) })}</p>
+        <p>{t(lang, "takeoffSpeed", { v: fmt.kmh(figures.takeoffSpeed_m_s) })}</p>
       </div>
       <p className="flight-note">{t(lang, "hangarNote")}</p>
       <p className="flight-note">{t(lang, "provisionalEngine")}</p>

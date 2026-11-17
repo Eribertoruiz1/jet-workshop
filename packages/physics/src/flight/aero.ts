@@ -12,15 +12,16 @@
  * stall model takes over (Viterna and Corrigan), `estimated`.
  *
  * Drag at zero lift: the friction of the current model (parasite.ts) at the
- * flight Reynolds number, `estimated`, plus the measured rise of the NACA
- * faired curve, CD0(M) - CD0(0.50), `NACA faired`. Drag due to lift: the
- * current model, K (CL - CL_min)^2 (induced.ts, lift.ts).
+ * flight Reynolds number with its Mach terms frozen at M 0.50, `estimated`,
+ * plus the measured rise of the NACA faired curve, CD0(M) - CD0(0.50),
+ * `NACA faired`. Drag due to lift: the current model, K (CL - CL_min)^2
+ * (induced.ts, lift.ts).
  */
 
 import type { WingBody } from "../geometry.ts";
 import { inducedDragFactor, oswaldFitValid } from "../induced.ts";
 import { liftCurveSlope, minimumDragCl } from "../lift.ts";
-import { POLAR_CL_HALF_RANGE } from "../models.ts";
+import { POLAR_CL_HALF_RANGE, SUBSONIC_LIMIT_MACH } from "../models.ts";
 import { parasiteDrag, turbulentCf } from "../parasite.ts";
 
 /** Classes of data of the evidence rules (docs/PROCESS.md, rule 1). */
@@ -100,7 +101,9 @@ function crossesGap(gaps: WingAeroTables["gaps"], a: number, b: number): boolean
  * Value of a table at a Mach number. Inside the sampled range it is joined by
  * straight lines between neighbouring samples; outside it holds the end value
  * (brief 006: "se mantiene el último incremento"). An interval whose ends lie
- * on either side of a gap is a straight join across the gap: "gap".
+ * on either side of a gap is a straight join across the gap: "gap", even
+ * within the tolerance of its ends, because the value there mixes both sides
+ * of the gap. Only a sample itself is "at" on such an interval.
  */
 export function lookup(t: MachTable, mach: number, gaps: WingAeroTables["gaps"], tolerance = 0): Lookup {
   const p = t.points;
@@ -115,8 +118,9 @@ export function lookup(t: MachTable, mach: number, gaps: WingAeroTables["gaps"],
   const f = b.mach > a.mach ? (mach - a.mach) / (b.mach - a.mach) : 0;
   const value = a.value + f * (b.value - a.value);
   if (inGap(gaps, mach)) return { value, placement: "gap" };
-  if (Math.abs(mach - a.mach) <= tolerance || Math.abs(mach - b.mach) <= tolerance) return { value, placement: "at" };
+  if (mach === a.mach || mach === b.mach) return { value, placement: "at" };
   if (crossesGap(gaps, a.mach, b.mach)) return { value, placement: "gap" };
+  if (Math.abs(mach - a.mach) <= tolerance || Math.abs(mach - b.mach) <= tolerance) return { value, placement: "at" };
   return { value, placement: "between" };
 }
 
@@ -152,7 +156,8 @@ export function checkTables(t: WingAeroTables): void {
  *   CD = CD_max sin^2 a + K_D cos a,                K_D = (CD_s - CD_max sin^2 a_s) / cos a_s
  * for a_s <= a <= 90 deg. Written for wind-turbine blades; here it stands for
  * the separated flow above the highest measured lift, and it is `estimated`.
- * Angles are measured from zero lift, a declared simplification.
+ * Angles are measured from zero lift, a declared simplification. `lift` caps
+ * the lift of this model at the highest measured lift coefficient.
  */
 export function viterna(alpha: number, alphaStall: number, clStall: number, cdStall: number, aspectRatio: number): { cl: number; cd: number } {
   // Checked against NREL's open implementation, AirfoilPrep.py (WISDEM/AirfoilPreppy,
@@ -245,7 +250,11 @@ export function lift(aero: WingAeroTables, wing: WingBody, mach: number, alpha: 
   const folded = reversed ? Math.PI - abs : abs;
   const sign = Math.sign(a) * (reversed ? -1 : 1);
   // The matching drag at the stall angle does not change the lift of the model, so 0 is passed here.
-  const cl = folded <= stallAngle ? slope * folded : viterna(folded, stallAngle, clMax, 0, wing.planform.aspectRatio).cl;
+  // Capped at the highest measured lift: where that lift is the top of the tested range and not
+  // a stall (transonic Mach numbers, where the balance load limited the angle), Viterna's
+  // flat-plate term would otherwise give more lift than any measurement, and the stall speed
+  // of the report would not be the slowest speed the wing carries the weight at.
+  const cl = folded <= stallAngle ? slope * folded : Math.min(clMax, viterna(folded, stallAngle, clMax, 0, wing.planform.aspectRatio).cl);
   return { ...base, cl: sign * cl, stalled: true, reversed, evidence: reversed ? "no-data" : weakest("estimated", liftEvidence(placement, cl, Infinity)) };
 }
 
@@ -285,12 +294,19 @@ export interface DragState {
  * turbulent boundary layer) with its skin friction re-evaluated at the flight
  * Reynolds number: the form factors and the wetted areas over the reference
  * area do not change with scale, only the friction coefficient does.
+ *
+ * Every Mach-dependent term of the friction (Raymer's 1.34 M^0.18 and the
+ * compressibility of Cf) is frozen at `factorsMach`, the reference Mach number
+ * of the measured rise, as the incompressible baseline does (models.ts). The
+ * rise CD0(M) - CD0(0.50) already holds the measured change with Mach number
+ * above it; letting the friction change too would count it twice, and below
+ * it Raymer's factor would take the wing's friction to zero at rest.
  */
-export function flightFriction(wing: WingBody, geom: FlightGeometry, mach: number, reynoldsPerMetre: number): number {
-  const tunnel = parasiteDrag(wing, mach);
+export function flightFriction(wing: WingBody, geom: FlightGeometry, factorsMach: number, reynoldsPerMetre: number): number {
+  const tunnel = parasiteDrag(wing, factorsMach, factorsMach);
   const reWing = Math.max(FRICTION_MIN_REYNOLDS, reynoldsPerMetre * geom.mac_m);
   const reBody = Math.max(FRICTION_MIN_REYNOLDS, reynoldsPerMetre * geom.bodyLength_m);
-  return (tunnel.wing * turbulentCf(reWing, mach)) / tunnel.wingCf + (tunnel.body * turbulentCf(reBody, mach)) / tunnel.bodyCf;
+  return (tunnel.wing * turbulentCf(reWing, factorsMach)) / tunnel.wingCf + (tunnel.body * turbulentCf(reBody, factorsMach)) / tunnel.bodyCf;
 }
 
 function riseEvidence(p: Placement): FlightEvidence {
@@ -301,7 +317,7 @@ function riseEvidence(p: Placement): FlightEvidence {
 
 /** Drag coefficient at a Mach number and Reynolds number per metre, for a lift state from `lift`. */
 export function drag(aero: WingAeroTables, wing: WingBody, geom: FlightGeometry, mach: number, reynoldsPerMetre: number, l: LiftState): DragState {
-  const friction = flightFriction(wing, geom, mach, reynoldsPerMetre);
+  const friction = flightFriction(wing, geom, aero.dragRise.referenceMach, reynoldsPerMetre);
   const r = lookup(aero.dragRise, mach, aero.gaps);
   const k = inducedDragFactor(wing.planform);
   const clMin = minimumDragCl(wing, mach);
@@ -310,7 +326,9 @@ export function drag(aero: WingAeroTables, wing: WingBody, geom: FlightGeometry,
   const re = riseEvidence(r.placement);
   if (!l.stalled) {
     const induced = k * (l.cl - clMin) ** 2;
-    const ie: FlightEvidence = Math.abs(l.cl - clMin) <= POLAR_CL_HALF_RANGE && oswaldFitValid(wing.planform) ? "validated" : "estimated";
+    // The polar was compared with the measured symbols up to M 0.90 and within its attached-flow lift range.
+    const compared = mach <= SUBSONIC_LIMIT_MACH && Math.abs(l.cl - clMin) <= POLAR_CL_HALF_RANGE && oswaldFitValid(wing.planform);
+    const ie: FlightEvidence = compared ? "validated" : "estimated";
     return {
       cd: friction + r.value + induced,
       parts: { friction, rise: r.value, induced },

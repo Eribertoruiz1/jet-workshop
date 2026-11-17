@@ -80,6 +80,17 @@ describe("the three wings' tables, built from the measured data", () => {
     expect(Math.max(...loss)).toBeCloseTo(12.92, 2);
   });
 
+  it("never lifts more than the highest measured CL, for any wing, Mach number or angle", () => {
+    for (const id of TESTED_WINGS) {
+      const t = tables[id];
+      for (const { mach, value } of t.clMax.points) {
+        for (let deg = -60; deg <= 90; deg += 0.25) {
+          expect(lift(t, bielatWing(id), mach, deg * DEG).cl, `${id} deg wing, M ${mach}, ${deg} deg`).toBeLessThanOrEqual(value + 1e-12);
+        }
+      }
+    }
+  });
+
   it("refuses a dataset without the faired curve", () => {
     expect(() => wingTables({ ...data, faired: [] }, "35")).toThrow(/faired/);
   });

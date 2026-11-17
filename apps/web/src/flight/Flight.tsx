@@ -3,7 +3,7 @@ import { DT, observe, step, type Aircraft, type Controls, type FlightEvidence, t
 import { drawScene, type Palette } from "./draw.ts";
 import * as fmt from "./format.ts";
 import { profile } from "./profile.ts";
-import { LANDING_RUNWAY_START_M } from "./scenario.ts";
+import { toLandingRunway } from "./scenario.ts";
 import { t, type Lang, type StringKey } from "./strings.ts";
 
 /** Longest real time integrated in one frame, s; longer frames run the flight slower instead of jumping. */
@@ -39,7 +39,7 @@ export function stickCurve(d: number): number {
   return Math.sign(c) * c * c;
 }
 
-export function Flight({ lang, aircraft, start, onEnd }: { lang: Lang; aircraft: Aircraft; start: FlightState; onEnd: (end: FlightState) => void }) {
+export function Flight({ lang, aircraft, start, onEnd, onHangar }: { lang: Lang; aircraft: Aircraft; start: FlightState; onEnd: (end: FlightState) => void; onHangar: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const sim = useRef({ prev: start, cur: start, acc: 0, last: null as number | null });
@@ -207,7 +207,7 @@ export function Flight({ lang, aircraft, start, onEnd }: { lang: Lang; aircraft:
 
   const ev = (e: FlightEvidence): string => t(lang, EVIDENCE_KEY[e]);
   const engineWarnings = obs.warnings.engineLimits;
-  const toRunway = LANDING_RUNWAY_START_M - state.x;
+  const toRunway = toLandingRunway(state.x);
 
   return (
     <main className="flight-flight">
@@ -287,6 +287,11 @@ export function Flight({ lang, aircraft, start, onEnd }: { lang: Lang; aircraft:
           {paused ? t(lang, "resume") : t(lang, "pause")}
         </button>
       </section>
+      {paused && (
+        <button type="button" className="flight-leave" onClick={onHangar}>
+          {t(lang, "toHangar")}
+        </button>
+      )}
       <p className="flight-keys">{t(lang, "keys")}</p>
     </main>
   );

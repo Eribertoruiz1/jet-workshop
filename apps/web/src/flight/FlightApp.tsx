@@ -3,7 +3,7 @@ import type { TestedWingId } from "@jet-workshop/physics";
 import { initialState, makeAircraft, makePlaceholderEngine, type Aircraft, type FlightState } from "@jet-workshop/physics/flight";
 import { loadTables } from "./data.ts";
 import { Flight } from "./Flight.tsx";
-import { Hangar, defaultDesign, type Design } from "./Hangar.tsx";
+import { Hangar, defaultDesign, fuelLoad, type Design } from "./Hangar.tsx";
 import { Report } from "./Report.tsx";
 import { SCENARIO } from "./scenario.ts";
 import { initialLang, t, type Lang } from "./strings.ts";
@@ -31,7 +31,7 @@ export function FlightApp() {
 
   const board = (): void => {
     if (!aircraft) return;
-    setPhase({ kind: "flight", start: initialState(aircraft, Math.min(design.fuel_kg, aircraft.fuelCapacity_kg), SCENARIO), run: Date.now() });
+    setPhase({ kind: "flight", start: initialState(aircraft, fuelLoad(design, aircraft), SCENARIO), run: Date.now() });
   };
 
   return (
@@ -54,7 +54,7 @@ export function FlightApp() {
       {!TABLES.ok && <p className="flight-error">{t(lang, "dataError", { error: TABLES.error })}</p>}
       {aircraft && phase.kind === "hangar" && <Hangar lang={lang} design={design} aircraft={aircraft} onChange={setDesign} onBoard={board} />}
       {aircraft && phase.kind === "flight" && (
-        <Flight key={phase.run} lang={lang} aircraft={aircraft} start={phase.start} onEnd={(end) => setPhase({ kind: "report", end })} />
+        <Flight key={phase.run} lang={lang} aircraft={aircraft} start={phase.start} onEnd={(end) => setPhase({ kind: "report", end })} onHangar={() => setPhase({ kind: "hangar" })} />
       )}
       {aircraft && phase.kind === "report" && <Report lang={lang} aircraft={aircraft} end={phase.end} onAgain={board} onHangar={() => setPhase({ kind: "hangar" })} />}
     </div>

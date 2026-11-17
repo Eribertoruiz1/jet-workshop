@@ -379,6 +379,10 @@ body.flight-body {
   padding: 9px;
 }
 
+.flight-page button.flight-leave {
+  align-self: flex-start;
+}
+
 .flight-keys {
   margin: 2px 0 0;
   font-size: 12px;

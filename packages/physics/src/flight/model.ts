@@ -53,6 +53,22 @@ export const PITCH_RATE_LIMIT = 20 * DEG;
 // UNVERIFIED: 0.03 for dry concrete is the textbook value (Raymer, Aircraft Design, table 17.1); find an open source.
 export const ROLLING_FRICTION = 0.03;
 
+/**
+ * Highest pitch attitude on the runway, rad: rotating further would put the
+ * aft body on the ground. No tail and no gear are modelled, so the angle is
+ * declared, of the order of a fighter's tail-strike angle.
+ */
+// UNVERIFIED: no source; declared, `estimated`.
+export const ROTATION_LIMIT = 15 * DEG;
+
+/**
+ * Height that completes a take-off: 35 ft above the take-off surface,
+ * 14 CFR 25.113(a)(1) (`report text`, Cornell LII e-CFR, read on 17 November
+ * 2026). A gentle touchdown on a runway before the aircraft has climbed to it
+ * is not a landing: the aircraft goes back to its ground roll.
+ */
+export const TAKEOFF_SCREEN_HEIGHT = 35 * 0.3048;
+
 /** Load factor, as a fraction of a limit, at which the wing-limit warning starts. A warning threshold, not a limit. */
 export const WING_LIMIT_WARNING_FRACTION = 0.9;
 /** Fraction of an engine limit at which the page relays the engine's warning. */
@@ -111,7 +127,7 @@ export type Outcome =
   | { readonly kind: "landed"; readonly t: number; readonly speed_m_s: number; readonly sink_m_s: number }
   | { readonly kind: "no-takeoff"; readonly t: number; readonly speed_m_s: number; readonly required_m_s: number }
   | { readonly kind: "stall"; readonly t: number; readonly speed_m_s: number; readonly height_m: number; readonly mass_kg: number; readonly stallSpeed_m_s: number }
-  | { readonly kind: "wing-break"; readonly t: number; readonly loadFactor: number; readonly limit: number }
+  | { readonly kind: "wing-break"; readonly t: number; readonly loadFactor: number; readonly limit: number; readonly speed_m_s: number }
   | { readonly kind: "out-of-fuel"; readonly t: number; readonly distance_m: number }
   | { readonly kind: "engine-failure"; readonly t: number; readonly limitId: string }
   | { readonly kind: "hard-landing"; readonly t: number; readonly sink_m_s: number; readonly limit_m_s: number }
@@ -119,7 +135,7 @@ export type Outcome =
       readonly kind: "crash";
       readonly t: number;
       readonly speed_m_s: number;
-      readonly reason: "off-runway" | "nose-low";
+      readonly reason: "off-runway" | "nose-low" | "backwards";
       /** Pitch attitude at contact, rad (negative: nose below the horizon) */
       readonly theta: number;
       /** Distance to the nearest runway, m (0 on a runway) */
@@ -225,7 +241,8 @@ function derivative(ac: Aircraft, y: Vec, onGround: boolean, engine: EngineOutpu
     const friction = ROLLING_FRICTION * normal;
     // Rolling friction opposes motion; at rest it holds the aircraft until the drive exceeds it.
     const force = y[2] > 0 ? drive - friction : Math.max(0, drive - friction);
-    const thetaRate = theta <= 0 && pitchRate < 0 ? 0 : pitchRate;
+    // The nose gear stops the attitude at zero, the aft body at the rotation limit.
+    const thetaRate = (theta <= 0 && pitchRate < 0) || (theta >= ROTATION_LIMIT && pitchRate > 0) ? 0 : pitchRate;
     return [Math.max(0, y[2]), 0, force / f.mass_kg, 0, thetaRate, -f.fuelFlow_kg_s];
   }
   const cg = Math.cos(f.gamma);
@@ -265,7 +282,7 @@ function advance(ac: Aircraft, y: Vec, onGround: boolean, engine: EngineState, c
     y[4] + s * (k1[4] + 2 * k2[4] + 2 * k3[4] + k4[4]),
     y[5] + s * (k1[5] + 2 * k2[5] + 2 * k3[5] + k4[5]),
   ];
-  if (onGround) next = [next[0], 0, Math.max(0, next[2]), 0, Math.max(0, next[4]), next[5]];
+  if (onGround) next = [next[0], 0, Math.max(0, next[2]), 0, Math.min(ROTATION_LIMIT, Math.max(0, next[4])), next[5]];
   return { y: next, engine: first.state, output: first.output };
 }
 
@@ -301,6 +318,11 @@ export function distanceToRunway(scenario: Scenario, x: number): number {
 
 function onRunway(scenario: Scenario, x: number): boolean {
   return distanceToRunway(scenario, x) === 0;
+}
+
+/** The runway under a position, or null. */
+export function runwayAt(scenario: Scenario, x: number): Runway | null {
+  return scenario.runways.find((r) => x >= r.start_m && x <= r.start_m + r.length_m) ?? null;
 }
 
 export function initialState(ac: Aircraft, fuel_kg: number, scenario: Scenario): FlightState {
@@ -378,7 +400,9 @@ function groundStep(s: FlightState, ac: Aircraft, cmd: EngineCommand, rate: numb
     const f = forcesAt(ac, a.y, true, a.output);
     return f.lift_N >= f.weight_N;
   };
-  const end = s.scenario.runways[0]!.start_m + s.scenario.runways[0]!.length_m;
+  // The runway it is rolling on: the take-off runway, or the one it touched back down on.
+  const runway = runwayAt(s.scenario, s.x) ?? s.scenario.runways[0]!;
+  const end = runway.start_m + runway.length_m;
   const full = go(dt);
   const liftoff = lifts(full);
   const overrun = full.y[0] > end;
@@ -406,19 +430,31 @@ function groundStep(s: FlightState, ac: Aircraft, cmd: EngineCommand, rate: numb
   return rest > 0 ? airStep(up, ac, cmd, rate, rest) : up;
 }
 
-function touchdown(s: FlightState, ac: Aircraft, f: Forces): FlightState {
+/**
+ * Contact with the ground at `s` (h = 0). `rest` is what is left of the time
+ * step: a touchdown that only ends a hop below the take-off screen height
+ * goes back to the ground roll for that time.
+ */
+function touchdown(s: FlightState, ac: Aircraft, f: Forces, cmd: EngineCommand, rate: number, rest: number): FlightState {
   const sink = -s.vz;
   const noseLow = wrapAngle(s.theta) < 0;
-  const runway = onRunway(s.scenario, s.x) && s.vx > 0;
+  const runway = onRunway(s.scenario, s.x);
+  const forward = s.vx > 0;
   const gentle = sink <= ac.limits.gearSink_m_s;
-  const landed = runway && !noseLow && gentle;
   const t = s.t;
-  if (landed) return ended(s, { kind: "landed", t, speed_m_s: f.speed_m_s, sink_m_s: sink });
+  if (runway && forward && !noseLow && gentle) {
+    if (s.records.maxHeight_m < TAKEOFF_SCREEN_HEIGHT) {
+      const rolling: FlightState = { ...s, phase: "ground", h: 0, vz: 0, theta: Math.min(ROTATION_LIMIT, Math.max(0, s.theta)), stall: null };
+      return rest > 0 ? groundStep(rolling, ac, cmd, rate, rest) : rolling;
+    }
+    return ended(s, { kind: "landed", t, speed_m_s: f.speed_m_s, sink_m_s: sink });
+  }
   if (s.stall) {
     const e = s.stall;
     return ended(s, { kind: "stall", t, speed_m_s: e.speed_m_s, height_m: e.height_m, mass_kg: e.mass_kg, stallSpeed_m_s: stallSpeed(ac, e.mass_kg, e.height_m) });
   }
   const contact = { t, speed_m_s: f.speed_m_s, theta: wrapAngle(s.theta), distance_m: distanceToRunway(s.scenario, s.x) };
+  if (!forward) return ended(s, { kind: "crash", reason: "backwards", ...contact });
   if (!runway) return ended(s, { kind: "crash", reason: "off-runway", ...contact });
   if (noseLow) return ended(s, { kind: "crash", reason: "nose-low", ...contact });
   return ended(s, { kind: "hard-landing", t, sink_m_s: sink, limit_m_s: ac.limits.gearSink_m_s });
@@ -434,7 +470,7 @@ function airStep(s: FlightState, ac: Aircraft, cmd: EngineCommand, rate: number,
     const y: Vec = [a.y[0], 0, a.y[2], a.y[3], a.y[4], a.y[5]];
     const f = forcesAt(ac, y, false, a.output);
     const at = { ...withVec(s, y, s.t + tau, a.engine, a.output), records: records(s.records, f, y, s.t + tau, true) };
-    return touchdown(at, ac, f);
+    return touchdown(at, ac, f, cmd, rate, dt - tau);
   }
   const f = forcesAt(ac, full.y, false, full.output);
   const next = withVec(s, full.y, s.t + dt, full.engine, full.output);
@@ -448,8 +484,8 @@ function airStep(s: FlightState, ac: Aircraft, cmd: EngineCommand, rate: number,
 function finishStep(s: FlightState, ac: Aircraft, f: Forces, airborne: boolean): FlightState {
   const failure = s.engineOutput.failure;
   if (failure) return ended(s, { kind: "engine-failure", t: s.t, limitId: failure.limitId });
-  if (airborne && f.loadFactor > ac.limits.maxLoadFactor) return ended(s, { kind: "wing-break", t: s.t, loadFactor: f.loadFactor, limit: ac.limits.maxLoadFactor });
-  if (airborne && f.loadFactor < ac.limits.minLoadFactor) return ended(s, { kind: "wing-break", t: s.t, loadFactor: f.loadFactor, limit: ac.limits.minLoadFactor });
+  if (airborne && f.loadFactor > ac.limits.maxLoadFactor) return ended(s, { kind: "wing-break", t: s.t, loadFactor: f.loadFactor, limit: ac.limits.maxLoadFactor, speed_m_s: f.speed_m_s });
+  if (airborne && f.loadFactor < ac.limits.minLoadFactor) return ended(s, { kind: "wing-break", t: s.t, loadFactor: f.loadFactor, limit: ac.limits.minLoadFactor, speed_m_s: f.speed_m_s });
   if (s.fuel_kg <= 0) return ended(s, { kind: "out-of-fuel", t: s.t, distance_m: distanceToRunway(s.scenario, s.x) });
   return s;
 }

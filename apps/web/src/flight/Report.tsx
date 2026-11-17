@@ -27,9 +27,14 @@ export function reportSentences(lang: Lang, r: FlightReport): string[] {
     case "stall":
       out.push(t(lang, "stall", { v: fmt.kmh(o.speed_m_s), w: fmt.kg(o.mass_kg), vs: fmt.kmh(o.stallSpeed_m_s) }));
       break;
-    case "wing-break":
-      out.push(t(lang, "wingBreak", { g: fmt.loadFactor(o.loadFactor), gl: fmt.loadFactor(o.limit) }));
+    case "wing-break": {
+      // The wing breaks in the first step past its limit, so both figures are close:
+      // as many decimals as it takes, from two, for them to print apart.
+      const d = fmt.decimalsApart(o.loadFactor, o.limit, 2, 4);
+      out.push(t(lang, "wingBreak", { g: fmt.fixed(o.loadFactor, d), gl: fmt.fixed(o.limit, d) }));
+      out.push(t(lang, "wingBreakSpeed", { v: fmt.kmh(o.speed_m_s) }));
       break;
+    }
     case "out-of-fuel":
       out.push(t(lang, "outOfFuel", { d: fmt.km(o.distance_m) }));
       break;
@@ -41,7 +46,13 @@ export function reportSentences(lang: Lang, r: FlightReport): string[] {
       break;
     case "crash":
       out.push(t(lang, "crash", { v: fmt.kmh(o.speed_m_s) }));
-      out.push(o.reason === "off-runway" ? t(lang, "crashOffRunway", { d: fmt.km(o.distance_m) }) : t(lang, "crashNoseLow", { a: fmt.degrees(-o.theta) }));
+      out.push(
+        o.reason === "off-runway"
+          ? t(lang, "crashOffRunway", { d: fmt.km(o.distance_m) })
+          : o.reason === "nose-low"
+            ? t(lang, "crashNoseLow", { a: fmt.degrees(-o.theta) })
+            : t(lang, "crashBackwards"),
+      );
       break;
   }
   if (!r.supersonic) {

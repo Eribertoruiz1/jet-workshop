@@ -1,8 +1,23 @@
 import { describe, expect, it } from "vitest";
 import { bielatWing, geometry } from "../../src/geometry.ts";
 import { parasiteDrag } from "../../src/parasite.ts";
-import { M_PER_IN, drag, flightFriction, lift, lookup, makeAircraft, makePlaceholderEngine, viterna, weakest } from "../../src/flight/index.ts";
-import { SYNTHETIC } from "./fixtures.ts";
+import {
+  G0,
+  M_PER_IN,
+  STALL_WARNING_SPEED_MARGIN,
+  drag,
+  estimatedTakeoffSpeed,
+  flightFriction,
+  hangarFigures,
+  lift,
+  lookup,
+  makeAircraft,
+  makePlaceholderEngine,
+  stallSpeed,
+  viterna,
+  weakest,
+} from "../../src/flight/index.ts";
+import { CONSTANT, SYNTHETIC } from "./fixtures.ts";
 
 const DEG = Math.PI / 180;
 const wing = bielatWing("35");
@@ -20,6 +35,16 @@ describe("tables: where a Mach number falls", () => {
     // Outside the gap itself but on the straight join across it: still no data.
     expect(lookup(rise, 1.09, SYNTHETIC.gaps).placement).toBe("gap");
   });
+  it("calls a value on the join across the gap no data, even near a sample, and the sample itself at it", () => {
+    const slope = SYNTHETIC.liftSlope; // samples at 1.0 and 1.1, on either side of the gap
+    expect(lookup(slope, 1.09, SYNTHETIC.gaps, 0.025).placement).toBe("gap");
+    expect(lookup(slope, 1.01, SYNTHETIC.gaps, 0.025).placement).toBe("gap");
+    expect(lookup(slope, 1.1, SYNTHETIC.gaps, 0.025).placement).toBe("at");
+    expect(lookup(slope, 1.0, SYNTHETIC.gaps, 0.025).placement).toBe("at");
+    expect(lookup(slope, 0.98, SYNTHETIC.gaps, 0.025).placement).toBe("at");
+    expect(lift(SYNTHETIC, wing, 1.09, 2 * DEG).evidence).toBe("no-data");
+  });
+
   it("interpolates between samples inside the sampled range", () => {
     const v = lookup(rise, 0.9, SYNTHETIC.gaps);
     expect(v.placement).toBe("between");
@@ -68,6 +93,17 @@ describe("lift: measured slope, then the declared stall model", () => {
     expect(cd(a + 10 * DEG)).toBeGreaterThan(3 * cd(a - 1e-9));
   });
 
+  it("never gives more lift than the highest measured, at any angle and Mach number", () => {
+    // A low highest lift, as where the balance load limited the tested angles (47 deg wing, M 0.99: 0.449).
+    const low = { ...SYNTHETIC, clMax: { ...SYNTHETIC.clMax, points: [{ mach: 0.5, value: 0.45 }] } };
+    for (const mach of [0.3, 0.6, 0.99, 1.2]) {
+      const cap = lift(low, wing, mach, 0).clMax;
+      for (let deg = -180; deg <= 180; deg += 0.5) {
+        expect(Math.abs(lift(low, wing, mach, deg * DEG).cl)).toBeLessThanOrEqual(cap + 1e-12);
+      }
+    }
+  });
+
   it("Viterna and Corrigan's extension matches the lift and drag it is given at the stall angle", () => {
     const v = viterna(0.2, 0.2, 0.7, 0.05, 3.5);
     expect(v.cl).toBeCloseTo(0.7, 12);
@@ -90,6 +126,22 @@ describe("drag: friction at the flight Reynolds number plus the measured rise", 
   it("falls when the Reynolds number is ten times the tunnel's (thinner boundary layer)", () => {
     const rePerM = 2.0e6 / (7.874 * M_PER_IN);
     expect(flightFriction(wing, tunnelGeom, 0.5, 10 * rePerM)).toBeLessThan(0.85 * flightFriction(wing, tunnelGeom, 0.5, rePerM));
+  });
+
+  it("keeps its Mach terms at M 0.50: the measured rise holds the change with Mach number", () => {
+    const re = 3e7;
+    const at = (mach: number) => drag(SYNTHETIC, wing, tunnelGeom, mach, re, lift(SYNTHETIC, wing, mach, 0)).parts.friction;
+    expect(at(0.05)).toBe(at(0.5));
+    expect(at(0.9)).toBe(at(0.5));
+    expect(at(1.2)).toBe(at(0.5));
+  });
+
+  it("calls the drag due to lift compared only up to M 0.90, within the attached-flow range", () => {
+    const re = 3e7;
+    const ev = (mach: number) => drag(SYNTHETIC, wing, tunnelGeom, mach, re, lift(SYNTHETIC, wing, mach, 1 * DEG)).inducedEvidence;
+    expect(ev(0.85)).toBe("validated");
+    expect(ev(0.95)).toBe("estimated");
+    expect(ev(1.1)).toBe("estimated");
   });
 
   it("adds the rise over M 0.50 and is never better than estimated", () => {
@@ -137,5 +189,18 @@ describe("the provisional engine", () => {
     const high = e.step(e.initialState(), { throttle: 1, afterburner: false }, { ambient: { pressure_Pa: 22632, temperature_K: 216.65 }, mach: 0.8 }, 1 / 120).output;
     expect(high.thrust_N / sl.thrust_N).toBeCloseTo((22632 / 216.65) / (101325 / 288.15), 9);
     expect(high.fuelFlow_kg_s / high.thrust_N).toBeCloseTo(sl.fuelFlow_kg_s / sl.thrust_N, 15);
+  });
+});
+
+describe("the hangar's figures, computed by the model", () => {
+  it("gives take-off weight, thrust to weight and the take-off speed 5 percent above the stall", () => {
+    const ac = makeAircraft({ wing, aero: CONSTANT, wingArea_m2: 25, engine: makePlaceholderEngine({ staticThrust_N: 50000 }) });
+    const f = hangarFigures(ac, 700);
+    expect(f.mass_kg).toBe(ac.emptyMass_kg + 700);
+    expect(f.staticThrust_N).toBeCloseTo(50000, 6);
+    expect(f.thrustToWeight).toBeCloseTo(50000 / ((ac.emptyMass_kg + 700) * G0), 9);
+    // With a highest lift that does not change with Mach number, it is exactly 1.05 times the stall speed.
+    expect(f.takeoffSpeed_m_s / stallSpeed(ac, f.mass_kg, 0)).toBeCloseTo(STALL_WARNING_SPEED_MARGIN, 9);
+    expect(estimatedTakeoffSpeed(ac, f.mass_kg)).toBe(f.takeoffSpeed_m_s);
   });
 });

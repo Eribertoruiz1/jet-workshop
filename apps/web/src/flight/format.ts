@@ -23,4 +23,10 @@ export const kg = (m: number): string => fixed(m, 0);
 export const kN = (n: number): string => fixed(n / 1000, 0);
 export const ratio = (r: number): string => fixed(r, 2);
 export const degrees = (rad: number): string => fixed((rad * 180) / Math.PI, 1);
-export const sweep = (deg: number): string => (Number.isInteger(deg) ? fixed(deg, 0) : fixed(deg, 1));
+/** The fewest decimals, from `min` to `max`, at which two different figures print apart. */
+export function decimalsApart(a: number, b: number, min: number, max: number): number {
+  let d = min;
+  while (d < max && fixed(a, d) === fixed(b, d)) d++;
+  return d;
+}
+export const sweep =(deg: number): string => (Number.isInteger(deg) ? fixed(deg, 0) : fixed(deg, 1));

@@ -19,6 +19,24 @@ export function estimatedTakeoffSpeed(ac: Aircraft, mass_kg: number): number {
   return speedForLift(ac, mass_kg, 0, (m) => ac.aerodynamics(m, 0, 1e7).lift.clMax / m2);
 }
 
+export interface HangarFigures {
+  /** Structure, engine and fuel, kg */
+  readonly mass_kg: number;
+  /** Full-throttle thrust of the engine at rest at sea level, N */
+  readonly staticThrust_N: number;
+  readonly thrustToWeight: number;
+  readonly takeoffSpeed_m_s: number;
+}
+
+/** The three readings of the hangar, computed by the model for an aircraft and its fuel. */
+export function hangarFigures(ac: Aircraft, fuel_kg: number): HangarFigures {
+  const mass = ac.emptyMass_kg + fuel_kg;
+  const sl = atmosphere(0);
+  const out = ac.engine.step(ac.engine.initialState(), { throttle: 1, afterburner: false }, { ambient: { pressure_Pa: sl.pressure_Pa, temperature_K: sl.temperature_K }, mach: 0 }, DT).output;
+  const thrust = out.failure ? 0 : out.thrust_N;
+  return { mass_kg: mass, staticThrust_N: thrust, thrustToWeight: thrust / (mass * G0), takeoffSpeed_m_s: estimatedTakeoffSpeed(ac, mass) };
+}
+
 /** Excess of thrust along the path over drag in level flight (lift equal to weight), N; null where the wing cannot carry the weight. */
 export function levelFlightExcess(ac: Aircraft, mass_kg: number, height_m: number, mach: number, engine: EngineState, throttle = 1, afterburner = false): number | null {
   const air = atmosphere(height_m);

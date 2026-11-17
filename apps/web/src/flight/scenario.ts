@@ -18,3 +18,8 @@ export const SCENARIO: Scenario = {
     { start_m: LANDING_RUNWAY_START_M, length_m: RUNWAY_LENGTH_M },
   ],
 };
+
+/** The "Landing runway" reading: horizontal distance to its threshold, m; negative once past it. */
+export function toLandingRunway(x_m: number): number {
+  return LANDING_RUNWAY_START_M - x_m;
+}

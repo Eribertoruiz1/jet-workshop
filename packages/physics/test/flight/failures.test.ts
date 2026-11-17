@@ -4,6 +4,8 @@ import {
   MAX_LOAD_FACTOR,
   MIN_LOAD_FACTOR,
   PITCH_RATE_LIMIT,
+  ROTATION_LIMIT,
+  TAKEOFF_SCREEN_HEIGHT,
   flightReport,
   initialState,
   liftoffSpeed,
@@ -81,6 +83,7 @@ describe("check 7: every failure of the table, provoked by a scripted flight", (
     expect(o.limit).toBe(MAX_LOAD_FACTOR);
     expect(o.loadFactor).toBeGreaterThan(MAX_LOAD_FACTOR);
     expect(o.loadFactor).toBeLessThan(MAX_LOAD_FACTOR + 0.5);
+    expect(o.speed_m_s).toBeGreaterThan(200);
   });
 
   it("wing break: pushing past the negative limit load factor", () => {
@@ -154,6 +157,38 @@ describe("check 7: every failure of the table, provoked by a scripted flight", (
     expect(r.provisionalEngine).toBe(true);
     // It never went supersonic, so the report gives where drag equals full thrust in level flight.
     expect(r.dragEqualsThrustMach).not.toBeNull();
+  });
+
+  it("crash: touching the runway moving backwards", () => {
+    const ac = aircraft();
+    const run = fly(ac, airborne(ac, { x: 1800, h: 3, speed: 60, gamma: Math.PI + 0.05, theta: Math.PI - 0.1 }), steady(0), 10);
+    expect(outcomeOf(run)).toMatchObject({ kind: "crash", reason: "backwards", distance_m: 0 });
+  });
+
+  it("a touchdown before the take-off screen height (35 ft) is not a landing: the ground roll goes on", () => {
+    const ac = aircraft();
+    const rotate = (10 * Math.PI) / 180 / PITCH_RATE_LIMIT;
+    // Rotate to 10 deg, lift off, then push the nose down hard just after lift-off.
+    let pushedAt: number | null = null;
+    const script: Script = (t, s) => {
+      if (s.records.liftoff && pushedAt === null) pushedAt = t;
+      const push = pushedAt !== null && t < pushedAt + 0.5;
+      return { throttle: 1, pitch: during(t, 0, rotate) ? 1 : push ? -1 : 0, afterburner: false };
+    };
+    const run = fly(ac, initialState(ac, 600, RUNWAY), script, 25);
+    const hop = run.findIndex((s, i) => i > 0 && run[i - 1]!.phase === "air" && s.phase === "ground");
+    expect(hop).toBeGreaterThan(0);
+    expect(Math.max(...run.slice(0, hop + 1).map((s) => s.h))).toBeLessThan(TAKEOFF_SCREEN_HEIGHT);
+    expect(run[hop]!.outcome).toBeNull();
+    expect(run[hop]!.vx).toBeGreaterThan(50);
+  });
+
+  it("keeps the attitude on the runway between the nose gear and the rotation limit", () => {
+    const ac = aircraft();
+    const up = fly(ac, initialState(ac, 600, RUNWAY), () => ({ throttle: 0, pitch: 1, afterburner: false }), 5);
+    expect(up.at(-1)!.theta).toBe(ROTATION_LIMIT);
+    const down = fly(ac, initialState(ac, 600, RUNWAY), () => ({ throttle: 0, pitch: -1, afterburner: false }), 2);
+    expect(down.at(-1)!.theta).toBe(0);
   });
 
   it("after the outcome, the state no longer changes", () => {

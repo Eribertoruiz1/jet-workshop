@@ -115,11 +115,17 @@ export function airborne(ac: Aircraft, o: { x?: number; h: number; speed: number
     vx: o.speed * Math.cos(g),
     vz: o.speed * Math.sin(g),
     theta: o.theta,
-    records: { ...s.records, liftoff: { t: 0, speed_m_s: o.speed, mass_kg: ac.emptyMass_kg + s.fuel_kg, alpha: o.theta - g } },
+    // A flight already under way: it took off earlier and climbed past the take-off screen height.
+    records: { ...s.records, maxHeight_m: Math.max(o.h, 50), liftoff: { t: 0, speed_m_s: o.speed, mass_kg: ac.emptyMass_kg + s.fuel_kg, alpha: o.theta - g } },
   };
 }
 
 export type Script = (t: number, s: FlightState) => Controls;
+
+/** Prints a figure a check measures, so its real output can be pasted in the checkpoint (the physics tsconfig has no console type). */
+export function report(...args: unknown[]): void {
+  (globalThis as unknown as { console: { log: (...a: unknown[]) => void } }).console.log(...args);
+}
 
 /** Runs a scripted flight for `seconds` (or until it ends), recording every state. */
 export function fly(ac: Aircraft, start: FlightState, script: Script, seconds: number, dt = DT): FlightState[] {

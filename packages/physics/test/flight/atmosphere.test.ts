@@ -58,6 +58,11 @@ describe("check 3: the standard atmosphere against its table", () => {
     expect(rounds(a.pressure_Pa, "22632.1")).toBe(true);
     expect(rounds(a.temperature_K, "216.65")).toBe(true);
     expect(rounds(atmosphere((6356766 * 20000) / (6356766 - 20000)).pressure_Pa, "5474.89")).toBe(true);
+    // Density at the same base: 0.3639 kg/m^3 in the layer table of the International Standard
+    // Atmosphere, whose base values are the 1976 standard's (Wikipedia, "International Standard
+    // Atmosphere", read on 17 November 2026; base geometric altitude printed there: 11 019 m).
+    expect(rounds(a.density_kg_m3, "0.3639")).toBe(true);
+    expect(rounds(atmosphere((6356766 * 20000) / (6356766 - 20000)).density_kg_m3, "0.0880")).toBe(true);
   });
 
   it("gives the defining sea-level values", () => {

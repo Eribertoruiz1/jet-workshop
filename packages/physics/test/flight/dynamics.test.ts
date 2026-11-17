@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DT, G0, PITCH_RATE_LIMIT, atmosphere, initialState, lift, observe, type Controls, type FlightState } from "../../src/flight/index.ts";
-import { CONSTANT, RUNWAY, aircraft, airborne, fly, withoutDrag, type Script } from "./fixtures.ts";
+import { CONSTANT, RUNWAY, aircraft, airborne, fly, report, withoutDrag, type Script } from "./fixtures.ts";
 
 const DEG = Math.PI / 180;
 
@@ -26,7 +26,7 @@ describe("check 1: energy is conserved without thrust or drag", () => {
     expect(run.at(-1)!.t).toBeCloseTo(60, 9);
     const e0 = energy(start, ac.emptyMass_kg);
     const worst = Math.max(...run.map((s) => Math.abs(energy(s, ac.emptyMass_kg) - e0) / e0));
-    console.log("check 1: largest relative change of the total energy in 60 s", worst);
+    report("check 1: largest relative change of the total energy in 60 s", worst);
     expect(worst).toBeLessThan(1e-6);
     // The flight is not trivial: it climbed and dived, trading speed for height.
     const heights = run.map((s) => s.h);
@@ -46,7 +46,7 @@ describe("check 2: the steady glide slope is drag over lift", () => {
     const o = observe(s, ac);
     const slope = -s.vz / s.vx;
     const ratio = o.drag_N / o.lift_N;
-    console.log("check 2: glide slope", slope, "D/L", ratio, "relative difference", Math.abs(slope - ratio) / ratio);
+    report("check 2: glide slope", slope, "D/L", ratio, "relative difference", Math.abs(slope - ratio) / ratio);
     expect(Math.abs(slope - ratio) / ratio).toBeLessThan(0.01);
     expect(slope).toBeGreaterThan(0.02);
   });
@@ -75,7 +75,7 @@ describe("check 4: the result does not depend on the time step", () => {
     expect(b.outcome).toBeNull();
     expect(a.phase).toBe("air");
     expect(a.h).toBeGreaterThan(100);
-    console.log("check 4: position after 60 s", a.x, a.h, "change with half the step (m)", Math.hypot(a.x - b.x, a.h - b.h));
+    report("check 4: position after 60 s", a.x, a.h, "change with half the step (m)", Math.hypot(a.x - b.x, a.h - b.h));
     expect(Math.hypot(a.x - b.x, a.h - b.h)).toBeLessThan(1);
   });
 });
@@ -115,7 +115,7 @@ describe("check 6: lift-off happens where lift equals weight", () => {
         const cl = lift(ac.aero, ac.wing, v / air.speedOfSound_m_s, lo!.alpha).cl;
         v = Math.sqrt((2 * lo!.mass_kg * G0) / (air.density_kg_m3 * ac.wingArea_m2 * cl));
       }
-      console.log(`check 6: ${attitudeDeg} deg, lift-off at`, lo!.speed_m_s, "m/s; lift equals weight at", v, "m/s; relative difference", Math.abs(lo!.speed_m_s - v) / v);
+      report(`check 6: ${attitudeDeg} deg, lift-off at`, lo!.speed_m_s, "m/s; lift equals weight at", v, "m/s; relative difference", Math.abs(lo!.speed_m_s - v) / v);
       expect(Math.abs(lo!.speed_m_s - v) / v).toBeLessThan(0.02);
     });
   }
