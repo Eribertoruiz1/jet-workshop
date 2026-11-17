@@ -115,7 +115,16 @@ export type Outcome =
   | { readonly kind: "out-of-fuel"; readonly t: number; readonly distance_m: number }
   | { readonly kind: "engine-failure"; readonly t: number; readonly limitId: string }
   | { readonly kind: "hard-landing"; readonly t: number; readonly sink_m_s: number; readonly limit_m_s: number }
-  | { readonly kind: "crash"; readonly t: number; readonly speed_m_s: number; readonly reason: "off-runway" | "nose-low" };
+  | {
+      readonly kind: "crash";
+      readonly t: number;
+      readonly speed_m_s: number;
+      readonly reason: "off-runway" | "nose-low";
+      /** Pitch attitude at contact, rad (negative: nose below the horizon) */
+      readonly theta: number;
+      /** Distance to the nearest runway, m (0 on a runway) */
+      readonly distance_m: number;
+    };
 
 export interface FlightState {
   readonly t: number;
@@ -409,8 +418,9 @@ function touchdown(s: FlightState, ac: Aircraft, f: Forces): FlightState {
     const e = s.stall;
     return ended(s, { kind: "stall", t, speed_m_s: e.speed_m_s, height_m: e.height_m, mass_kg: e.mass_kg, stallSpeed_m_s: stallSpeed(ac, e.mass_kg, e.height_m) });
   }
-  if (!runway) return ended(s, { kind: "crash", t, speed_m_s: f.speed_m_s, reason: "off-runway" });
-  if (noseLow) return ended(s, { kind: "crash", t, speed_m_s: f.speed_m_s, reason: "nose-low" });
+  const contact = { t, speed_m_s: f.speed_m_s, theta: wrapAngle(s.theta), distance_m: distanceToRunway(s.scenario, s.x) };
+  if (!runway) return ended(s, { kind: "crash", reason: "off-runway", ...contact });
+  if (noseLow) return ended(s, { kind: "crash", reason: "nose-low", ...contact });
   return ended(s, { kind: "hard-landing", t, sink_m_s: sink, limit_m_s: ac.limits.gearSink_m_s });
 }
 
