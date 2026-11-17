@@ -176,3 +176,11 @@ Respuestas al dueño en español. El estudio, en español. Código, commits, CSV
 El motor tiene que comportarse como una máquina con carácter: generoso cuando se le pide poco, sediento con el postquemador, y frágil justo donde más rinde.
 
 Prueba de aceptación, en primera persona: subo la temperatura de mi motor para ganar empuje, veo que el límite de la turbina se acerca, lo paso, y el motor falla diciendo que fue la turbina. Y sé qué parte de lo que vi está comparada con un motor real y qué parte es estimada.
+
+## Enmienda 1 · 16 de noviembre de 2026
+
+Decide el PM, con el OK del dueño, al auditar el PR de documentación y antes de lanzar el carril.
+
+1. **La firma de diseño va en tu compuerta 1.** El contrato describe un motor ya diseñado (`EngineModel`), pero no cómo se crea a partir de las cuatro decisiones ni cómo se rechaza un diseño imposible. Propón esa firma en el punto de control de la compuerta 1: los nombres y unidades de las cuatro decisiones, y la forma del rechazo con su razón. El PM la pasará a `contract.ts` para que el carril D pueda usarla.
+2. **"Sin reservas de memoria en cada paso"** se refiere a tablas y arrays de trabajo: se calculan una sola vez, al diseñar el motor. Los objetos pequeños que devuelve `step` (el estado y la salida) los exige el contrato y están permitidos. La medida es el check 7.
+3. **La página del taller, en la compuerta 4,** necesita su entrada en `apps/web/vite.config.ts`. Ese cambio, una sola vez, queda cedido a este carril en la tabla de `docs/PROCESS.md`.

@@ -18,7 +18,7 @@ Un carril es una sesión, un worktree, una rama y un punto de control propio. Lo
 | B · Datos reservados | 003 | `lane/heldout-data`, `heldout-data` | `tools/digitize/**`; `packages/validation/data/heldout/**`; `packages/validation/test/heldout.test.ts`; `packages/validation/README.md`; `docs/studies/heldout-geometry.md` | `docs/cp/003.md` |
 | C · Estudio de método | 004 | `lane/wave-drag-study`, `wave-drag-study` | `studies/001-wave-drag/**`; `docs/studies/001-wave-drag-method.md` | `docs/cp/004.md` |
 | D · Primer vuelo | 006 | `lane/first-flight`, `first-flight` | `packages/physics/src/flight/**`; `packages/physics/test/flight/**`; `apps/web/flight.html`; `apps/web/src/flight/**`; `apps/web/test/flight/**`; una sola vez, `apps/web/vite.config.ts`, para añadir la página de vuelo | `docs/cp/006.md` |
-| E · Motor | 007 | `lane/engine`, `engine` | `packages/physics/src/propulsion/**` salvo `contract.ts`; `packages/physics/test/propulsion/**`; `packages/physics/data/engines/**`; `studies/002-engine-cycle/**`; `docs/studies/002-engine-cycle.md`; en su compuerta 4, `apps/web/engine.html`, `apps/web/src/engine/**` y `apps/web/test/engine/**` | `docs/cp/007.md` |
+| E · Motor | 007 | `lane/engine`, `engine` | `packages/physics/src/propulsion/**` salvo `contract.ts`; `packages/physics/test/propulsion/**`; `packages/physics/data/engines/**`; `studies/002-engine-cycle/**`; `docs/studies/002-engine-cycle.md`; en su compuerta 4, `apps/web/engine.html`, `apps/web/src/engine/**`, `apps/web/test/engine/**` y, una sola vez, `apps/web/vite.config.ts`, para añadir la página de motor | `docs/cp/007.md` |
 
 El brief 005 está reservado: puntuará las predicciones a ciegas del carril C y construirá el método elegido.
 

@@ -242,3 +242,16 @@ Respuestas al dueño en español. Código, commits y nombres en inglés. La inte
 Tiene que sentirse como empujar un objeto real: pesado en la pista, ligero cuando el ala por fin lo levanta, terco cuando se acerca a la velocidad del sonido.
 
 Prueba de aceptación, en primera persona: abro la página en el teléfono, elijo el ala de 47°, le pongo poco motor y veo que no cruza Mach 1; vuelvo al hangar, le pongo más, y cruza. En los dos vuelos, el informe me dice por qué.
+
+## Enmienda 1 · 16 de noviembre de 2026
+
+Decide el PM, con el OK del dueño, al auditar el PR de documentación y antes de lanzar el carril. Ninguna línea de este carril se había escrito.
+
+1. **El modelo de vuelo no importa los datos medidos: los recibe.** `packages/validation` depende de `packages/physics`, no al revés. El PM lo comprobó con una prueba propia: un archivo dentro de `packages/physics` que importa `@jet-workshop/validation` falla con `Cannot find package`. Añadir esa dependencia sería circular, y este carril no cambia ningún `package.json`. Por tanto:
+   - `packages/physics/src/flight/**` define el tipo de las tablas aerodinámicas que necesita y las recibe dentro de `aircraft`. Por cada ala: la pendiente de sustentación medida por Mach, el mayor coeficiente de sustentación medido por Mach y la subida de resistencia por Mach, cada una con su clase de dato y su rango. No lee ningún CSV y no importa nada de `packages/validation`.
+   - `apps/web/src/flight/` construye esas tablas a partir de los datos medidos, con las funciones que ya existen en `@jet-workshop/validation` (`loadDataset`, `measuredLiftSlope` y las muestras `faired`) y en `@jet-workshop/physics`. `apps/web` ya depende de los dos paquetes.
+   - Las pruebas de `packages/physics/test/flight/` usan tablas sintéticas escritas en la propia prueba: bastan para los checks 1 a 7.
+   - Las pruebas con los datos reales van en `apps/web/test/flight/`. Como mínimo: que las tablas de las tres alas se construyen, y que el vuelo guionizado de la compuerta 1 corre con ellas. Ese vuelo es el que el PM rehace con código propio.
+2. **Las tablas de cadenas del carril A todavía no están en `main`.** `apps/web/src/i18n/` vive en `lane/lesson` hasta que su PR se fusione. Léelas como referencia con `git show origin/lane/lesson:apps/web/src/i18n/strings.ts`, sin depender de ellas: tus cadenas y tu selector de idioma van en `apps/web/src/flight/`. Unificarlos con los del carril A es un Ticket.
+3. **Estilos.** De `apps/web/src/styles.css` usa solo las variables de color y de tipografía. Las reglas de tu página van en un CSS propio dentro de `apps/web/src/flight/`, con clases de prefijo `flight-`, porque el carril A está cambiando `styles.css` en su rama.
+4. **El motor en la compuerta 2.** Programa solo contra `EngineModel`. Qué función crea el motor del carril E, y con qué diseño por defecto mientras no exista el taller de motor, lo fijará el PM en el contrato después de la compuerta 2 del carril E.
