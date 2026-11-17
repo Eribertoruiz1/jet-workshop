@@ -108,12 +108,16 @@ export function Flight({ lang, aircraft, start, onEnd }: { lang: Lang; aircraft:
     const hidden = (): void => {
       if (document.hidden) setPause(true);
     };
+    // A key released while the window had no focus never sends keyup: forget every key.
+    const blur = (): void => input.current.keys.clear();
     window.addEventListener("keydown", down);
     window.addEventListener("keyup", up);
+    window.addEventListener("blur", blur);
     document.addEventListener("visibilitychange", hidden);
     return () => {
       window.removeEventListener("keydown", down);
       window.removeEventListener("keyup", up);
+      window.removeEventListener("blur", blur);
       document.removeEventListener("visibilitychange", hidden);
     };
   }, [setPause]);
