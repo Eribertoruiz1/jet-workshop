@@ -119,3 +119,16 @@ export function buildWaveTable(requests: WaveRequest[], shiftIn: number, cachePa
   if (cachePath) writeFileSync(cachePath, JSON.stringify({ ...table, key }));
   return table;
 }
+
+/** Union of two wave tables (the second adds Mach numbers and geometries; equal keys hold equal values). */
+export function mergeWaveTables(a: WaveTable, b: WaveTable): WaveTable {
+  const out: WaveTable = { levels: {}, seconds: { ...a.seconds } };
+  for (const [g, s] of Object.entries(b.seconds)) out.seconds[`${g} (held-out)`] = s;
+  for (const t of [a, b]) {
+    for (const [g, vs] of Object.entries(t.levels)) {
+      const gg = (out.levels[g] ??= {});
+      for (const [v, ms] of Object.entries(vs)) gg[v] = { ...gg[v], ...ms };
+    }
+  }
+  return out;
+}

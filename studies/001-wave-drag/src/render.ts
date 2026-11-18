@@ -3,7 +3,7 @@
  * docs/studies/001-wave-drag-method.md. Markers:
  *   {{s:name}}       a generated table (study snippets)
  *   {{n:key}}        a value as text
- *   {{nD:key}}       a number with D decimals (D = 0, 1, 3 or 4); key "onset:<id>" is that curve's largest onset error
+ *   {{nD:key}}       a number with D decimals; keys "onset:<id>", "main:<id>", "t3:<id>", "t2:<id>" are that curve's metrics
  *   {{t:thresholds}} the thresholds
  *   {{v:summary}} / {{v:nose}}  sections of out/verification.md
  * An unknown marker stops the run, so no marker can be left unfilled.
@@ -28,10 +28,11 @@ export function renderStudy(templatePath: string, outPath: string, snippets: Rec
     nose: section(verificationMd, "## La afirmación del PM sobre la nariz redondeada"),
   };
   const num = (key: string): number | string | null => {
-    if (key.startsWith("onset:")) {
-      const r = results.find((x) => x.id === key.slice(6));
+    const m = /^(onset|main|t3|t2):(.+)$/.exec(key);
+    if (m) {
+      const r = results.find((x) => x.id === m[2]);
       if (!r) throw new Error(`unknown curve ${key}`);
-      return r.metrics.onsetMaxAbs;
+      return m[1] === "onset" ? r.metrics.onsetMaxAbs : m[1] === "main" ? r.metrics.main : m[1] === "t3" ? r.metrics.t3 : r.metrics.t2;
     }
     if (!(key in numbers)) throw new Error(`unknown number ${key}`);
     return numbers[key]!;

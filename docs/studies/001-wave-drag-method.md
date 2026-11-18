@@ -1,12 +1,12 @@
 # Estudio 001 · Cómo cruzar Mach 1: método para la resistencia de onda
 
-Borrador de la compuerta 2 del brief 004 (carril C). **Generado por `studies/001-wave-drag/run.ts` desde `studies/001-wave-drag/study.template.md`: ninguna cifra de este texto está escrita a mano.** Las cifras vienen marcadas con su clase: `measured` y `NACA faired` son datos; `computed` es cálculo de este estudio; `report text` es una cifra del texto de un informe; lo que va como **juicio** es opinión de la sesión constructora.
+Estudio del brief 004 (carril C), con la fase B de la compuerta 3. **Generado por `studies/001-wave-drag/run.ts` desde `studies/001-wave-drag/study.template.md`: ninguna cifra de este texto está escrita a mano.** Las cifras vienen marcadas con su clase: `measured` y `NACA faired` son datos; `computed` es cálculo de este estudio; `report text` es una cifra del texto de un informe; lo que va como **juicio** es opinión de la sesión constructora.
 
 ## 1. Resumen
 
 - **Recomendación de la regla A.9 del prerregistro:** B1, **construir con reservas**. Condiciones que no cumple: mayor error del inicio NA > 0.03.
 - Métrica principal de B1 (media cuadrática de E en T2 y T3 con el ala fuera, 24 muestras, `computed`): 0.0029; en T3: 0.0028. La línea base E da 0.0035 en las 10 muestras que predice de las 24; E0 da 0.0084.
-- Las tres primeras curvas de la tabla: B1, B2 y Ak-P1.
+- Las tres primeras curvas que pueden recomendarse: B1, B2 y Ak-P1. B1-P1, añadido después de la compuerta 1, queda por delante en la tabla, pero no puede recomendarse (sección 5).
 - **Juicio.** B1 es la curva más sencilla de todas: el nivel de un cuerpo de Sears-Haack con la misma área máxima y la misma longitud que el conjunto, sin ningún parámetro, y la forma en Mach de AeroSandbox. Tiene la menor métrica principal de las curvas que pueden recomendarse, pero no predice bien el inicio: su forma no llega a pendiente 0.1 en 2 de las tres alas. La regla de áreas (A y C) predice bien el inicio con el puente P1 pero sobrestima mucho el nivel del ala de 10.8°, y en T3 con borde de ataque supersónico no converge. Lo que el dueño elige en esta compuerta es, por tanto, entre un método que acierta el nivel y no el inicio, y otro que acierta el inicio y no el nivel.
 - **Una advertencia que pesa sobre B1.** El prerregistro declaró (sección 0) que ya se conocían las subidas de la figura 9. B1 se fijó con E_WD = 1 por la regla "sin guía" y su nivel se calculó antes de leer datos (`docs/cp/004.md`, paso 3), pero la coincidencia con esas subidas puede ser suerte de esta familia de alas. La prueba a ciegas es la que lo dirá.
 
@@ -74,7 +74,7 @@ Incremento de CD en cada duplicación de N:
 
 Una divergencia logarítmica da el mismo incremento en cada duplicación; una que crece más deprisa, incrementos crecientes. La lectura de esta tabla está en `docs/cp/004.md` y en el estudio.
 
-Tiempo de esta verificación: 93 s.
+Tiempo de esta verificación: 116 s.
 
 **Lectura (juicio sobre cifras `computed`).** Con borde de ataque supersónico, la nariz redondeada hace divergir la resistencia de la teoría lineal: el incremento por duplicación crece. Con la nariz poligonal de la tabla converge, pero solo con N del orden de miles y a un valor muy alto, porque el primer tramo de la tabla es una cuña muy abierta que la teoría lineal cuenta entera. Con borde casi sónico (47° a Mach 1.6) las dos narices convergen tarde. En esas condiciones la teoría lineal no tiene un valor bien definido para estas alas: depende del suavizado.
 
@@ -86,22 +86,25 @@ Métrica principal: media cuadrática de E = S − D (S el centro del intervalo 
 
 | Puesto | Curva | Parámetros libres | Métrica principal (T2 y T3) | T3 | T2 | Mayor error del inicio | Aciertos (|E| ≤ 0.003) | Sesgo | Sin predicción | No converge | Mejora a E | Mejora a E0 | Coste, ms |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: |
-| 1 | B1 | 0 | 0.0029 | 0.0028 | 0.0029 | NA | 58 % | -0.0011 | 0 | 0 | sí | sí | 135.1 |
-| 2 | B2 | 1 | 0.0029 | 0.0036 | 0.0027 | NA | 54 % | -0.0008 | 0 | 0 | sí | sí | 135.1 |
-| 3 | Ak-P1 | 2 | 0.0039 | 0.0060 | 0.0029 | NA | 71 % | 0.0011 | 0 | 15 | sí | sí | 1783.6 |
-| 4 | D2 | 2 | 0.0043 | 0.0037 | 0.0044 | NA | 42 % | 0.0001 | 0 | 0 | no | sí | 0.3 |
-| 5 | A2-P1 | 1 | 0.0059 | 0.0087 | 0.0046 | 0.014 | 71 % | 0.0033 | 0 | 14 | sí | sí | 1783.6 |
-| 6 | C-P1 | 1 | 0.0060 | 0.0088 | 0.0046 | 0.014 | 67 % | 0.0034 | 0 | 14 | sí | sí | 1783.6 |
-| 7 | A2-P2 | 2 | 0.0064 | 0.0087 | 0.0055 | 0.030 | 46 % | 0.0043 | 0 | 11 | sí | sí | 1783.6 |
-| 8 | C-P2 | 2 | 0.0065 | 0.0088 | 0.0055 | 0.030 | 42 % | 0.0044 | 0 | 11 | sí | sí | 1783.6 |
-| 9 | Ak-P3 | 2 | 0.0064 | 0.0041 | 0.0070 | NA | 33 % | 0.0021 | 0 | 14 | no | sí | 1783.6 |
-| 10 | A2-P3 | 1 | 0.0109 | 0.0087 | 0.0116 | 0.085 | 42 % | 0.0073 | 0 | 14 | no | no | 1783.6 |
-| 11 | C-P3 | 1 | 0.0110 | 0.0088 | 0.0116 | 0.085 | 38 % | 0.0074 | 0 | 14 | no | no | 1783.6 |
-| 12 | D1 | no paramétrica | 0.0038 | 0.0033 | 0.0038 | 0.044 | 38 % | -0.0002 | 2 | 0 | no | no | 0.3 |
-| 13 | E | 0 | 0.0035 | 0.0025 | 0.0036 | 0.126 | 25 % | -0.0011 | 14 | 0 | no | no | 2.1 |
-| 14 | E0 | 0 | 0.0084 | 0.0105 | 0.0076 | NA | 25 % | -0.0073 | 0 | 0 | no | no | 2.1 |
+| 1 | B1-P1 (añadido después de la compuerta 1) | 1 | 0.0014 | 0.0006 | 0.0015 | 0.028 | 92 % | 0.0001 | 0 | 0 | sí | sí | 165.0 |
+| 2 | B1 | 0 | 0.0029 | 0.0028 | 0.0029 | NA | 58 % | -0.0011 | 0 | 0 | sí | sí | 165.0 |
+| 3 | B2 | 1 | 0.0029 | 0.0036 | 0.0027 | NA | 54 % | -0.0008 | 0 | 0 | sí | sí | 165.0 |
+| 4 | Ak-P1 | 2 | 0.0039 | 0.0060 | 0.0029 | NA | 71 % | 0.0011 | 0 | 15 | sí | sí | 2150.5 |
+| 5 | D2 | 2 | 0.0043 | 0.0037 | 0.0044 | NA | 42 % | 0.0001 | 0 | 0 | no | sí | 0.4 |
+| 6 | A2-P1 | 1 | 0.0059 | 0.0087 | 0.0046 | 0.014 | 71 % | 0.0033 | 0 | 14 | sí | sí | 2150.5 |
+| 7 | C-P1 | 1 | 0.0060 | 0.0088 | 0.0046 | 0.014 | 67 % | 0.0034 | 0 | 14 | sí | sí | 2150.5 |
+| 8 | A2-P2 | 2 | 0.0064 | 0.0087 | 0.0055 | 0.030 | 46 % | 0.0043 | 0 | 11 | sí | sí | 2150.5 |
+| 9 | C-P2 | 2 | 0.0065 | 0.0088 | 0.0055 | 0.030 | 42 % | 0.0044 | 0 | 11 | sí | sí | 2150.5 |
+| 10 | Ak-P3 | 2 | 0.0064 | 0.0041 | 0.0070 | NA | 33 % | 0.0021 | 0 | 14 | no | sí | 2150.5 |
+| 11 | A2-P3 | 1 | 0.0109 | 0.0087 | 0.0116 | 0.085 | 42 % | 0.0073 | 0 | 14 | no | no | 2150.5 |
+| 12 | C-P3 | 1 | 0.0110 | 0.0088 | 0.0116 | 0.085 | 38 % | 0.0074 | 0 | 14 | no | no | 2150.5 |
+| 13 | D1 | no paramétrica | 0.0038 | 0.0033 | 0.0038 | 0.044 | 38 % | -0.0002 | 2 | 0 | no | no | 0.4 |
+| 14 | E | 0 | 0.0035 | 0.0025 | 0.0036 | 0.126 | 25 % | -0.0011 | 14 | 0 | no | no | 2.9 |
+| 15 | E0 | 0 | 0.0084 | 0.0105 | 0.0076 | NA | 25 % | -0.0073 | 0 | 0 | no | no | 2.9 |
 
 El coste es la mediana del tiempo de una curva de 60 Mach para una geometría nueva, en milisegundos (sección 7).
+
+**B1-P1, añadido después de la compuerta 1.** El PM lo propuso tras ver los errores de B1 por Mach en esta tabla: el nivel de Sears-Haack de B1 (E_WD = 1), constante por encima de Mach 1, al que se llega desde la base con el puente P1 (M₀ ajustado en cada rotación, un parámetro). Con datos abiertos da 0.0014 de métrica principal, 0.0006 en T3 y 0.028 de mayor error del inicio. **No puede recomendarse ni lleva veredicto** (A.9, candidatos nuevos): se diseñó después de ver estos errores, así que su acierto aquí no es una prueba independiente. Va en `predictions-all.csv` como exploratorio; la prueba a ciegas dirá si el acierto era del método o de esta tabla.
 
 ### Parámetros ajustados
 
@@ -117,6 +120,7 @@ El coste es la mediana del tiempo de una curva de 60 Mach para una geometría nu
 | C-P3 | Teoría lineal por piezas con P3 | R1: O-1 0.627; R2: O-1 0.547; R3: O-1 1.000 |
 | B1 | Sears-Haack por E_WD = 1 con la forma de AeroSandbox | ninguno |
 | B2 | Sears-Haack por E_WD ajustado con la forma de AeroSandbox | R1: E_WD 1.074; R2: E_WD 1.025; R3: E_WD 1.037 |
+| B1-P1 | Añadido después de la compuerta 1, a propuesta del PM tras ver la tabla de datos abiertos: nivel de Sears-Haack de B1 (E_WD = 1) constante por encima de Mach 1, con el puente P1 desde la base | R1: M₀ 0.848; R2: M₀ 0.800; R3: M₀ 0.800 |
 | D1 | Semejanza transónica: media de las curvas propias de las dos alas de entrenamiento | ninguno |
 | D2 | Semejanza transónica: logística ajustada (anchura fijada) | R1: L 4.753, ξc 0.789; R2: L 5.231, ξc 0.445; R3: L 4.593, ξc -0.081 |
 | E | Línea base: el modelo actual, korn-mason-lock | ninguno |
@@ -138,37 +142,39 @@ Parámetros que acaban en el borde de su rango:
 - C-P2, R3: rel:O-1 = 1.000, rango [0, 1]
 - C-P2, R3: p = 8.000, rango [1, 8]
 - C-P3, R3: rel:O-1 = 1.000, rango [0, 1]
+- B1-P1, R2: M0 = 0.800, rango [0.8, 0.99]
+- B1-P1, R3: M0 = 0.800, rango [0.8, 0.99]
 
 **Juicio.** Un parámetro en el borde dice que la forma de esa curva no encaja con los datos aunque se le dé libertad, no que el rango sea corto.
 
 ### Predicciones por ala
 
-| Ala fuera | Mach | Tramo | D (figura 9) | u_D | B1: S | B2: S | Ak-P1: S | E: S | B1: E | B2: E | Ak-P1: E | E: E |
+| Ala fuera | Mach | Tramo | D (figura 9) | u_D | B1-P1: S | B1: S | B2: S | E: S | B1-P1: E | B1: E | B2: E | E: E |
 | --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 10.8° | 0.925 | T2 | 0.0132 | 0.0010 | 0.0136 [0.0117, 0.0155] | 0.0138 [0.0119, 0.0157] | 0.0123 [0.0104, 0.0141]* | NA | 0.0004 | 0.0006 | -0.0009 | NA |
-| 10.8° | 0.950 | T2 | 0.0167 | 0.0010 | 0.0151 [0.0131, 0.0171] | 0.0154 [0.0134, 0.0174] | 0.0152 [0.0133, 0.0171]* | NA | -0.0016 | -0.0012 | -0.0014 | NA |
-| 10.8° | 0.975 | T2 | 0.0209 | 0.0010 | 0.0168 [0.0148, 0.0189] | 0.0173 [0.0152, 0.0194] | 0.0215 [0.0193, 0.0237]* | NA | -0.0040 | -0.0036 | 0.0006 | NA |
-| 10.8° | 1.000 | T2 | 0.0230 | 0.0010 | 0.0186 [0.0162, 0.0210] | 0.0192 [0.0167, 0.0216] | 0.0327 [0.0297, 0.0356]* | NA | -0.0045 | -0.0038 | 0.0097 | NA |
-| 10.8° | 1.020 | T2 | 0.0234 | 0.0010 | 0.0204 [0.0179, 0.0229] | 0.0211 [0.0186, 0.0236] | 0.0276 [0.0250, 0.0302] | NA | -0.0031 | -0.0023 | 0.0042 | NA |
-| 10.8° | 1.035 | T2 | 0.0235 | 0.0010 | 0.0218 [0.0192, 0.0244] | 0.0226 [0.0200, 0.0253] | 0.0270 [0.0236, 0.0304]* | NA | -0.0017 | -0.0009 | 0.0035 | NA |
-| 10.8° | 1.085 | T3 | 0.0231 | 0.0010 | 0.0257 [0.0229, 0.0284] | 0.0268 [0.0240, 0.0296] | 0.0328 [0.0210, 0.0447]* | NA | 0.0026 | 0.0037 | 0.0097 | NA |
-| 10.8° | 1.100 | T3 | 0.0228 | 0.0010 | 0.0261 [0.0233, 0.0289] | 0.0273 [0.0244, 0.0301] | 0.0304 [0.0203, 0.0406]* | NA | 0.0033 | 0.0045 | 0.0076 | NA |
-| 10.8° | 1.114 | T3 | 0.0224 | 0.0010 | 0.0262 [0.0234, 0.0289] | 0.0274 [0.0245, 0.0302] | 0.0287 [0.0197, 0.0377]* | NA | 0.0038 | 0.0050 | 0.0063 | NA |
-| 35° | 0.925 | T2 | 0.0116 | 0.0010 | 0.0105 [0.0088, 0.0122] | 0.0105 [0.0088, 0.0122] | 0.0119 [0.0102, 0.0137] | 0.0126 [0.0110, 0.0143] | -0.0011 | -0.0011 | 0.0003 | 0.0010 |
-| 35° | 0.950 | T2 | 0.0128 | 0.0010 | 0.0111 [0.0094, 0.0128] | 0.0111 [0.0094, 0.0128] | 0.0135 [0.0116, 0.0153] | 0.0156 [0.0139, 0.0172] | -0.0017 | -0.0016 | 0.0007 | 0.0028 |
-| 35° | 0.975 | T2 | 0.0164 | 0.0010 | 0.0128 [0.0110, 0.0146] | 0.0128 [0.0110, 0.0146] | 0.0161 [0.0141, 0.0181] | 0.0207 [0.0190, 0.0223] | -0.0036 | -0.0035 | -0.0003 | 0.0043 |
-| 35° | 1.000 | T2 | 0.0190 | 0.0010 | 0.0149 [0.0127, 0.0170] | 0.0150 [0.0128, 0.0172] | 0.0199 [0.0174, 0.0223] | NA | -0.0041 | -0.0040 | 0.0009 | NA |
-| 35° | 1.020 | T2 | 0.0196 | 0.0010 | 0.0169 [0.0146, 0.0191] | 0.0170 [0.0147, 0.0193] | 0.0181 [0.0156, 0.0207] | NA | -0.0028 | -0.0026 | -0.0015 | NA |
-| 35° | 1.035 | T2 | 0.0198 | 0.0010 | 0.0183 [0.0159, 0.0207] | 0.0185 [0.0161, 0.0209] | 0.0176 [0.0152, 0.0200] | NA | -0.0016 | -0.0014 | -0.0023 | NA |
-| 35° | 1.100 | T3 | 0.0193 | 0.0010 | 0.0216 [0.0190, 0.0241] | 0.0219 [0.0192, 0.0245] | 0.0167 [0.0145, 0.0189]* | NA | 0.0022 | 0.0025 | -0.0026 | NA |
-| 35° | 1.130 | T3 | 0.0185 | 0.0010 | 0.0215 [0.0189, 0.0240] | 0.0218 [0.0192, 0.0243] | 0.0164 [0.0142, 0.0186]* | NA | 0.0030 | 0.0033 | -0.0021 | NA |
-| 47° | 0.916 | T2 | 0.0097 | 0.0010 | 0.0101 [0.0085, 0.0116] | 0.0101 [0.0085, 0.0116] | 0.0105 [0.0090, 0.0121]* | 0.0100 [0.0085, 0.0115] | 0.0004 | 0.0004 | 0.0009 | 0.0004 |
-| 47° | 0.941 | T2 | 0.0100 | 0.0010 | 0.0100 [0.0085, 0.0116] | 0.0100 [0.0085, 0.0116] | 0.0110 [0.0095, 0.0126]* | 0.0100 [0.0085, 0.0115] | 0.0000 | 0.0000 | 0.0010 | 0.0000 |
-| 47° | 0.965 | T2 | 0.0113 | 0.0010 | 0.0100 [0.0085, 0.0115] | 0.0100 [0.0085, 0.0115] | 0.0119 [0.0103, 0.0135]* | 0.0100 [0.0085, 0.0115] | -0.0013 | -0.0013 | 0.0006 | -0.0013 |
-| 47° | 0.990 | T2 | 0.0137 | 0.0010 | 0.0100 [0.0084, 0.0115] | 0.0100 [0.0084, 0.0115] | 0.0133 [0.0117, 0.0149]* | 0.0100 [0.0085, 0.0115] | -0.0037 | -0.0037 | -0.0003 | -0.0037 |
-| 47° | 1.010 | T2 | 0.0155 | 0.0010 | 0.0104 [0.0087, 0.0121] | 0.0104 [0.0087, 0.0122] | 0.0138 [0.0120, 0.0156] | 0.0099 [0.0084, 0.0114] | -0.0050 | -0.0050 | -0.0016 | -0.0055 |
-| 47° | 1.024 | T2 | 0.0164 | 0.0010 | 0.0127 [0.0109, 0.0145] | 0.0128 [0.0110, 0.0146] | 0.0138 [0.0120, 0.0156] | 0.0100 [0.0085, 0.0115] | -0.0038 | -0.0037 | -0.0026 | -0.0065 |
-| 47° | 1.112 | T3 | 0.0172 | 0.0010 | 0.0181 [0.0161, 0.0201] | 0.0184 [0.0164, 0.0204] | 0.0142 [0.0121, 0.0163]* | 0.0148 [0.0132, 0.0163] | 0.0009 | 0.0012 | -0.0030 | -0.0025 |
+| 10.8° | 0.925 | T2 | 0.0132 | 0.0010 | 0.0117 [0.0098, 0.0135] | 0.0136 [0.0117, 0.0155] | 0.0138 [0.0119, 0.0157] | NA | -0.0015 | 0.0004 | 0.0006 | NA |
+| 10.8° | 0.950 | T2 | 0.0167 | 0.0010 | 0.0134 [0.0115, 0.0153] | 0.0151 [0.0131, 0.0171] | 0.0154 [0.0134, 0.0174] | NA | -0.0033 | -0.0016 | -0.0012 | NA |
+| 10.8° | 0.975 | T2 | 0.0209 | 0.0010 | 0.0170 [0.0150, 0.0191] | 0.0168 [0.0148, 0.0189] | 0.0173 [0.0152, 0.0194] | NA | -0.0038 | -0.0040 | -0.0036 | NA |
+| 10.8° | 1.000 | T2 | 0.0230 | 0.0010 | 0.0234 [0.0207, 0.0261] | 0.0186 [0.0162, 0.0210] | 0.0192 [0.0167, 0.0216] | NA | 0.0004 | -0.0045 | -0.0038 | NA |
+| 10.8° | 1.020 | T2 | 0.0234 | 0.0010 | 0.0234 [0.0207, 0.0260] | 0.0204 [0.0179, 0.0229] | 0.0211 [0.0186, 0.0236] | NA | -0.0001 | -0.0031 | -0.0023 | NA |
+| 10.8° | 1.035 | T2 | 0.0235 | 0.0010 | 0.0233 [0.0207, 0.0260] | 0.0218 [0.0192, 0.0244] | 0.0226 [0.0200, 0.0253] | NA | -0.0002 | -0.0017 | -0.0009 | NA |
+| 10.8° | 1.085 | T3 | 0.0231 | 0.0010 | 0.0232 [0.0206, 0.0258] | 0.0257 [0.0229, 0.0284] | 0.0268 [0.0240, 0.0296] | NA | 0.0001 | 0.0026 | 0.0037 | NA |
+| 10.8° | 1.100 | T3 | 0.0228 | 0.0010 | 0.0232 [0.0206, 0.0258] | 0.0261 [0.0233, 0.0289] | 0.0273 [0.0244, 0.0301] | NA | 0.0004 | 0.0033 | 0.0045 | NA |
+| 10.8° | 1.114 | T3 | 0.0224 | 0.0010 | 0.0232 [0.0206, 0.0258] | 0.0262 [0.0234, 0.0289] | 0.0274 [0.0245, 0.0302] | NA | 0.0008 | 0.0038 | 0.0050 | NA |
+| 35° | 0.925 | T2 | 0.0116 | 0.0010 | 0.0119 [0.0101, 0.0137] | 0.0105 [0.0088, 0.0122] | 0.0105 [0.0088, 0.0122] | 0.0126 [0.0110, 0.0143] | 0.0003 | -0.0011 | -0.0011 | 0.0010 |
+| 35° | 0.950 | T2 | 0.0128 | 0.0010 | 0.0134 [0.0116, 0.0152] | 0.0111 [0.0094, 0.0128] | 0.0111 [0.0094, 0.0128] | 0.0156 [0.0139, 0.0172] | 0.0006 | -0.0017 | -0.0016 | 0.0028 |
+| 35° | 0.975 | T2 | 0.0164 | 0.0010 | 0.0159 [0.0139, 0.0179] | 0.0128 [0.0110, 0.0146] | 0.0128 [0.0110, 0.0146] | 0.0207 [0.0190, 0.0223] | -0.0004 | -0.0036 | -0.0035 | 0.0043 |
+| 35° | 1.000 | T2 | 0.0190 | 0.0010 | 0.0196 [0.0171, 0.0221] | 0.0149 [0.0127, 0.0170] | 0.0150 [0.0128, 0.0172] | NA | 0.0007 | -0.0041 | -0.0040 | NA |
+| 35° | 1.020 | T2 | 0.0196 | 0.0010 | 0.0196 [0.0171, 0.0221] | 0.0169 [0.0146, 0.0191] | 0.0170 [0.0147, 0.0193] | NA | -0.0001 | -0.0028 | -0.0026 | NA |
+| 35° | 1.035 | T2 | 0.0198 | 0.0010 | 0.0196 [0.0171, 0.0220] | 0.0183 [0.0159, 0.0207] | 0.0185 [0.0161, 0.0209] | NA | -0.0003 | -0.0016 | -0.0014 | NA |
+| 35° | 1.100 | T3 | 0.0193 | 0.0010 | 0.0194 [0.0170, 0.0219] | 0.0216 [0.0190, 0.0241] | 0.0219 [0.0192, 0.0245] | NA | 0.0001 | 0.0022 | 0.0025 | NA |
+| 35° | 1.130 | T3 | 0.0185 | 0.0010 | 0.0194 [0.0169, 0.0218] | 0.0215 [0.0189, 0.0240] | 0.0218 [0.0192, 0.0243] | NA | 0.0009 | 0.0030 | 0.0033 | NA |
+| 47° | 0.916 | T2 | 0.0097 | 0.0010 | 0.0109 [0.0093, 0.0125] | 0.0101 [0.0085, 0.0116] | 0.0101 [0.0085, 0.0116] | 0.0100 [0.0085, 0.0115] | 0.0012 | 0.0004 | 0.0004 | 0.0004 |
+| 47° | 0.941 | T2 | 0.0100 | 0.0010 | 0.0118 [0.0101, 0.0134] | 0.0100 [0.0085, 0.0116] | 0.0100 [0.0085, 0.0116] | 0.0100 [0.0085, 0.0115] | 0.0018 | 0.0000 | 0.0000 | 0.0000 |
+| 47° | 0.965 | T2 | 0.0113 | 0.0010 | 0.0132 [0.0116, 0.0149] | 0.0100 [0.0085, 0.0115] | 0.0100 [0.0085, 0.0115] | 0.0100 [0.0085, 0.0115] | 0.0019 | -0.0013 | -0.0013 | -0.0013 |
+| 47° | 0.990 | T2 | 0.0137 | 0.0010 | 0.0156 [0.0139, 0.0174] | 0.0100 [0.0084, 0.0115] | 0.0100 [0.0084, 0.0115] | 0.0100 [0.0085, 0.0115] | 0.0020 | -0.0037 | -0.0037 | -0.0037 |
+| 47° | 1.010 | T2 | 0.0155 | 0.0010 | 0.0167 [0.0147, 0.0187] | 0.0104 [0.0087, 0.0121] | 0.0104 [0.0087, 0.0122] | 0.0099 [0.0084, 0.0114] | 0.0012 | -0.0050 | -0.0050 | -0.0055 |
+| 47° | 1.024 | T2 | 0.0164 | 0.0010 | 0.0166 [0.0147, 0.0186] | 0.0127 [0.0109, 0.0145] | 0.0128 [0.0110, 0.0146] | 0.0100 [0.0085, 0.0115] | 0.0002 | -0.0038 | -0.0037 | -0.0065 |
+| 47° | 1.112 | T3 | 0.0172 | 0.0010 | 0.0165 [0.0145, 0.0184] | 0.0181 [0.0161, 0.0201] | 0.0184 [0.0164, 0.0204] | 0.0148 [0.0132, 0.0163] | -0.0007 | 0.0009 | 0.0012 | -0.0025 |
 
 S es el centro del intervalo predicho y, entre corchetes, el intervalo. * marca "no converge". E = S − D.
 
@@ -204,6 +210,7 @@ S es el centro del intervalo predicho y, entre corchetes, el intervalo. * marca 
 | C-P3 | 0.836 [0.836, 0.836] | 0.888 [0.888, 0.888] | 0.999 [0.999, 0.999] | 10.8°: 0.921 (muestras); 35°: 0.951 (muestras); 47°: 0.970 (texto del informe) | 0.085 |
 | B1 | NA (NA: la curva nominal no llega a 0.1) | NA (NA: la curva nominal no llega a 0.1) | 1.008 [1.008, 1.009] | 10.8°: 0.921 (muestras); 35°: 0.951 (muestras); 47°: 0.970 (texto del informe) | NA |
 | B2 | 1.022 [1.006, 1.039] | NA (NA: la curva nominal no llega a 0.1) | 1.008 [1.008, 1.009] | 10.8°: 0.921 (muestras); 35°: 0.951 (muestras); 47°: 0.970 (texto del informe) | NA |
+| B1-P1 | 0.950 [0.948, 0.952] | 0.962 [0.958, 0.966] | 0.981 [0.978, 0.983] | 10.8°: 0.921 (muestras); 35°: 0.951 (muestras); 47°: 0.970 (texto del informe) | 0.028 |
 | D1 | 0.965 [0.965, 0.965] | 0.950 [0.950, 0.950] | 0.950 [0.950, 0.950] | 10.8°: 0.921 (muestras); 35°: 0.951 (muestras); 47°: 0.970 (texto del informe) | 0.044 |
 | D2 | NA (NA: la curva nominal no llega a 0.1) | NA (NA: la curva nominal no llega a 0.1) | NA (NA: la curva nominal no llega a 0.1) | 10.8°: 0.921 (muestras); 35°: 0.951 (muestras); 47°: 0.970 (texto del informe) | NA |
 | E | 0.836 [0.836, 0.836] | 0.932 [0.932, 0.933] | 1.096 [1.095, 1.096] | 10.8°: 0.921 (muestras); 35°: 0.951 (muestras); 47°: 0.970 (texto del informe) | 0.126 |
@@ -225,15 +232,15 @@ En los datos abiertos, el ala de 10.8° en T3 (Mach normal al borde de ataque en
 
 | Curva | Mach | Mn borde de ataque | Banda de base y parámetros | I1 | I2 | I3 | I5 | I7 | I8 | I9 | Converge | Intervalo final | Anchura |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: |
+| B1-P1 | 1.085 | 1.014 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0014 | sí | [0.0206, 0.0258] | 0.0052 |
+| B1-P1 | 1.100 | 1.028 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0014 | sí | [0.0206, 0.0258] | 0.0052 |
+| B1-P1 | 1.114 | 1.041 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0014 | sí | [0.0206, 0.0258] | 0.0052 |
 | B1 | 1.085 | 1.014 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0016 | sí | [0.0229, 0.0284] | 0.0055 |
 | B1 | 1.100 | 1.028 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0017 | sí | [0.0233, 0.0289] | 0.0055 |
 | B1 | 1.114 | 1.041 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0017 | sí | [0.0234, 0.0289] | 0.0055 |
 | B2 | 1.085 | 1.014 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0017 | sí | [0.0240, 0.0296] | 0.0056 |
 | B2 | 1.100 | 1.028 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0018 | sí | [0.0244, 0.0301] | 0.0057 |
 | B2 | 1.114 | 1.041 | 0.0038 | — | — | — | 0.0002 | — | — | 0.0018 | sí | [0.0245, 0.0302] | 0.0057 |
-| Ak-P1 | 1.085 | 1.014 | 0.0038 | 0.0083 | 0.0084 | 0.0036 | 0.0002 | 0.0092 | 0.0080 | — | no | [0.0210, 0.0447] | 0.0237 |
-| Ak-P1 | 1.100 | 1.028 | 0.0038 | 0.0065 | 0.0067 | 0.0033 | 0.0002 | 0.0073 | 0.0064 | — | no | [0.0203, 0.0406] | 0.0203 |
-| Ak-P1 | 1.114 | 1.041 | 0.0038 | 0.0055 | 0.0056 | 0.0028 | 0.0002 | 0.0062 | 0.0053 | — | no | [0.0197, 0.0377] | 0.0180 |
 | A2-P1 | 1.085 | 1.014 | 0.0038 | 0.0100 | 0.0102 | 0.0044 | 0.0002 | 0.0111 | 0.0097 | — | no | [0.0236, 0.0514] | 0.0278 |
 | A2-P1 | 1.100 | 1.028 | 0.0038 | 0.0079 | 0.0081 | 0.0040 | 0.0002 | 0.0089 | 0.0078 | — | no | [0.0228, 0.0464] | 0.0237 |
 | A2-P1 | 1.114 | 1.041 | 0.0038 | 0.0066 | 0.0068 | 0.0034 | 0.0002 | 0.0075 | 0.0064 | — | no | [0.0220, 0.0430] | 0.0209 |
@@ -270,21 +277,21 @@ Modelo: rozamiento del fuselaje (banda turbulento y mixto, `model`) más su prop
 
 ### Comprobación con los valores (b) de las polares
 
-| Ala | Mach | Valor (b), computed | u_D | Figura 9 en ese Mach | B1 | B2 | Ak-P1 | E |
+| Ala | Mach | Valor (b), computed | u_D | Figura 9 en ese Mach | B1-P1 | B1 | B2 | E |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 10.8° | 0.500 | 0.0102 | 0.0010 | 0.0101 | 0.0106 | 0.0106 | 0.0106 | 0.0106 |
-| 10.8° | 0.850 | 0.0105 | 0.0010 | 0.0104 | 0.0109 | 0.0110 | 0.0108 | 0.0153 |
-| 10.8° | 1.000 | 0.0234 | 0.0010 | 0.0230 | 0.0181 | 0.0187 | 0.0325 | NA |
-| 10.8° | 1.100 | 0.0228 | 0.0010 | 0.0228 | 0.0253 | 0.0264 | 0.0247 | NA |
+| 10.8° | 0.850 | 0.0105 | 0.0010 | 0.0104 | 0.0108 | 0.0109 | 0.0110 | 0.0153 |
+| 10.8° | 1.000 | 0.0234 | 0.0010 | 0.0230 | 0.0227 | 0.0181 | 0.0187 | NA |
+| 10.8° | 1.100 | 0.0228 | 0.0010 | 0.0228 | 0.0225 | 0.0253 | 0.0264 | NA |
 | 35° | 0.500 | 0.0091 | 0.0010 | 0.0096 | 0.0104 | 0.0104 | 0.0104 | 0.0104 |
-| 35° | 0.850 | 0.0103 | 0.0010 | 0.0104 | 0.0104 | 0.0104 | 0.0105 | 0.0104 |
-| 35° | 0.900 | 0.0107 | 0.0011 | 0.0110 | 0.0105 | 0.0105 | 0.0110 | 0.0112 |
-| 35° | 1.000 | 0.0184 | 0.0010 | 0.0190 | 0.0145 | 0.0146 | 0.0193 | NA |
-| 35° | 1.100 | 0.0190 | 0.0010 | 0.0193 | 0.0207 | 0.0210 | 0.0165 | NA |
+| 35° | 0.850 | 0.0103 | 0.0010 | 0.0104 | 0.0105 | 0.0104 | 0.0104 | 0.0104 |
+| 35° | 0.900 | 0.0107 | 0.0011 | 0.0110 | 0.0110 | 0.0105 | 0.0105 | 0.0112 |
+| 35° | 1.000 | 0.0184 | 0.0010 | 0.0190 | 0.0190 | 0.0145 | 0.0146 | NA |
+| 35° | 1.100 | 0.0190 | 0.0010 | 0.0193 | 0.0188 | 0.0207 | 0.0210 | NA |
 | 47° | 0.500 | 0.0079 | 0.0010 | 0.0085 | 0.0101 | 0.0101 | 0.0101 | 0.0101 |
-| 47° | 0.843 | 0.0095 | 0.0010 | 0.0093 | 0.0100 | 0.0100 | 0.0101 | 0.0100 |
-| 47° | 0.990 | 0.0128 | 0.0010 | 0.0137 | 0.0099 | 0.0099 | 0.0132 | 0.0100 |
-| 47° | 1.112 | 0.0169 | 0.0010 | 0.0172 | 0.0183 | 0.0187 | 0.0140 | 0.0148 |
+| 47° | 0.843 | 0.0095 | 0.0010 | 0.0093 | 0.0101 | 0.0100 | 0.0100 | 0.0100 |
+| 47° | 0.990 | 0.0128 | 0.0010 | 0.0137 | 0.0157 | 0.0099 | 0.0099 | 0.0100 |
+| 47° | 1.112 | 0.0169 | 0.0010 | 0.0172 | 0.0167 | 0.0183 | 0.0187 | 0.0148 |
 
 ### Validez de las teorías
 
@@ -323,22 +330,18 @@ Para las curvas que encabezan la tabla, el mayor cambio hacia fuera de cada lím
 
 | Curva | Entrada | Mayor cambio hacia abajo | Mayor cambio hacia arriba | Condición del mayor cambio |
 | --- | --- | ---: | ---: | --- |
+| B1-P1 | I5 | 0.00001 | 0.00021 | 10.8° a Mach 0.925 |
+| B1-P1 | I9 | 0.00056 | 0.00137 | 10.8° a Mach 1.000 |
 | B1 | I5 | 0.00001 | 0.00021 | 10.8° a Mach 0.925 |
 | B1 | I9 | 0.00069 | 0.00169 | 10.8° a Mach 1.114 |
 | B2 | I5 | 0.00001 | 0.00021 | 10.8° a Mach 0.925 |
 | B2 | I9 | 0.00072 | 0.00181 | 10.8° a Mach 1.114 |
-| Ak-P1 | I1 | 0.00000 | 0.00826 | 10.8° a Mach 1.085 |
-| Ak-P1 | I2 | 0.00000 | 0.00844 | 10.8° a Mach 1.085 |
-| Ak-P1 | I3 | 0.00256 | 0.00361 | 10.8° a Mach 1.085 |
-| Ak-P1 | I5 | 0.00001 | 0.00021 | 10.8° a Mach 0.925 |
-| Ak-P1 | I7 | 0.00000 | 0.00920 | 10.8° a Mach 1.085 |
-| Ak-P1 | I8 | 0.00002 | 0.00804 | 10.8° a Mach 1.085 |
 
 ## 7. Coste (pregunta 5)
 
-- A y C: 1783.6 ms por curva (11 repeticiones en el tiempo máximo de 20 s). No es interactivo: casi todo es el cálculo de las áreas oblicuas y la serie en cada Mach por encima de 1.
-- B: 135.1 ms, casi todo el área máxima de la geometría.
-- E: 2.1 ms.
+- A y C: 2150.5 ms por curva (10 repeticiones en el tiempo máximo de 20 s). No es interactivo: casi todo es el cálculo de las áreas oblicuas y la serie en cada Mach por encima de 1.
+- B: 165.0 ms, casi todo el área máxima de la geometría.
+- E: 2.9 ms.
 - **Qué lo haría interactivo (juicio).** El término de onda solo depende de la geometría y del Mach. Al soltar un control se calcula la tabla de A2 en los Mach por encima de 1 (el coste de arriba); mientras se arrastra, la curva se interpola en esa tabla, en microsegundos. Para B basta precalcular el área máxima, que no depende del Mach.
 
 ## 8. Explicación (pregunta 6)
@@ -361,19 +364,28 @@ La resistencia de onda cerca de Mach 1 depende de cómo cambia el área de la se
 2. **Inicio de B:** la forma de AeroSandbox no llega a pendiente 0.1 en dos alas. Para la fase B, ¿la recomendación lleva el inicio de otra relación (por ejemplo O-E, sin parámetros) o se deja `NA`?
 3. **El nivel de la regla de áreas en el ala de 10.8°.** ¿Vale la pena un candidato nuevo (A.9 permite añadirlos marcados "después de la compuerta 1") que use la regla de áreas solo donde el criterio de cuerpo esbelto se cumple?
 
-## 11. Límites y fórmulas sin verificar
+## 11. Fase B: las predicciones a ciegas
+
+- El dueño eligió B1 en la compuerta 2 (construir con reservas). Respuestas a las preguntas de la sección 10: la regla del intervalo no se enmienda; el inicio de B1 queda como lo da su curva, y donde no llega a 0.1 es `NA` y cuenta como fallo; no se añade el candidato de regla de áreas con criterio de cuerpo esbelto; sí se añade B1-P1, como exploratorio.
+- `studies/001-wave-drag/predictions.csv`: 122 filas, B1 y la línea base en cada condición de la hoja de geometría; 16 son `NA`. El inicio de B1 es `NA` en 0 de sus 4 configuraciones con barrido transónico.
+- `studies/001-wave-drag/predictions-all.csv`: 854 filas, las 14 curvas completas salvo E0 (la línea base E con el nombre `baseline-korn-mason-lock`); 28 son `NA`. Solo B1 lleva veredicto; el resto se puntúa como exploratorio.
+- Parámetros: los de las tres rotaciones, nunca un ajuste con las tres alas; la curva nominal usa su mediana. Intervalo: la regla registrada de A.9.
+- Lo que queda sin datos abiertos: los espesores del 6 y del 9 %, la raíz engrosada y Mach 1.60. Ninguna curva se ha comparado nunca allí.
+
+## 12. Límites y fórmulas sin verificar
 
 - Sin verificar en fuente impresa: la forma cerrada del cuerpo de arco parabólico (deducida), la fórmula de Ackeret (solo como límite de la ec. A5 de Jones), el factor de forma 1 en supersónico, la forma de B tal como la escribe AeroSandbox frente a Raymer, y la afirmación sobre la nariz (comprobada solo en lo numérico).
 - La resistencia de base del borde de salida romo no se modela. La resistencia de onda por curvatura a sustentación nula tampoco.
 - D no ve la flecha: sus parámetros no la tienen (Spreiter no trata alas en flecha).
 - Tres alas son pocas: con dos parámetros cualquier curva pasa cerca de dos alas; por eso solo cuenta el ala que queda fuera.
 
-## 12. Medido, calculado y juicio
+## 13. Medido, calculado y juicio
 
 - **Medido o NACA faired:** solo las columnas D, u_D y los valores de las polares y del fuselaje.
 - **Calculado:** todo lo demás de las tablas y figuras, regenerable con `corepack pnpm exec tsx studies/001-wave-drag/run.ts`.
 - **Juicio:** los párrafos marcados así, la sección 9 y las preguntas de la sección 10.
+- **Decisiones del dueño y del PM:** la sección 11.
 
-## 13. La apuesta
+## 14. La apuesta
 
 Si B1 se elige y la prueba a ciegas sale bien en los espesores del 6 y 9 % y a Mach 1.60, el proyecto tendrá un nivel de resistencia de onda sin parámetros que se explica con una sola figura. Si sale mal, sabremos que la coincidencia con las alas abiertas era de esta familia y no del método, antes de haber construido nada encima.

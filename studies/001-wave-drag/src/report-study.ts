@@ -5,7 +5,7 @@
 
 import type { TestedWingId } from "../../../packages/physics/src/index.ts";
 import type { CandidateResult, OpenWing, Ranking, RelationResult } from "./evaluate.ts";
-import { THRESHOLD_CD, THRESHOLD_ONSET } from "./evaluate.ts";
+import { ADDED_AFTER_GATE_1, THRESHOLD_CD, THRESHOLD_ONSET } from "./evaluate.ts";
 import { CANDIDATES, baseValues, curveCenter, NOMINAL_EVAL, type CandidateId, type EvalOptions } from "./model.ts";
 import type { BodyRow } from "./q4cost.ts";
 import { plotSvg, type Series } from "./svg.ts";
@@ -43,7 +43,7 @@ export function candidatesTable(results: CandidateResult[], ranking: Ranking, co
     const c = cost[fam];
     const np = id === "D1" ? "no paramétrica" : String(r.nParams);
     L.push(
-      `| ${i + 1} | ${id} | ${np} | ${f4(r.metrics.main)} | ${f4(r.metrics.t3)} | ${f4(r.metrics.t2)} | ${f3(r.metrics.onsetMaxAbs)} | ${(100 * r.metrics.hitRate).toFixed(0)} % | ${f4(r.metrics.bias)} | ${r.metrics.nMissing} | ${r.metrics.noConverge} | ${ranking.improvesE[id] ? "sí" : "no"} | ${ranking.improvesE0[id] ? "sí" : "no"} | ${c ? c.medianMs.toFixed(1) : "—"} |`,
+      `| ${i + 1} | ${id}${ADDED_AFTER_GATE_1.includes(id) ? " (añadido después de la compuerta 1)" : ""} | ${np} | ${f4(r.metrics.main)} | ${f4(r.metrics.t3)} | ${f4(r.metrics.t2)} | ${f3(r.metrics.onsetMaxAbs)} | ${(100 * r.metrics.hitRate).toFixed(0)} % | ${f4(r.metrics.bias)} | ${r.metrics.nMissing} | ${r.metrics.noConverge} | ${ranking.improvesE[id] ? "sí" : "no"} | ${ranking.improvesE0[id] ? "sí" : "no"} | ${c ? c.medianMs.toFixed(1) : "—"} |`,
     );
   });
   return L.join("\n");

@@ -440,3 +440,60 @@ Cada condición de la hoja tiene dos filas por magnitud: el método recomendado 
 6. Puntuación: brief 005, una vez, con estas reglas.
 
 Lo comprueban las fechas de los commits.
+
+---
+
+# Prerregistro · Estudio 001: fase B
+
+Añadida el 17 de noviembre de 2026 en el PR de predicciones (compuerta 3), sin tocar el texto de la fase A. Sigue los puntos B.1 a B.5 de la tabla 1 de Hofman y otros. El orden de A.9, "Orden y sello", se cumplió así:
+
+1. La fase A se fusionó en `main` con el PR 5 (d902f48).
+2. El commit de congelación es a83a2eb.
+3. El estudio con datos abiertos es 409c8a8 (compuerta 2).
+
+## B.1 El modelo elegido
+
+- **Método:** B1. Lo eligió el dueño en la compuerta 2, como da la regla de A.9: "construir con reservas", porque su inicio de la subida es `NA` en dos de las tres alas abiertas.
+- **Curva:** CD0(M) = base(M) + E_WD · (9π/2)(A_max / l)² · f(M) / S.
+  - La base es la de `PLAN.md`, sección 4.
+  - A_max es la mayor sección normal del conjunto ala-fuselaje, calculada con la geometría de la hoja.
+  - l es la longitud del fuselaje: 25.15 pulgadas en RM L51I04a y 25.12 en RM L51K16a.
+  - E_WD = 1 (`out/freeze.md`).
+  - f es `approximate_CD_wave` de AeroSandbox, con el Mcrit de Korn y Mason (kA = 0.87, flecha en la mitad de la cuerda, sustentación nula).
+  - En `47deg-root12-t06`, el Mcrit se evalúa con el 6 % y con el 12 %, y el intervalo cubre los dos.
+- **Parámetros libres:** ninguno.
+- **Inicio de la subida:** el cruce de pendiente 0.1 de la curva nominal. Donde no llega a 0.1 es `NA` y cuenta como fallo (decisión del dueño en la compuerta 2; ninguna relación lo sustituye).
+
+## B.2 Ajuste
+
+- B1 no tiene nada que ajustar.
+- Las demás curvas de `predictions-all.csv` usan los parámetros de las tres rotaciones con datos abiertos (`out/open-results.json`), nunca un ajuste con las tres alas juntas.
+- La curva nominal usa la mediana de los tres valores, y el intervalo usa los tres (A.9). D1, que no tiene parámetros, cubre las curvas de las tres rotaciones.
+
+## B.3 Software
+
+- Un comando, `corepack pnpm exec tsx studies/001-wave-drag/run.ts`, en Node 24.13.0, regenera todo: el estudio, `predictions.csv` y `predictions-all.csv`.
+- Los niveles de onda de A y C en las condiciones reservadas son solo geometría y se calcularon con los N₀ y m₀ congelados.
+- El Reynolds de las dos hojas cae dentro de la entrada I5. El script lo comprueba: en RM L51K16a es 0.935 veces el de la recta del túnel.
+
+## B.4 Las predicciones
+
+- **`predictions.csv`:** B1 y `baseline-korn-mason-lock` en cada condición de la hoja de geometría. Son 122 filas: 57 condiciones de `cd0` y 4 de `drag_rise_mach`, cada una con los dos métodos.
+  - 16 filas son `NA`, todas de la línea base: por encima de Mach 1.13, más allá del límite de Lock, y en la raíz engrosada desde Mach 1.00.
+  - B1 da inicio en las cuatro configuraciones con barrido transónico. Las cuatro son de 47°, como el ala abierta en la que sí lo daba.
+- **`predictions-all.csv`:** las 14 curvas completas salvo E0, en el mismo formato. Son 854 filas, de ellas 28 `NA`. Incluye B1-P1, marcada como exploratoria (B.5).
+- **Veredicto:** solo lo lleva B1. Las demás curvas se puntúan como exploratorias.
+- **Sello:** los datos del carril B se fusionan solo después de este PR, y se puntúan una vez, en el brief 005, con las reglas de la fase A.
+
+## B.5 Cambios y decisiones después de la fase A
+
+1. **B1-P1**, candidato nuevo con la regla de A.9 para candidatos añadidos. Va marcado "añadido después de la compuerta 1, a propuesta del PM tras ver la tabla de datos abiertos".
+   - Es el nivel de Sears-Haack de B1 (E_WD = 1), constante por encima de Mach 1, al que se llega con el puente P1 (M₀ ajustado en cada rotación).
+   - Se propuso después de ver los errores de B1 por Mach, así que no es una prueba independiente.
+   - El dueño lo admite en `predictions-all.csv` como exploratorio, sin veredicto.
+2. **La regla del intervalo no se enmienda.** Una variante geométrica que no converge cuenta con todo su barrido, y además el intervalo se extiende al barrido completo. Así la falta de convergencia entra dos veces. Queda documentado en el estudio (sección 5).
+3. **No se añade** el candidato de regla de áreas con criterio de cuerpo esbelto.
+4. **Interpretaciones de la regla escritas antes de ver datos**, en el commit de congelación (`out/freeze.md`, puntos 1 a 9). No son enmiendas de la fase A; se listan para que estén a la vista.
+5. **Clase `report text`:** el inicio de la subida del ala abierta de 47° es la cifra del texto de RM L52B08 (p. 8 impresa), con su cita, como manda la regla de evidencia 1 de `docs/PROCESS.md`.
+
+B1-P1 es `post hoc` como candidato: se definió después de ver los datos abiertos, por la vía que A.9 abre a los candidatos nuevos, y por eso no lleva veredicto. La fase A no cambia: las métricas, los umbrales, los subconjuntos y las reglas de veredicto son los de A.7 a A.9.

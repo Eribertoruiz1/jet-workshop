@@ -33,6 +33,9 @@ export const THRESHOLD_CD = 0.003;
 export const THRESHOLD_ONSET = 0.03;
 export const TIE = 0.0005;
 
+/** Candidates added after gate 1 (A.9): evaluated on open data, reported with their mark, never recommended. */
+export const ADDED_AFTER_GATE_1: CandidateId[] = ["B1-P1"];
+
 export interface OpenWing {
   id: TestedWingId;
   config: string;
@@ -165,7 +168,8 @@ export function fitCandidate(id: CandidateId, train: OpenWing[], table: WaveTabl
   const relFit = (): { kind: Relation; value: number } => ({ kind: rel, value: fitRelation(rel, train) });
   switch (id) {
     case "A2-P1":
-    case "C-P1": {
+    case "C-P1":
+    case "B1-P1": {
       const [lo, hi] = PARAM_RANGES.M0!;
       return { params: { M0: minimise1D((m) => sse(id, train, table, { M0: m }, o), lo, hi).x } };
     }
@@ -338,7 +342,8 @@ export function rank(results: CandidateResult[]): Ranking {
   };
   const sorted = [...eligible].sort(cmp);
   const order = [...sorted.map((r) => r.id), "D1", "E", "E0"] as CandidateId[];
-  const top = sorted[0] ?? null;
+  // Candidates added after gate 1 are ranked but cannot be recommended (PREREGISTRATION.md, A.9).
+  const top = sorted.find((r) => !ADDED_AFTER_GATE_1.includes(r.id)) ?? null;
   const reasons: string[] = [];
   let verdict: Ranking["recommendation"]["verdict"] = "no construir";
   if (top) {

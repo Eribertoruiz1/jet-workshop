@@ -7,7 +7,7 @@
 
 import { writeFileSync } from "node:fs";
 import { loadOpenData, polarValues } from "./data.ts";
-import { bestRelation, evaluateCandidate, evaluateRelations, openWings, rank, type CandidateResult } from "./evaluate.ts";
+import { ADDED_AFTER_GATE_1, bestRelation, evaluateCandidate, evaluateRelations, openWings, rank, type CandidateResult } from "./evaluate.ts";
 import { CANDIDATES, curveCenter, defaultBodyLength, NOMINAL_EVAL, PARAM_RANGES, type CandidateId, type EvalOptions } from "./model.ts";
 import { bodyQuestion, timeCurve } from "./q4cost.ts";
 import { bodyTableMd, candidatesTable, onsetTable, paramsTable, perWingTable, polarsTable, validityTable, wingFigure } from "./report-study.ts";
@@ -56,6 +56,7 @@ export function runStudy(table: WaveTable, OUT: string, log: (s: string) => void
   }
   const ranking = rank(results);
   const top = ranking.order.filter((id) => id !== "E" && id !== "E0" && id !== "D1").slice(0, 3) as CandidateId[];
+  const topRec = ranking.order.filter((id) => id !== "E" && id !== "E0" && id !== "D1" && !ADDED_AFTER_GATE_1.includes(id)).slice(0, 3) as CandidateId[];
 
   // Rule (b) values against figure 9 and the curves (each wing with its left-out fit).
   const polars = polarValues(data.dataset);
@@ -137,9 +138,9 @@ export function runStudy(table: WaveTable, OUT: string, log: (s: string) => void
     recommended: rec.id,
     verdict: rec.verdict,
     reasons: rec.reasons.join("; ") || "ninguna",
-    top1: top[0] ?? null,
-    top2: top[1] ?? null,
-    top3: top[2] ?? null,
+    top1: topRec[0] ?? null,
+    top2: topRec[1] ?? null,
+    top3: topRec[2] ?? null,
     recMain: recR?.metrics.main ?? null,
     recT3: recR?.metrics.t3 ?? null,
     recOnset: recR?.metrics.onsetMaxAbs ?? null,

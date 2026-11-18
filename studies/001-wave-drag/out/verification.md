@@ -131,4 +131,4 @@ Incremento de CD en cada duplicación de N:
 
 Una divergencia logarítmica da el mismo incremento en cada duplicación; una que crece más deprisa, incrementos crecientes. La lectura de esta tabla está en `docs/cp/004.md` y en el estudio.
 
-Tiempo de esta verificación: 93 s.
+Tiempo de esta verificación: 116 s.

@@ -1,12 +1,12 @@
 # Estudio 001 · Cómo cruzar Mach 1: método para la resistencia de onda
 
-Borrador de la compuerta 2 del brief 004 (carril C). **Generado por `studies/001-wave-drag/run.ts` desde `studies/001-wave-drag/study.template.md`: ninguna cifra de este texto está escrita a mano.** Las cifras vienen marcadas con su clase: `measured` y `NACA faired` son datos; `computed` es cálculo de este estudio; `report text` es una cifra del texto de un informe; lo que va como **juicio** es opinión de la sesión constructora.
+Estudio del brief 004 (carril C), con la fase B de la compuerta 3. **Generado por `studies/001-wave-drag/run.ts` desde `studies/001-wave-drag/study.template.md`: ninguna cifra de este texto está escrita a mano.** Las cifras vienen marcadas con su clase: `measured` y `NACA faired` son datos; `computed` es cálculo de este estudio; `report text` es una cifra del texto de un informe; lo que va como **juicio** es opinión de la sesión constructora.
 
 ## 1. Resumen
 
 - **Recomendación de la regla A.9 del prerregistro:** {{n:recommended}}, **{{n:verdict}}**. Condiciones que no cumple: {{n:reasons}}.
 - Métrica principal de {{n:recommended}} (media cuadrática de E en T2 y T3 con el ala fuera, 24 muestras, `computed`): {{n4:recMain}}; en T3: {{n4:recT3}}. La línea base E da {{n4:eMain}} en las {{n0:ePredicted}} muestras que predice de las 24; E0 da {{n4:e0Main}}.
-- Las tres primeras curvas de la tabla: {{n:top1}}, {{n:top2}} y {{n:top3}}.
+- Las tres primeras curvas que pueden recomendarse: {{n:top1}}, {{n:top2}} y {{n:top3}}. B1-P1, añadido después de la compuerta 1, queda por delante en la tabla, pero no puede recomendarse (sección 5).
 - **Juicio.** {{n:recommended}} es la curva más sencilla de todas: el nivel de un cuerpo de Sears-Haack con la misma área máxima y la misma longitud que el conjunto, sin ningún parámetro, y la forma en Mach de AeroSandbox. Tiene la menor métrica principal de las curvas que pueden recomendarse, pero no predice bien el inicio: su forma no llega a pendiente 0.1 en {{n0:recOnsetNA}} de las tres alas. La regla de áreas (A y C) predice bien el inicio con el puente P1 pero sobrestima mucho el nivel del ala de 10.8°, y en T3 con borde de ataque supersónico no converge. Lo que el dueño elige en esta compuerta es, por tanto, entre un método que acierta el nivel y no el inicio, y otro que acierta el inicio y no el nivel.
 - **Una advertencia que pesa sobre {{n:recommended}}.** El prerregistro declaró (sección 0) que ya se conocían las subidas de la figura 9. B1 se fijó con E_WD = 1 por la regla "sin guía" y su nivel se calculó antes de leer datos (`docs/cp/004.md`, paso 3), pero la coincidencia con esas subidas puede ser suerte de esta familia de alas. La prueba a ciegas es la que lo dirá.
 
@@ -55,6 +55,8 @@ Métrica principal: media cuadrática de E = S − D (S el centro del intervalo 
 {{s:candidates}}
 
 El coste es la mediana del tiempo de una curva de 60 Mach para una geometría nueva, en milisegundos (sección 7).
+
+**B1-P1, añadido después de la compuerta 1.** El PM lo propuso tras ver los errores de B1 por Mach en esta tabla: el nivel de Sears-Haack de B1 (E_WD = 1), constante por encima de Mach 1, al que se llega desde la base con el puente P1 (M₀ ajustado en cada rotación, un parámetro). Con datos abiertos da {{n4:main:B1-P1}} de métrica principal, {{n4:t3:B1-P1}} en T3 y {{n3:onset:B1-P1}} de mayor error del inicio. **No puede recomendarse ni lleva veredicto** (A.9, candidatos nuevos): se diseñó después de ver estos errores, así que su acierto aquí no es una prueba independiente. Va en `predictions-all.csv` como exploratorio; la prueba a ciegas dirá si el acierto era del método o de esta tabla.
 
 ### Parámetros ajustados
 
@@ -151,19 +153,28 @@ La resistencia de onda cerca de Mach 1 depende de cómo cambia el área de la se
 2. **Inicio de B:** la forma de AeroSandbox no llega a pendiente 0.1 en dos alas. Para la fase B, ¿la recomendación lleva el inicio de otra relación (por ejemplo O-E, sin parámetros) o se deja `NA`?
 3. **El nivel de la regla de áreas en el ala de 10.8°.** ¿Vale la pena un candidato nuevo (A.9 permite añadirlos marcados "después de la compuerta 1") que use la regla de áreas solo donde el criterio de cuerpo esbelto se cumple?
 
-## 11. Límites y fórmulas sin verificar
+## 11. Fase B: las predicciones a ciegas
+
+- El dueño eligió {{n:recommended}} en la compuerta 2 ({{n:verdict}}). Respuestas a las preguntas de la sección 10: la regla del intervalo no se enmienda; el inicio de {{n:recommended}} queda como lo da su curva, y donde no llega a 0.1 es `NA` y cuenta como fallo; no se añade el candidato de regla de áreas con criterio de cuerpo esbelto; sí se añade B1-P1, como exploratorio.
+- `studies/001-wave-drag/predictions.csv`: {{n0:predRows}} filas, {{n:recommended}} y la línea base en cada condición de la hoja de geometría; {{n0:predNA}} son `NA`. El inicio de {{n:recommended}} es `NA` en {{n0:recOnsetHeldNA}} de sus {{n0:recOnsetHeld}} configuraciones con barrido transónico.
+- `studies/001-wave-drag/predictions-all.csv`: {{n0:allRows}} filas, las {{n0:allCurves}} curvas completas salvo E0 (la línea base E con el nombre `baseline-korn-mason-lock`); {{n0:allNA}} son `NA`. Solo {{n:recommended}} lleva veredicto; el resto se puntúa como exploratorio.
+- Parámetros: los de las tres rotaciones, nunca un ajuste con las tres alas; la curva nominal usa su mediana. Intervalo: la regla registrada de A.9.
+- Lo que queda sin datos abiertos: los espesores del 6 y del 9 %, la raíz engrosada y Mach 1.60. Ninguna curva se ha comparado nunca allí.
+
+## 12. Límites y fórmulas sin verificar
 
 - Sin verificar en fuente impresa: la forma cerrada del cuerpo de arco parabólico (deducida), la fórmula de Ackeret (solo como límite de la ec. A5 de Jones), el factor de forma 1 en supersónico, la forma de B tal como la escribe AeroSandbox frente a Raymer, y la afirmación sobre la nariz (comprobada solo en lo numérico).
 - La resistencia de base del borde de salida romo no se modela. La resistencia de onda por curvatura a sustentación nula tampoco.
 - D no ve la flecha: sus parámetros no la tienen (Spreiter no trata alas en flecha).
 - Tres alas son pocas: con dos parámetros cualquier curva pasa cerca de dos alas; por eso solo cuenta el ala que queda fuera.
 
-## 12. Medido, calculado y juicio
+## 13. Medido, calculado y juicio
 
 - **Medido o NACA faired:** solo las columnas D, u_D y los valores de las polares y del fuselaje.
 - **Calculado:** todo lo demás de las tablas y figuras, regenerable con `corepack pnpm exec tsx studies/001-wave-drag/run.ts`.
 - **Juicio:** los párrafos marcados así, la sección 9 y las preguntas de la sección 10.
+- **Decisiones del dueño y del PM:** la sección 11.
 
-## 13. La apuesta
+## 14. La apuesta
 
 Si {{n:recommended}} se elige y la prueba a ciegas sale bien en los espesores del 6 y 9 % y a Mach 1.60, el proyecto tendrá un nivel de resistencia de onda sin parámetros que se explica con una sola figura. Si sale mal, sabremos que la coincidencia con las alas abiertas era de esta familia y no del método, antes de haber construido nada encima.

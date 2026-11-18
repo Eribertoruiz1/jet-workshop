@@ -220,7 +220,7 @@ export function onsetOf(curve: (m: number) => number): number | null {
 
 // ---------- the candidates ----------
 
-export type CandidateId = "A2-P1" | "A2-P2" | "A2-P3" | "Ak-P1" | "Ak-P3" | "C-P1" | "C-P2" | "C-P3" | "B1" | "B2" | "D1" | "D2" | "E" | "E0";
+export type CandidateId = "A2-P1" | "A2-P2" | "A2-P3" | "Ak-P1" | "Ak-P3" | "C-P1" | "C-P2" | "C-P3" | "B1" | "B2" | "B1-P1" | "D1" | "D2" | "E" | "E0";
 
 export const CANDIDATES: { id: CandidateId; family: string; params: string[]; description: string }[] = [
   { id: "A2-P1", family: "A", params: ["M0"], description: "Regla de áreas (A1 a Mach 1, A2 por encima) con el puente P1" },
@@ -233,6 +233,12 @@ export const CANDIDATES: { id: CandidateId; family: string; params: string[]; de
   { id: "C-P3", family: "C", params: ["rel"], description: "Teoría lineal por piezas con P3" },
   { id: "B1", family: "B", params: [], description: "Sears-Haack por E_WD = 1 con la forma de AeroSandbox" },
   { id: "B2", family: "B", params: ["EWD"], description: "Sears-Haack por E_WD ajustado con la forma de AeroSandbox" },
+  {
+    id: "B1-P1",
+    family: "B",
+    params: ["M0"],
+    description: "Añadido después de la compuerta 1, a propuesta del PM tras ver la tabla de datos abiertos: nivel de Sears-Haack de B1 (E_WD = 1) constante por encima de Mach 1, con el puente P1 desde la base",
+  },
   { id: "D1", family: "D", params: [], description: "Semejanza transónica: media de las curvas propias de las dos alas de entrenamiento" },
   { id: "D2", family: "D", params: ["L", "xic"], description: "Semejanza transónica: logística ajustada (anchura fijada)" },
   { id: "E", family: "E", params: [], description: "Línea base: el modelo actual, korn-mason-lock" },
@@ -317,6 +323,12 @@ export function waveTerm(id: CandidateId, ctx: Ctx, table: WaveTable, mach: numb
       c = vals.reduce((x, y) => x + y, 0) / vals.length;
     }
     return c / reducedFactor(tau);
+  }
+  // B1-P1 (added after gate 1, PM proposal): the Sears-Haack level of B1, constant from Mach 1, reached through P1.
+  if (id === "B1-P1") {
+    const level = searsHaackCD(ctx.aMax, o.bLength ?? ctx.bodyLengthIn, ctx.refAreaIn2) * FREEZE.ewdB1;
+    if (mach >= 1) return level;
+    return bridgeW({ kind: "P1", m0: prm.M0 ?? 0.9, p: 4 }, mach, level, 0);
   }
   // A and C families.
   const source: LevelSource = id.startsWith("C") ? "C" : "A";

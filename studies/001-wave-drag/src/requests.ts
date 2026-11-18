@@ -19,7 +19,8 @@ export function geometryOf(config: string): string {
   return config;
 }
 
-export function waveRequests(scope: "open" | "all"): WaveRequest[] {
+/** "open": the open conditions; "heldout": the held-out conditions only (phase B); "all": both. */
+export function waveRequests(scope: "open" | "heldout" | "all"): WaveRequest[] {
   const f = loadConditionsFile();
   const byGeom = new Map<string, Set<number>>();
   const add = (config: string, machs: number[]): void => {
@@ -28,8 +29,8 @@ export function waveRequests(scope: "open" | "all"): WaveRequest[] {
     for (const m of machs) if (m >= 1) s.add(m);
     byGeom.set(g, s);
   };
-  for (const w of f.open) add(w.wing, w.machs);
-  if (scope === "all") for (const h of f.heldout) add(h.config, h.machs);
+  if (scope !== "heldout") for (const w of f.open) add(w.wing, w.machs);
+  if (scope !== "open") for (const h of f.heldout) add(h.config, h.machs);
   return [...byGeom.entries()].map(([geometry, s]) => ({
     geometry,
     machsWithVariants: [...s].sort((a, b) => a - b),
