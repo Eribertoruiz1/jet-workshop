@@ -1,6 +1,6 @@
 # Plan · Estudio 002, ciclo del motor
 
-Brief 007, compuerta 1. Fecha: 16 de noviembre de 2026.
+Brief 007, compuerta 1. Fecha: 16 de noviembre de 2026. Revisión 2, del 17 de noviembre: aplica la auditoría del PM de la compuerta 1 (`docs/cp/007.md`, "Decisiones del PM"). Se escribió antes de abrir ningún informe del J47.
 
 Nada de este plan está calculado. Las respuestas a las seis preguntas son previsiones, y cada una dice cómo se va a medir. No se ha abierto ningún informe: de cada fuente se conoce solo su ficha de NTRS (título, autores, fecha, resumen y tamaño). Lo que se dice aquí del contenido de un informe, y toda cifra de un motor, viene de la pista del brief o de memoria y está **sin verificar** hasta leer la fuente.
 
@@ -29,7 +29,7 @@ Las preguntas para el PM y lo que hace falta del dueño están en `docs/cp/007.m
 **El comando**, desde la raíz: `corepack pnpm exec tsx studies/002-engine-cycle/run.ts`.
 
 - El estudio se escribe en TypeScript para llamar al modelo por ruta relativa. Las figuras son SVG escritos por el script. No hay dependencias nuevas de npm.
-- **pyCycle es Python y es pesado.** `run.ts` lo ejecuta si encuentra su entorno; si no, usa el CSV `computed` que deja la última ejecución, ya confirmado en el repositorio, y lo dice en la salida. Es una decisión que el PM puede revocar.
+- **pyCycle es Python y es pesado.** `run.ts` lo ejecuta si encuentra su entorno; si no, usa el CSV `computed` guardado en el repositorio, y lo dice en la salida. El CSV lleva la versión de pyCycle con que se generó y una huella de sus entradas. `run.ts` calcula la huella de las entradas actuales y falla si no coincide con la guardada: un CSV viejo no puede pasar por reciente.
 
 ## 2. Reglas del ciego, en la práctica
 
@@ -48,7 +48,8 @@ Un turborreactor de un eje. Estaciones: 0 aire libre, 2 entrada del compresor, 3
 - **Punto de referencia, por dentro.** El motor se construye a partir de un punto de referencia cualquiera: una condición de vuelo y lo que el motor hace en ella. `designEngine` usa el punto de diseño del jugador. La comparación con el J47 usa un punto de ensayo (sección 6), porque el túnel no ensayó parado a nivel del mar. Así el ancla del J47 no pasa por el modelo fuera de diseño.
 - **Nivel de tecnología.** No lo elige el jugador. Son los rendimientos de los componentes (compresor, cámara, turbina, tobera), las pérdidas de presión y el poder calorífico del combustible. Se toman de las medidas del J47, con su clase de dato, y se aplican a cualquier diseño. Lejos del J47 eso es una extrapolación: `estimated`.
 - **Geometría fija.** Al diseñar se calculan una vez el área de paso de la turbina y la de la tobera. Fuera de diseño no cambian. Con el postquemador encendido la tobera se abre lo justo para que la turbina no note el postquemador; es la tobera variable ideal, `estimated`.
-- **El mando.** `throttle` pide vueltas del eje, en línea recta entre el ralentí y el 100 %, como la palanca del J47. La temperatura de la turbina no se manda: sale del emparejamiento. No hay limitador automático, así que a fondo el motor puede pasar su límite, y entonces se daña.
+- **El mando.** `throttle` pide vueltas del eje, en línea recta entre el ralentí y el 100 %, como la palanca del J47. Los valores fuera de 0 a 1 se recortan. La temperatura de la turbina no se manda: sale del emparejamiento. No hay limitador automático, así que a fondo el motor puede pasar su límite, y entonces se daña.
+- **Combustible agotado.** No lo modela el motor. El depósito es del avión, del carril D.
 - **Toma de aire.** Contra los datos del J47 no se aplica ninguna pérdida: la presión total de entrada es la del ensayo. En vuelo, recuperación total en subsónico y una ley estándar de recuperación en supersónico, `estimated` y `// UNVERIFIED` hasta encontrarla en fuente abierta.
 - **Tobera.** Convergente. La tobera convergente-divergente queda fuera (Tickets): a Mach alto el modelo pierde empuje por expansión incompleta, y es lo que le pasa a un motor así.
 - **Estado.** Solo lo que el contrato permite integrar: el daño acumulado de cada límite y el fallo. Las vueltas siguen al mando sin retraso: los transitorios están fuera de alcance.
@@ -83,7 +84,12 @@ Los tres candidatos comparten el ciclo y el gas. Cambia cómo se describe el com
 - **B. A, con las tendencias empíricas de Morris** (NASA TM 78653) para los rendimientos fuera de diseño. Según su ficha, supone que el compresor trabaja en su línea de máximo rendimiento.
 - **C. Mapas genéricos escalados**, como GENENG (NASA TN D-6552), con el emparejamiento completo.
 
-**Nota del 16 de noviembre, tras leer las fuentes de método y antes de abrir ningún dato del J47.** El modelo de compresor de B son tres gráficos de Robbins y Dugan, de ocho compresores que Morris no nombra. Los mapas del listado de GENENG son ilustrativos, según el propio informe, así que C necesita otra fuente de mapas. Las dos cosas están preguntadas al PM (`docs/cp/007.md`, preguntas 13 y 14). No cambian el motor v0, que es A, ni el criterio de acierto.
+**Decisiones del PM sobre B y C, del 17 de noviembre,** tras leer las fuentes de método y antes de abrir ningún dato del J47. No cambian el motor v0, que es A.
+
+- **B usa los tres gráficos de Robbins y Dugan tal como los reproduce Morris.** Salen de ocho compresores que Morris no nombra. Su procedencia es desconocida y podría incluir el compresor de un motor reservado; son solo tendencias normalizadas. Queda en el registro de contaminación. No se descarga NASA SP-36 para averiguarlo.
+- **C no puede usar los mapas del listado de GENENG,** que según el propio informe son ilustrativos. Usa la característica medida del compresor del J47, escalada con las leyes de GENENG, si RM E9G28 la da con extensión suficiente.
+  - Contra el propio J47, C usa entonces datos medidos de ese compresor. No es una predicción del compresor, y el estudio lo dice.
+  - Si el informe no la da, C se descarta y se dice. No se buscan otros mapas.
 
 **Previsión.** A acierta cerca del régimen máximo, digamos por encima del 85 % de las vueltas, y se degrada a pocas vueltas, donde el rendimiento del compresor cae y la tobera se desbloquea. En altura, el error dominante es el de Reynolds, y afecta a los tres por igual si no se corrige. C es más fiel a pocas vueltas, pero su mapa es de otro compresor: gana forma y pierde procedencia.
 
@@ -104,7 +110,7 @@ Cada límite tiene un identificador, una cifra con fuente y una regla de daño. 
 | `afterburner-blowout` | El postquemador se apaga | RM E51E08 y RM E50G13: presión mínima a la entrada del postquemador | Calibrado con el J47D; lejos, `estimated` |
 
 - **Dos clases de fallo.** Los de material destruyen el motor por daño acumulado. Los de llama y de bombeo lo paran en el acto. En los dos casos el contrato dice lo mismo: empuje y consumo a cero, y el fallo nombra su límite.
-- **El postquemador que se apaga no rompe el motor.** El motor sigue en seco. El contrato no tiene cómo decirlo: es una pregunta al PM.
+- **El postquemador que se apaga no rompe el motor.** El motor sigue en seco. La versión 2 del contrato lo dice con el campo `afterburnerLit` de `EngineOutput`.
 - **Regla de daño, v0.** El daño crece con el exceso sobre el límite multiplicado por el tiempo, y el motor falla al agotar un presupuesto en kelvin-segundo; por encima de un techo, falla en el acto. Es `estimated`. Para la compuerta 3 se buscará una fuente abierta de rotura por fluencia del material de los álabes del J47, que daría una regla exponencial con procedencia.
 - **Compuerta 2:** solo `turbine-inlet-temperature`, con su fallo. El resto, en la compuerta 3.
 
@@ -179,8 +185,7 @@ Dos niveles, los dos sin ajustar nada punto a punto.
 
 - Lo medido que entra tal cual, en el punto donde se midió, no es un parámetro libre: es una entrada. Se lista con su fuente.
 - Todo lo que se fije mirando más de un punto, o mirando las magnitudes que luego se puntúan, es un parámetro libre: una tendencia de rendimiento con las vueltas, la corrección de Reynolds, un coeficiente de tobera ajustado. Cada uno nombra los datos con que se fijó.
-- El estudio da, por variante, la lista de entradas y el número de parámetros libres. Para A en el nivel 2 el número previsto es cero.
-- **Esa cuenta es una lectura del brief, y el PM tiene que confirmarla** (punto de control, pregunta 12). Trata lo que se lee en el ancla, un solo punto, como entrada y no como calibración. Si no vale, lo que sale del ancla y se aplica a otros puntos (los rendimientos, la temperatura y la constante de la ley de vueltas) pasa a contarse como parámetro libre. El estudio dará las dos cuentas.
+- **El estudio da las dos cuentas** (decisión del PM, 17 de noviembre). El titular de cada variante dice cuántos parámetros se ajustaron a los puntos puntuados y cuántos valores se tomaron del ancla, con la lista de esos valores. Para A en el nivel 2 lo previsto es: "cero parámetros ajustados a los puntos puntuados; N valores tomados del ancla". N se cuenta al leer el informe.
 
 **Lo que se informa**, por magnitud y por condición de ensayo, como manda `docs/PROCESS.md`. La estructura es una adaptación nuestra de ASME V&V 20, no el estándar; el estudio lo dirá donde la use.
 
@@ -193,16 +198,25 @@ Dos niveles, los dos sin ajustar nada punto a punto.
 
 **Criterio de acierto con el J47. Tiene que estar fusionado en `main` antes de abrir ningún informe con resultados del J47** (`docs/PROCESS.md`, regla 3). Escribirlo aquí no basta: por eso esta compuerta va en un PR, y no se abre ningún informe del J47 hasta que el dueño ordene su merge. Mientras tanto solo se leen las fuentes de método.
 
-- Un punto es un acierto si `|E| ≤ max(u_val, 5 % de lo medido)`, en empuje neto y en gasto de combustible; en gasto de aire, con el 3 %.
-- Una región de ensayo (una altura y un Mach, por encima del 85 % de las vueltas) cuenta como comparada con acierto si aciertan al menos tres de cada cuatro de sus puntos en las tres magnitudes.
-- El motor da `validated` solo dentro de las regiones con acierto y solo para diseños cercanos al J47. En todo lo demás, `estimated`.
+El PM lo aceptó el 17 de noviembre de 2026 con tres cambios, que ya están abajo: el mínimo de puntos por región, el tope de `u_val` y la fracción a secas.
+
+- **Punto.** Un punto es un acierto si `|E| ≤ max(u_val, 5 % de lo medido)`, en empuje neto y en gasto de combustible; en gasto de aire, con el 3 %.
+- **Región.** Una región de ensayo es una altura y un Mach, con sus puntos por encima del 85 % de las vueltas. Cuenta como comparada con acierto si cumple las tres condiciones:
+  - tiene al menos 3 puntos puntuados;
+  - la mediana de `u_val` de sus puntos no supera el 10 % de lo medido en ninguna de las tres magnitudes;
+  - aciertan al menos tres de cada cuatro de sus puntos en las tres magnitudes.
+- Una región que no cumple la primera o la segunda condición no cuenta como comparada, acierte o no.
+- **Además, sin `u_val`.** El estudio informa también, por región y en total, la fracción de puntos con `|E|` dentro del 5 % de lo medido (3 % en gasto de aire), a secas.
+- **`validated`.** El motor lo da solo si se cumplen las tres cosas: el diseño está cerca del J47, la condición de vuelo cae en una región comparada con acierto y las vueltas están por encima del 85 %. En todo lo demás, `estimated`.
+- **Cerca del J47:** las tres cifras del diseño a menos de un 5 % de las del J47, y sin postquemador. Es un juicio del PM, no una medida.
+- **Cuándo una condición de vuelo cae en una región.** El vuelo es continuo y los ensayos son condiciones sueltas. La regla que lo decide se escribe en el punto de control al leer RM E9G09, a partir de la lista de condiciones ensayadas y antes de calcular ningún `E`. Hasta que esté escrita, fuera de las condiciones de ensayo todo es `estimated`.
 - **Qué es "el J47" en las decisiones del jugador.** Las decisiones valen parado a nivel del mar, y el túnel no ensayó ahí. El diseño equivalente del J47 es por tanto `computed`: lo que da el modelo, anclado en el punto de ensayo, al llevarlo a ese punto de diseño. Si el informe trae en su texto las cifras nominales a nivel del mar, se comparan con las calculadas y se informa la diferencia; no las sustituyen. No se usa ninguna cifra de memoria.
-- Los umbrales del 5 %, el 3 %, el 85 % y los tres cuartos son una propuesta propia, sin precedente publicado. El PM puede cambiarlos antes del merge de este plan; después, cualquier cambio es una enmienda `post hoc`.
+- **Procedencia de los umbrales.** El 5 %, el 3 %, el 85 % y los tres cuartos son propuesta de este carril. El mínimo de 3 puntos y el tope del 10 % son del PM. Ninguno sale de un precedente publicado contra medidas de ensayo; el 5 % que declara Morris (NASA TM 78653) es contra especificaciones. Después del merge de este plan, cualquier cambio es una enmienda `post hoc`.
 - Si el nivel 2 no acierta, se dice y el motor entero se queda como `estimated`.
 
 **pyCycle** (check 4): el mismo turborreactor en el punto de diseño y en varios puntos fuera de diseño. Es `computed` contra `computed`; nunca se presenta como medida.
 
-**Motor reservado** (compuerta 3): prerregistro con la estructura del estudio 001, fusionado antes de calcular ninguna predicción.
+**Motor reservado** (compuerta 3): prerregistro con la estructura del estudio 001, fusionado antes de calcular ninguna predicción. Previsión del PM, que fijará el prerregistro: del motor reservado llegarán las condiciones de ensayo y sus cifras de diseño del texto del informe, sin punto de ancla. El modelo tendrá que predecirlo desde el diseño, como a un motor del jugador.
 
 ## 7. Pruebas del check 2
 
