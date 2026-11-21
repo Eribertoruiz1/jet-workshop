@@ -1,73 +1,175 @@
+import { useId } from "react";
 import { scaleLinear } from "d3-scale";
 import { area } from "d3-shape";
-import type { FairedSample, PolarPoint, Segment } from "@jet-workshop/validation";
-import { HatchPattern, MeasuredMark, XAxis, YAxis, bandRuns, niceTicks, type BandSample } from "./axes.tsx";
+import type { PolarPoint, Reliability, Segment } from "@jet-workshop/validation";
+import { CHART_TEXT, HatchPattern, MeasuredMark, XAxis, YAxis, bandRuns, niceTicks, xAxisHeight, type BandSample, type MarkShape, type MarkTone } from "./axes.tsx";
+import { spreadLabels, textWidth, wrapText } from "./useWidth.ts";
 
-const W = 860;
-const H = 430;
-const M = { l: 70, r: 16, t: 46, b: 112 };
 /** Mach axis: a little room left of M 0.50 so the symbols at the lowest test Mach number show whole. */
 const MACH: [number, number] = [0.47, 1.15];
 /** The reliability strip and the model start at the lowest test Mach number. */
 const STRIP_FROM = 0.5;
+const LINE = CHART_TEXT * 1.25;
 
 export interface MachBandPoint extends BandSample {
   mach: number;
 }
 
-interface Props {
-  band: MachBandPoint[];
-  limitMach: number | null;
-  measured: PolarPoint[];
-  faired: FairedSample[];
-  segments: Segment[];
-  clSelected: number;
-  /** Measured symbols drawn, and scored by the reliability strip (decision 0001): within this of the selected CL */
-  symbolWindow: number;
+/** A curve through samples, drawn as a polyline; a stretch without data splits it. */
+export interface MachCurve {
+  id: string;
+  points: { mach: number; cd: number }[];
+  tone: MarkTone;
+  /** Dotted (the bench's faired curve) or solid (the lesson's three curves) */
+  dotted?: boolean;
+  /** Direct label at the curve's right end */
+  label?: string;
+  title?: string;
+  /** Do not join samples across this Mach stretch */
+  gap?: [number, number];
 }
 
-/** The red limit line and its note, on the side of the line with more room, in two lines. */
-function LimitNote({ x }: { x: number }) {
-  const right = W - M.r - x >= x - M.l;
-  const tx = right ? x + 6 : x - 6;
-  return (
-    <g>
-      <line x1={x} x2={x} y1={M.t - 32} y2={H - M.b} stroke="var(--stop)" strokeWidth={0.8} strokeDasharray="2 3" />
-      <text x={tx} y={M.t - 22} textAnchor={right ? "start" : "end"} className="ink">
-        <tspan x={tx}>Beyond this Mach number the drag-rise model is not valid.</tspan>
-        <tspan x={tx} dy="1.25em">Measured points continue; the model stops.</tspan>
-      </text>
-    </g>
-  );
+export interface StripText {
+  title: string;
+  states: Record<Reliability, string>;
+  /** Hover text of a segment */
+  segment: (s: Segment) => string;
+}
+
+interface Props {
+  width: number;
+  xLabel: string;
+  yLabel: string;
+  ariaLabel: string;
+  measured: PolarPoint[];
+  /** Shape and tone of each symbol; circles in ink by default */
+  markStyle?: (p: PolarPoint) => { shape: MarkShape; tone: MarkTone };
+  markTitle?: (p: PolarPoint) => string;
+  /** Error bars on the symbols (hidden in the lesson: it shows no statistics) */
+  errorBars?: boolean;
+  /** The model band; omitted, no band is drawn */
+  band?: MachBandPoint[];
+  curves?: MachCurve[];
+  /** The reliability strip; omitted, no strip is drawn */
+  segments?: Segment[];
+  stripText?: StripText;
+  /** Where the drag-rise model stops, with its note; omitted, nothing is drawn */
+  limit?: { mach: number; note: string } | null;
+  /** A short note at the top right */
+  note?: string;
+  /** A Mach stretch marked with a grid-coloured background */
+  highlight?: { from: number; to: number };
+  /** A vertical line at a Mach number, labelled at its top */
+  vLine?: { mach: number; label: string };
+  /** Direct labels beside points */
+  labels?: { mach: number; cd: number; text: string; tone: MarkTone }[];
+  /** Fixed top of the drag axis, so pictures that follow one another share a scale */
+  yMax?: number;
+  /** Words naming the hatched zone of the band (model outside its range), drawn above the plot where the zone starts */
+  zoneLabel?: string;
 }
 
 const COLOR = { validated: "var(--ok)", estimate: "var(--warn)", "outside model range": "var(--stop)" } as const;
 
-export function DragMachChart({ band, limitMach, measured, faired, segments, clSelected, symbolWindow }: Props) {
+interface Row {
+  lines: string[];
+  x: number;
+  anchor: "start" | "end";
+  ink?: boolean;
+}
+
+export function DragMachChart(props: Props) {
+  const { width: W, xLabel, yLabel, ariaLabel, measured, markStyle, markTitle, errorBars = true, band = [], curves = [], segments, stripText, limit, note, highlight, vLine, labels = [], zoneLabel } = props;
+  const uid = useId().replace(/:/g, "");
+  const narrow = W < 520;
+  const labelRoom = curves.some((c) => c.label) || labels.length ? Math.max(...[...curves.map((c) => c.label ?? ""), ...labels.map((l) => l.text)].map((t) => textWidth(t, CHART_TEXT))) + 10 : 0;
+  const M = { l: 48, r: Math.max(14, labelRoom) };
   const x = scaleLinear().domain(MACH).range([M.l, W - M.r]);
+
+  // Rows of text above the plot, stacked: note, limit note, then the drag-axis label.
+  const plotW = W - M.l - M.r;
+  const rows: Row[] = [];
+  if (note) rows.push({ lines: wrapText(note, W - 8, CHART_TEXT), x: W - 4, anchor: "end" });
+  const lx = limit && limit.mach < MACH[1] ? x(limit.mach) : null;
+  if (limit && lx !== null) {
+    const right = W - 4 - lx >= lx - 4;
+    const room = right ? W - 8 - lx : lx - 8;
+    rows.push({ lines: wrapText(limit.note, Math.max(room, 150), CHART_TEXT), x: right ? Math.min(lx + 6, W - 150) : Math.max(lx - 6, 150), anchor: right ? "start" : "end", ink: true });
+  }
+  if (vLine) rows.push({ lines: [vLine.label], x: x(vLine.mach), anchor: "start", ink: true });
+  const zoneFrom = zoneLabel ? bandRuns(band).find((r) => !r.valid)?.points[0]?.mach : undefined;
+  const zx = zoneFrom !== undefined && zoneFrom < MACH[1] ? x(zoneFrom) : null;
+  const zoneRow = zoneLabel && zx !== null ? rows.length : -1;
+  if (zoneLabel && zx !== null) {
+    const room = W - 8 - zx;
+    rows.push(room >= 110 ? { lines: wrapText(zoneLabel, room, CHART_TEXT), x: zx + 4, anchor: "start", ink: true } : { lines: wrapText(zoneLabel, W - 8 - M.l, CHART_TEXT), x: W - 4, anchor: "end", ink: true });
+  }
+  const yLines = wrapText(yLabel, W - 8, CHART_TEXT);
+  rows.push({ lines: yLines, x: 4, anchor: "start", ink: true });
+  const rowY: number[] = [];
+  let cursor = 14;
+  for (const r of rows) {
+    rowY.push(cursor);
+    cursor += r.lines.length * LINE + 4;
+  }
+  const top = cursor + 6;
+  const plotH = Math.round(Math.min(300, Math.max(190, plotW * 0.48)));
+  const xLines = wrapText(xLabel, plotW, CHART_TEXT).length;
+  const axisBottom = top + plotH;
+  const stripY = axisBottom + xAxisHeight(xLines) + 14;
+  const legendItems = segments && stripText ? (["validated", "estimate", "outside model range"] as const).map((k) => ({ k, text: stripText.states[k], w: 15 + textWidth(stripText.states[k], CHART_TEXT) + 16 })) : [];
+  const legendRows: { k: Reliability; text: string; x: number; row: number }[] = [];
+  {
+    let lxp = M.l;
+    let row = 0;
+    for (const it of legendItems) {
+      if (lxp + it.w > W - 4 && lxp > M.l) {
+        row++;
+        lxp = M.l;
+      }
+      legendRows.push({ k: it.k, text: it.text, x: lxp, row });
+      lxp += it.w;
+    }
+  }
+  const legendLines = legendRows.length ? Math.max(...legendRows.map((r) => r.row)) + 1 : 0;
+  const H = segments ? stripY + 9 + 22 + legendLines * LINE : axisBottom + xAxisHeight(xLines);
+
   const validMax = Math.max(0, ...band.filter((c) => c.valid).map((c) => c.max));
-  const dataMax = Math.max(0, ...measured.map((p) => p.cd + p.uCd), ...faired.map((s) => s.cd0));
-  const yMax = Math.max(0.03, Math.ceil((Math.max(validMax, dataMax) * 1.25) / 0.005) * 0.005);
-  const y = scaleLinear().domain([0, yMax]).range([H - M.b, M.t]);
+  const dataMax = Math.max(0, ...measured.map((p) => p.cd + (errorBars ? p.uCd : 0)), ...curves.flatMap((c) => c.points.map((p) => p.cd)));
+  const yMax = props.yMax ?? Math.max(0.03, Math.ceil((Math.max(validMax, dataMax) * 1.25) / 0.005) * 0.005);
+  const y = scaleLinear().domain([0, yMax]).range([axisBottom, top]);
   const clampY = (v: number) => y(Math.min(v, yMax * 1.5));
   const fill = area<MachBandPoint>().x((d) => x(d.mach)).y0((d) => clampY(d.min)).y1((d) => clampY(d.max));
   const edge = (key: "min" | "max") => area<MachBandPoint>().x((d) => x(d.mach)).y0((d) => clampY(d[key])).y1((d) => clampY(d[key]));
   const runs = bandRuns(band);
-  const faiPath = faired.length > 1 ? faired.map((d, i) => `${i ? "L" : "M"}${x(d.mach)},${y(d.cd0)}`).join("") : "";
-  const stripY = H - M.b + 62;
+  /** Runs of a curve between stretches without data; a lone sample cannot be drawn as a line and is left out. */
+  const curveRuns = (c: MachCurve): { mach: number; cd: number }[][] => {
+    const runs: { mach: number; cd: number }[][] = [];
+    c.points.forEach((p, i) => {
+      const prev = c.points[i - 1];
+      const broken = !prev || (c.gap && prev.mach < c.gap[1] && p.mach > c.gap[0]);
+      if (broken) runs.push([p]);
+      else runs.at(-1)!.push(p);
+    });
+    return runs.filter((r) => r.length > 1);
+  };
+  const curvePath = (c: MachCurve): string => curveRuns(c).map((r) => r.map((p, i) => `${i ? "L" : "M"}${x(p.mach)},${y(p.cd)}`).join("")).join("");
+  const curveEnd = (c: MachCurve) => curveRuns(c).at(-1)?.at(-1);
+  const xTicks = niceTicks(STRIP_FROM, MACH[1], narrow ? 6 : 13);
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="Drag coefficient against Mach number">
+    <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label={ariaLabel}>
       <defs>
-        <clipPath id="plot-drag">
-          <rect x={M.l} y={M.t} width={W - M.l - M.r} height={H - M.t - M.b} />
+        <clipPath id={`plot-${uid}`}>
+          <rect x={M.l} y={top} width={plotW} height={plotH} />
         </clipPath>
-        <HatchPattern id="hatch-drag" />
+        <HatchPattern id={`hatch-${uid}`} />
       </defs>
-      <XAxis scale={x} ticks={niceTicks(STRIP_FROM, MACH[1], 13)} format={(v) => v.toFixed(2)} at={H - M.b} gridFrom={M.t} gridTo={H - M.b} label="Mach number, M" />
-      <YAxis scale={y} ticks={niceTicks(0, yMax, 6)} format={(v) => v.toFixed(3)} at={M.l} gridFrom={M.l} gridTo={W - M.r} label="Drag coefficient, CD" />
+      {highlight && <rect x={x(highlight.from)} y={top} width={x(highlight.to) - x(highlight.from)} height={plotH} fill="var(--grid)" />}
+      <XAxis scale={x} ticks={xTicks} format={(v) => v.toFixed(2)} at={axisBottom} gridFrom={top} gridTo={axisBottom} label={xLabel} />
+      <YAxis scale={y} ticks={niceTicks(0, yMax, narrow ? 4 : 6)} format={(v) => v.toFixed(3)} at={M.l} gridFrom={M.l} gridTo={W - M.r} label={yLabel} labelWidth={W - 8} />
 
-      <g clipPath="url(#plot-drag)">
+      <g clipPath={`url(#plot-${uid})`}>
         {runs.map((r, i) =>
           r.valid ? (
             <g key={i}>
@@ -77,56 +179,82 @@ export function DragMachChart({ band, limitMach, measured, faired, segments, clS
             </g>
           ) : (
             <g key={i}>
-              <title>Model outside its range (the reliability strip gives the reason)</title>
-              <path d={fill(r.points) ?? ""} fill="url(#hatch-drag)" stroke="none" />
+              <path d={fill(r.points) ?? ""} fill={`url(#hatch-${uid})`} stroke="none" />
               <path d={edge("min")(r.points) ?? ""} fill="none" stroke="var(--stop)" strokeWidth={1} strokeDasharray="5 4" />
               <path d={edge("max")(r.points) ?? ""} fill="none" stroke="var(--stop)" strokeWidth={1} strokeDasharray="5 4" />
             </g>
           ),
         )}
-        {faiPath && (
-          <path d={faiPath} fill="none" stroke="var(--ink-2)" strokeWidth={1} strokeDasharray="1 3" strokeLinecap="round">
-            <title>NACA faired curve (1952), drag coefficient at zero lift, figure 9 of NACA RM L52B08</title>
+        {curves.map((c) => (
+          <path key={c.id} d={curvePath(c)} fill="none" stroke={`var(--${c.tone})`} strokeWidth={c.dotted ? 1 : c.tone === "ink" ? 2 : 1.4} strokeDasharray={c.dotted ? "1 3" : undefined} strokeLinecap="round" strokeLinejoin="round">
+            {c.title && <title>{c.title}</title>}
           </path>
-        )}
-        {measured.map((p) => (
-          <MeasuredMark
-            key={`${p.series}-${p.pointId}`}
-            x={x(p.mach)}
-            y={y(p.cd)}
-            ey0={y(p.cd - p.uCd)}
-            ey1={y(p.cd + p.uCd)}
-            title={`Measured (NACA, 1952): M ${p.mach.toFixed(3)}, CL ${p.cl.toFixed(3)}, CD ${p.cd.toFixed(4)} ± ${p.uCd.toFixed(4)}. NACA RM L52B08, figure ${p.figure}.`}
-          />
         ))}
+        {measured.map((p) => {
+          const st = markStyle?.(p);
+          return (
+            <MeasuredMark
+              key={`${p.series}-${p.pointId}`}
+              x={x(p.mach)}
+              y={y(p.cd)}
+              ey0={y(p.cd - p.uCd)}
+              ey1={y(p.cd + p.uCd)}
+              shape={st?.shape}
+              tone={st?.tone}
+              errorBars={errorBars}
+              title={markTitle?.(p) ?? ""}
+            />
+          );
+        })}
       </g>
 
-      {limitMach !== null && limitMach < MACH[1] && <LimitNote x={x(limitMach)} />}
+      {(() => {
+        const direct = [
+          ...curves.flatMap((c) => {
+            const end = curveEnd(c);
+            return c.label && end ? [{ key: c.id, x: x(end.mach) + 6, y: y(end.cd), text: c.label, tone: c.tone }] : [];
+          }),
+          ...labels.map((l, i) => ({ key: `l${i}`, x: x(l.mach) + 8, y: y(l.cd), text: l.text, tone: l.tone })),
+        ];
+        const ys = spreadLabels(direct.map((d) => d.y));
+        return direct.map((d, i) => (
+          <text key={d.key} x={d.x} y={ys[i]! + 4} className={d.tone === "ink" ? "ink" : undefined}>{d.text}</text>
+        ));
+      })()}
 
-      <text x={W - M.r} y={M.t + 14} textAnchor="end">
-        model at CL <tspan className="num">{clSelected.toFixed(2)}</tspan>
-        {segments.some((s) => s.n > 0) || measured.length ? (
-          <tspan>
-            ; symbols within <tspan className="num">{symbolWindow.toFixed(2)}</tspan>, drawn and scored by the strip
-          </tspan>
-        ) : null}
-      </text>
+      {vLine && <line x1={x(vLine.mach)} x2={x(vLine.mach)} y1={rowY[rows.findIndex((r) => r.lines[0] === vLine.label)]! + 4} y2={axisBottom} stroke="var(--ink)" strokeWidth={1} />}
+      {zoneRow >= 0 && zx !== null && (
+        <line x1={zx} x2={zx} y1={rowY[zoneRow]! - CHART_TEXT + 2} y2={top} stroke="var(--stop)" strokeWidth={1} strokeDasharray="5 4" />
+      )}
+      {limit && lx !== null && <line x1={lx} x2={lx} y1={top - 4} y2={axisBottom} stroke="var(--stop)" strokeWidth={0.8} strokeDasharray="2 3" />}
 
-      {/* Model reliability strip, computed by the scoring function */}
-      <text x={M.l} y={stripY - 8} className="ink">Model reliability</text>
-      {segments.map((s) => (
-        <rect key={s.lo} x={x(s.lo)} y={stripY} width={Math.max(0, x(Math.min(s.hi, MACH[1])) - x(s.lo)) - 1} height={9} fill={COLOR[s.state]}>
-          <title>{`M ${s.lo.toFixed(2)}–${s.hi.toFixed(2)}: ${s.state}. ${s.reason}`}</title>
-        </rect>
-      ))}
-      <g transform={`translate(${W - M.r - 360}, ${stripY + 30})`}>
-        {(["validated", "estimate", "outside model range"] as const).map((k, i) => (
-          <g key={k} transform={`translate(${i * 120}, 0)`}>
-            <rect x={0} y={-8} width={10} height={9} fill={COLOR[k]} />
-            <text x={15} y={0}>{k}</text>
-          </g>
-        ))}
-      </g>
+      {rows.map((r, i) => {
+        if (r === rows.at(-1)) return null; // the drag-axis label is drawn by YAxis
+        return (
+          <text key={i} x={r.x} y={rowY[i]} textAnchor={r.anchor} className={r.ink ? "ink" : undefined}>
+            {r.lines.map((l, j) => (
+              <tspan key={j} x={r.x} dy={j ? "1.25em" : 0}>{l}</tspan>
+            ))}
+          </text>
+        );
+      })}
+
+      {segments && stripText && (
+        <g>
+          <text x={M.l} y={stripY - 8} className="ink">{stripText.title}</text>
+          {segments.map((s) => (
+            <rect key={s.lo} x={x(s.lo)} y={stripY} width={Math.max(0, x(Math.min(s.hi, MACH[1])) - x(s.lo)) - 1} height={9} fill={COLOR[s.state]}>
+              <title>{stripText.segment(s)}</title>
+            </rect>
+          ))}
+          {legendRows.map((r) => (
+            <g key={r.k} transform={`translate(${r.x}, ${stripY + 30 + r.row * LINE})`}>
+              <rect x={0} y={-8} width={10} height={9} fill={COLOR[r.k]} />
+              <text x={15} y={0}>{r.text}</text>
+            </g>
+          ))}
+        </g>
+      )}
     </svg>
   );
 }

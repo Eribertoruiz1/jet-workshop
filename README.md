@@ -41,6 +41,7 @@ pnpm validate    # writes packages/validation/report/validation-report.md
 pnpm dev         # the app at http://localhost:5173
 pnpm typecheck
 pnpm lint
+pnpm check:browser http://localhost:5173   # SVG text size, overflow and console in a browser, at 390 and 1360 px
 ```
 
 ## Layout
