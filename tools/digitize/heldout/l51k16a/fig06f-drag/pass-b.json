@@ -1,0 +1,74 @@
+{
+  "source": {
+    "document": "NACA RM L51K16a",
+    "author": "R. B. Robinson and C. Driver",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087888/downloads/19930087888.pdf",
+    "pdf_sha256_as_downloaded": "292d22d43283b2a2d0086e726b20ca43d5d23958b3973004254ae856be66a932",
+    "pdf_sha256_stripped": "59bbdcb18699f38fa763f61d51e5ab1ab04ff7ba686ca7964e83c8b2041bb2c2",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF; the stripped copy (bytes 437 onward) is the file read.",
+    "declared_accuracy": {"CL": 0.005, "CD": 0.001, "Cm": 0.001, "alpha": 0.1},
+    "declared_accuracy_source": "RM L51K16a, PDF p. 6 (printed 5): estimated errors in the force data CL +/-0.005, CD +/-0.001, Cm +/-0.001; wing angle of attack +/-0.1 deg"
+  },
+  "figure": {
+    "id": "fig06f-drag",
+    "number": "6(f) CD",
+    "pdf_page": 23,
+    "printed_page": 22,
+    "title": "Aerodynamic characteristics in pitch of the various wing-body configurations. (f) Λ = 47°; t/c = 0.12, 0.06, 0.06. (Page caption: 'Figure 6.- Concluded.')",
+    "x_axis": "Lift coefficient, C_L, common to the three plots of the page and labelled only under the bottom (angle-of-attack) plot: -.2 at the left frame line, 0 at the heavy axis line, .8 at the right frame line, labels every 0.1. On the graph paper the heavy vertical lines fall every 0.05 C_L (about 71.3 px on this page), a medium line halfway between them (every 0.025), fine lines every 0.005 (about 7.1 px). The C_L = 0 line is drawn heavier than the other heavy lines.",
+    "y_axis": "Drag coefficient, C_D, scale on the right of the middle plot: labels 0, .04, .08, .12, .16, .20. The heavy horizontal lines fall every 0.02 C_D (about 71.7 px; the labels sit on every second one, printed a few px below their line), a medium line halfway between them (every 0.01), fine lines every 0.002 (about 7.2 px). The C_D = 0 line is drawn heavier than the other heavy lines.",
+    "content_note": "Middle plot of the page only (C_D against C_L). One faired curve with 8 hollow circles (radius about 13 px), all single: no doubled outline or second circle seen. Circle 1 sits on a grid crossing: the heavy -0.10 C_L line runs through its centre and the 0.03 C_D line close to it; circle 2 has its left stroke almost touching the heavy C_L = 0 axis line and its top stroke merged with the 0.03 C_D line, with the faired curve through it; circle 4 has the heavy 0.04 C_D line through its centre; circle 5 has the heavy 0.06 C_D line across its upper part and the 0.325 C_L line through it; circle 6 has the 0.425 C_L line through it. This page sits about 30 px lower on the scan than pages 18-22 (C_D = 0 line at y about 1644, 0.20 line at about 926); the .20 label is printed about 8 px below its grid line. The scan is slightly rotated (horizontal lines about 6 px higher at the right frame than at the left), the left frame line steps by about 2 px at y about 1621, and the horizontal lines show 1-px steps along vertical seams (e.g. near x 577, 727 and 1769)."
+  },
+  "scan": {
+    "pdf_page": 23,
+    "size_px": [2354, 3096],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51k16a/NACA-RM-L51K16a.pdf 23 .cache/l51k16a/scans/p23.png (native resolution, upright, greyscale)"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "calibration": {
+    "x_definition": "C_L: vertical heavy and medium grid lines of the graph paper, every 0.025 from the left frame line (-0.20) to the right frame line (0.80).",
+    "y_definition": "C_D: horizontal heavy and medium grid lines, every 0.01 from the heavy C_D = 0 line (labelled 0) to the 0.20 line (labelled .20).",
+    "grid": {
+      "x_lines": {"start": -0.2, "step": 0.025, "count": 41},
+      "y_lines": {"start": 0.0, "step": 0.01, "count": 21}
+    },
+    "points": [
+      {"px": [518.5, 999], "x": -0.15, "y": 0.18},
+      {"px": [875, 927], "x": 0.1, "y": 0.2},
+      {"px": [1302.5, 1069.5], "x": 0.4, "y": 0.16},
+      {"px": [1801.5, 1284], "x": 0.75, "y": 0.1},
+      {"px": [590.5, 1357.5], "x": -0.1, "y": 0.08},
+      {"px": [946, 1357], "x": 0.15, "y": 0.08},
+      {"px": [1088.5, 1213.5], "x": 0.25, "y": 0.12},
+      {"px": [732.5, 1501], "x": 0.0, "y": 0.04},
+      {"px": [1516.5, 1499.5], "x": 0.55, "y": 0.04},
+      {"px": [1730.5, 1571], "x": 0.7, "y": 0.02},
+      {"px": [519.5, 1644.5], "x": -0.15, "y": 0.0},
+      {"px": [1160, 1643.5], "x": 0.3, "y": 0.0}
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06f-drag-47deg-root12-t06-M1.600",
+      "wing": "47",
+      "mach": 1.6,
+      "kind": "symbols",
+      "symbol": "hollow circle without centre dot, radius about 13 px",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {"id": "p1", "px": [591, 1540], "snap": "ring", "note": "lowest C_L; heavy -0.10 C_L line through its centre, 0.03 C_D line close to its centre; curve leaves the right edge"},
+        {"id": "p2", "px": [747.5, 1550], "snap": "ring", "note": "left edge about 2 px from the heavy C_L = 0 axis line (left stroke at x 734.5-735, axis line at 733, merged in places), top edge merged with the 0.03 C_D line, faired curve through it. Ring fit accepted, but its radius (13.8 px) is the largest of the page (others 12.7-13.1). Chord midpoints read from the grey values (rows 1546 and 1555-1556: left stroke about 734.7, right about 759.5-760; columns 749-751: top about 1537.3, bottom about 1564) put the centre about 0.4 px right of and 0.3 px above the fitted one. Fit stable within 0.3 px for ring_level 60-130 and ring_window 22-26."},
+        {"id": "p3", "px": [896.5, 1537], "snap": "ring"},
+        {"id": "p4", "px": [1042.5, 1499], "snap": "ring", "note": "heavy 0.04 C_D line through its centre"},
+        {"id": "p5", "px": [1195.5, 1435], "snap": "ring", "note": "heavy 0.06 C_D line across its upper part, 0.325 C_L line through it"},
+        {"id": "p6", "px": [1340, 1347], "snap": "ring", "note": "0.425 C_L line through it"},
+        {"id": "p7", "px": [1476.5, 1233], "snap": "ring"},
+        {"id": "p8", "px": [1614.5, 1093], "snap": "ring", "note": "highest C_L"}
+      ]
+    }
+  ]
+}

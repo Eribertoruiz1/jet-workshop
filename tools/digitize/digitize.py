@@ -362,6 +362,101 @@ def _is_vertical_rule(g: np.ndarray, c: int, y: float, half_height: int = 30) ->
     return bool((seg < INK).mean() > 0.8)
 
 
+def _is_horizontal_rule(g: np.ndarray, r: int, x: float, half_width: int = 30) -> bool:
+    """True when row r sits on a printed horizontal line (grid or axis)."""
+    xi = int(round(x))
+    seg = g[r, xi - half_width : xi + half_width + 1]
+    return bool((seg < INK).mean() > 0.8)
+
+
+def _row_hit(g: np.ndarray, r: int, x_pred: float, win: int) -> tuple[float, int] | None:
+    """Centre (ink-weighted) and length of the inked run nearest x_pred in row r.
+
+    Runs that touch a printed vertical line (grid or axis) are left out, as
+    the column fit leaves out columns on a vertical line.
+    """
+    x0 = int(round(x_pred)) - win
+    x1 = int(round(x_pred)) + win
+    seg = g[r, x0 : x1 + 1]
+    runs = _runs(seg < INK)
+    if not runs:
+        return None
+    best = None
+    for s, e in runs:
+        if any(_is_vertical_rule(g, c, r) for c in range(x0 + s, x0 + e + 1)):
+            continue
+        w = 255.0 - seg[s : e + 1]
+        xc = x0 + float((np.arange(s, e + 1) * w).sum() / w.sum())
+        d = abs(xc - x_pred)
+        if best is None or d < best[0]:
+            best = (d, xc, e - s + 1)
+    return None if best is None else (best[1], best[2])
+
+
+def sample_curve_rows(g: np.ndarray, aff: Affine, x_value: float, hint: tuple[float, float],
+                      half: int = 12, win: int = 7) -> dict:
+    """Locate a steep curve by rows and intersect it with the column of x_value.
+
+    On a steep stretch a column cuts the inked line along its length, and
+    where the line crosses a horizontal grid line the run of ink in a column
+    takes in the grid line too. Here the centre of the ink is found along
+    each row within `half` rows of the hint (rows on a printed horizontal line
+    are skipped, so the curve is bridged across it), a straight line x(y) is
+    fitted, and the row where it meets the target column is returned.
+    """
+    hy = float(hint[1])
+    for _ in range(3):
+        c0 = aff.column_for_x(x_value, hy)
+        ri = int(round(hy))
+        rows: list[int] = []
+        xs: list[float] = []
+        widths: list[int] = []
+        for direction in (+1, -1):
+            x_pred = c0
+            local_r: list[int] = []
+            local_x: list[float] = []
+            rng = range(ri, ri + half + 1) if direction > 0 else range(ri - 1, ri - half - 1, -1)
+            for r in rng:
+                if _is_horizontal_rule(g, r, x_pred):
+                    continue
+                hit = _row_hit(g, r, x_pred, win)
+                if hit is None:
+                    continue
+                xc, length = hit
+                local_r.append(r)
+                local_x.append(xc)
+                widths.append(length)
+                if len(local_r) >= 2:
+                    s = np.polyfit(local_r, local_x, 1)
+                    x_pred = float(np.polyval(s, r + direction))
+                else:
+                    x_pred = xc
+            rows += local_r
+            xs += local_x
+        if len(rows) < 3:
+            return {"x_value": x_value, "hint": list(hint), "found": False,
+                    "reason": "fewer than 3 clean rows with ink near the hint"}
+        fit = np.polyfit(np.array(rows, float) - hy, np.array(xs), 1)  # x = fit[0] * (y - hy) + fit[1]
+        if abs(fit[0]) < 1e-6:
+            return {"x_value": x_value, "hint": list(hint), "found": False, "reason": "the line is horizontal: use column fitting"}
+        y_at = hy + (c0 - float(fit[1])) / float(fit[0])
+        resid = np.array(xs) - np.polyval(fit, np.array(rows, float) - hy)
+        hy = y_at
+    xv, yv = aff.to_data(c0, y_at)
+    return {
+        "x_value": x_value,
+        "hint": list(hint),
+        "found": True,
+        "fit": "rows",
+        "px": [round(c0, 2), round(y_at, 2)],
+        "rows_used": len(rows),
+        "line_width_px": float(np.median(widths)),
+        "fit_rms_px": round(float(np.sqrt((resid ** 2).mean())), 3),
+        "slope_px_per_px": round(1.0 / float(fit[0]), 4),
+        "data": [xv, yv],
+    }
+
+
 def sample_curve(g: np.ndarray, aff: Affine, x_value: float, hint: tuple[float, float],
                  half: int = 8, win: int = 7, side: str = "both") -> dict:
     """Locate the inked curve through the reader's hint at data x = x_value.
@@ -472,6 +567,71 @@ def snap_dot(g: np.ndarray, x: float, y: float, r: int = 5, level: float = 200.0
     return {"found": True, "px": [round(xi - r + bx, 2), round(yi - r + by, 2)], "dot_pixels": size}
 
 
+def snap_ring(g: np.ndarray, x: float, y: float, r: int = 26, level: float = 100.0, tol: float = 2.5,
+              search: int = 6, radii: tuple[int, int] = (8, 18)) -> dict:
+    """Refine a pick to the centre of a hollow circle drawn without a centre dot.
+
+    For figures whose symbols carry no centre dot (NACA RM L51K16a: plain
+    circles on fine-ruled graph paper). Takes the pixels darker than `level`
+    within r px of the pick (the printed graph-paper lines are lighter and
+    mostly drop out). A coarse search over centres within `search` px of the
+    pick and radii in `radii` finds the ring that holds the most dark pixels
+    (within 1.5 px of it); a least-squares circle (algebraic fit) is then
+    refined from there, keeping only pixels within `tol` px of the fitted ring
+    and refitting until the kept set stops changing. A curve stub or a grid
+    line crossing the window is rejected that way, and the result does not
+    depend on where inside the circle the pick fell.
+
+    Returns the fitted centre, the radius, the number of ring pixels, the rms
+    distance of those pixels from the ring, and how many of 16 equal sectors
+    around the centre hold ring pixels. found=False when fewer than 12 of 16
+    sectors are covered or the rms is above 1.5 px: then the reader picks the
+    centre by eye (snap "none") and says why.
+    """
+    xi, yi = int(round(x)), int(round(y))
+    win = g[yi - r : yi + r + 1, xi - r : xi + r + 1]
+    ys, xs = np.nonzero(win < level)
+    px = xs.astype(float) + xi - r
+    py = ys.astype(float) + yi - r
+    if len(px) < 12:
+        return {"found": False, "px": [float(x), float(y)], "reason": "too few dark pixels"}
+    best = None
+    for oy in range(-search, search + 1):
+        for ox in range(-search, search + 1):
+            d = np.hypot(px - (xi + ox), py - (yi + oy))
+            for rr in range(radii[0], radii[1] + 1):
+                score = int(np.count_nonzero(np.abs(d - rr) < 1.5))
+                key = (score, -(ox * ox + oy * oy))
+                if best is None or key > best[0]:
+                    best = (key, xi + ox, yi + oy, rr)
+    _, cx, cy, rad = best
+    cx, cy, rad = float(cx), float(cy), float(rad)
+    d = np.hypot(px - cx, py - cy)
+    keep = np.abs(d - rad) < tol
+    for _ in range(20):
+        if keep.sum() < 12:
+            return {"found": False, "px": [float(x), float(y)], "reason": "ring not found"}
+        a = np.column_stack([2 * px[keep], 2 * py[keep], np.ones(int(keep.sum()))])
+        b = px[keep] ** 2 + py[keep] ** 2
+        (cx, cy, c), *_ = np.linalg.lstsq(a, b, rcond=None)
+        rad = float(np.sqrt(c + cx**2 + cy**2))
+        d = np.hypot(px - cx, py - cy)
+        new_keep = np.abs(d - rad) < tol
+        if np.array_equal(new_keep, keep):
+            break
+        keep = new_keep
+    res = d[keep] - rad
+    rms = float(np.sqrt(np.mean(res**2)))
+    ang = np.arctan2(py[keep] - cy, px[keep] - cx)
+    sectors = int(len(np.unique(np.floor((ang + np.pi) / (2 * np.pi) * 16).astype(int) % 16)))
+    out = {"px": [round(float(cx), 2), round(float(cy), 2)], "ring_radius_px": round(rad, 2),
+           "ring_pixels": int(keep.sum()), "ring_rms_px": round(rms, 2), "ring_sectors_of_16": sectors}
+    out["found"] = bool(sectors >= 12 and rms <= 1.5)
+    if not out["found"]:
+        out["reason"] = f"ring covers {sectors} of 16 sectors, rms {rms:.2f} px"
+    return out
+
+
 # --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
@@ -530,9 +690,21 @@ def run(spec: dict, g: np.ndarray) -> dict:
         pts_out = []
         if s["kind"] == "curve_samples":
             for p in s["samples"]:
-                r = sample_curve(g, mapper, float(p["x"]) + offset, tuple(p["hint_px"]),
-                                 side=p.get("side", "both"))
-                if r["found"]:
+                if p.get("snap") == "none":
+                    # Two curves merged into one band of ink: the reader places the
+                    # line centre by eye (the hint itself); flagged in the dataset.
+                    hy = float(p["hint_px"][1])
+                    hx = mapper.column_for_x(float(p["x"]) + offset, hy)
+                    conv = convert(hx, hy)
+                    r = {"x_value": float(p["x"]) + offset, "hint": list(p["hint_px"]), "found": True,
+                         "snap": "none", "px": [round(hx, 2), hy], "data": conv["data"],
+                         "affine_data": conv["affine_data"]}
+                elif p.get("fit") == "rows":
+                    r = sample_curve_rows(g, mapper, float(p["x"]) + offset, tuple(p["hint_px"]))
+                else:
+                    r = sample_curve(g, mapper, float(p["x"]) + offset, tuple(p["hint_px"]),
+                                     side=p.get("side", "both"))
+                if r["found"] and r.get("snap") != "none":
                     r["affine_data"] = convert(*r["px"])["affine_data"]
                     if isinstance(mapper, Mesh):
                         # Flag samples whose line centre lies within one line width of a
@@ -576,6 +748,14 @@ def run(spec: dict, g: np.ndarray) -> dict:
                     else:
                         raise SystemExit(f"{s['id']} {p['id']}: no isolated centre dot near {x},{y}; "
                                          "move the pick or use snap 'none' with a note")
+                elif snap == "ring":
+                    d = snap_ring(g, float(x), float(y), r=int(p.get("ring_window", 26)),
+                                  level=float(p.get("ring_level", 100)))
+                    if not d["found"]:
+                        raise SystemExit(f"{s['id']} {p['id']}: no circle outline fitted near {x},{y} "
+                                         f"({d.get('reason')}); move the pick or use snap 'none' with a note")
+                    x, y = d["px"]
+                    r["ring"] = {k: d[k] for k in ("ring_radius_px", "ring_pixels", "ring_rms_px", "ring_sectors_of_16")}
                 r["px"] = [x, y]
                 conv = convert(float(x), float(y))
                 xv, yv = conv["data"]
@@ -651,6 +831,14 @@ def main() -> None:
             if p.get("found"):
                 vals = ", ".join(f"{k}={v:.5f}" for k, v in p["value"].items())
                 extra = f" width {p['line_width_px']:.0f}px rms {p['fit_rms_px']}" if "line_width_px" in p else ""
+                if p.get("fit") == "rows":
+                    extra += f" (fitted by rows, {p['rows_used']} rows)"
+                if "x_value" in p and p.get("snap") == "none":
+                    extra += " (line centre placed by eye)"
+                if "ring" in p:
+                    q = p["ring"]
+                    extra += (f" ring r {q['ring_radius_px']} px, {q['ring_pixels']} px, rms {q['ring_rms_px']}, "
+                              f"{q['ring_sectors_of_16']}/16 sectors")
                 if p.get("near_grid_line"):
                     g_ = p["nearest_grid_line"]
                     extra += f" NEAR GRID LINE {g_['value']} ({g_['distance_px']} px)"

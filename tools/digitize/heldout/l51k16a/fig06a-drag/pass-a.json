@@ -1,0 +1,213 @@
+{
+  "source": {
+    "document": "NACA RM L51K16a",
+    "author": "R. B. Robinson and C. Driver",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087888/downloads/19930087888.pdf",
+    "pdf_sha256_as_downloaded": "292d22d43283b2a2d0086e726b20ca43d5d23958b3973004254ae856be66a932",
+    "pdf_sha256_stripped": "59bbdcb18699f38fa763f61d51e5ab1ab04ff7ba686ca7964e83c8b2041bb2c2",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF; the stripped copy (bytes 437 onward) is the file read.",
+    "declared_accuracy": {
+      "CL": 0.005,
+      "CD": 0.001,
+      "Cm": 0.001,
+      "alpha": 0.1
+    },
+    "declared_accuracy_source": "RM L51K16a, PDF p. 6 (printed 5): estimated errors in the force data CL +/-0.005, CD +/-0.001, Cm +/-0.001; wing angle of attack +/-0.1 deg"
+  },
+  "figure": {
+    "id": "fig06a-drag",
+    "number": "6(a) CD",
+    "title": "Aerodynamic characteristics in pitch of the various wing-body configurations. (a) Lambda = 10.8 deg; t/c = 0.04. Middle plot: drag coefficient.",
+    "pdf_page": 18,
+    "printed_page": 17,
+    "x_axis": "Lift coefficient, CL (one axis, -0.2 to 0.8, common to the three plots of the panel)",
+    "y_axis": "Drag coefficient, CD (scale on the right, 0 to 0.20)",
+    "content_note": "Configuration 10.8deg-t04 at M 1.60, one polar. Measured points: hollow circles without a centre dot, joined by a faired curve, on fine-ruled graph paper (lines every 0.005 in CL and 0.002 in CD, heavier every 0.05 and 0.02)."
+  },
+  "scan": {
+    "pdf_page": 18,
+    "size_px": [
+      2354,
+      3096
+    ],
+    "extraction": "tools/digitize/extract_scan.py: the page's single embedded image (page /Rotate 0), greyscale, upright as printed"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session (lane B)",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.05,
+        "count": 21
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.02,
+        "count": 11
+      }
+    },
+    "x_definition": "Only the heavier printed lines: every 0.05 in CL from -0.2 (left frame) to 0.8, and every 0.02 in CD from 0 to 0.20 (the labelled range of the drag scale). The finer ruling (0.005 and 0.002) is not used.",
+    "points": [
+      {
+        "px": [
+          547,
+          960
+        ],
+        "x": -0.15,
+        "y": 0.18
+      },
+      {
+        "px": [
+          543,
+          1443
+        ],
+        "x": -0.15,
+        "y": 0.04
+      },
+      {
+        "px": [
+          890,
+          962
+        ],
+        "x": 0.1,
+        "y": 0.18
+      },
+      {
+        "px": [
+          750,
+          1237
+        ],
+        "x": 0.0,
+        "y": 0.1
+      },
+      {
+        "px": [
+          1027,
+          1171
+        ],
+        "x": 0.2,
+        "y": 0.12
+      },
+      {
+        "px": [
+          1166,
+          1031
+        ],
+        "x": 0.3,
+        "y": 0.16
+      },
+      {
+        "px": [
+          1442,
+          965
+        ],
+        "x": 0.5,
+        "y": 0.18
+      },
+      {
+        "px": [
+          1369,
+          1516
+        ],
+        "x": 0.45,
+        "y": 0.02
+      },
+      {
+        "px": [
+          1788,
+          966
+        ],
+        "x": 0.75,
+        "y": 0.18
+      },
+      {
+        "px": [
+          1785,
+          1449
+        ],
+        "x": 0.75,
+        "y": 0.04
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06a-drag-10.8deg-t04-M1.600",
+      "wing": "10.8",
+      "mach": 1.6,
+      "kind": "symbols",
+      "symbol": "hollow circle without a centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            569,
+            1488
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p2",
+          "px": [
+            726,
+            1508
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p3",
+          "px": [
+            886,
+            1501
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1045,
+            1464
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p5",
+          "px": [
+            1219,
+            1390
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p6",
+          "px": [
+            1391,
+            1286
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p7",
+          "px": [
+            1557,
+            1148
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p8",
+          "px": [
+            1724,
+            977
+          ],
+          "snap": "ring"
+        }
+      ]
+    }
+  ]
+}

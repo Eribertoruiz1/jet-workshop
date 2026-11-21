@@ -1,0 +1,75 @@
+{
+  "source": {
+    "document": "NACA RM L51K16a",
+    "author": "R. B. Robinson and C. Driver",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087888/downloads/19930087888.pdf",
+    "pdf_sha256_as_downloaded": "292d22d43283b2a2d0086e726b20ca43d5d23958b3973004254ae856be66a932",
+    "pdf_sha256_stripped": "59bbdcb18699f38fa763f61d51e5ab1ab04ff7ba686ca7964e83c8b2041bb2c2",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF; the stripped copy (bytes 437 onward) is the file read.",
+    "declared_accuracy": {"CL": 0.005, "CD": 0.001, "Cm": 0.001, "alpha": 0.1},
+    "declared_accuracy_source": "RM L51K16a, PDF p. 6 (printed 5): estimated errors in the force data CL +/-0.005, CD +/-0.001, Cm +/-0.001; wing angle of attack +/-0.1 deg"
+  },
+  "figure": {
+    "id": "fig06c-drag",
+    "number": "6(c) CD",
+    "pdf_page": 20,
+    "printed_page": 19,
+    "title": "Figure 6 (continued). Aerodynamic characteristics in pitch of the various wing-body configurations. (c) Lambda = 47 deg; t/c = 0.04. (Caption as printed on the page: '(c) Lambda = 47 deg; t = 0.04.' and 'Figure 6.- Continued.')",
+    "x_axis": "Lift coefficient, C_L, common to the three plots of the page and labelled only under the bottom (angle-of-attack) plot: -.2 at the left frame line, 0 at the heavy axis line, .8 at the right frame line, labels every 0.1. On the graph paper the heavy vertical lines fall every 0.05 C_L (about 71.4 px), a medium line halfway between them (every 0.025), fine lines every 0.005 (about 7.1 px). The C_L = 0 line is drawn heavier than the other heavy lines.",
+    "y_axis": "Drag coefficient, C_D, scale on the right of the middle plot: labels 0, .04, .08, .12, .16, .20. The heavy horizontal lines fall every 0.02 C_D (about 71.3 px; the labels sit on every second one), a medium line halfway between them (every 0.01), fine lines every 0.002 (about 7.1 px). The C_D = 0 line is drawn heavier than the other heavy lines.",
+    "content_note": "Middle plot of the page only (C_D against C_L). One faired curve with 8 hollow circles without a centre dot (radius about 13 px), all single: no doubled outline or second circle seen at any point. Circle 2 (near C_L = 0) has its left edge on the heavy C_L = 0 axis line, its top edge on the 0.02 C_D grid line, and the faired curve meets it at mid-height on both sides along a C_D grid line; circle 5 has its left edge near a heavy vertical line and circle 8 its bottom edge on a heavy horizontal line. The faired curve leaves every circle at the edge. Grid lines show 1-px steps in places (e.g. along the 0.06 C_D line at x about 1721 and 1865) and the scan is slightly rotated (horizontal lines about 4 px higher at the left frame than at the right)."
+  },
+  "scan": {
+    "pdf_page": 20,
+    "size_px": [2354, 3096],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51k16a/NACA-RM-L51K16a.pdf 20 .cache/l51k16a/scans/p20.png (native resolution, upright, greyscale)"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "calibration": {
+    "x_definition": "C_L: vertical heavy and medium grid lines of the graph paper, every 0.025 from the left frame line (-0.20) to the right frame line (0.80).",
+    "y_definition": "C_D: horizontal heavy and medium grid lines, every 0.01 from the heavy C_D = 0 line (labelled 0) to the 0.20 line (labelled .20).",
+    "grid": {
+      "x_lines": {"start": -0.2, "step": 0.025, "count": 41},
+      "y_lines": {"start": 0.0, "step": 0.01, "count": 21}
+    },
+    "points": [
+      {"px": [564, 920], "x": -0.15, "y": 0.2},
+      {"px": [990, 992], "x": 0.15, "y": 0.18},
+      {"px": [1419, 923], "x": 0.45, "y": 0.2},
+      {"px": [1849, 995], "x": 0.75, "y": 0.18},
+      {"px": [634, 1277], "x": -0.1, "y": 0.1},
+      {"px": [1132, 1207], "x": 0.25, "y": 0.12},
+      {"px": [847, 1420], "x": 0.05, "y": 0.06},
+      {"px": [1776, 1423], "x": 0.7, "y": 0.06},
+      {"px": [1346, 1563.5], "x": 0.4, "y": 0.02},
+      {"px": [562, 1633], "x": -0.15, "y": 0.0},
+      {"px": [1060, 1634.5], "x": 0.2, "y": 0.0},
+      {"px": [1560, 1636], "x": 0.55, "y": 0.0},
+      {"px": [1775, 1637], "x": 0.7, "y": 0.0}
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06c-drag-47deg-t04-M1.600",
+      "wing": "47",
+      "mach": 1.6,
+      "kind": "symbols",
+      "symbol": "hollow circle without centre dot, radius about 13 px",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {"id": "p1", "px": [619.5, 1556], "snap": "ring", "note": "lowest C_L; curve leaves the right edge"},
+        {"id": "p2", "px": [787, 1574.5], "snap": "ring", "note": "left edge lies on the heavy C_L = 0 axis line, top edge on the 0.02 C_D grid line; the faired curve meets both sides at mid-height. Ring fit accepted, but the tangent axis line probably enlarges the fitted radius slightly: the stroke midpoints read from the grey values (left on the axis line at x 773.5, right 798.5-799 in rows 1572-1575; top about 1562, merged with the grid line, bottom 1587.5) put the centre about 0.5 px right of and 0.6 px below the fitted one. Fit stable within 0.3 px for ring_level 70-130."},
+        {"id": "p3", "px": [946, 1560], "snap": "ring"},
+        {"id": "p4", "px": [1097, 1524], "snap": "ring"},
+        {"id": "p5", "px": [1253, 1463], "snap": "ring", "note": "left edge close to a heavy vertical grid line"},
+        {"id": "p6", "px": [1411.5, 1367], "snap": "ring"},
+        {"id": "p7", "px": [1541, 1261.5], "snap": "ring"},
+        {"id": "p8", "px": [1682, 1121], "snap": "ring", "note": "highest C_L; bottom edge on a heavy horizontal grid line"}
+      ]
+    }
+  ]
+}

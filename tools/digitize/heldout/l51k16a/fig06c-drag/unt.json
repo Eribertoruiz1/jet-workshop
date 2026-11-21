@@ -1,0 +1,212 @@
+{
+  "source": {
+    "document": "NACA RM L51K16a",
+    "author": "R. B. Robinson and C. Driver",
+    "year": 1952,
+    "url": "https://digital.library.unt.edu/ark:/67531/metadc59859/m2/1/high_res_d/19930087888.pdf",
+    "pdf_sha256": "37e81d41dd04fb695c1bf2219ed1ee764a8bb669848fa5b513b0b990a3865961",
+    "note": "UNT Digital Library copy: a different scan from the NTRS file (28 pages, 1-bit images). Used only as an independent check of the NTRS digitization. Its grid calibration below is NOT usable: in this 1-bit scan the fine, medium and heavy rulings all print black, and the picked intersections land on the wrong lines (affine residuals up to 17 px); its data values must not be used. Only the ring centres in pixels are used, by tools/digitize/scan_check.py.",
+    "declared_accuracy": {
+      "CL": 0.005,
+      "CD": 0.001,
+      "Cm": 0.001,
+      "alpha": 0.1
+    },
+    "declared_accuracy_source": "RM L51K16a, PDF p. 6 (printed 5): estimated errors in the force data CL +/-0.005, CD +/-0.001, Cm +/-0.001; wing angle of attack +/-0.1 deg"
+  },
+  "figure": {
+    "id": "fig06c-drag",
+    "number": "6(c) CD",
+    "title": "Aerodynamic characteristics in pitch of the various wing-body configurations. (c) Lambda = 47 deg; t/c = 0.04. Middle plot: drag coefficient.",
+    "pdf_page": 20,
+    "printed_page": 19,
+    "x_axis": "Lift coefficient, CL (one axis, -0.2 to 0.8, common to the three plots of the panel)",
+    "y_axis": "Drag coefficient, CD (scale on the right, 0 to 0.20)",
+    "content_note": "Configuration 47deg-t04 at M 1.60, one polar. Measured points: hollow circles without a centre dot, joined by a faired curve, on fine-ruled graph paper (lines every 0.005 in CL and 0.002 in CD, heavier every 0.05 and 0.02)."
+  },
+  "scan": {
+    "pdf_page": 20,
+    "size_px": [
+      2552,
+      3303
+    ],
+    "extraction": "tools/digitize/extract_scan.py on the UNT PDF: the page's single embedded 1-bit image, upright"
+  },
+  "pass": "UNT",
+  "digitizer": "main session, one reading of the UNT scan (check only, not a pass)",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.05,
+        "count": 21
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.02,
+        "count": 11
+      }
+    },
+    "x_definition": "Only the heavier printed lines: every 0.05 in CL from -0.2 (left frame) to 0.8, and every 0.02 in CD from 0 to 0.20 (the labelled range of the drag scale). The finer ruling (0.005 and 0.002) is not used.",
+    "points": [
+      {
+        "px": [
+          660,
+          1090
+        ],
+        "x": -0.15,
+        "y": 0.18
+      },
+      {
+        "px": [
+          661,
+          1588
+        ],
+        "x": -0.15,
+        "y": 0.04
+      },
+      {
+        "px": [
+          1002,
+          1089
+        ],
+        "x": 0.1,
+        "y": 0.18
+      },
+      {
+        "px": [
+          874,
+          1373
+        ],
+        "x": 0.0,
+        "y": 0.1
+      },
+      {
+        "px": [
+          1132,
+          1302
+        ],
+        "x": 0.2,
+        "y": 0.12
+      },
+      {
+        "px": [
+          1268,
+          1160
+        ],
+        "x": 0.3,
+        "y": 0.16
+      },
+      {
+        "px": [
+          1540,
+          1089
+        ],
+        "x": 0.5,
+        "y": 0.18
+      },
+      {
+        "px": [
+          1478,
+          1658
+        ],
+        "x": 0.45,
+        "y": 0.02
+      },
+      {
+        "px": [
+          1885,
+          1088
+        ],
+        "x": 0.75,
+        "y": 0.18
+      },
+      {
+        "px": [
+          1873,
+          1586
+        ],
+        "x": 0.75,
+        "y": 0.04
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06c-drag-47deg-t04-M1.600",
+      "wing": "47",
+      "mach": 1.6,
+      "kind": "symbols",
+      "symbol": "circle, no centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "px": [
+            722,
+            1650
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p2",
+          "px": [
+            885,
+            1672
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p3",
+          "px": [
+            1046,
+            1655
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1193,
+            1620
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p5",
+          "px": [
+            1350,
+            1553
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p6",
+          "px": [
+            1510,
+            1460
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p7",
+          "px": [
+            1640,
+            1353
+          ],
+          "snap": "ring"
+        },
+        {
+          "id": "p8",
+          "px": [
+            1783,
+            1210
+          ],
+          "snap": "ring"
+        }
+      ]
+    }
+  ]
+}

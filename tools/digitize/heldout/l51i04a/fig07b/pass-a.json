@@ -1,0 +1,417 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig07b",
+    "number": "7(b)",
+    "title": "Variation with lift coefficient of the aerodynamic characteristics for wing 2. (b) Drag coefficient.",
+    "pdf_page": 23,
+    "printed_page": 22,
+    "x_axis": "Lift coefficient, CL (staggered: each Mach number has its own CL = 0, marked by a 0 label on the bottom row)",
+    "y_axis": "Drag coefficient, CD (common to all Mach numbers)",
+    "content_note": "Wing 2: 47 deg, t/c 0.06 (configuration 47deg-t06). Measured points: hollow symbols with a centre dot, one shape per Mach number, joined by faired curves. Test Mach numbers as labelled: 0.50, 0.70, 0.85, 0.90, 0.925, 0.95, 0.975, 1.00, 1.02, 1.035, 1.088, 1.10, 1.12."
+  },
+  "scan": {
+    "pdf_page": 23,
+    "size_px": [
+      3086,
+      2201
+    ],
+    "extraction": "tools/digitize/extract_scan.py --turn cw: the page's single embedded image (page /Rotate 0), turned a quarter turn clockwise so that the sideways figure reads upright"
+  },
+  "pass": "A",
+  "digitizer": "pass A, main session (lane B)",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "grid": {
+      "x_lines": {
+        "start": -0.1,
+        "step": 0.1,
+        "count": 32
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 22
+      }
+    },
+    "x_definition": "Common staggered axis: left frame -0.1, grid every 0.1; one 0 label every 0.2 from 0.0 (M 0.50) to 2.4 (M 1.12); then .2 .4 .6 of M 1.12 at 2.6 to 3.0 (right frame).",
+    "points": [
+      {
+        "px": [
+          704.5,
+          327.5
+        ],
+        "x": 0.0,
+        "y": 0.2
+      },
+      {
+        "px": [
+          829.5,
+          635.5
+        ],
+        "x": 0.2,
+        "y": 0.15
+      },
+      {
+        "px": [
+          704.5,
+          1252
+        ],
+        "x": 0.0,
+        "y": 0.05
+      },
+      {
+        "px": [
+          891,
+          941.5
+        ],
+        "x": 0.3,
+        "y": 0.1
+      },
+      {
+        "px": [
+          1329.9,
+          325
+        ],
+        "x": 1.0,
+        "y": 0.2
+      },
+      {
+        "px": [
+          1954.5,
+          323
+        ],
+        "x": 2.0,
+        "y": 0.2
+      },
+      {
+        "px": [
+          2456,
+          443.5
+        ],
+        "x": 2.8,
+        "y": 0.18
+      },
+      {
+        "px": [
+          2518.5,
+          1062.5
+        ],
+        "x": 2.9,
+        "y": 0.08
+      },
+      {
+        "px": [
+          2330,
+          816
+        ],
+        "x": 2.6,
+        "y": 0.12
+      },
+      {
+        "px": [
+          766.5,
+          1313
+        ],
+        "x": 0.1,
+        "y": 0.04
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig07b-47deg-t06-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 1,
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "candidate": 3,
+          "snap": "dot"
+        },
+        {
+          "id": "p3",
+          "candidate": 6,
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "candidate": 7,
+          "snap": "dot"
+        },
+        {
+          "id": "p5",
+          "candidate": 11,
+          "snap": "dot"
+        },
+        {
+          "id": "p6",
+          "candidate": 12,
+          "snap": "candidate",
+          "note": "two circles drawn almost on top of each other (centre dots 5 px apart, candidates 12 and 13): two test points"
+        },
+        {
+          "id": "p7",
+          "candidate": 13,
+          "snap": "candidate",
+          "note": "the second of the two overlapping circles (candidates 12 and 13)"
+        },
+        {
+          "id": "p8",
+          "candidate": 18,
+          "snap": "candidate",
+          "note": "candidate 17, a 1-px speck 4 px away, is not a dot"
+        },
+        {
+          "id": "p9",
+          "candidate": 20,
+          "snap": "dot"
+        },
+        {
+          "id": "p10",
+          "candidate": 26,
+          "snap": "dot"
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-t06-M0.850",
+      "wing": "47",
+      "mach": 0.85,
+      "kind": "symbols",
+      "symbol": "diamond",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 8,
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "candidate": 14,
+          "snap": "dot"
+        },
+        {
+          "id": "p3",
+          "candidate": 19,
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "candidate": 28,
+          "snap": "dot"
+        },
+        {
+          "id": "p5",
+          "candidate": 36,
+          "snap": "dot"
+        },
+        {
+          "id": "p6",
+          "px": [
+            1296.0,
+            1232.0
+          ],
+          "snap": "dot",
+          "note": "two centre dots 7 px apart inside a doubled diamond outline: two test points; added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p7",
+          "px": [
+            1297.3,
+            1225.4
+          ],
+          "snap": "none",
+          "note": "upper of the two dots inside the doubled diamond, merged with the inner outline: centre placed by eye on the dot; added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p8",
+          "candidate": 39,
+          "snap": "dot"
+        },
+        {
+          "id": "p9",
+          "candidate": 44,
+          "snap": "dot"
+        },
+        {
+          "id": "p10",
+          "candidate": 47,
+          "snap": "dot"
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-t06-M0.950",
+      "wing": "47",
+      "mach": 0.95,
+      "kind": "symbols",
+      "symbol": "triangle pointing right",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 34,
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "candidate": 42,
+          "snap": "dot",
+          "note": "partly behind the vertical grid line"
+        },
+        {
+          "id": "p3",
+          "candidate": 52,
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "candidate": 59,
+          "snap": "dot",
+          "note": "right-pointing triangle missed by pass A (taken for a symbol of another polar); added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p5",
+          "candidate": 60,
+          "snap": "dot"
+        },
+        {
+          "id": "p6",
+          "candidate": 65,
+          "snap": "dot",
+          "note": "two triangles drawn 16 px apart (candidates 65 and 66): two test points"
+        },
+        {
+          "id": "p7",
+          "candidate": 66,
+          "snap": "dot",
+          "note": "the second of the two triangles (candidates 65 and 66)"
+        },
+        {
+          "id": "p8",
+          "candidate": 69,
+          "snap": "dot"
+        },
+        {
+          "id": "p9",
+          "candidate": 72,
+          "snap": "dot"
+        },
+        {
+          "id": "p10",
+          "candidate": 73,
+          "snap": "dot"
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-t06-M1.000",
+      "wing": "47",
+      "mach": 1.0,
+      "kind": "symbols",
+      "symbol": "right triangle with the right angle at top left",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 55,
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "px": [
+            1662.0,
+            1437.0
+          ],
+          "snap": "none",
+          "note": "triangle overlapped by a down-pointing triangle of another polar and by a faired curve; no centre dot visible; centre placed by eye at the visible top-left corner (1655, 1430 px) plus one third of the 25-px legs"
+        },
+        {
+          "id": "p3",
+          "candidate": 68,
+          "snap": "dot"
+        },
+        {
+          "id": "p4",
+          "px": [
+            1777.5,
+            1370.5
+          ],
+          "snap": "none",
+          "note": "centre dot merged with the grid line under it; centre placed by eye at the visible top of the dot, which matches the top-left corner (1768.4, 1363.2 px) plus one third of the legs"
+        }
+      ]
+    },
+    {
+      "id": "fig07b-47deg-t06-M1.100",
+      "wing": "47",
+      "mach": 1.1,
+      "kind": "symbols",
+      "symbol": "quarter circle with the corner at top left",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "candidate": 81,
+          "snap": "dot"
+        },
+        {
+          "id": "p2",
+          "px": [
+            2138.0,
+            1425.5
+          ],
+          "snap": "none",
+          "note": "two quarter circles drawn about 10 px apart (left edges 2129.5 and 2138.5 px), a vertical grid line through them, no isolated dot: centre from the corner (2129.5, 1416.5 px) plus 0.42 radius; added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p3",
+          "px": [
+            2147.5,
+            1419.5
+          ],
+          "snap": "none",
+          "note": "the second of the two quarter circles: centre from the corner (2138.5, 1410.5 px) plus 0.42 radius; pass A had first taken candidate 84, which is a mirrored quarter circle of M 1.12; added or moved after the comparison with pass B, confirmed on the scan; not independent of pass B"
+        },
+        {
+          "id": "p4",
+          "candidate": 87,
+          "snap": "candidate",
+          "note": "three small blobs inside the symbol (candidates 86, 87, 88); 87 sits at the centroid of the quarter circle (corner plus 0.42 radius) and is taken as the centre dot"
+        },
+        {
+          "id": "p5",
+          "candidate": 90,
+          "snap": "dot"
+        }
+      ]
+    }
+  ]
+}

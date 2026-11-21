@@ -1,0 +1,1133 @@
+{
+  "source": {
+    "document": "NACA RM L51K16a",
+    "author": "R. B. Robinson and C. Driver",
+    "year": 1952,
+    "url": "https://ntrs.nasa.gov/api/citations/19930087888/downloads/19930087888.pdf",
+    "pdf_sha256_as_downloaded": "292d22d43283b2a2d0086e726b20ca43d5d23958b3973004254ae856be66a932",
+    "pdf_sha256_stripped": "59bbdcb18699f38fa763f61d51e5ab1ab04ff7ba686ca7964e83c8b2041bb2c2",
+    "note": "The NTRS download carries a 436-byte wrapper before %PDF; the stripped copy (bytes 437 onward) is the file read.",
+    "declared_accuracy": {
+      "CL": 0.005,
+      "CD": 0.001,
+      "Cm": 0.001,
+      "alpha": 0.1
+    },
+    "declared_accuracy_source": "RM L51K16a, PDF p. 6 (printed 5): estimated errors in the force data CL +/-0.005, CD +/-0.001, Cm +/-0.001; wing angle of attack +/-0.1 deg"
+  },
+  "figure": {
+    "id": "fig06f-drag",
+    "number": "6(f) CD",
+    "pdf_page": 23,
+    "printed_page": 22,
+    "title": "Aerodynamic characteristics in pitch of the various wing-body configurations. (f) \u039b = 47\u00b0; t/c = 0.12, 0.06, 0.06. (Page caption: 'Figure 6.- Concluded.')",
+    "x_axis": "Lift coefficient, C_L, common to the three plots of the page and labelled only under the bottom (angle-of-attack) plot: -.2 at the left frame line, 0 at the heavy axis line, .8 at the right frame line, labels every 0.1. On the graph paper the heavy vertical lines fall every 0.05 C_L (about 71.3 px on this page), a medium line halfway between them (every 0.025), fine lines every 0.005 (about 7.1 px). The C_L = 0 line is drawn heavier than the other heavy lines.",
+    "y_axis": "Drag coefficient, C_D, scale on the right of the middle plot: labels 0, .04, .08, .12, .16, .20. The heavy horizontal lines fall every 0.02 C_D (about 71.7 px; the labels sit on every second one, printed a few px below their line), a medium line halfway between them (every 0.01), fine lines every 0.002 (about 7.2 px). The C_D = 0 line is drawn heavier than the other heavy lines.",
+    "content_note": "Middle plot of the page only (C_D against C_L). One faired curve with 8 hollow circles (radius about 13 px), all single: no doubled outline or second circle seen. Circle 1 sits on a grid crossing: the heavy -0.10 C_L line runs through its centre and the 0.03 C_D line close to it; circle 2 has its left stroke almost touching the heavy C_L = 0 axis line and its top stroke merged with the 0.03 C_D line, with the faired curve through it; circle 4 has the heavy 0.04 C_D line through its centre; circle 5 has the heavy 0.06 C_D line across its upper part and the 0.325 C_L line through it; circle 6 has the 0.425 C_L line through it. This page sits about 30 px lower on the scan than pages 18-22 (C_D = 0 line at y about 1644, 0.20 line at about 926); the .20 label is printed about 8 px below its grid line. The scan is slightly rotated (horizontal lines about 6 px higher at the right frame than at the left), the left frame line steps by about 2 px at y about 1621, and the horizontal lines show 1-px steps along vertical seams (e.g. near x 577, 727 and 1769)."
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "scan": {
+    "pdf_page": 23,
+    "size_px": [
+      2354,
+      3096
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51k16a/NACA-RM-L51K16a.pdf 23 .cache/l51k16a/scans/p23.png (native resolution, upright, greyscale)"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.025,
+        "count": 41
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 21
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0007013501504344965,
+        -3.7289850783270035e-06,
+        -0.5083747176366059
+      ],
+      [
+        -1.2792775680071184e-06,
+        -0.0002799885733723744,
+        0.4611439890862226
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          518.5,
+          999
+        ],
+        "px": [
+          516.55,
+          1002.51
+        ],
+        "x": -0.15,
+        "y": 0.18,
+        "residual_data": [
+          0.00016617864923060277,
+          -0.0002074949950275351
+        ],
+        "residual_px": [
+          0.24,
+          0.74
+        ],
+        "mesh_residual_data": [
+          -0.0004082669275909667,
+          -4.307811531684136e-05
+        ]
+      },
+      {
+        "picked_px": [
+          875,
+          927
+        ],
+        "px": [
+          872.42,
+          928.99
+        ],
+        "x": 0.1,
+        "y": 0.2,
+        "residual_data": [
+          3.1981573022837884e-05,
+          -7.75564628618941e-05
+        ],
+        "residual_px": [
+          0.05,
+          0.28
+        ],
+        "mesh_residual_data": [
+          0.00039775419930297706,
+          -1.5265836578182146e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1302.5,
+          1069.5
+        ],
+        "px": [
+          1301.05,
+          1070.46
+        ],
+        "x": 0.4,
+        "y": 0.16,
+        "residual_data": [
+          0.00012271305546684985,
+          -0.00023609872082105965
+        ],
+        "residual_px": [
+          0.18,
+          0.84
+        ],
+        "mesh_residual_data": [
+          0.00017263882602391867,
+          -0.00017889883815341845
+        ]
+      },
+      {
+        "picked_px": [
+          1801.5,
+          1284
+        ],
+        "px": [
+          1801.45,
+          1280.96
+        ],
+        "x": 0.75,
+        "y": 0.1,
+        "residual_data": [
+          0.00029734413784299196,
+          0.0001864242839158814
+        ],
+        "residual_px": [
+          0.42,
+          -0.67
+        ],
+        "mesh_residual_data": [
+          -1.609188188012034e-05,
+          5.690417636396161e-05
+        ]
+      },
+      {
+        "picked_px": [
+          590.5,
+          1357.5
+        ],
+        "px": [
+          589.48,
+          1357.43
+        ],
+        "x": -0.1,
+        "y": 0.08,
+        "residual_data": [
+          -1.5464158705513764e-06,
+          0.00032380570230790273
+        ],
+        "residual_px": [
+          -0.01,
+          -1.16
+        ],
+        "mesh_residual_data": [
+          0.0001932534642807987,
+          0.00010361430559135965
+        ]
+      },
+      {
+        "picked_px": [
+          946,
+          1357
+        ],
+        "px": [
+          945.1,
+          1355.99
+        ],
+        "x": 0.15,
+        "y": 0.08,
+        "residual_data": [
+          -0.0005831894194599785,
+          0.0002723261553304185
+        ],
+        "residual_px": [
+          -0.84,
+          -0.97
+        ],
+        "mesh_residual_data": [
+          0.00014121943739933696,
+          1.1666936833576447e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1088.5,
+          1213.5
+        ],
+        "px": [
+          1087.42,
+          1212.48
+        ],
+        "x": 0.25,
+        "y": 0.12,
+        "residual_data": [
+          -0.00023300897062206172,
+          0.0002724443679077426
+        ],
+        "residual_px": [
+          -0.34,
+          -0.97
+        ],
+        "mesh_residual_data": [
+          0.0003784728626592404,
+          2.6489827610179373e-05
+        ]
+      },
+      {
+        "picked_px": [
+          732.5,
+          1501
+        ],
+        "px": [
+          732.49,
+          1501.06
+        ],
+        "x": 0.0,
+        "y": 0.04,
+        "residual_data": [
+          -0.00023821913394761474,
+          -7.246998069506544e-05
+        ],
+        "residual_px": [
+          -0.34,
+          0.26
+        ],
+        "mesh_residual_data": [
+          0.00021490133953861669,
+          -1.775631755820961e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1516.5,
+          1499.5
+        ],
+        "px": [
+          1517.06,
+          1497.53
+        ],
+        "x": 0.55,
+        "y": 0.04,
+        "residual_data": [
+          3.2760094384465255e-05,
+          -8.815218902887695e-05
+        ],
+        "residual_px": [
+          0.05,
+          0.31
+        ],
+        "mesh_residual_data": [
+          0.0002178947055849756,
+          6.423887782740917e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1730.5,
+          1571
+        ],
+        "px": [
+          1731.09,
+          1568.1
+        ],
+        "x": 0.7,
+        "y": 0.02,
+        "residual_data": [
+          -0.00012213233243485444,
+          -0.00012089936019691813
+        ],
+        "residual_px": [
+          -0.17,
+          0.43
+        ],
+        "mesh_residual_data": [
+          -4.433434994022267e-05,
+          -8.260392671715147e-05
+        ]
+      },
+      {
+        "picked_px": [
+          519.5,
+          1644.5
+        ],
+        "px": [
+          520.35,
+          1645.14
+        ],
+        "x": -0.15,
+        "y": 0.0,
+        "residual_data": [
+          0.0004361054318952895,
+          -0.00014169143628289804
+        ],
+        "residual_px": [
+          0.62,
+          0.5
+        ],
+        "mesh_residual_data": [
+          0.00030347506540562286,
+          -1.5677101195182075e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1160,
+          1643.5
+        ],
+        "px": [
+          1161.46,
+          1642.1
+        ],
+        "x": 0.3,
+        "y": 0.0,
+        "residual_data": [
+          9.101333049571503e-05,
+          -0.00011063736454886008
+        ],
+        "residual_px": [
+          0.13,
+          0.39
+        ],
+        "mesh_residual_data": [
+          0.000362393631239577,
+          -3.63344647683486e-05
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.00025783148982951655,
+      0.00019424208482535476
+    ],
+    "affine_max_abs_residual_data": [
+      0.0005831894194599785,
+      0.00032380570230790273
+    ],
+    "data_per_px": [
+      0.0007013501504344877,
+      -0.0002799885733723584
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.351,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "horizontal",
+        "value": 0.01,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.355,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.02,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.356,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "horizontal",
+        "value": 0.03,
+        "samples": 234,
+        "used": 234,
+        "rms_px": 0.406,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "horizontal",
+        "value": 0.04,
+        "samples": 234,
+        "used": 234,
+        "rms_px": 0.359,
+        "max_warp_px": 0.22
+      },
+      {
+        "line": "horizontal",
+        "value": 0.05,
+        "samples": 234,
+        "used": 233,
+        "rms_px": 0.383,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "horizontal",
+        "value": 0.06,
+        "samples": 235,
+        "used": 234,
+        "rms_px": 0.382,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.07,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.391,
+        "max_warp_px": 0.22
+      },
+      {
+        "line": "horizontal",
+        "value": 0.08,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.368,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "horizontal",
+        "value": 0.09,
+        "samples": 234,
+        "used": 234,
+        "rms_px": 0.384,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "horizontal",
+        "value": 0.1,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.332,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "horizontal",
+        "value": 0.11,
+        "samples": 235,
+        "used": 234,
+        "rms_px": 0.387,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "horizontal",
+        "value": 0.12,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.366,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "horizontal",
+        "value": 0.13,
+        "samples": 234,
+        "used": 234,
+        "rms_px": 0.386,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "horizontal",
+        "value": 0.14,
+        "samples": 234,
+        "used": 234,
+        "rms_px": 0.339,
+        "max_warp_px": 0.22
+      },
+      {
+        "line": "horizontal",
+        "value": 0.15,
+        "samples": 235,
+        "used": 234,
+        "rms_px": 0.396,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.16,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.335,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "horizontal",
+        "value": 0.17,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.355,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "horizontal",
+        "value": 0.18,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.395,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "horizontal",
+        "value": 0.19,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.385,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "horizontal",
+        "value": 0.2,
+        "samples": 235,
+        "used": 235,
+        "rms_px": 0.372,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": -0.2,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.345,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "vertical",
+        "value": -0.175,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.336,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "vertical",
+        "value": -0.15,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.326,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": -0.125,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.344,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": -0.1,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.342,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": -0.075,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.338,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "vertical",
+        "value": -0.05,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.378,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "vertical",
+        "value": -0.025,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.359,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "vertical",
+        "value": 0.0,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.359,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.025,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.339,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.05,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.322,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.075,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.35,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "vertical",
+        "value": 0.1,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.34,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.125,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.428,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.15,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.311,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.175,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.376,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "vertical",
+        "value": 0.2,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.312,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.225,
+        "samples": 116,
+        "used": 115,
+        "rms_px": 0.346,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.25,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.347,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.275,
+        "samples": 116,
+        "used": 116,
+        "rms_px": 0.328,
+        "max_warp_px": 0.1
+      },
+      {
+        "line": "vertical",
+        "value": 0.3,
+        "samples": 116,
+        "used": 116,
+        "rms_px": 0.322,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.325,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.364,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "vertical",
+        "value": 0.35,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.354,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": 0.375,
+        "samples": 116,
+        "used": 116,
+        "rms_px": 0.315,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.326,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "vertical",
+        "value": 0.425,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.331,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.45,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.346,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.475,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.334,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.32,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.525,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.323,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 0.55,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.325,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.575,
+        "samples": 116,
+        "used": 116,
+        "rms_px": 0.314,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 116,
+        "used": 116,
+        "rms_px": 0.32,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.625,
+        "samples": 115,
+        "used": 114,
+        "rms_px": 0.343,
+        "max_warp_px": 0.12
+      },
+      {
+        "line": "vertical",
+        "value": 0.65,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.334,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 0.675,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.313,
+        "max_warp_px": 0.11
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.356,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.725,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.332,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.75,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.311,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.775,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.346,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 117,
+        "used": 117,
+        "rms_px": 0.348,
+        "max_warp_px": 0.19
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06f-drag-47deg-root12-t06-M1.600",
+      "wing": "47",
+      "mach": 1.6,
+      "kind": "symbols",
+      "symbol": "hollow circle without centre dot, radius about 13 px",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            591,
+            1540
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.11,
+            "ring_pixels": 159,
+            "ring_rms_px": 0.94,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            591.13,
+            1539.75
+          ],
+          "data": [
+            -0.09930069884812015,
+            0.029298481647951995
+          ],
+          "affine_data": [
+            -0.09952730798461601,
+            0.029275363887333095
+          ],
+          "value": {
+            "CL": -0.09930069884812015,
+            "CD": 0.029298481647951995
+          },
+          "note": "lowest C_L; heavy -0.10 C_L line through its centre, 0.03 C_D line close to its centre; curve leaves the right edge"
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            747.5,
+            1550
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.82,
+            "ring_pixels": 189,
+            "ring_rms_px": 1.13,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            746.82,
+            1550.94
+          ],
+          "data": [
+            0.010116923443442475,
+            0.025962512069873267
+          ],
+          "affine_data": [
+            0.009624169593504317,
+            0.02594312102673324
+          ],
+          "value": {
+            "CL": 0.010116923443442475,
+            "CD": 0.025962512069873267
+          },
+          "note": "left edge about 2 px from the heavy C_L = 0 axis line (left stroke at x 734.5-735, axis line at 733, merged in places), top edge merged with the 0.03 C_D line, faired curve through it. Ring fit accepted, but its radius (13.8 px) is the largest of the page (others 12.7-13.1). Chord midpoints read from the grey values (rows 1546 and 1555-1556: left stroke about 734.7, right about 759.5-760; columns 749-751: top about 1537.3, bottom about 1564) put the centre about 0.4 px right of and 0.3 px above the fitted one. Fit stable within 0.3 px for ring_level 60-130 and ring_window 22-26."
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            896.5,
+            1537
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.07,
+            "ring_pixels": 157,
+            "ring_rms_px": 0.83,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            896.29,
+            1537.5
+          ],
+          "data": [
+            0.11520073889691992,
+            0.029555902987086897
+          ],
+          "affine_data": [
+            0.11450509413840115,
+            0.029514953834767932
+          ],
+          "value": {
+            "CL": 0.11520073889691992,
+            "CD": 0.029555902987086897
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1042.5,
+            1499
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 12.84,
+            "ring_pixels": 183,
+            "ring_rms_px": 0.97,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1043.49,
+            1499.47
+          ],
+          "data": [
+            0.21832144911191284,
+            0.04006285415557605
+          ],
+          "affine_data": [
+            0.21788564958488776,
+            0.03997460962210864
+          ],
+          "value": {
+            "CL": 0.21832144911191284,
+            "CD": 0.04006285415557605
+          },
+          "note": "heavy 0.04 C_D line through its centre"
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1195.5,
+            1435
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 13.04,
+            "ring_pixels": 193,
+            "ring_rms_px": 1.03,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1195.58,
+            1435.84
+          ],
+          "data": [
+            0.3249942365823786,
+            0.05747795370128525
+          ],
+          "affine_data": [
+            0.32479126928500424,
+            0.057595717220474685
+          ],
+          "value": {
+            "CL": 0.3249942365823786,
+            "CD": 0.05747795370128525
+          },
+          "note": "heavy 0.06 C_D line across its upper part, 0.325 C_L line through it"
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1340,
+            1347
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 12.84,
+            "ring_pixels": 168,
+            "ring_rms_px": 0.95,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1340.75,
+            1348.87
+          ],
+          "data": [
+            0.42717198273393175,
+            0.08150358577743154
+          ],
+          "affine_data": [
+            0.4269305804558423,
+            0.08176061072212248
+          ],
+          "value": {
+            "CL": 0.42717198273393175,
+            "CD": 0.08150358577743154
+          },
+          "note": "0.425 C_L line through it"
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1476.5,
+            1233
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 12.69,
+            "ring_pixels": 171,
+            "ring_rms_px": 0.9,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1476.53,
+            1235.53
+          ],
+          "data": [
+            0.5229110427587054,
+            0.11316775041997879
+          ],
+          "affine_data": [
+            0.5225825470506157,
+            0.11332081531996335
+          ],
+          "value": {
+            "CL": 0.5229110427587054,
+            "CD": 0.11316775041997879
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1614.5,
+            1093
+          ],
+          "snap": "ring",
+          "found": true,
+          "ring": {
+            "ring_radius_px": 12.94,
+            "ring_pixels": 172,
+            "ring_rms_px": 1.0,
+            "ring_sectors_of_16": 16
+          },
+          "px": [
+            1614.15,
+            1094.73
+          ],
+          "data": [
+            0.6198157688397157,
+            0.1526869635599695
+          ],
+          "affine_data": [
+            0.6196273958524398,
+            0.1525671522718845
+          ],
+          "value": {
+            "CL": 0.6198157688397157,
+            "CD": 0.1526869635599695
+          },
+          "note": "highest C_L"
+        }
+      ]
+    }
+  ]
+}

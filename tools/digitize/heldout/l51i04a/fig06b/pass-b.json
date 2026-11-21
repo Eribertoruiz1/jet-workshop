@@ -1,0 +1,113 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f"
+  },
+  "figure": {
+    "id": "fig06b",
+    "number": "6(b)",
+    "title": "Figure 6 (continued). Variation with lift coefficient of the aerodynamic characteristics for wing 1. (b) Drag coefficient.",
+    "pdf_page": 20,
+    "printed_page": 19,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis = the M = 0.50 scale: left frame line = -0.2 (label '-.2'), grid every 0.1 (31 vertical lines, about 62 px apart), right frame line = 2.8. The row of labels under the Mach strip reads '-.2 0 0 0 0 0 0 0 0 0 0 0 0 .2 .4 .6': one '0' under every second grid line from common 0.0 to 2.2, each directly below its Mach number in the strip 'M = 0.50 .696 .843 .892 .916 .941 .965 .990 1.010 1.024 1.088 1.112' (each Mach label box spans the two grid cells either side of its zero line), then .2, .4, .6 of the M = 1.112 scale at common 2.4, 2.6 and 2.8 (the right frame).",
+    "y_axis": "Drag coefficient, C_D (common to all Mach numbers). Grid every 0.01 from 0 (the line above the Mach label strip) to 0.22 (top frame line); labels every 0.02.",
+    "content_note": "Wing 1 (47 deg sweep, 4 percent thick). One faired polar per Mach number, 12 Mach numbers, hollow symbols with a centre dot, one shape per Mach number. Only M = 0.50 (circle), 0.843 (diamond), 0.941 (triangle pointing right), 0.990 (right triangle, horizontal top and vertical left side) and 1.112 (D-shaped: horizontal top, vertical left side, curved lower right) are read here. Each polar's symbols were counted by following its faired curve and checked by shape; no doubled (overlapping same-shape) symbols were found on these five polars."
+  },
+  "scan": {
+    "pdf_page": 20,
+    "size_px": [3075, 2194],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51i04a/NACA-RM-L51I04a.ntrs.pdf 20 .cache/l51i04a/scans/p20-cw.png --turn cw: the page's single embedded image (page /Rotate 0) turned a quarter turn clockwise so that the sideways figure reads upright (C_L horizontal, C_D vertical)"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "x_definition": "Common axis = the M = 0.50 C_L scale (its zero is the third vertical line from the left frame, under the '0' below 'M = 0.50'). Each Mach number's C_L = 0 is the grid line above its '0' label: M 0.50 at 0.0, 0.696 at 0.2, 0.843 at 0.4, 0.892 at 0.6, 0.916 at 0.8, 0.941 at 1.0, 0.965 at 1.2, 0.990 at 1.4, 1.010 at 1.6, 1.024 at 1.8, 1.088 at 2.0, 1.112 at 2.2. Reported C_L = common-axis value minus x_offset.",
+    "grid": {
+      "x_lines": {"start": -0.2, "step": 0.1, "count": 31},
+      "y_lines": {"start": 0.0, "step": 0.01, "count": 23}
+    },
+    "points": [
+      {"px": [805.5, 335.6], "x": 0.0, "y": 0.20},
+      {"px": [743, 644], "x": -0.1, "y": 0.15},
+      {"px": [992, 952], "x": 0.3, "y": 0.10},
+      {"px": [1178, 274], "x": 0.6, "y": 0.21},
+      {"px": [1550.5, 274], "x": 1.2, "y": 0.21},
+      {"px": [2296, 335.6], "x": 2.4, "y": 0.20},
+      {"px": [2482.6, 829], "x": 2.7, "y": 0.12},
+      {"px": [2421, 1260], "x": 2.6, "y": 0.05},
+      {"px": [1861, 521], "x": 1.7, "y": 0.17},
+      {"px": [805.5, 1445], "x": 0.0, "y": 0.02},
+      {"px": [2358.7, 1508], "x": 2.5, "y": 0.01},
+      {"px": [2171, 1014], "x": 2.2, "y": 0.09},
+      {"px": [1117, 1568], "x": 0.5, "y": 0.0}
+    ]
+  },
+  "series": [
+    {
+      "id": "fig06b-47deg-t04-M0.500", "wing": "47", "mach": 0.5, "kind": "symbols",
+      "symbol": "circle with centre dot", "x_offset": 0.0, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 2},
+        {"id": "p2", "candidate": 4},
+        {"id": "p3", "candidate": 6, "note": "candidate 7 just above-right of the dot is a 1-px speck inside the circle, not a second dot; the circle's top merges with the C_D = 0.01 line"},
+        {"id": "p4", "candidate": 9, "note": "circle touches the M = 0.843 diamond (candidate 12) on its right"},
+        {"id": "p5", "candidate": 16},
+        {"id": "p6", "candidate": 22, "note": "candidate 23 below it is a speck on the faired curve"},
+        {"id": "p7", "candidate": 25},
+        {"id": "p8", "candidate": 32, "note": "last symbol of the polar, on the C_D = 0.15 line; candidate 33 (2 px, 6 px below the dot) is a remnant of that grid line inside the circle"}
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M0.843", "wing": "47", "mach": 0.843, "kind": "symbols",
+      "symbol": "diamond with centre dot", "x_offset": 0.4, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 12, "note": "diamond touches the M = 0.50 circle (candidate 9) on its left"},
+        {"id": "p2", "candidate": 17},
+        {"id": "p3", "candidate": 24},
+        {"id": "p4", "candidate": 35},
+        {"id": "p5", "candidate": 42},
+        {"id": "p6", "candidate": 45, "note": "candidate 46 above-left is a speck outside the diamond"},
+        {"id": "p7", "candidate": 51, "note": "candidate 52 above is a speck on the faired curve"},
+        {"id": "p8", "candidate": 56, "note": "last symbol of the polar; candidate 57 below it is a speck on the faired curve"}
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M0.941", "wing": "47", "mach": 0.941, "kind": "symbols",
+      "symbol": "triangle pointing right (vertical left side) with centre dot", "x_offset": 1.0, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 39, "note": "vertical side on the grid line at common 0.9; candidate 37 to the left is a speck with no outline"},
+        {"id": "p2", "candidate": 50},
+        {"id": "p3", "candidate": 64, "note": "vertical side on the grid line at common 1.3, directly below the M = 0.990 symbol (candidate 62), whose left side shares that line"},
+        {"id": "p4", "candidate": 71},
+        {"id": "p5", "candidate": 78, "note": "the grid line at common 1.6 runs through the symbol (blank inside it); dot isolated"},
+        {"id": "p6", "candidate": 83},
+        {"id": "p7", "candidate": 85},
+        {"id": "p8", "candidate": 89, "note": "last symbol of the polar"}
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M0.990", "wing": "47", "mach": 0.99, "kind": "symbols",
+      "symbol": "right triangle with horizontal top and vertical left side (hypotenuse from top right to bottom left), with centre dot", "x_offset": 1.4, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 62, "note": "directly above the M = 0.941 triangle (candidate 64); separate outlines and dots"},
+        {"id": "p2", "candidate": 75},
+        {"id": "p3", "candidate": 81, "note": "top edge just under the C_D = 0.02 line; the M = 1.024 symbol (candidate 82) and the M = 1.010 symbol (candidate 84) are next to it"},
+        {"id": "p4", "candidate": 88, "note": "last symbol of the polar"}
+      ]
+    },
+    {
+      "id": "fig06b-47deg-t04-M1.112", "wing": "47", "mach": 1.112, "kind": "symbols",
+      "symbol": "D-shaped symbol: horizontal top, vertical left side, curved lower right side, with centre dot", "x_offset": 2.2, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 95, "note": "overlaps the M = 1.088 right triangle (candidate 97) below it; separate dots"},
+        {"id": "p2", "candidate": 101, "note": "candidate 102 above-right is a 1-px speck outside the outline"},
+        {"id": "p3", "candidate": 104},
+        {"id": "p4", "candidate": 105, "note": "last symbol of the polar; the grid line at common 2.6 runs through the symbol (blank inside it), dot isolated"}
+      ]
+    }
+  ]
+}
