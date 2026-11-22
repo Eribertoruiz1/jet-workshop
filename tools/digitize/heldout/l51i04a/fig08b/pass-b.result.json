@@ -1,0 +1,2163 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig08b",
+    "number": "8(b)",
+    "title": "Figure 8 (continued). Variation with lift coefficient of the aerodynamic characteristics for wing 3. (b) Drag coefficient.",
+    "pdf_page": 26,
+    "printed_page": 25,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis = the M = 0.50 scale: left frame line = -0.2 (label '-.2'), grid every 0.1 (33 vertical lines, about 62 px apart), right frame line = 3.0. The row of labels under the Mach strip reads '-.2' and then '0' thirteen times, one under every second grid line from common 0.0 to 2.4, each below its Mach number in the strip 'M = 0.50 .696 .843 .892 .916 .941 .965 .990 1.010 1.024 1.088 1.112 1.122', then '.2 .4 .6' of the M = 1.122 scale at common 2.6, 2.8 and 3.0 (the right frame).",
+    "y_axis": "Drag coefficient, C_D (common to all Mach numbers). Grid every 0.01 from 0 (the top line of the Mach label strip) to 0.22 (top frame line); labels every 0.02. The C_D = 0 line is not printed right of about common 2.6 (NACA logo box).",
+    "content_note": "Wing 3 (47 deg sweep, 9 percent thick). One faired polar per Mach number, 13 Mach numbers, hollow symbols with a centre dot, one shape per Mach number: circle 0.50, square 0.696, diamond 0.843, triangle 0.892, inverted triangle 0.916, triangle pointing right 0.941, triangle pointing left 0.965, right triangle with horizontal top and vertical left side 0.990, right triangle with horizontal top and vertical right side 1.010, right triangle with vertical left side and horizontal bottom 1.024, right triangle with vertical right side and horizontal bottom 1.088, D-shape (horizontal top, vertical left side, curved lower right) 1.112, mirrored D-shape 1.122. Shapes were tied to Mach numbers by following each faired curve to its minimum near its own C_L = 0. Only M = 0.50, 0.843, 0.941, 0.990 and 1.112 are read here. Overlapping and repeated symbols: M = 0.50 has two overlapping circles at C_L about -0.07 and three circles stacked at the same C_L (about 0.40), drawn 4 to 7 px apart vertically; M = 0.843 has two diamonds 5 px apart horizontally at C_L about -0.08; M = 0.941 has two triangles overlapping, 5 px apart vertically, at C_L about 0.53; M = 0.990 has two overlapping symbols at C_L about -0.05 and two at C_L about 0.56; M = 1.112 has two D-shapes 4 px apart at C_L about -0.06. Where the order of two symbols at the same C_L is a tie, they are listed by increasing C_D."
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "scan": {
+    "pdf_page": 26,
+    "size_px": [
+      3075,
+      2201
+    ],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51i04a/NACA-RM-L51I04a.ntrs.pdf 26 .cache/l51i04a/scans/p26-cw.png --turn cw: the page's single embedded image (page /Rotate 0) turned a quarter turn clockwise so that the sideways figure reads upright (C_L horizontal, C_D vertical)"
+  },
+  "calibration": {
+    "model": "mesh: every grid line fitted with a robust cubic plus a smooth local correction for warping; linear interpolation inside the grid cell (affine fit over the picked intersections only seeds the search)",
+    "grid": {
+      "x_lines": {
+        "start": -0.2,
+        "step": 0.1,
+        "count": 33
+      },
+      "y_lines": {
+        "start": 0.0,
+        "step": 0.01,
+        "count": 23
+      }
+    },
+    "affine_matrix": [
+      [
+        0.0016102269410313706,
+        -4.625702473882521e-06,
+        -1.2718483734731683
+      ],
+      [
+        -3.843583858048499e-07,
+        -0.00016191979376741687,
+        0.25328835498655
+      ]
+    ],
+    "points": [
+      {
+        "picked_px": [
+          789,
+          267
+        ],
+        "px": [
+          789.29,
+          267.0
+        ],
+        "x": 0.0,
+        "y": 0.21,
+        "residual_data": [
+          -0.0021543147196487755,
+          -0.00024759853243197516
+        ],
+        "residual_px": [
+          -1.33,
+          1.53
+        ],
+        "mesh_residual_data": [
+          0.0003168980640730839,
+          -6.631827564415604e-05
+        ]
+      },
+      {
+        "picked_px": [
+          1412,
+          327
+        ],
+        "px": [
+          1412.5,
+          325.5
+        ],
+        "x": 1.0,
+        "y": 0.2,
+        "residual_data": [
+          0.0010915145783938485,
+          4.055589530643777e-05
+        ],
+        "residual_px": [
+          0.68,
+          -0.25
+        ],
+        "mesh_residual_data": [
+          0.00011416206903058779,
+          -4.799895467305637e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2403,
+          322
+        ],
+        "px": [
+          2403.5,
+          321.5
+        ],
+        "x": 2.6,
+        "y": 0.2,
+        "residual_data": [
+          -0.003155084049622392,
+          0.0003073359100435047
+        ],
+        "residual_px": [
+          -1.96,
+          -1.89
+        ],
+        "mesh_residual_data": [
+          0.00032152839901433694,
+          1.9072055015556533e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2591,
+          569
+        ],
+        "px": [
+          2593.02,
+          569.43
+        ],
+        "x": 2.9,
+        "y": 0.16,
+        "residual_data": [
+          0.0008703484503285175,
+          9.032786659504688e-05
+        ],
+        "residual_px": [
+          0.54,
+          -0.56
+        ],
+        "mesh_residual_data": [
+          -0.0007254382272878779,
+          -7.332742808119352e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1103,
+          637
+        ],
+        "px": [
+          1104.0,
+          636.8
+        ],
+        "x": 0.5,
+        "y": 0.15,
+        "residual_data": [
+          0.0028965220900964983,
+          -0.00024650134246959055
+        ],
+        "residual_px": [
+          1.8,
+          1.52
+        ],
+        "mesh_residual_data": [
+          -0.00010047347110053728,
+          -7.481825637922768e-07
+        ]
+      },
+      {
+        "picked_px": [
+          914,
+          944
+        ],
+        "px": [
+          916.5,
+          943.71
+        ],
+        "x": 0.2,
+        "y": 0.1,
+        "residual_data": [
+          -0.00044072352398388803,
+          0.0001300680077375993
+        ],
+        "residual_px": [
+          -0.28,
+          -0.8
+        ],
+        "mesh_residual_data": [
+          -1.6037206779506707e-06,
+          2.449304830444421e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2528,
+          818
+        ],
+        "px": [
+          2531.0,
+          817.5
+        ],
+        "x": 2.8,
+        "y": 0.12,
+        "residual_data": [
+          -0.00014549749516756805,
+          -5.388749278537053e-05
+        ],
+        "residual_px": [
+          -0.09,
+          0.33
+        ],
+        "mesh_residual_data": [
+          -0.00018838990513936338,
+          -7.928890491185059e-06
+        ]
+      },
+      {
+        "picked_px": [
+          2346,
+          942
+        ],
+        "px": [
+          2347.0,
+          941.5
+        ],
+        "x": 2.5,
+        "y": 0.1,
+        "residual_data": [
+          0.002999158248298439,
+          -6.121997695698878e-05
+        ],
+        "residual_px": [
+          1.86,
+          0.37
+        ],
+        "mesh_residual_data": [
+          6.496078270856742e-05,
+          -1.512627053834592e-05
+        ]
+      },
+      {
+        "picked_px": [
+          2469,
+          1188
+        ],
+        "px": [
+          2471.0,
+          1188.0
+        ],
+        "x": 2.7,
+        "y": 0.06,
+        "residual_data": [
+          0.0015270632763759728,
+          -2.2109580465029532e-05
+        ],
+        "residual_px": [
+          0.95,
+          0.13
+        ],
+        "mesh_residual_data": [
+          0.0,
+          -3.48989570841049e-05
+        ]
+      },
+      {
+        "picked_px": [
+          852,
+          1314
+        ],
+        "px": [
+          856.0,
+          1314.0
+        ],
+        "x": 0.1,
+        "y": 0.04,
+        "residual_data": [
+          0.00042771499900337573,
+          0.00019673519791527788
+        ],
+        "residual_px": [
+          0.26,
+          -1.22
+        ],
+        "mesh_residual_data": [
+          -1.1960357499743446e-05,
+          4.1721909517511424e-07
+        ]
+      },
+      {
+        "picked_px": [
+          2281,
+          1437
+        ],
+        "px": [
+          2283.5,
+          1436.4
+        ],
+        "x": 2.4,
+        "y": 0.02,
+        "residual_data": [
+          -0.0015395126615183052,
+          -0.00017091915495296914
+        ],
+        "residual_px": [
+          -0.95,
+          1.06
+        ],
+        "mesh_residual_data": [
+          2.3441675761848302e-05,
+          2.190154352686019e-06
+        ]
+      },
+      {
+        "picked_px": [
+          980,
+          1560
+        ],
+        "px": [
+          980.69,
+          1560.95
+        ],
+        "x": 0.3,
+        "y": 0.0,
+        "residual_data": [
+          6.606482334131636e-05,
+          0.00016292371998816169
+        ],
+        "residual_px": [
+          0.04,
+          -1.01
+        ],
+        "mesh_residual_data": [
+          -0.0003923220310379505,
+          4.229144388459213e-06
+        ]
+      },
+      {
+        "picked_px": [
+          1910,
+          1499
+        ],
+        "px": [
+          1910.5,
+          1499.0
+        ],
+        "x": 1.8,
+        "y": 0.01,
+        "residual_data": [
+          -0.002443730641084718,
+          -0.00016373256688808312
+        ],
+        "residual_px": [
+          -1.51,
+          1.01
+        ],
+        "mesh_residual_data": [
+          -5.7492728284813666e-06,
+          -9.407717524046594e-06
+        ]
+      },
+      {
+        "picked_px": [
+          729,
+          1130
+        ],
+        "px": [
+          731.0,
+          1130.0
+        ],
+        "x": -0.1,
+        "y": 0.07,
+        "residual_data": [
+          4.7662527649650066e-07,
+          3.802204934558184e-05
+        ],
+        "residual_px": [
+          -0.0,
+          -0.23
+        ],
+        "mesh_residual_data": [
+          -8.620114893900799e-06,
+          2.7468010231762596e-05
+        ]
+      }
+    ],
+    "affine_rms_residual_data": [
+      0.0017929600579845964,
+      0.00016324865834798114
+    ],
+    "affine_max_abs_residual_data": [
+      0.003155084049622392,
+      0.0003073359100435047
+    ],
+    "data_per_px": [
+      0.0016102269410316339,
+      -0.00016191979376742327
+    ],
+    "grid_lines": [
+      {
+        "line": "horizontal",
+        "value": 0.0,
+        "samples": 296,
+        "used": 293,
+        "rms_px": 0.296,
+        "max_warp_px": 0.27
+      },
+      {
+        "line": "horizontal",
+        "value": 0.01,
+        "samples": 303,
+        "used": 301,
+        "rms_px": 0.305,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "horizontal",
+        "value": 0.02,
+        "samples": 321,
+        "used": 321,
+        "rms_px": 0.255,
+        "max_warp_px": 0.31
+      },
+      {
+        "line": "horizontal",
+        "value": 0.03,
+        "samples": 324,
+        "used": 320,
+        "rms_px": 0.272,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "horizontal",
+        "value": 0.04,
+        "samples": 325,
+        "used": 324,
+        "rms_px": 0.272,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "horizontal",
+        "value": 0.05,
+        "samples": 324,
+        "used": 323,
+        "rms_px": 0.214,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "horizontal",
+        "value": 0.06,
+        "samples": 326,
+        "used": 326,
+        "rms_px": 0.179,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "horizontal",
+        "value": 0.07,
+        "samples": 326,
+        "used": 326,
+        "rms_px": 0.235,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "horizontal",
+        "value": 0.08,
+        "samples": 318,
+        "used": 314,
+        "rms_px": 0.238,
+        "max_warp_px": 0.3
+      },
+      {
+        "line": "horizontal",
+        "value": 0.09,
+        "samples": 326,
+        "used": 326,
+        "rms_px": 0.184,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "horizontal",
+        "value": 0.1,
+        "samples": 326,
+        "used": 326,
+        "rms_px": 0.159,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.11,
+        "samples": 327,
+        "used": 327,
+        "rms_px": 0.158,
+        "max_warp_px": 0.33
+      },
+      {
+        "line": "horizontal",
+        "value": 0.12,
+        "samples": 319,
+        "used": 317,
+        "rms_px": 0.165,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "horizontal",
+        "value": 0.13,
+        "samples": 327,
+        "used": 327,
+        "rms_px": 0.145,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.14,
+        "samples": 328,
+        "used": 327,
+        "rms_px": 0.176,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "horizontal",
+        "value": 0.15,
+        "samples": 328,
+        "used": 328,
+        "rms_px": 0.178,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "horizontal",
+        "value": 0.16,
+        "samples": 327,
+        "used": 327,
+        "rms_px": 0.178,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "horizontal",
+        "value": 0.17,
+        "samples": 328,
+        "used": 328,
+        "rms_px": 0.213,
+        "max_warp_px": 0.36
+      },
+      {
+        "line": "horizontal",
+        "value": 0.18,
+        "samples": 327,
+        "used": 327,
+        "rms_px": 0.195,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "horizontal",
+        "value": 0.19,
+        "samples": 328,
+        "used": 328,
+        "rms_px": 0.229,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "horizontal",
+        "value": 0.2,
+        "samples": 327,
+        "used": 327,
+        "rms_px": 0.193,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "horizontal",
+        "value": 0.21,
+        "samples": 328,
+        "used": 328,
+        "rms_px": 0.214,
+        "max_warp_px": 0.45
+      },
+      {
+        "line": "horizontal",
+        "value": 0.22,
+        "samples": 326,
+        "used": 326,
+        "rms_px": 0.182,
+        "max_warp_px": 0.1
+      },
+      {
+        "line": "vertical",
+        "value": -0.2,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.173,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": -0.1,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.185,
+        "max_warp_px": 0.19
+      },
+      {
+        "line": "vertical",
+        "value": 0.0,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.217,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": 0.1,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.2,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 0.2,
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.179,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 0.3,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.272,
+        "max_warp_px": 0.18
+      },
+      {
+        "line": "vertical",
+        "value": 0.4,
+        "samples": 219,
+        "used": 218,
+        "rms_px": 0.225,
+        "max_warp_px": 0.2
+      },
+      {
+        "line": "vertical",
+        "value": 0.5,
+        "samples": 223,
+        "used": 221,
+        "rms_px": 0.172,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.6,
+        "samples": 214,
+        "used": 214,
+        "rms_px": 0.215,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 0.7,
+        "samples": 219,
+        "used": 218,
+        "rms_px": 0.284,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "vertical",
+        "value": 0.8,
+        "samples": 216,
+        "used": 216,
+        "rms_px": 0.183,
+        "max_warp_px": 0.21
+      },
+      {
+        "line": "vertical",
+        "value": 0.9,
+        "samples": 220,
+        "used": 219,
+        "rms_px": 0.289,
+        "max_warp_px": 0.14
+      },
+      {
+        "line": "vertical",
+        "value": 1.0,
+        "samples": 217,
+        "used": 217,
+        "rms_px": 0.175,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "vertical",
+        "value": 1.1,
+        "samples": 219,
+        "used": 218,
+        "rms_px": 0.236,
+        "max_warp_px": 0.13
+      },
+      {
+        "line": "vertical",
+        "value": 1.2,
+        "samples": 195,
+        "used": 195,
+        "rms_px": 0.2,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "vertical",
+        "value": 1.3,
+        "samples": 223,
+        "used": 222,
+        "rms_px": 0.286,
+        "max_warp_px": 0.24
+      },
+      {
+        "line": "vertical",
+        "value": 1.4,
+        "samples": 220,
+        "used": 220,
+        "rms_px": 0.22,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 1.5,
+        "samples": 220,
+        "used": 219,
+        "rms_px": 0.262,
+        "max_warp_px": 0.34
+      },
+      {
+        "line": "vertical",
+        "value": 1.6,
+        "samples": 221,
+        "used": 221,
+        "rms_px": 0.198,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "vertical",
+        "value": 1.7,
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.261,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "vertical",
+        "value": 1.8,
+        "samples": 216,
+        "used": 215,
+        "rms_px": 0.186,
+        "max_warp_px": 0.15
+      },
+      {
+        "line": "vertical",
+        "value": 1.9,
+        "samples": 223,
+        "used": 223,
+        "rms_px": 0.235,
+        "max_warp_px": 0.26
+      },
+      {
+        "line": "vertical",
+        "value": 2.0,
+        "samples": 211,
+        "used": 211,
+        "rms_px": 0.204,
+        "max_warp_px": 0.17
+      },
+      {
+        "line": "vertical",
+        "value": 2.1,
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.297,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "vertical",
+        "value": 2.2,
+        "samples": 208,
+        "used": 207,
+        "rms_px": 0.234,
+        "max_warp_px": 0.5
+      },
+      {
+        "line": "vertical",
+        "value": 2.3,
+        "samples": 222,
+        "used": 222,
+        "rms_px": 0.255,
+        "max_warp_px": 0.23
+      },
+      {
+        "line": "vertical",
+        "value": 2.4,
+        "samples": 221,
+        "used": 221,
+        "rms_px": 0.178,
+        "max_warp_px": 0.16
+      },
+      {
+        "line": "vertical",
+        "value": 2.5,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.216,
+        "max_warp_px": 0.29
+      },
+      {
+        "line": "vertical",
+        "value": 2.6,
+        "samples": 219,
+        "used": 219,
+        "rms_px": 0.21,
+        "max_warp_px": 0.25
+      },
+      {
+        "line": "vertical",
+        "value": 2.7,
+        "samples": 219,
+        "used": 218,
+        "rms_px": 0.274,
+        "max_warp_px": 0.28
+      },
+      {
+        "line": "vertical",
+        "value": 2.8,
+        "samples": 221,
+        "used": 220,
+        "rms_px": 0.196,
+        "max_warp_px": 0.32
+      },
+      {
+        "line": "vertical",
+        "value": 2.9,
+        "samples": 220,
+        "used": 219,
+        "rms_px": 0.255,
+        "max_warp_px": 0.53
+      },
+      {
+        "line": "vertical",
+        "value": 3.0,
+        "samples": 224,
+        "used": 224,
+        "rms_px": 0.194,
+        "max_warp_px": 0.31
+      }
+    ]
+  },
+  "series": [
+    {
+      "id": "fig08b-47deg-t09-M0.500",
+      "wing": "47",
+      "mach": 0.5,
+      "kind": "symbols",
+      "symbol": "circle with centre dot",
+      "x_offset": 0.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            744.67,
+            1515.89
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 3,
+          "dot_pixels": 9,
+          "px": [
+            744.67,
+            1515.89
+          ],
+          "data": [
+            -0.07775575922272954,
+            0.007371929727824869
+          ],
+          "affine_data": [
+            -0.07977273341847124,
+            0.007549538653303128
+          ],
+          "value": {
+            "CL": -0.07775575922272954,
+            "CD": 0.007371929727824869
+          },
+          "note": "lower-left of two overlapping circles (outline centre about (746,1515.5)); candidate 5, 6 px below the dot, is a 3-px speck inside the circle; candidate 1 at the left frame is a speck with no outline"
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            759.3,
+            1508.3
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            759.3,
+            1508.3
+          ],
+          "data": [
+            -0.05398045551530054,
+            0.0086298538202999
+          ],
+          "affine_data": [
+            -0.05618000418940561,
+            0.008772886724813522
+          ],
+          "value": {
+            "CL": -0.05398045551530054,
+            "CD": 0.0086298538202999
+          },
+          "note": "upper-right of the two overlapping circles (outline: left side x 748.5, right side x 770, top 1497.5, bottom 1519); its centre dot is merged with the upper-right arc of the other circle (the arc is 7 px thick there), so the centre is placed by eye at the outline centre"
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            828.0,
+            1529.29
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 6,
+          "dot_pixels": 7,
+          "px": [
+            828.0,
+            1529.29
+          ],
+          "data": [
+            0.05610121230060173,
+            0.005183314970047299
+          ],
+          "affine_data": [
+            0.05434549316452286,
+            0.00534778483253065
+          ],
+          "value": {
+            "CL": 0.05610121230060173,
+            "CD": 0.005183314970047299
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            903.67,
+            1515.44
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 10,
+          "dot_pixels": 9,
+          "px": [
+            903.67,
+            1515.44
+          ],
+          "data": [
+            0.17759621281607457,
+            0.007467531539203734
+          ],
+          "affine_data": [
+            0.17625543177162983,
+            0.007561289577155489
+          ],
+          "value": {
+            "CL": 0.17759621281607457,
+            "CD": 0.007467531539203734
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            970.5,
+            1481.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 12,
+          "dot_pixels": 12,
+          "px": [
+            970.5,
+            1481.5
+          ],
+          "data": [
+            0.28346444658328607,
+            0.012986401977223701
+          ],
+          "affine_data": [
+            0.28402389458272004,
+            0.013031160706698297
+          ],
+          "value": {
+            "CL": 0.28346444658328607,
+            "CD": 0.012986401977223701
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1040.0,
+            1417.0
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1040.0,
+            1417.0
+          ],
+          "data": [
+            0.3978298490924085,
+            0.02339212249537328
+          ],
+          "affine_data": [
+            0.3962330247939656,
+            0.023448274496883248
+          ],
+          "value": {
+            "CL": 0.3978298490924085,
+            "CD": 0.02339212249537328
+          },
+          "note": "three circles stacked at the same C_L (outline line-centre tops at y 1394, 1398.5 and 1406, bottoms at 1416, 1421 and 1428, all with sides at x 1029.5 and 1050); no isolated dot (candidates.py found none): each centre placed by eye at its outline centre. This is the lowest circle, whose dot is merged with the bottom arc of the top circle"
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1040.0,
+            1410.0
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1040.0,
+            1410.0
+          ],
+          "data": [
+            0.3978687476717524,
+            0.024523140358546407
+          ],
+          "affine_data": [
+            0.3962654047112828,
+            0.024581713053255155
+          ],
+          "value": {
+            "CL": 0.3978687476717524,
+            "CD": 0.024523140358546407
+          },
+          "note": "middle of the three stacked circles (outline centre y 1409.75); a blob at x 1036-1045, y 1409-1412, joined to the top arc of the lowest circle, holds its dot"
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1040.0,
+            1405.0
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1040.0,
+            1405.0
+          ],
+          "data": [
+            0.39785820796880383,
+            0.025331010260812928
+          ],
+          "affine_data": [
+            0.3962885332236523,
+            0.025391312022092244
+          ],
+          "value": {
+            "CL": 0.39785820796880383,
+            "CD": 0.025331010260812928
+          },
+          "note": "top of the three stacked circles (outline centre y 1405); its dot is merged with the top arc of the lowest circle"
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            1113.33,
+            1298.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 18,
+          "dot_pixels": 6,
+          "px": [
+            1113.33,
+            1298.5
+          ],
+          "data": [
+            0.5136619036803194,
+            0.04253631307428072
+          ],
+          "affine_data": [
+            0.5148591121229511,
+            0.042607585057891084
+          ],
+          "value": {
+            "CL": 0.5136619036803194,
+            "CD": 0.04253631307428072
+          },
+          "note": "candidate 17, 4 px to the upper left, is a 2-px speck inside the circle; 18 is the centre dot"
+        },
+        {
+          "id": "p10",
+          "picked_px": [
+            1180.12,
+            1080.88
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 23,
+          "dot_pixels": 8,
+          "px": [
+            1180.12,
+            1080.88
+          ],
+          "data": [
+            0.6229216031020693,
+            0.07772671541016363
+          ],
+          "affine_data": [
+            0.6234128148868026,
+            0.07781889928096841
+          ],
+          "value": {
+            "CL": 0.6229216031020693,
+            "CD": 0.07772671541016363
+          }
+        },
+        {
+          "id": "p11",
+          "picked_px": [
+            1230.07,
+            815.93
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 25,
+          "dot_pixels": 15,
+          "px": [
+            1230.07,
+            815.93
+          ],
+          "data": [
+            0.7018481670468255,
+            0.12072331606225926
+          ],
+          "affine_data": [
+            0.7050692304617747,
+            0.12070034993827458
+          ],
+          "value": {
+            "CL": 0.7018481670468255,
+            "CD": 0.12072331606225926
+          },
+          "note": "last symbol of the polar"
+        }
+      ]
+    },
+    {
+      "id": "fig08b-47deg-t09-M0.843",
+      "wing": "47",
+      "mach": 0.843,
+      "kind": "symbols",
+      "symbol": "diamond with centre dot",
+      "x_offset": 0.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            990.4,
+            1495.8
+          ],
+          "snap": "candidate-centroid",
+          "found": true,
+          "candidate": 13,
+          "px": [
+            990.4,
+            1495.8
+          ],
+          "data": [
+            0.31555119810154914,
+            0.010676434471461677
+          ],
+          "affine_data": [
+            0.3160012631638678,
+            0.010708058923946745
+          ],
+          "value": {
+            "CL": -0.08444880189845089,
+            "CD": 0.010676434471461677
+          },
+          "note": "doubled symbol: two diamonds drawn 5 px apart horizontally (parallel double edges on both sides), each with its own dot (candidates 13 and 14); this is the left one; candidate centroid used because the dot snap would merge the dots"
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            995.17,
+            1495.83
+          ],
+          "snap": "candidate-centroid",
+          "found": true,
+          "candidate": 14,
+          "px": [
+            995.17,
+            1495.83
+          ],
+          "data": [
+            0.32343528880173716,
+            0.010671195158155983
+          ],
+          "affine_data": [
+            0.3236819069015131,
+            0.010701367940633422
+          ],
+          "value": {
+            "CL": -0.07656471119826286,
+            "CD": 0.010671195158155983
+          },
+          "note": "doubled symbol: the right one of the two diamonds; candidate centroid used"
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1089.25,
+            1515.38
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 16,
+          "dot_pixels": 8,
+          "px": [
+            1089.25,
+            1515.38
+          ],
+          "data": [
+            0.4752294655474405,
+            0.007477560539856931
+          ],
+          "affine_data": [
+            0.4750816250303802,
+            0.0074996755355438705
+          ],
+          "value": {
+            "CL": 0.07522946554744048,
+            "CD": 0.007477560539856931
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1188.89,
+            1489.33
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 24,
+          "dot_pixels": 9,
+          "px": [
+            1188.89,
+            1489.33
+          ],
+          "data": [
+            0.6359629238322647,
+            0.011722034302607586
+          ],
+          "affine_data": [
+            0.6356451369841907,
+            0.011679388693623505
+          ],
+          "value": {
+            "CL": 0.2359629238322647,
+            "CD": 0.011722034302607586
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1282.11,
+            1415.67
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 29,
+          "dot_pixels": 9,
+          "px": [
+            1282.11,
+            1415.67
+          ],
+          "data": [
+            0.787680766007443,
+            0.023589570367452628
+          ],
+          "affine_data": [
+            0.7860912216713611,
+            0.0235705708138067
+          ],
+          "value": {
+            "CL": 0.38768076600744295,
+            "CD": 0.023589570367452628
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1361.29,
+            1267.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 33,
+          "dot_pixels": 7,
+          "px": [
+            1361.29,
+            1267.0
+          ],
+          "data": [
+            0.9129001556618611,
+            0.04759313462836375
+          ],
+          "affine_data": [
+            0.914276694049017,
+            0.047612753056220536
+          ],
+          "value": {
+            "CL": 0.5129001556618611,
+            "CD": 0.04759313462836375
+          },
+          "note": "touches the diamond above (candidate 36); separate outlines and dots"
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1372.2,
+            1242.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 36,
+          "dot_pixels": 10,
+          "px": [
+            1372.2,
+            1242.5
+          ],
+          "data": [
+            0.9309828220192725,
+            0.05156329899821939
+          ],
+          "affine_data": [
+            0.9319575996862794,
+            0.05157559465353312
+          ],
+          "value": {
+            "CL": 0.5309828220192725,
+            "CD": 0.05156329899821939
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1436.2,
+            1009.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 39,
+          "dot_pixels": 10,
+          "px": [
+            1436.2,
+            1009.5
+          ],
+          "data": [
+            1.0355717503066677,
+            0.08929684541140959
+          ],
+          "affine_data": [
+            1.036089912588702,
+            0.08927830766464973
+          ],
+          "value": {
+            "CL": 0.6355717503066677,
+            "CD": 0.08929684541140959
+          }
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            1489.0,
+            718.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 42,
+          "dot_pixels": 8,
+          "px": [
+            1489.0,
+            718.5
+          ],
+          "data": [
+            1.1218204998117953,
+            0.1365990175711842
+          ],
+          "affine_data": [
+            1.122455974495058,
+            0.13637667352819755
+          ],
+          "value": {
+            "CL": 0.7218204998117953,
+            "CD": 0.1365990175711842
+          }
+        },
+        {
+          "id": "p10",
+          "picked_px": [
+            1514.0,
+            476.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 44,
+          "dot_pixels": 11,
+          "px": [
+            1514.0,
+            476.0
+          ],
+          "data": [
+            1.1641496508608924,
+            0.17570438225620852
+          ],
+          "affine_data": [
+            1.1638333808707588,
+            0.175632614557151
+          ],
+          "value": {
+            "CL": 0.7641496508608924,
+            "CD": 0.17570438225620852
+          },
+          "note": "last symbol of the polar"
+        }
+      ]
+    },
+    {
+      "id": "fig08b-47deg-t09-M0.941",
+      "wing": "47",
+      "mach": 0.941,
+      "kind": "symbols",
+      "symbol": "triangle pointing right (vertical left side) with centre dot",
+      "x_offset": 1.0,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1379.29,
+            1476.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 37,
+          "dot_pixels": 14,
+          "px": [
+            1379.29,
+            1476.0
+          ],
+          "data": [
+            0.9421873045965459,
+            0.01384394329381328
+          ],
+          "affine_data": [
+            0.9422940071705401,
+            0.013764597707885934
+          ],
+          "value": {
+            "CL": -0.05781269540345413,
+            "CD": 0.01384394329381328
+          }
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1495.3,
+            1480.8
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1495.3,
+            1480.8
+          ],
+          "data": [
+            1.1299619225347888,
+            0.013042097851226384
+          ],
+          "affine_data": [
+            1.1290742312277149,
+            0.01294279328146511
+          ],
+          "value": {
+            "CL": 0.12996192253478878,
+            "CD": 0.013042097851226384
+          },
+          "note": "not found by candidates.py: the faired curve runs into the symbol from the left and its end merges with the centre dot (blob at x 1493-1497, y 1478-1483); centre placed by eye at the outline centroid (left side x 1489 from y 1471 to 1491, apex about (1508,1481))"
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1600.71,
+            1404.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 51,
+          "dot_pixels": 7,
+          "px": [
+            1600.71,
+            1404.0
+          ],
+          "data": [
+            1.299253206700423,
+            0.025362953562541975
+          ],
+          "affine_data": [
+            1.299163507031826,
+            0.02533771822535505
+          ],
+          "value": {
+            "CL": 0.299253206700423,
+            "CD": 0.025362953562541975
+          }
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1690.5,
+            1273.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 55,
+          "dot_pixels": 6,
+          "px": [
+            1690.5,
+            1273.0
+          ],
+          "data": [
+            1.4461796790098143,
+            0.0465329759292606
+          ],
+          "affine_data": [
+            1.4443517510911112,
+            0.0465146996694252
+          ],
+          "value": {
+            "CL": 0.44617967900981426,
+            "CD": 0.0465329759292606
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1745.3,
+            1108.5
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1745.3,
+            1108.5
+          ],
+          "data": [
+            1.5345360925686293,
+            0.07316385127504686
+          ],
+          "affine_data": [
+            1.5333531155165843,
+            0.0731294429046232
+          ],
+          "value": {
+            "CL": 0.5345360925686293,
+            "CD": 0.07316385127504686
+          },
+          "note": "doubled symbol: two triangles drawn 5 px apart vertically on the same left side (x 1739, y 1092 to 1119), two parallel upper edges; neither dot is isolated (the lower edges merge into a dark area). This is the lower triangle (top-left vertex about (1739,1098), apex about (1758,1108.5), bottom-left about (1739,1119)): centre placed by eye at its centroid. Not found by candidates.py"
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            1746.0,
+            1104.3
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1746.0,
+            1104.3
+          ],
+          "data": [
+            1.5356775055844625,
+            0.07384743649606672
+          ],
+          "affine_data": [
+            1.5344997023256965,
+            0.0738092369875763
+          ],
+          "value": {
+            "CL": 0.5356775055844625,
+            "CD": 0.07384743649606672
+          },
+          "note": "doubled symbol: the upper triangle (top-left vertex (1739,1093), apex about (1759,1104), bottom-left about (1739,1114.5)); its dot is probably the stub at x 1746-1747, y 1104-1106 merged with the upper edge of the lower triangle; centre placed by eye between that stub and the outline centroid (1745.7,1103.8)"
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            1801.17,
+            890.67
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 60,
+          "dot_pixels": 6,
+          "px": [
+            1801.17,
+            890.67
+          ],
+          "data": [
+            1.625227510315154,
+            0.10851090506297827
+          ],
+          "affine_data": [
+            1.6243241114818927,
+            0.1083789574779647
+          ],
+          "value": {
+            "CL": 0.6252275103151539,
+            "CD": 0.10851090506297827
+          }
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            1855.0,
+            644.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 64,
+          "dot_pixels": 8,
+          "px": [
+            1855.0,
+            644.5
+          ],
+          "data": [
+            1.711675890524518,
+            0.1484218733863758
+          ],
+          "affine_data": [
+            1.7121413368956069,
+            0.14821806309778185
+          ],
+          "value": {
+            "CL": 0.711675890524518,
+            "CD": 0.1484218733863758
+          }
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            1903.45,
+            365.18
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 67,
+          "dot_pixels": 11,
+          "px": [
+            1903.45,
+            365.18
+          ],
+          "data": [
+            1.7949430891459845,
+            0.19317696273301532
+          ],
+          "affine_data": [
+            1.7914488834035818,
+            0.19342687772910447
+          ],
+          "value": {
+            "CL": 0.7949430891459845,
+            "CD": 0.19317696273301532
+          },
+          "note": "last symbol of the polar"
+        }
+      ]
+    },
+    {
+      "id": "fig08b-47deg-t09-M0.990",
+      "wing": "47",
+      "mach": 0.99,
+      "kind": "symbols",
+      "symbol": "right triangle with horizontal top and vertical left side (hypotenuse from top right to bottom left), with centre dot",
+      "x_offset": 1.4,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            1629.8,
+            1372.0
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1629.8,
+            1372.0
+          ],
+          "data": [
+            1.3471938273847697,
+            0.030530017565375666
+          ],
+          "affine_data": [
+            1.346153031225593,
+            0.030507970640469312
+          ],
+          "value": {
+            "CL": -0.05280617261523024,
+            "CD": 0.030530017565375666
+          },
+          "note": "doubled symbol: two right triangles 11 px apart vertically, sharing the left side (x 1621-1625). This is the lower one (top 1364.5 from x 1622 to 1645, hypotenuse to about (1623,1387)); its dot lies under the hypotenuse of the upper triangle, so the centre is placed by eye at the outline centroid. Not found by candidates.py"
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            1629.5,
+            1361.5
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1629.5,
+            1361.5
+          ],
+          "data": [
+            1.3467110632066575,
+            0.03221805290650965
+          ],
+          "affine_data": [
+            1.3457185330192591,
+            0.03220824378254292
+          ],
+          "value": {
+            "CL": -0.053288936793342456,
+            "CD": 0.03221805290650965
+          },
+          "note": "doubled symbol: the upper triangle (top 1353.5 from x 1624 to 1647, hypotenuse to about (1624,1376)); its dot (x 1628-1631, y 1360-1363) touches the top edge of the lower triangle, so it is picked by hand on the visible dot (outline centroid about (1631,1361))"
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            1722.8,
+            1382.8
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            1722.8,
+            1382.8
+          ],
+          "data": [
+            1.4967897028870192,
+            0.028733232073603957
+          ],
+          "affine_data": [
+            1.4958541791547924,
+            0.02872349153790138
+          ],
+          "value": {
+            "CL": 0.09678970288701927,
+            "CD": 0.028733232073603957
+          },
+          "note": "top edge lies on the C_D = 0.03 line, vertical left side at x 1715.5 from y 1376 to 1397; the faired curve enters along the hypotenuse; the vertical grid line at common 1.5 is erased inside. The dot (x 1721-1724, y 1382-1384) touches the hypotenuse; centre placed by eye on it, within 0.5 px of the outline centroid (1723,1382.3). Not found by candidates.py"
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            1821.67,
+            1333.44
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 62,
+          "dot_pixels": 9,
+          "px": [
+            1821.67,
+            1333.44
+          ],
+          "data": [
+            1.656343471481411,
+            0.03666157714119559
+          ],
+          "affine_data": [
+            1.6552856414886747,
+            0.03667785104465651
+          ],
+          "value": {
+            "CL": 0.256343471481411,
+            "CD": 0.03666157714119559
+          }
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            1920,
+            1223.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "dot_pixels": 10,
+          "px": [
+            1920.0,
+            1223.5
+          ],
+          "data": [
+            1.8153001044966075,
+            0.054447971866140366
+          ],
+          "affine_data": [
+            1.814127806330268,
+            0.05444151921137014
+          ],
+          "value": {
+            "CL": 0.4153001044966076,
+            "CD": 0.054447971866140366
+          },
+          "note": "hand pick on an isolated 3 x 4 dot not found by candidates.py; the vertical left side runs along the grid line at common 1.8"
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            2007.7,
+            1059.7
+          ],
+          "snap": "none",
+          "found": true,
+          "px": [
+            2007.7,
+            1059.7
+          ],
+          "data": [
+            1.9557463641216537,
+            0.0810824667981817
+          ],
+          "affine_data": [
+            1.9561023991239415,
+            0.08093027320003796
+          ],
+          "value": {
+            "CL": 0.5557463641216538,
+            "CD": 0.0810824667981817
+          },
+          "note": "doubled symbol: two right triangles 14 px apart vertically at C_L about 0.56. This is the lower one (top 1052 from x 2000 to 2023, left side x 2000.5, hypotenuse to about (2001,1075)); its dot is lost in a solid black area where the hypotenuse of the upper triangle crosses it, so the centre is placed by eye at the outline centroid. The C_D = 0.13 line crosses it"
+        },
+        {
+          "id": "p7",
+          "picked_px": [
+            2010.5,
+            1045.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 72,
+          "dot_pixels": 8,
+          "px": [
+            2010.5,
+            1045.5
+          ],
+          "data": [
+            1.9603651493549765,
+            0.08335650535587583
+          ],
+          "affine_data": [
+            1.960676719533958,
+            0.08322845806805498
+          ],
+          "value": {
+            "CL": 0.5603651493549766,
+            "CD": 0.08335650535587583
+          },
+          "note": "doubled symbol: the upper of the two triangles at C_L about 0.56 (top 1038 from x 2003 to 2026)"
+        },
+        {
+          "id": "p8",
+          "picked_px": [
+            2086.5,
+            823.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 77,
+          "dot_pixels": 4,
+          "px": [
+            2086.5,
+            823.5
+          ],
+          "data": [
+            2.0828144498232373,
+            0.11919484583042055
+          ],
+          "affine_data": [
+            2.0840808730015445,
+            0.11914544104710037
+          ],
+          "value": {
+            "CL": 0.6828144498232374,
+            "CD": 0.11919484583042055
+          },
+          "note": "added after the comparison with pass A, confirmed on the scan; not independent of pass A"
+        },
+        {
+          "id": "p9",
+          "picked_px": [
+            2147.2,
+            545.6
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 81,
+          "dot_pixels": 5,
+          "px": [
+            2147.2,
+            545.6
+          ],
+          "data": [
+            2.1844030284241223,
+            0.1640686380502938
+          ],
+          "affine_data": [
+            2.18310713103964,
+            0.16411962118104717
+          ],
+          "value": {
+            "CL": 0.7844030284241224,
+            "CD": 0.1640686380502938
+          },
+          "note": "added after the comparison with pass A, confirmed on the scan; not independent of pass A"
+        },
+        {
+          "id": "p10",
+          "picked_px": [
+            2203.0,
+            232.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 84,
+          "dot_pixels": 8,
+          "px": [
+            2203.0,
+            232.5
+          ],
+          "data": [
+            2.2763647670829865,
+            0.21473657950051644
+          ],
+          "affine_data": [
+            2.2744061017937636,
+            0.2147952614116975
+          ],
+          "value": {
+            "CL": 0.8763647670829866,
+            "CD": 0.21473657950051644
+          },
+          "note": "last symbol of the polar. Added after the comparison with pass A, confirmed on the scan; not independent of pass A"
+        }
+      ]
+    },
+    {
+      "id": "fig08b-47deg-t09-M1.112",
+      "wing": "47",
+      "mach": 1.112,
+      "kind": "symbols",
+      "symbol": "D-shape: horizontal top, vertical left side, curved lower right side, with centre dot",
+      "x_offset": 2.2,
+      "x_variable": "CL",
+      "y_variable": "CD",
+      "points": [
+        {
+          "id": "p1",
+          "picked_px": [
+            2120.57,
+            1351.71
+          ],
+          "snap": "candidate-centroid",
+          "found": true,
+          "candidate": 78,
+          "px": [
+            2120.57,
+            1351.71
+          ],
+          "data": [
+            2.137591143107612,
+            0.033614412697881985
+          ],
+          "affine_data": [
+            2.136497962578754,
+            0.03360469169100874
+          ],
+          "value": {
+            "CL": -0.062408856892388176,
+            "CD": 0.033614412697881985
+          },
+          "note": "doubled symbol: two D-shapes sharing the top line (y 1343), vertical left sides at x 2112 and 2116.5, two parallel curved sides; dots 78 and 79 are 4 px apart (candidate 80 is a 1-px speck). This is the left D-shape; candidate centroid used because the dot snap would merge the dots"
+        },
+        {
+          "id": "p2",
+          "picked_px": [
+            2124.5,
+            1350.5
+          ],
+          "snap": "candidate-centroid",
+          "found": true,
+          "candidate": 79,
+          "px": [
+            2124.5,
+            1350.5
+          ],
+          "data": [
+            2.1441393344766744,
+            0.03380883074012276
+          ],
+          "affine_data": [
+            2.1428317515570003,
+            0.033799104113011125
+          ],
+          "value": {
+            "CL": -0.0558606655233258,
+            "CD": 0.03380883074012276
+          },
+          "note": "doubled symbol: the right D-shape; candidate centroid used"
+        },
+        {
+          "id": "p3",
+          "picked_px": [
+            2210.88,
+            1364.12
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 86,
+          "dot_pixels": 8,
+          "px": [
+            2210.88,
+            1364.12
+          ],
+          "data": [
+            2.281407890591908,
+            0.031592595406372985
+          ],
+          "affine_data": [
+            2.281860152655596,
+            0.031560555644533084
+          ],
+          "value": {
+            "CL": 0.08140789059190778,
+            "CD": 0.031592595406372985
+          },
+          "note": "top-right corner on the grid line at common 2.3"
+        },
+        {
+          "id": "p4",
+          "picked_px": [
+            2298.29,
+            1321.0
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 89,
+          "dot_pixels": 7,
+          "px": [
+            2298.29,
+            1321.0
+          ],
+          "data": [
+            2.42331413852258,
+            0.03852374197967891
+          ],
+          "affine_data": [
+            2.422809549861822,
+            0.03850894038528088
+          ],
+          "value": {
+            "CL": 0.22331413852257986,
+            "CD": 0.03852374197967891
+          },
+          "note": "top on the C_D = 0.04 line"
+        },
+        {
+          "id": "p5",
+          "picked_px": [
+            2387.2,
+            1216.5
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 91,
+          "dot_pixels": 10,
+          "px": [
+            2387.2,
+            1216.5
+          ],
+          "data": [
+            2.5668850857768937,
+            0.055440525431582836
+          ],
+          "affine_data": [
+            2.5664582130974414,
+            0.05539538552989404
+          ],
+          "value": {
+            "CL": 0.3668850857768935,
+            "CD": 0.055440525431582836
+          }
+        },
+        {
+          "id": "p6",
+          "picked_px": [
+            2473.11,
+            1072.33
+          ],
+          "snap": "dot",
+          "found": true,
+          "candidate": 93,
+          "dot_pixels": 9,
+          "px": [
+            2473.11,
+            1072.33
+          ],
+          "data": [
+            2.7034589559631024,
+            0.0788745053677063
+          ],
+          "affine_data": [
+            2.7054596971271065,
+            0.07870634196841805
+          ],
+          "value": {
+            "CL": 0.5034589559631022,
+            "CD": 0.0788745053677063
+          },
+          "note": "last symbol of the polar"
+        }
+      ]
+    }
+  ]
+}

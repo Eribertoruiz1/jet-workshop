@@ -1,0 +1,120 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig09b",
+    "number": "9(b)",
+    "title": "Figure 9 (continued). Variation with lift coefficient of the aerodynamic characteristics for wing 4. (b) Drag coefficient.",
+    "pdf_page": 29,
+    "printed_page": 28,
+    "x_axis": "Lift coefficient, C_L, on staggered scales. Common axis = the M = 0.50 scale: left frame line = -0.2 (label '-.2'), grid every 0.1 (33 vertical lines, about 62.4 px apart), right frame line = 3.0. The row of labels under the Mach strip reads '-.2' and then '0' thirteen times, one under every second grid line from common 0.0 to 2.4, each below its Mach number in the strip 'M = 0.50 .70 .85 .90 .925 .95 .975 1.00 1.02 1.035 1.085 1.10 1.121', then '.2 .4 .6' of the M = 1.121 scale at common 2.6, 2.8 and 3.0 (the right frame).",
+    "y_axis": "Drag coefficient, C_D (common to all Mach numbers). Grid every 0.01 from 0 (the top line of the Mach label strip) to 0.20 (top frame line, label '.20'); labels every 0.02. The C_D = 0 line is not printed right of about common 2.5 (NACA logo box).",
+    "content_note": "Wing 4 (47 deg sweep, thickened root: 12 percent at the root to 6 percent at 40 percent semispan, 6 percent outboard). One faired polar per Mach number, 13 Mach numbers, hollow symbols with a centre dot, one shape per Mach number: circle 0.50, square 0.70, diamond 0.85, triangle 0.90, inverted triangle 0.925, triangle pointing right 0.95, triangle pointing left 0.975, right triangle with horizontal top and vertical left side 1.00, right triangle with horizontal top and vertical right side 1.02, right triangle with vertical left side and horizontal bottom 1.035, right triangle with vertical right side and horizontal bottom 1.085, D-shape (horizontal top, vertical left side, curved lower right) 1.10, mirrored D-shape (horizontal top, vertical right side, curved lower left) 1.121. Shapes were tied to Mach numbers by following each faired curve to its minimum near its own C_L = 0. Only M = 0.50, 0.85, 0.95, 1.00 and 1.10 are read here. Repeated and odd symbols: M = 0.50 has three overlapping circles at C_L about 0.41 (two dots visible, the third dot hidden), and one symbol at C_L about 0.06 drawn as two concentric circles (radii about 8.5 and 13.5 px, the usual circle is about 11 px) with a single centre dot, counted once. Where the order of two symbols at the same C_L is a tie, they are listed by increasing C_D."
+  },
+  "scan": {
+    "pdf_page": 29,
+    "size_px": [3085, 2195],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51i04a/NACA-RM-L51I04a.ntrs.pdf 29 .cache/l51i04a/scans/p29-cw.png --turn cw: the page's single embedded image (page /Rotate 0) turned a quarter turn clockwise so that the sideways figure reads upright (C_L horizontal, C_D vertical)"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "candidates_file": "candidates.json",
+  "calibration": {
+    "x_definition": "Common axis = the M = 0.50 C_L scale (its zero is the third vertical line from the left frame, under the first '0'). Each Mach number's C_L = 0 is the grid line above its '0' label: M 0.50 at 0.0, 0.70 at 0.2, 0.85 at 0.4, 0.90 at 0.6, 0.925 at 0.8, 0.95 at 1.0, 0.975 at 1.2, 1.00 at 1.4, 1.02 at 1.6, 1.035 at 1.8, 1.085 at 2.0, 1.10 at 2.2, 1.121 at 2.4. Reported C_L = common-axis value minus x_offset.",
+    "grid": {
+      "x_lines": {"start": -0.2, "step": 0.1, "count": 33},
+      "y_lines": {"start": 0.0, "step": 0.01, "count": 21}
+    },
+    "points": [
+      {"px": [720, 340], "x": 0.0, "y": 0.19},
+      {"px": [1344, 340], "x": 1.0, "y": 0.19},
+      {"px": [2030, 341], "x": 2.1, "y": 0.19},
+      {"px": [2530, 527], "x": 2.9, "y": 0.16},
+      {"px": [1031, 587], "x": 0.5, "y": 0.15},
+      {"px": [844, 897], "x": 0.2, "y": 0.10},
+      {"px": [2217, 774], "x": 2.4, "y": 0.12},
+      {"px": [2405, 1022], "x": 2.7, "y": 0.08},
+      {"px": [781, 1267], "x": 0.1, "y": 0.04},
+      {"px": [1968, 1083], "x": 2.0, "y": 0.07},
+      {"px": [2279, 1392], "x": 2.5, "y": 0.02},
+      {"px": [1905, 1453], "x": 1.9, "y": 0.01},
+      {"px": [2030, 1516], "x": 2.1, "y": 0.0},
+      {"px": [657, 1144], "x": -0.1, "y": 0.06}
+    ]
+  },
+  "series": [
+    {
+      "id": "fig09b-47deg-root12-t06-M0.500", "wing": "47", "mach": 0.5, "kind": "symbols",
+      "symbol": "circle with centre dot", "x_offset": 0.0, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "px": [681.0, 1455.0], "snap": "none", "note": "the C_D = 0.01 line is not erased inside this circle and the centre dot (x 680-682, y 1454-1456) touches it, so the centre is placed by eye on the dot, at the outline centre (680.75,1455). Candidate 2, 5 px lower left, is a speck, not the dot"},
+        {"id": "p2", "candidate": 4, "note": "drawn as two concentric circles (line-centre radii about 8.5 and 13.5 px, both centred on the dot) with a single centre dot; counted as one symbol"},
+        {"id": "p3", "candidate": 11, "note": "candidates 10 and 12 either side of the dot are remnants of the C_D = 0.01 line, erased inside the circle"},
+        {"id": "p4", "px": [906.0, 1408.5], "snap": "none", "note": "the vertical grid line at common 0.3 is erased inside the circle but leaves a 1-px remnant that touches the centre dot (x 905-907, y 1407-1409); centre placed by eye on the dot (outline centre (906,1409.3)). Not found by candidates.py"},
+        {"id": "p5", "px": [976.5, 1326.5], "snap": "none", "note": "three overlapping circles at about the same C_L (found as three full rings of radius 11 px centred near (982,1320.5), (982,1325.5) and (977,1326.5)). This is the left one; its dot is merged with the left arc of the right lower circle (the arc is 7 px thick at y 1325-1328), so the centre is placed by eye at the ring centre"},
+        {"id": "p6", "candidate": 19, "snap": "candidate", "note": "three overlapping circles: the right lower one (top arc at y 1315, bottom arc at 1336); its dot is 4.5 px below dot 20, so the candidate centroid is used"},
+        {"id": "p7", "candidate": 20, "snap": "candidate", "note": "three overlapping circles: the upper one (top arc at y 1309.5, bottom merged with the C_D = 0.03 line); candidate centroid used"},
+        {"id": "p8", "candidate": 23},
+        {"id": "p9", "px": [1094.2, 1000.5], "snap": "none", "note": "circle on the grid line at common 0.6; the centre dot (x 1092-1096, y 998-1002) touches a 1-px remnant of that grid line inside the circle, so the centre is placed by eye on the dot (outline centre (1094.3,1001)). Not found by candidates.py"},
+        {"id": "p10", "candidate": 28, "note": "last symbol of the polar"}
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M0.850", "wing": "47", "mach": 0.85, "kind": "symbols",
+      "symbol": "diamond with centre dot", "x_offset": 0.4, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 15, "dot_radius": 3, "note": "candidate 16, 4 px below the dot, is a remnant of the C_D = 0.01 line inside the diamond; dot radius 3 keeps it out of the snap window"},
+        {"id": "p2", "px": [1031.0, 1468.5], "snap": "none", "note": "the vertical grid line at common 0.5 is erased inside the diamond but leaves a 1-px remnant (x 1028) joined to the centre dot (x 1029-1034, y 1467-1470); centre placed by eye on the dot, at the outline centre (1031,1468.5). Not found by candidates.py"},
+        {"id": "p3", "candidate": 26},
+        {"id": "p4", "candidate": 31},
+        {"id": "p5", "candidate": 35, "note": "lowest of three diamonds touching one another (candidates 35, 36, 38); candidate 34 at its upper left is a speck"},
+        {"id": "p6", "candidate": 36},
+        {"id": "p7", "candidate": 38, "note": "upper of the three touching diamonds; candidate 37 is a remnant of the C_D = 0.06 line inside it, candidate 40 above is a speck"},
+        {"id": "p8", "candidate": 44, "note": "candidate 43, 20 px above, is a speck outside the diamond"},
+        {"id": "p9", "candidate": 47},
+        {"id": "p10", "candidate": 52, "note": "last symbol of the polar"}
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M0.950", "wing": "47", "mach": 0.95, "kind": "symbols",
+      "symbol": "triangle pointing right (vertical left side) with centre dot", "x_offset": 1.0, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 33, "note": "vertical side on the grid line at common 0.9"},
+        {"id": "p2", "px": [1413.0, 1458.0], "snap": "none", "note": "second triangle 19 px left of candidate 49 (left side on the grid line at common 1.0, x 1404, from y 1445 to 1468; apex about (1424.5,1456.5)); its centre dot (x 1412-1414, y 1457-1459) touches a remnant of the C_D = 0.01 line above it, so the centre is placed by eye on the visible dot, 2 px right of the outline centroid (1410.8,1456.5). Added after the comparison with pass A, confirmed on the scan; not independent of pass A"},
+        {"id": "p3", "candidate": 49, "dot_radius": 3, "note": "candidate 48 is a remnant of the C_D = 0.01 line inside the triangle; dot radius 3 keeps it out of the snap window"},
+        {"id": "p4", "candidate": 62, "note": "vertical side on the grid line at common 1.3; directly below the M = 1.00 symbol (candidate 63)"},
+        {"id": "p5", "candidate": 71},
+        {"id": "p6", "px": [1714.0, 1025.0], "snap": "none", "note": "triangle at the crossing of the grid lines at common 1.6 and C_D = 0.08 (left side x 1707 from y 1014 to 1036, apex about (1729,1025)); the centre dot is merged with remnants of both grid lines, so the centre is placed by eye at the outline centroid (1714.3,1025). Not found by candidates.py"},
+        {"id": "p7", "candidate": 79},
+        {"id": "p8", "candidate": 81},
+        {"id": "p9", "candidate": 86, "note": "last symbol of the polar"}
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M1.000", "wing": "47", "mach": 1.0, "kind": "symbols",
+      "symbol": "right triangle with horizontal top and vertical left side (hypotenuse from top right to bottom left), with centre dot", "x_offset": 1.4, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 63, "note": "first symbol of the polar; vertical left side on the grid line at common 1.3, the M = 0.95 faired curve runs along its hypotenuse; the M = 0.95 triangle (candidate 62) is directly below"},
+        {"id": "p2", "candidate": 74, "note": "overlapped by an M = 1.02 symbol (right triangle with horizontal top and vertical right side, top at y 1352) above it and by the right side of the M = 0.975 triangle (candidate 73); its own top merges with the faired curve at y 1359-1366; the dot is isolated just left of the grid line at common 1.5"},
+        {"id": "p3", "candidate": 78},
+        {"id": "p4", "candidate": 85, "note": "last symbol of the polar; candidate 84 is a 1-px remnant of the C_D = 0.05 line inside the symbol"}
+      ]
+    },
+    {
+      "id": "fig09b-47deg-root12-t06-M1.100", "wing": "47", "mach": 1.1, "kind": "symbols",
+      "symbol": "D-shape: horizontal top, vertical left side, curved lower right side, with centre dot", "x_offset": 2.2, "x_variable": "CL", "y_variable": "CD",
+      "points": [
+        {"id": "p1", "candidate": 94, "note": "first symbol of the polar, right of two overlapping M = 1.085 right triangles (candidates 92 and 93); the dot lies about 2.5 px left of the outline centroid"},
+        {"id": "p2", "candidate": 98, "note": "top on the C_D = 0.03 line; the M = 1.121 mirrored D-shape (candidate 99) is up and to the right"},
+        {"id": "p3", "candidate": 103},
+        {"id": "p4", "candidate": 107, "note": "last symbol of the polar; candidate 106 is a remnant of the vertical grid line at common 2.6 inside the symbol"}
+      ]
+    }
+  ]
+}

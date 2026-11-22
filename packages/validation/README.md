@@ -147,6 +147,54 @@ As for the wing-body file: digitization uncertainty = max(pass difference, one p
 - **Points not independent of pass B.** Pass A first read seven of these pairs as one symbol with a doubled outline. After pass B's report the second symbol was confirmed on the scan and added to pass A, and five first picks were moved; those 12 picks say in their note that they are not independent of pass B.
 - **Not read:** the symbols above 2 deg, figure 16(a) (lift) and 16(c) (pitching moment), and the rest of the report (the thickness series of the 47 deg wing: Tickets, brief 002).
 
+## Held-out datasets: NACA RM L51I04a and RM L51K16a
+
+`data/heldout/l51i04a.csv` and `data/heldout/l51k16a.csv` are **held out** (brief 003, decision 0004): measurements that no method of the project has seen, against which lane C's sealed predictions are scored once. They stay off `main` until the owner confirms the predictions are merged. No model is run on them before that. The models, test conditions and reference values are in `docs/studies/heldout-geometry.md`.
+
+### Sources
+
+- R. P. Bielat, D. E. Harrison and D. A. Coppolino, NACA RM L51I04a (1951): the 47 deg wing at 4, 6 and 9 percent thickness and with a thickened root, Langley 8-foot high-speed tunnel, slotted test section, M 0.50 to about 1.12. Declared accuracy: CL ±0.01, CD ±0.001.
+- R. B. Robinson and C. Driver, NACA RM L51K16a (1952): the six wing-body configurations at M 1.60, Langley 4- by 4-foot supersonic pressure tunnel. Declared accuracy: CL ±0.005, CD ±0.001 (the `u_declared` of its CL rows is 0.005).
+- Downloads and SHA-256: `docs/studies/heldout-geometry.md`, Sources. The PDFs are not stored here.
+
+### What was read
+
+| File | Figure | Configuration | What | Class |
+| --- | --- | --- | --- | --- |
+| `l51i04a.csv` | 6(b) | `47deg-t04` | CD against CL, 5 Mach numbers (0.50, 0.843, 0.941, 0.990, 1.112) | measured |
+| | 7(b) | `47deg-t06` | the same, M 0.50, 0.85, 0.95, 1.00, 1.10 | measured |
+| | 8(b) | `47deg-t09` | the same, M 0.50, 0.843, 0.941, 0.990, 1.112 | measured |
+| | 9(b) | `47deg-root12-t06` | the same, M 0.50, 0.85, 0.95, 1.00, 1.10 | measured |
+| | 11 | the four wings | NACA's faired CD at zero lift against M, sampled at each wing's test Mach numbers as labelled on figures 6 to 9 | NACA faired |
+| `l51k16a.csv` | 6(a) to 6(f), middle plot | the six configurations | CD against CL at M 1.60 | measured |
+
+Every symbol of the polars read was read (repeated test points drawn as two or three symbols included); a symbol gives two rows, CL and CD. Figure 11 has two panels (upper: wings 1, 2, 3; lower: wings 2 and 4); wing 2 is taken from the upper panel, and its second drawing in the lower panel is read only as a check (`tools/digitize/heldout/l51i04a/fig11-lower/wing2-upper-vs-lower.md`).
+
+**Replica, not blind.** Figure 6(b) of RM L51I04a is the same test as the open RM L52B08 figure 7(b) (gate 2, `docs/cp/003.md`): `47deg-t04` in the transonic range, here and in figure 11, is out of the blind scoring and serves as a check between the reports. Its M 1.60 point (RM L51K16a 6(c)) stays held out.
+
+### Schema and configuration names
+
+The columns are exactly those of the open file (CSV schema above). The reader accepts only a sweep in `wing`, so the configuration goes in `series` (owner's decision 4 at gate 1; a real `config` column is a Ticket for brief 005):
+
+- `wing`: `10.8 deg`, `35 deg` or `47 deg` (quarter-chord sweep only; four configurations share `47 deg`).
+- `series`, symbols: `<figure_id>-<config>-M<mach with 3 decimals>`, for example `fig07b-47deg-t06-M0.950` and `fig06d-drag-47deg-t06-M1.600`.
+- `series`, figure 11 samples: `<figure_id>-<config>`, for example `fig11-upper-47deg-t09`, with the Mach number in `mach` and the sample id `M0.965` in `point_id`.
+- `<config>` is one of `10.8deg-t04`, `35deg-t04`, `47deg-t04`, `47deg-t06`, `47deg-t09`, `47deg-root12-t06` (the IDs of the geometry sheet). `<figure_id>` is `fig06b` to `fig09b` and `fig11-upper` / `fig11-lower` for RM L51I04a, and `fig06a-drag` to `fig06f-drag` for RM L51K16a.
+- `test/heldout.test.ts` checks that every row matches this pattern and one of the six configurations, and that the sweep in `wing` agrees with it.
+
+Any consumer must key on the configuration in `series`, never on `wing` and `mach`. `assemble()` keeps `series` on polar points but **drops it on faired samples**: the four 47 deg curves of figure 11 are mixed in `Dataset.faired`, so read them from the rows (`parseRows`).
+
+### Method and uncertainty
+
+As for the open files: the tools of `tools/digitize/` (README), two independent passes (pass A in the main session, pass B by fresh-context subagents), digitization uncertainty = max(pass difference, one pixel), total = root-sum-square with the declared accuracy. RM L51K16a is a greyscale scan on fine-ruled graph paper with circles drawn without a centre dot: their centres come from a circle fitted to the outline (`snap: "ring"`). The comparison tables, overlays and the remaining doubts are in `tools/digitize/heldout/` and `docs/cp/003.md`.
+
+### Known limitations
+
+- **Overlapping symbols.** The RM L51I04a polars near and above M 1 are crowded: symbols of neighbouring Mach numbers overlap, and several test points are drawn twice or three times. Centres hidden under lines or other symbols were placed by eye from the outline (flagged). Points found by only one pass were checked on the scan: confirmed ones were added to the other pass with a note that they are not independent of it; two that could not be confirmed (a third stacked circle on figures 8(b) and 9(b)) are left out.
+- **Figure 11.** Samples where two curves merge into one band are placed by eye (flagged); steep stretches are fitted along rows. Samples at M 1.085 and 1.088 fall at the end of the dashed stretch, where the report took no data (M 1.04 to 1.08). The two drawings of wing 2 differ by up to about 0.0006 in CD0 on the steep stretch: NACA's own drafting spread, below the declared accuracy.
+- **Second scan.** The UNT copy of RM L51K16a is a 1-bit scan in which the graph-paper ruling cannot be told apart, so it cannot be calibrated on its own grid; its 8 ring centres on figure 6(c) agree with the NTRS reading within one pixel after an affine map between the scans (`tools/digitize/heldout/l51k16a/fig06c-drag/unt-vs-pass-a.md`). No UNT copy of RM L51I04a was found.
+- **Not digitized** (Tickets in `docs/cp/003.md`): angle of attack (figures (a) of both reports), pitching moment, the other Mach numbers of RM L51I04a, figure 6(a) of RM L51I04a.
+
 ## License
 
 License: not yet chosen. All rights reserved until a license is added. This covers the digitized values and this card, not the NACA report.

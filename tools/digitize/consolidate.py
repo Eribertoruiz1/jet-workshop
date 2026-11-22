@@ -35,7 +35,7 @@ def main() -> None:
         res = compare_results(json.loads(fa.read_text(encoding="utf-8")), json.loads(fb.read_text(encoding="utf-8")))
         write_csv(res["rows"], folder / "comparison.csv")
         (folder / "comparison.md").write_text(markdown(res), encoding="utf-8", newline="\n")
-        all_rows += res["rows"]
+        all_rows += [r for r in res["rows"] if r["series"] not in res["check_series"]]
         frac = res["exceed"] / res["compared"] if res["compared"] else 0.0
         summary.append(f"| {res['figure']['number']} | {res['compared']} | {res['exceed']} ({100 * frac:.0f}%) | "
                        f"{'TRIGGERED' if frac > 0.10 else 'not triggered'} | {len(res['unmatched'])} |")

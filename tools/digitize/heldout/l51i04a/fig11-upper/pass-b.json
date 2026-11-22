@@ -1,0 +1,104 @@
+{
+  "source": {
+    "document": "NACA RM L51I04a",
+    "author": "R. P. Bielat, D. E. Harrison and D. A. Coppolino",
+    "year": 1951,
+    "url": "https://ntrs.nasa.gov/api/citations/19930086979/downloads/19930086979.pdf",
+    "pdf_sha256_as_downloaded": "70c6278baa880d8ab15b4fca4944e0bab8021ab0ac4377f4c970ea8c3ab25e9f",
+    "note": "The NTRS download of this report has no wrapper: it starts with %PDF and is read as downloaded."
+  },
+  "figure": {
+    "id": "fig11-upper",
+    "number": "11 (upper panel)",
+    "title": "Figure 11. Effect of thickness ratio and thickened root sections on the variation of drag coefficient at zero lift with Mach number for the wing-body configuration.",
+    "pdf_page": 32,
+    "printed_page": 31,
+    "x_axis": "Mach number, M (scale shared with the lower panel, labels under the lower panel). Grid every 0.05 from 0.40 (left frame) to 1.20 (right frame), 17 vertical lines about 96.6 px apart; labels every 0.1.",
+    "y_axis": "Drag coefficient at zero lift, C_D0, upper panel scale. Grid every 0.005 from 0 (bottom frame) to 0.04 (top frame), 9 horizontal lines about 96.6 px apart; labels every 0.01.",
+    "content_note": "NACA faired curves only, no symbols, for wings 1, 2 and 3 (47 deg sweep; 4, 6 and 9 percent thick), each labelled with its wing number at both ends ('Wing 2 1 3' from top to bottom on the left, '3 2 1' from top to bottom on the right). All three curves start at M = 0.50 and end at about M = 1.122. Each curve is solid up to about M = 1.04, dashed from about M = 1.045 to about M = 1.09 (two dashes and gaps), then solid to its end. Subsonic order from the top: wing 2 (just below the C_D0 = 0.01 line), wing 1, wing 3; the three curves converge and cross between M = 0.89 and 0.94, where they run inside one band of ink with the C_D0 = 0.01 line."
+  },
+  "scan": {
+    "pdf_page": 32,
+    "size_px": [2198, 3075],
+    "extraction": "tools/digitize/extract_scan.py .cache/l51i04a/NACA-RM-L51I04a.ntrs.pdf 32 .cache/l51i04a/scans/p32.png: the page's single embedded image, upright"
+  },
+  "pass": "B",
+  "digitizer": "pass B, fresh-context subagent",
+  "calibration": {
+    "grid": {
+      "x_lines": {"start": 0.40, "step": 0.05, "count": 17},
+      "y_lines": {"start": 0.0, "step": 0.005, "count": 9}
+    },
+    "points": [
+      {"px": [459, 670], "x": 0.45, "y": 0.035},
+      {"px": [1039, 671], "x": 0.75, "y": 0.035},
+      {"px": [1814, 677], "x": 1.15, "y": 0.035},
+      {"px": [746, 767], "x": 0.60, "y": 0.030},
+      {"px": [651, 961], "x": 0.55, "y": 0.020},
+      {"px": [1909, 966], "x": 1.20, "y": 0.020},
+      {"px": [1232, 1058], "x": 0.85, "y": 0.015},
+      {"px": [1812, 1158], "x": 1.15, "y": 0.010},
+      {"px": [843, 1250], "x": 0.65, "y": 0.005},
+      {"px": [1715, 1256], "x": 1.10, "y": 0.005},
+      {"px": [1133, 1350], "x": 0.80, "y": 0.0}
+    ]
+  },
+  "series": [
+    {
+      "id": "fig11-upper-47deg-t04", "wing": "47", "kind": "curve_samples", "x_variable": "M", "y_variable": "CD0",
+      "note": "wing 1 (4 percent thick): the middle curve at subsonic speeds, the lowest one above M = 0.94",
+      "samples": [
+        {"id": "M0.500", "x": 0.500, "hint_px": [554, 1181], "side": "right", "note": "the curve starts here"},
+        {"id": "M0.696", "x": 0.696, "hint_px": [932, 1173.5]},
+        {"id": "M0.843", "x": 0.843, "hint_px": [1218, 1170]},
+        {"id": "M0.892", "x": 0.892, "hint_px": [1311, 1168.5], "snap": "none", "note": "wing 1 and wing 3 run together here in one band (rows 1167-1174); line centre placed by eye on the upper part of the band, continuing the wing 1 line (1168-1170 at x 1300), wing 3 being the lower part"},
+        {"id": "M0.916", "x": 0.916, "hint_px": [1357, 1165.5], "note": "wing 1 is the lowest line here (rows 1164-1167), just below the band where wings 2 and 3 cross the C_D0 = 0.01 line"},
+        {"id": "M0.941", "x": 0.941, "hint_px": [1406, 1156.5], "snap": "none", "note": "the curve crosses the C_D0 = 0.01 line here and merges with it; line centre placed by eye on the straight line between its clean positions at x 1388 (row 1163) and x 1420 (row 1151.5)"},
+        {"id": "M0.965", "x": 0.965, "hint_px": [1452, 1131.5]},
+        {"id": "M0.990", "x": 0.990, "hint_px": [1501, 1085.5]},
+        {"id": "M1.010", "x": 1.010, "hint_px": [1540, 1048.5]},
+        {"id": "M1.024", "x": 1.024, "hint_px": [1566, 1033.5]},
+        {"id": "M1.088", "x": 1.088, "hint_px": [1691, 1018], "note": "dashed part: the sample column falls in a gap between the last dash (ends x 1681) and the final solid stretch (starts x 1695)"},
+        {"id": "M1.112", "x": 1.112, "hint_px": [1738, 1019.5], "note": "final stretch after the dashes"}
+      ]
+    },
+    {
+      "id": "fig11-upper-47deg-t06", "wing": "47", "kind": "curve_samples", "x_variable": "M", "y_variable": "CD0",
+      "note": "wing 2 (6 percent thick): the top curve at subsonic speeds, the middle one above M = 0.94",
+      "samples": [
+        {"id": "M0.500", "x": 0.500, "hint_px": [554, 1162], "side": "right", "note": "the curve starts here; the sample column is the grid line at M = 0.50"},
+        {"id": "M0.700", "x": 0.700, "hint_px": [940, 1162.5], "note": "sample column on the grid line at M = 0.70; the curve runs 6 to 8 px below the C_D0 = 0.01 line"},
+        {"id": "M0.850", "x": 0.850, "hint_px": [1231, 1161.5], "note": "sample column on the grid line at M = 0.85"},
+        {"id": "M0.900", "x": 0.900, "hint_px": [1326, 1161], "side": "left", "note": "sample column on the grid line at M = 0.90; right of it the curve merges with the C_D0 = 0.01 line and the other two curves, so only the clean columns on the left are used (the curve is flat there)"},
+        {"id": "M0.925", "x": 0.925, "hint_px": [1375, 1153], "side": "right", "note": "the curve touches the C_D0 = 0.01 line from above here (merged with it left of x 1376); only the columns on the right, where it is separate, are used"},
+        {"id": "M0.950", "x": 0.950, "hint_px": [1423, 1137.5], "note": "sample column on the grid line at M = 0.95"},
+        {"id": "M0.975", "x": 0.975, "hint_px": [1472, 1095.5]},
+        {"id": "M1.000", "x": 1.000, "hint_px": [1520, 995], "note": "sample column on the grid line at M = 1.00, steep stretch"},
+        {"id": "M1.020", "x": 1.020, "hint_px": [1559, 951]},
+        {"id": "M1.035", "x": 1.035, "hint_px": [1587.5, 939.5]},
+        {"id": "M1.088", "x": 1.088, "hint_px": [1691, 920], "note": "dashed part: start of the last dash (from x 1688)"},
+        {"id": "M1.100", "x": 1.100, "hint_px": [1715, 917.5], "note": "sample column on the grid line at M = 1.10; end of the dashed part"},
+        {"id": "M1.120", "x": 1.120, "hint_px": [1754, 916.5]}
+      ]
+    },
+    {
+      "id": "fig11-upper-47deg-t09", "wing": "47", "kind": "curve_samples", "x_variable": "M", "y_variable": "CD0",
+      "note": "wing 3 (9 percent thick): the lowest curve at subsonic speeds, the steepest and highest one above M = 0.93",
+      "samples": [
+        {"id": "M0.500", "x": 0.500, "hint_px": [554, 1202], "side": "right", "note": "the curve starts here"},
+        {"id": "M0.696", "x": 0.696, "hint_px": [932, 1199.5]},
+        {"id": "M0.843", "x": 0.843, "hint_px": [1218, 1190.5]},
+        {"id": "M0.892", "x": 0.892, "hint_px": [1311, 1172.8], "snap": "none", "note": "wing 3 and wing 1 run together here in one band (rows 1167-1174); line centre placed by eye on the lower part of the band, continuing the wing 3 line (1180.5 at x 1280, 1175.5 at x 1300)"},
+        {"id": "M0.916", "x": 0.916, "hint_px": [1357, 1154.5], "snap": "none", "note": "the curve crosses the C_D0 = 0.01 line and the wing 2 curve here, inside one band of ink; line centre placed by eye on the straight continuation of its steep stretch (1151 at x 1364, 1145.5 at x 1372)"},
+        {"id": "M0.941", "x": 0.941, "hint_px": [1406, 1094.5]},
+        {"id": "M0.965", "x": 0.965, "hint_px": [1452, 968], "fit": "rows", "note": "steep stretch crossing the C_D0 = 0.02 line: row fit"},
+        {"id": "M0.990", "x": 0.990, "hint_px": [1501, 801.5], "fit": "rows", "note": "steep stretch (slope about -1.7 px/px): row fit"},
+        {"id": "M1.010", "x": 1.010, "hint_px": [1540, 771], "note": "the curve runs along the C_D0 = 0.03 line here"},
+        {"id": "M1.024", "x": 1.024, "hint_px": [1566, 761]},
+        {"id": "M1.088", "x": 1.088, "hint_px": [1691, 735.5], "note": "dashed part: the sample column falls in the gap between the last dash (ends x 1683) and the final solid stretch (starts x 1694)"},
+        {"id": "M1.112", "x": 1.112, "hint_px": [1738, 731], "note": "final stretch after the dashes"},
+        {"id": "M1.122", "x": 1.122, "hint_px": [1757.5, 729.5], "note": "about 7 px before the end of the curve"}
+      ]
+    }
+  ]
+}
