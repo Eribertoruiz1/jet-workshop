@@ -17,7 +17,12 @@ export const AREA_RANGE = { min: 10, max: 60, step: 1 } as const;
 export const THRUST_RANGE = { min: 5000, max: 120000, step: 1000 } as const;
 export const FUEL_STEP = 10;
 
-export const defaultDesign: Design = { wing: "35", area_m2: 25, fuel_kg: 700, thrust_N: 30000 };
+/**
+ * Starting values of the hangar. The thrust starts low (PM, gate 1): with it
+ * the first flight takes off but stays below Mach 1, so the player has to
+ * raise it to go supersonic (apps/web/test/flight/defaults.test.ts).
+ */
+export const defaultDesign: Design = { wing: "35", area_m2: 25, fuel_kg: 700, thrust_N: 15000 };
 
 /** The fuel slider's top: the capacity, down to a whole step. */
 export function fuelSliderMax(ac: Aircraft): number {
