@@ -28,27 +28,240 @@ body {
   line-height: 1.45;
 }
 
-.bench {
+/* Top bar: title on the left; mode and language switches on the right. */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 28px 32px 24px;
+  padding: 14px 32px;
+  border-bottom: 1px solid var(--grid);
 }
 
-.head h1 {
-  margin: 0;
-  font-size: 22px;
+.topbar-title {
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
 
-.head p {
-  margin: 2px 0 0;
+.switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.switch {
+  display: inline-flex;
+  border: 1px solid var(--grid);
+  border-radius: 2px;
+  background: var(--surface);
+}
+
+.switch button {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 11px;
+  min-height: 34px;
+  border: 0;
+  background: transparent;
   color: var(--ink-2);
+  cursor: pointer;
+}
+
+.switch button + button {
+  border-left: 1px solid var(--grid);
+}
+
+.switch button[aria-pressed="true"] {
+  color: var(--ink);
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--ink);
+}
+
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 32px 32px;
+}
+
+.lead {
+  margin: 0;
+  color: var(--ink-2);
+}
+
+/* Buttons of the lesson */
+.lesson button,
+.lesson-nav button {
+  font: inherit;
+  font-size: 15px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--grid);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.lesson button.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--surface);
+  font-weight: 700;
+}
+
+.lesson button.link {
+  border-color: transparent;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.lesson button:disabled {
+  cursor: default;
+  color: var(--ink-2);
+}
+
+.lesson button:focus-visible,
+.switch button:focus-visible,
+.lesson input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Lesson: desktop, text on the left and the step's one picture on the right. */
+.lesson {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(0, 1.6fr);
+  grid-template-areas:
+    "text figure"
+    "controls figure"
+    "nav figure"
+    ". figure";
+  grid-template-rows: auto auto auto 1fr;
+  gap: 18px 48px;
+  align-items: start;
+}
+
+.lesson-text { grid-area: text; }
+.lesson-figure { grid-area: figure; min-width: 0; background: var(--surface); border-top: 1px solid var(--grid); border-bottom: 1px solid var(--grid); padding: 16px; }
+.lesson-figure.empty { background: transparent; border: 0; padding: 0; }
+.lesson-controls { grid-area: controls; }
+.lesson-nav { grid-area: nav; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+.step-of {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.step-title {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.lesson-body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+
+.lesson-body strong {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.num {
+  font-family: var(--num);
+  font-variant-numeric: tabular-nums;
+}
+
+.cover {
+  grid-template-areas:
+    "text figure"
+    "nav figure";
+  grid-template-rows: auto 1fr;
+  align-items: start;
+}
+
+.cover-text { grid-area: text; display: grid; gap: 18px; }
+
+.cover-title {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
+  max-width: 18ch;
+}
+
+.lesson-slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 12px;
+  align-items: baseline;
+  max-width: 60ch;
+}
+
+.lesson-slider label { font-size: 15px; }
+.lesson-slider output { font-size: 15px; }
+.lesson-slider input { grid-column: 1 / -1; width: 100%; accent-color: var(--ink); min-height: 32px; }
+.lesson-slider button { grid-column: 1 / -1; justify-self: start; }
+
+.wing-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wing-buttons button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wing-buttons button[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--ink);
+  font-weight: 700;
+}
+
+svg text.big {
+  font-size: 15px;
+}
+
+/* Step 8 */
+.quiz { display: grid; gap: 18px; max-width: 60ch; }
+.question { border: 0; padding: 0; margin: 0; }
+.question legend { font-size: 16px; font-weight: 700; padding: 0; margin-bottom: 8px; line-height: 1.4; }
+.options { display: flex; flex-wrap: wrap; gap: 8px; }
+.lesson .options button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); }
+.feedback { margin: 8px 0 0; font-size: 15px; min-height: 1.4em; }
+.close { margin-top: 6px; }
+
+@media (max-width: 760px) {
+  .topbar { padding: 12px 16px; }
+  .page { padding: 18px 16px 28px; }
+  .lesson,
+  .cover {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "text" "figure" "controls" "nav";
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+  .lesson-figure { padding: 12px; margin: 0 -16px; border-left: 0; border-right: 0; }
+  .cover-title { font-size: 26px; }
 }
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(300px, 1fr) 2fr;
+  grid-template-columns: minmax(300px, 1fr) minmax(0, 2fr);
   gap: 32px;
   margin-top: 20px;
 }
@@ -173,7 +386,7 @@ svg .ink {
 
 .small-charts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
   margin-top: 16px;
 }
@@ -224,14 +437,11 @@ svg .ink {
 }
 
 @media (max-width: 900px) {
-  .bench {
-    padding: 18px 16px;
-  }
   .layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .small-charts {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

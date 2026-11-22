@@ -1,0 +1,333 @@
+{
+  "summary": {
+    "screens": 40,
+    "minSvgTextPxAt390": 11,
+    "minSvgTextPxAll": 11,
+    "below11At390": [],
+    "textOutsideSvg": [],
+    "horizontalScroll": [],
+    "consoleMessages": []
+  },
+  "screens": [
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "0-cover",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "35° de flecha"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "1-step",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "10.8° de flecha"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "2-step",
+      "texts": 9,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "3-step",
+      "texts": 9,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "4-step",
+      "texts": 11,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "5-step",
+      "texts": 13,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "6-step",
+      "texts": 12,
+      "minPx": 11,
+      "minText": "0"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "7-step",
+      "texts": 9,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "8-step",
+      "texts": 0,
+      "minPx": null,
+      "minText": ""
+    },
+    {
+      "lang": "es",
+      "width": 390,
+      "screen": "9-bench",
+      "texts": 41,
+      "minPx": 11,
+      "minText": "envergadura 24.00 in"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "0-cover",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "35° de flecha"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "1-step",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "10.8° de flecha"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "2-step",
+      "texts": 23,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "3-step",
+      "texts": 23,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "4-step",
+      "texts": 25,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "5-step",
+      "texts": 27,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "6-step",
+      "texts": 12,
+      "minPx": 11,
+      "minText": "0"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "7-step",
+      "texts": 23,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "8-step",
+      "texts": 0,
+      "minPx": null,
+      "minText": ""
+    },
+    {
+      "lang": "es",
+      "width": 1360,
+      "screen": "9-bench",
+      "texts": 57,
+      "minPx": 11,
+      "minText": "envergadura 24.00 in"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "0-cover",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "35° of sweep"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "1-step",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "10.8° of sweep"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "2-step",
+      "texts": 9,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "3-step",
+      "texts": 9,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "4-step",
+      "texts": 11,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "5-step",
+      "texts": 13,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "6-step",
+      "texts": 12,
+      "minPx": 11,
+      "minText": "0"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "7-step",
+      "texts": 9,
+      "minPx": 11,
+      "minText": "0.60"
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "8-step",
+      "texts": 0,
+      "minPx": null,
+      "minText": ""
+    },
+    {
+      "lang": "en",
+      "width": 390,
+      "screen": "9-bench",
+      "texts": 41,
+      "minPx": 11,
+      "minText": "span 24.00 in"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "0-cover",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "35° of sweep"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "1-step",
+      "texts": 1,
+      "minPx": 15,
+      "minText": "10.8° of sweep"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "2-step",
+      "texts": 23,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "3-step",
+      "texts": 23,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "4-step",
+      "texts": 25,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "5-step",
+      "texts": 27,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "6-step",
+      "texts": 12,
+      "minPx": 11,
+      "minText": "0"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "7-step",
+      "texts": 23,
+      "minPx": 11,
+      "minText": "0.50"
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "8-step",
+      "texts": 0,
+      "minPx": null,
+      "minText": ""
+    },
+    {
+      "lang": "en",
+      "width": 1360,
+      "screen": "9-bench",
+      "texts": 57,
+      "minPx": 11,
+      "minText": "span 24.00 in"
+    }
+  ]
+}

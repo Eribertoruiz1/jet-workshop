@@ -22,6 +22,7 @@ import {
   type TestedWingId,
 } from "@jet-workshop/physics";
 import type { BodyPoint, Dataset } from "./data.ts";
+import { NACA_TEXT_DRAG_RISE } from "./reportText.ts";
 import {
   ACCEPTANCE_RANGES,
   BAND_MODELS,
@@ -401,9 +402,6 @@ function cd0Sensitivity(data: Dataset, L: string[]): void {
   L.push("");
 }
 
-/** Drag-rise Mach numbers stated in the report's text (p. 8, PDF page 10). */
-const NACA_TEXT_DRAG_RISE: Partial<Record<TestedWingId, number>> = { "10.8": 0.92, "47": 0.97 };
-
 /** 8. Gate 4: the transonic method against what the data show. */
 function transonicBasis(data: Dataset, L: string[]): void {
   L.push("## 8. Transonic method against the data (gate 4)");
@@ -418,14 +416,14 @@ function transonicBasis(data: Dataset, L: string[]): void {
     const half = sweepAtDeg(w.planform, 0.5);
     const m = dragDivergenceMach(KORN_FACTOR_NACA6, w.planform.thicknessRatio, 0, half);
     mdd[wid] = m;
-    const text = NACA_TEXT_DRAG_RISE[wid];
+    const text = NACA_TEXT_DRAG_RISE[wid]?.value;
     const sampled = sampledDragRiseMach(data.faired.filter((s) => s.wing === wid).map((s) => ({ mach: s.mach, cd: s.cd0 })));
     const ref = text ?? sampled;
     L.push(`| ${wid} deg | ${half.toFixed(1)} deg | ${f3(m)} | ${text !== undefined ? text.toFixed(2) : "not stated"} | ${sampled === null ? "not reached" : f3(sampled)} | ${ref === null || ref === undefined ? "n/a" : (m - ref >= 0 ? "+" : "") + (m - ref).toFixed(3)} |`);
   }
   L.push("");
   const korn = mdd["47"]! - mdd["10.8"]!;
-  const naca = NACA_TEXT_DRAG_RISE["47"]! - NACA_TEXT_DRAG_RISE["10.8"]!;
+  const naca = NACA_TEXT_DRAG_RISE["47"]!.value - NACA_TEXT_DRAG_RISE["10.8"]!.value;
   L.push(`From 10.8 to 47 deg of sweep the drag-rise Mach number grows by ${naca.toFixed(2)} in the report and by ${korn.toFixed(3)} in simple sweep theory: ${(korn / naca).toFixed(1)} times the measured gain.`);
   L.push("");
   L.push("Size of the transonic term on figure 9 (NACA faired curve):");
