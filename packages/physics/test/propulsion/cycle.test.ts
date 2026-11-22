@@ -3,6 +3,7 @@ import {
   compress,
   convergentNozzle,
   expandForWork,
+  jetThrust,
   solveReferencePoint,
   sonicState,
   type ReferenceInputs,
@@ -295,7 +296,37 @@ describe("reference point with losses, on the combustion gas", () => {
   });
 });
 
+describe("jet thrust of a convergent nozzle", () => {
+  const exit = { choked: true, exitTemperature_K: 800, exitPressure_Pa: 120000, exitVelocity_m_s: 500, massFlux_kg_s_m2: 50 };
+
+  it("is the momentum of the jet plus the exit pressure above ambient on the exit area", () => {
+    // 10 kg/s at 500 m/s is 5000 N; 20 000 Pa over 0.2 m2 is 4000 N.
+    expect(jetThrust(1, 10, exit, 0.2, 100000)).toBeCloseTo(9000, 9);
+  });
+
+  it("applies the thrust coefficient to the whole of it, as NACA RM E9G09 defines its coefficient", () => {
+    // 0.97 * (5000 + 4000)
+    expect(jetThrust(0.97, 10, exit, 0.2, 100000)).toBeCloseTo(8730, 9);
+  });
+
+  it("is what the reference point reports as gross thrust", () => {
+    const solved = solveReferencePoint(losslessInputs({ nozzleThrustCoefficient: 0.95 }));
+    const ideal = solveReferencePoint(losslessInputs({}));
+    if (!solved.ok || !ideal.ok) throw new Error("no reference point");
+    expect(solved.point.grossThrust_N / ideal.point.grossThrust_N).toBeCloseTo(0.95, 12);
+  });
+});
+
 describe("designs that cannot run", () => {
+  it("rejects a turbine inlet temperature that is not above the compressor outlet, without throwing", () => {
+    // Pressure ratio 5 takes air from 288.15 K to 456.4 K. No fuel can be added to end at 400 K.
+    expect(solveReferencePoint(losslessInputs({ turbineInletTemperature_K: 400 }))).toEqual({
+      ok: false,
+      reason: "turbine-cannot-drive-compressor",
+    });
+  });
+
+
   it("rejects a design whose turbine cannot drive the compressor", () => {
     // Perfect gas, pressure ratio 16 and 900 K with efficiencies 0.80 and 0.85: the turbine
     // would have to expand to (387.9 / 900)^3.5 = 0.053 of its inlet pressure, 0.84 of ambient.
