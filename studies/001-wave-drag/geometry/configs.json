@@ -1,0 +1,50 @@
+{
+  "description": "Wing-body geometry for the wave-drag study, inches. Every value cites its figure or table; derived values are computed by the script, not stored.",
+  "sources": {
+    "l52b08-fig3": "NACA RM L52B08, figure 3, printed page 17 (PDF page 19): details of model configurations tested",
+    "l52b08-text": "NACA RM L52B08, 'Models', printed page 4: 4 percent thick streamwise, aspect ratio 3.5, taper 0.2, NACA 65A thickness",
+    "sheet": "docs/studies/heldout-geometry.md (lane B), from RM L51I04a figure 3 and RM L51K16a figure 1(a), PDF p. 5"
+  },
+  "body": {
+    "diameterIn": 2.25,
+    "noseLengthIn": 6.61,
+    "noseOgiveRadiusIn": 20,
+    "lengthIn": { "l52b08": 25.15, "l51i04a": 25.15, "l51k16a": 25.12 },
+    "source": "l52b08-fig3 (2.25D, 6.61, 20R, 25.15) and sheet (25.12 in L51K16a)",
+    "noseNote": "The three printed numbers over-determine a pointed tangent ogive. The script keeps the diameter and the nose length and derives the ogive radius, (R^2 + L^2) / 2R, and reports its difference from the printed 20 in.",
+    "stingNote": "RM L52B08 figure 3 shows no sting. The sheet gives a 2.25 in sting at the base in both held-out reports; in RM L51K16a it flares 11 13/64 in behind the base, which is behind the last point of every wing, so it lies outside the model's domain of dependence at M 1.60 and is not part of the equivalent body. The body continues as a cylinder (input I4 is not active)."
+  },
+  "planform": {
+    "aspectRatio": 3.5,
+    "taperRatio": 0.2,
+    "spanIn": 24.0,
+    "areaFt2": 1.143,
+    "source": "l52b08-fig3 and sheet"
+  },
+  "wingPosition": {
+    "macQuarterChordStationIn": 16.61,
+    "source": "l52b08-fig3 prints 16.61 from the nose to the 0.25 point of the mean aerodynamic chord; the sheet gives the same station for every held-out wing (RM L51K16a, PDF p. 5) and the 47 deg apex at 8.748 (RM L51I04a figure 3)",
+    "printedRootQuarterChordIn": { "10.8": 15.73, "35": 13.34, "47": 11.61 },
+    "printedRootQuarterChordSource": "l52b08-fig3: nose to the 0.25-chord line at the plane of symmetry, one per wing",
+    "printedApex47In": 8.748,
+    "printedApex47Source": "sheet (RM L51I04a figure 3)",
+    "uncertaintyIn": 0.005,
+    "uncertaintyNote": "Input I1: the station is printed as a number, so plus or minus half its last digit (PLAN.md, section 7)."
+  },
+  "configurations": {
+    "open-10.8": { "sweepQuarterChordDeg": 10.8, "thickness": { "kind": "uniform", "section": "t04" }, "bodyLength": "l52b08" },
+    "open-35": { "sweepQuarterChordDeg": 35, "thickness": { "kind": "uniform", "section": "t04" }, "bodyLength": "l52b08" },
+    "open-47": { "sweepQuarterChordDeg": 47, "thickness": { "kind": "uniform", "section": "t04" }, "bodyLength": "l52b08" },
+    "10.8deg-t04": { "sweepQuarterChordDeg": 10.8, "thickness": { "kind": "uniform", "section": "t04" }, "bodyLength": "l51k16a" },
+    "35deg-t04": { "sweepQuarterChordDeg": 35, "thickness": { "kind": "uniform", "section": "t04" }, "bodyLength": "l51k16a" },
+    "47deg-t04": { "sweepQuarterChordDeg": 47, "thickness": { "kind": "uniform", "section": "t04" }, "bodyLength": { "l51i04a": "l51i04a", "l51k16a": "l51k16a" } },
+    "47deg-t06": { "sweepQuarterChordDeg": 47, "thickness": { "kind": "uniform", "section": "t06" }, "bodyLength": { "l51i04a": "l51i04a", "l51k16a": "l51k16a" } },
+    "47deg-t09": { "sweepQuarterChordDeg": 47, "thickness": { "kind": "uniform", "section": "t09" }, "bodyLength": { "l51i04a": "l51i04a", "l51k16a": "l51k16a" } },
+    "47deg-root12-t06": {
+      "sweepQuarterChordDeg": 47,
+      "thickness": { "kind": "root-taper", "rootSection": "root12", "outerSection": "t06", "taperEndSemispanFraction": 0.4 },
+      "bodyLength": { "l51i04a": "l51i04a", "l51k16a": "l51k16a" },
+      "note": "Sheet: 0.12 at the plane of symmetry, tapering linearly to 0.06 at 40 percent of the semispan, 0.06 outboard. Nominal: ordinates interpolated linearly along the span between the two tabulated sections; input I6: the 6 percent section scaled to the local thickness."
+    }
+  }
+}

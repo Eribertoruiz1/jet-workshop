@@ -1,0 +1,2272 @@
+[
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.014202298146121067,
+  "max": 0.02222142658271303,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.013817381591359017,
+  "max": 0.023289036490585925,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.009039224273245976,
+  "max": 0.01228833626853181,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.010213353745440287,
+  "max": 0.013539259465081858,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.01289413053989939,
+  "max": 0.016278218433754373,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.014297500183712628,
+  "max": 0.019008342990752613,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.013356039367650879,
+  "max": 0.025895247258410574,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.008928943232507057,
+  "max": 0.012329225651066747,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.010067821489544397,
+  "max": 0.013600234023447224,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.013010766391345397,
+  "max": 0.016615693386982343,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.0185765198948441,
+  "max": 0.022500786625407252,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.01913264025046321,
+  "max": 0.025497882770278965,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.018347404465192892,
+  "max": 0.03919452607437538,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.009047650356536896,
+  "max": 0.012711543975167081,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.010448773691190273,
+  "max": 0.014374558401656322,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.01427072963073896,
+  "max": 0.018447628171509696,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.02292202954131494,
+  "max": 0.027125204977742425,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.024,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.027595420265297082,
+  "max": 0.03226764331132229,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.029231609702719836,
+  "max": 0.03857641282650054,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.029274814411999656,
+  "max": 0.03952256287880065,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "A2-P1",
+  "min": 0.9385428932188136,
+  "max": 0.94225,
+  "note": "no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.029183631765031776,
+  "max": 0.07257004827947876,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.009081265999327666,
+  "max": 0.01333180253873807,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.010742232124646865,
+  "max": 0.015250352665717004,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.015016122713287554,
+  "max": 0.019834328691017956,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.0232248110479424,
+  "max": 0.028785424429223692,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.024288088380678127,
+  "max": 0.032890075975447644,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P1",
+  "min": 0.022055777944159076,
+  "max": 0.05271410567211971,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.014202298146121067,
+  "max": 0.02222142658271303,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.013817381591359017,
+  "max": 0.023289036490585925,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.014297500183712628,
+  "max": 0.019008342990752613,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "A2-P2",
+  "min": 0.9912500000000001,
+  "max": 1.2,
+  "note": "algún miembro no llega a 0.1: máximo 1.20"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.013356039367650879,
+  "max": 0.025895247258410574,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.9,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008627516494902806,
+  "max": 0.013704731744319968,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008584147468355986,
+  "max": 0.014776078690934905,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008527090284506595,
+  "max": 0.016426212528703226,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008493525707249464,
+  "max": 0.018895283001819627,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.0185765198948441,
+  "max": 0.022500786625407252,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.01913264025046321,
+  "max": 0.025497882770278965,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.018347404465192892,
+  "max": 0.03919452607437538,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.843,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008827734367392617,
+  "max": 0.013230940568196846,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.892,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008773043612462051,
+  "max": 0.015123659196904022,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008740529537974872,
+  "max": 0.016843992055736154,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008702948064952693,
+  "max": 0.019560052121282718,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008666336072760841,
+  "max": 0.023446817366336685,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008627668221142124,
+  "max": 0.029344085481296973,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.024,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.027595420265297082,
+  "max": 0.03226764331132229,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.029231609702719836,
+  "max": 0.03857641282650054,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.029274814411999656,
+  "max": 0.03952256287880065,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "A2-P2",
+  "min": 0.9232499999999999,
+  "max": 0.9992500000000001,
+  "note": "no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.029183631765031776,
+  "max": 0.07257004827947876,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.85,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008675750385882454,
+  "max": 0.013583498942035874,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.9,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008627516494902806,
+  "max": 0.015356034849136684,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008590901080517419,
+  "max": 0.016995141415868286,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008553714854271057,
+  "max": 0.01951997278823092,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.008515983957985264,
+  "max": 0.023292304438003075,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.0232248110479424,
+  "max": 0.028785424429223692,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.024288088380678127,
+  "max": 0.032890075975447644,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "A2-P2",
+  "min": 0.9377500000000001,
+  "max": 0.9992500000000001,
+  "note": "no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P2",
+  "min": 0.022055777944159076,
+  "max": 0.05271410567211971,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.014202298146121067,
+  "max": 0.02222142658271303,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.013817381591359017,
+  "max": 0.023289036490585925,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.014297500183712628,
+  "max": 0.019008342990752613,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.013356039367650879,
+  "max": 0.025895247258410574,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008515983957985264,
+  "max": 0.018998468140262518,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.0185765198948441,
+  "max": 0.022500786625407252,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.01913264025046321,
+  "max": 0.025497882770278965,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.018347404465192892,
+  "max": 0.03919452607437538,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008740529537974872,
+  "max": 0.014898706168159751,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008702948064952693,
+  "max": 0.02131027670381586,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008666336072760841,
+  "max": 0.028029222077527838,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008627668221142124,
+  "max": 0.03224401757173252,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.024,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.027595420265297082,
+  "max": 0.03226764331132229,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.029231609702719836,
+  "max": 0.03857641282650054,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.029274814411999656,
+  "max": 0.03952256287880065,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.029183631765031776,
+  "max": 0.07257004827947876,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008586190256780205,
+  "max": 0.01702098033382244,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008553714854271057,
+  "max": 0.02240482067666056,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.008515983957985264,
+  "max": 0.02714682574778656,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.0232248110479424,
+  "max": 0.028785424429223692,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.024288088380678127,
+  "max": 0.032890075975447644,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "A2-P3",
+  "min": 0.022055777944159076,
+  "max": 0.05271410567211971,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.011793397847673545,
+  "max": 0.020271294773061495,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.011490214108030857,
+  "max": 0.021081903589919872,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.008724686569761449,
+  "max": 0.012110050169366591,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.009195756070150071,
+  "max": 0.012609777638893831,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.010237008779890451,
+  "max": 0.013469449539379567,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.011660954847255588,
+  "max": 0.015540565201292555,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.01201629678288191,
+  "max": 0.017649126572097867,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "Ak-P1",
+  "min": null,
+  "max": null,
+  "note": "NA: la curva nominal no llega a 0.1"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.011128816337048271,
+  "max": 0.023156130915742965,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.9,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.008740801232763525,
+  "max": 0.012331068178494414,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.009153016883237124,
+  "max": 0.012905433436590803,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.010307158775479447,
+  "max": 0.014007161750049782,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.012517293509862212,
+  "max": 0.016050681789719707,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.014825717092815513,
+  "max": 0.020643447850144638,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.015121593698185512,
+  "max": 0.02306121845181017,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.014340061229408615,
+  "max": 0.03421855838338526,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.892,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.008879232497275732,
+  "max": 0.012827631811388027,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.009371128949014531,
+  "max": 0.013683241659277022,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.01094682574558711,
+  "max": 0.015395275451957218,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.014346295847294051,
+  "max": 0.01822801212761512,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.018978976282501083,
+  "max": 0.024829302937066082,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.024,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.020616566529307247,
+  "max": 0.028786995505711042,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.02162566423445647,
+  "max": 0.03396858776155502,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.021648173941006633,
+  "max": 0.03474883508857757,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "Ak-P1",
+  "min": 0.94125,
+  "max": 0.94825,
+  "note": "no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.021316703032665918,
+  "max": 0.061955269296302844,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.9,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.008792804654675239,
+  "max": 0.013310617138600761,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.009404436945995756,
+  "max": 0.014186391353353948,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.011088258856567662,
+  "max": 0.01586188416318287,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.014302128619474322,
+  "max": 0.01897770825170188,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.017797196125568553,
+  "max": 0.02597057718167706,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.018420099635289646,
+  "max": 0.02931562155031683,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P1",
+  "min": 0.016708772667217958,
+  "max": 0.04554330593398913,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.010810672370889958,
+  "max": 0.01847016004750498,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.01054083670976681,
+  "max": 0.019043235893366293,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.01108564579035256,
+  "max": 0.01639487239367505,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "Ak-P3",
+  "min": 0.99175,
+  "max": 1.2,
+  "note": "algún miembro no llega a 0.1: máximo 1.20"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.010220214304081604,
+  "max": 0.020625910099986315,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008515983957985264,
+  "max": 0.017276454796073232,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.013295504531205397,
+  "max": 0.018930142967028375,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.013485279071538325,
+  "max": 0.020811163372617375,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "Ak-P3",
+  "min": 0.96275,
+  "max": 1.2,
+  "note": "algún miembro no llega a 0.1: máximo 1.20"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.012705266635431346,
+  "max": 0.029621886181088866,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008691390047637575,
+  "max": 0.022795755397412895,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008696441842557013,
+  "max": 0.02283157164318953,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008666336072760841,
+  "max": 0.022697015467890835,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008627668221142124,
+  "max": 0.025444813956490734,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.01852282227525506,
+  "max": 0.02971246177004584,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.01853688996168749,
+  "max": 0.03033935238200503,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "Ak-P3",
+  "min": 0.91975,
+  "max": 1.2,
+  "note": "algún miembro no llega a 0.1: máximo 1.20"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.0181073976365822,
+  "max": 0.0521494509843352,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.7,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008825834677719316,
+  "max": 0.016020675243478083,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.85,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008675750385882454,
+  "max": 0.019947137594859554,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.9,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008627516494902806,
+  "max": 0.02074797334203304,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008590901080517419,
+  "max": 0.020915163895320495,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008553714854271057,
+  "max": 0.02094548889956229,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.008515983957985264,
+  "max": 0.021848354271706776,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.015582984778989614,
+  "max": 0.023372444015411317,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.016026253135120634,
+  "max": 0.026014235501305452,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "Ak-P3",
+  "min": null,
+  "max": null,
+  "note": "NA: la curva nominal no llega a 0.1"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "Ak-P3",
+  "min": 0.014527465916742413,
+  "max": 0.038919035884445626,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.01443610175941864,
+  "max": 0.02245083750782741,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.0142260629471356,
+  "max": 0.023677458591797856,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.00903164447778189,
+  "max": 0.01229492600224996,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.010234602506634471,
+  "max": 0.013571040857911259,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.013019361382716036,
+  "max": 0.01636822246701236,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.01447397734670509,
+  "max": 0.019211657766890156,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.01377155739283352,
+  "max": 0.02624238502555787,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.008912995291797888,
+  "max": 0.01232746000568597,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.01005740581491691,
+  "max": 0.013621081741380093,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.013075135494452338,
+  "max": 0.016714556729719623,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.018866863113432726,
+  "max": 0.022781917081982718,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.01939028701667037,
+  "max": 0.025799085850850882,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "C-P1",
+  "min": 0.9557499999999999,
+  "max": 0.9582499999999999,
+  "note": "no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.018952104425546953,
+  "max": 0.03970361242569418,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.009024352525246462,
+  "max": 0.012702991987594735,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.01040848693110273,
+  "max": 0.014379315646119292,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.014280916053818975,
+  "max": 0.018525345149373516,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.023170378380094885,
+  "max": 0.027409295448574886,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.024,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.028033317828733605,
+  "max": 0.03269764153348571,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.029612046734842776,
+  "max": 0.03902592874264464,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.029664892293811862,
+  "max": 0.03997308168559847,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.030087865690859063,
+  "max": 0.07333074420747024,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.009058272959097374,
+  "max": 0.01332812709363998,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.010726512537242628,
+  "max": 0.015277580251932522,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.015106303240838316,
+  "max": 0.019972453862688304,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.023637617977953346,
+  "max": 0.029182321386103938,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.024626175244017653,
+  "max": 0.03330466080975192,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P1",
+  "min": 0.022823125229225385,
+  "max": 0.05337015097000766,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.01443610175941864,
+  "max": 0.02245083750782741,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.0142260629471356,
+  "max": 0.023677458591797856,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.01447397734670509,
+  "max": 0.019211657766890156,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.01377155739283352,
+  "max": 0.02624238502555787,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.9,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008627516494902806,
+  "max": 0.013750685338441659,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008587559179792781,
+  "max": 0.014851092636256209,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008532313269531985,
+  "max": 0.016545509644568024,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008498814840961317,
+  "max": 0.019080526894634568,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.018866863113432726,
+  "max": 0.022781917081982718,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.01939028701667037,
+  "max": 0.025799085850850882,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.018952104425546953,
+  "max": 0.03970361242569418,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.843,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008827734367392617,
+  "max": 0.013250938404056183,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.892,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008773043612462051,
+  "max": 0.015182413608458732,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008740529537974872,
+  "max": 0.016939199449168545,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008702948064952693,
+  "max": 0.019713159008253257,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008666336072760841,
+  "max": 0.023682292527248395,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008627668221142124,
+  "max": 0.029703662057809076,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.024,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.028033317828733605,
+  "max": 0.03269764153348571,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.029612046734842776,
+  "max": 0.03902592874264464,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.029664892293811862,
+  "max": 0.03997308168559847,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "C-P2",
+  "min": 0.9227500000000001,
+  "max": 0.9992500000000001,
+  "note": "no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.030087865690859063,
+  "max": 0.07333074420747024,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.85,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008675750385882454,
+  "max": 0.013605345878710502,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.9,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008627516494902806,
+  "max": 0.01542089786452581,
+  "note": "T1; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008590901080517419,
+  "max": 0.017101678532760105,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008553714854271057,
+  "max": 0.019689658731762934,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.008515983957985264,
+  "max": 0.023555026354208187,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.023637617977953346,
+  "max": 0.029182321386103938,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.024626175244017653,
+  "max": 0.03330466080975192,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P2",
+  "min": 0.022823125229225385,
+  "max": 0.05337015097000766,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "10.8deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.01443610175941864,
+  "max": 0.02245083750782741,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "35deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.0142260629471356,
+  "max": 0.023677458591797856,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.01447397734670509,
+  "max": 0.019211657766890156,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.01377155739283352,
+  "max": 0.02624238502555787,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008515983957985264,
+  "max": 0.019156480267371184,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.018866863113432726,
+  "max": 0.022781917081982718,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": 1.12,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.01939028701667037,
+  "max": 0.025799085850850882,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.018952104425546953,
+  "max": 0.03970361242569418,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.916,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008740529537974872,
+  "max": 0.014906502111164592,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.941,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008702948064952693,
+  "max": 0.021444503402296634,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.965,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008666336072760841,
+  "max": 0.028320016666848784,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 0.99,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008627668221142124,
+  "max": 0.03265213801154897,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.024,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.028033317828733605,
+  "max": 0.03269764153348571,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.112,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.029612046734842776,
+  "max": 0.03902592874264464,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": 1.122,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.029664892293811862,
+  "max": 0.03997308168559847,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.030087865690859063,
+  "max": 0.07333074420747024,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.925,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008587605272074991,
+  "max": 0.017047754011757774,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.95,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008553714854271057,
+  "max": 0.022579689121781796,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 0.975,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.008515983957985264,
+  "max": 0.027470457064696998,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.023637617977953346,
+  "max": 0.029182321386103938,
+  "note": "T2; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": 1.121,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.024626175244017653,
+  "max": 0.03330466080975192,
+  "note": "T3; no converge"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51K16a",
+  "mach": 1.6,
+  "quantity": "cd0",
+  "method": "C-P3",
+  "min": 0.022823125229225385,
+  "max": 0.05337015097000766,
+  "note": "T4; no converge"
+ },
+ {
+  "config": "47deg-t04",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "D2",
+  "min": null,
+  "max": null,
+  "note": "NA: la curva nominal no llega a 0.1"
+ },
+ {
+  "config": "47deg-t06",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "D2",
+  "min": null,
+  "max": null,
+  "note": "NA: la curva nominal no llega a 0.1"
+ },
+ {
+  "config": "47deg-t09",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "D2",
+  "min": null,
+  "max": null,
+  "note": "NA: la curva nominal no llega a 0.1"
+ },
+ {
+  "config": "47deg-root12-t06",
+  "report": "RM L51I04a",
+  "mach": null,
+  "quantity": "drag_rise_mach",
+  "method": "D2",
+  "min": null,
+  "max": null,
+  "note": "NA: la curva nominal no llega a 0.1"
+ }
+]
