@@ -68,6 +68,24 @@ export const J47_SIZE = {
   weight_lb: 2475,
 } as const;
 
+/**
+ * Figures the reports give in their text and the study quotes. None enters the model.
+ */
+export const J47_REPORT_TEXT = {
+  /** RM E9G09, page 5: "Engine-inlet air temperatures below 439 R were unobtainable." */
+  minimumInletTemperature_R: 439,
+  /** RM E9G09, page 14: air flow by three methods "agreed within 3 percent". */
+  airFlowAgreement_percent: 3,
+  /** RM E9G28, page 3: maximum compressor efficiency "approximately 87 percent", at a corrected speed "of about 6300 rpm". */
+  compressorPeakEfficiency_percent: 87,
+  compressorPeakEfficiencySpeed_rpm: 6300,
+  /** RM E9G28, page 11: at rated speed, "from 5000 to 50,000 feet decreased the compressor efficiency from 79 to 72 percent". */
+  compressorEfficiencyAtRatedSpeed5000ft_percent: 79,
+  compressorEfficiencyAtRatedSpeed50000ft_percent: 72,
+  /** RM E9L02, page 6: combustion efficiency "accurate to approximately +-0.04". */
+  combustionEfficiencyAccuracy: 0.04,
+} as const;
+
 /** Sea-level static rating. Report text: RM E9G09, page 3, and RM E9L02, page 3 (fuel). Not used by the model. */
 export const J47_RATING = {
   thrust_lbf: 5000,

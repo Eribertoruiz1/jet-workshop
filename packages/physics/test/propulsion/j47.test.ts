@@ -372,6 +372,33 @@ describe("comparison with the J47 tests", () => {
     for (const result of comparison.regions) if (few.includes(result.region.id)) expect(result.compared).toBe(false);
   });
 
+  it("counts a region as a hit when the measurements are the model's own outputs, but only if it has 3 points", () => {
+    // Synthetic table: every run keeps its conditions and takes the model's outputs as its measurements.
+    // Then every point hits. The three regions with fewer than 3 scored points still do not count.
+    const N_PER_LBF = 4.4482216152605;
+    const KG_PER_LB = 0.45359237;
+    const synthetic = runs.map((run) => {
+      const point = comparison.points.find((p) => p.run === run.run);
+      if (!point?.model) return run;
+      const ramDrag_lbf = run.jetThrust_lbf - run.netThrust_lbf;
+      const netThrust_lbf = point.model.netThrust / N_PER_LBF;
+      return {
+        ...run,
+        netThrust_lbf,
+        jetThrust_lbf: netThrust_lbf + ramDrag_lbf,
+        fuelFlow_lb_h: (point.model.fuelFlow / KG_PER_LB) * 3600,
+        airFlow_lb_s: point.model.airflow / KG_PER_LB,
+      };
+    });
+    const perfect = compareJ47(synthetic);
+    for (const result of perfect.regions) {
+      expect(result.hits, result.region.id).toBe(result.points.length);
+      expect(result.compared, result.region.id).toBe(result.points.length >= MIN_SCORED_POINTS);
+      expect(result.hit, result.region.id).toBe(result.points.length >= MIN_SCORED_POINTS);
+    }
+    expect(perfect.regions.filter((result) => result.hit)).toHaveLength(11);
+  });
+
   it("is what the generated list of regions in the engine says", () => {
     expect(J47_COMPARED_REGIONS).toHaveLength(comparison.regions.length);
     comparison.regions.forEach((result, i) => {

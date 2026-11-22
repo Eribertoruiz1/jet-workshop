@@ -242,3 +242,80 @@ export function compareJ47(runs: readonly J47Run[], anchor: AnchorState = j47Anc
       .map((run) => run.run),
   };
 }
+
+/** One scored run compared at the measured exhaust-gas temperature instead of at the measured speed. */
+export interface TemperatureMatchedPoint {
+  readonly run: number;
+  readonly regionId: string | null;
+  readonly speed_rpm: number;
+  /** Speed at which the model has the measured exhaust-gas total temperature, rpm. null if it never does. */
+  readonly modelSpeed_rpm: number | null;
+  readonly measured: PerQuantity<number>;
+  readonly model: PerQuantity<number> | null;
+  readonly error: PerQuantity<number> | null;
+  readonly withinFraction: PerQuantity<boolean> | null;
+}
+
+/**
+ * The fallback comparison of PLAN.md, risk 2: each scored run at the speed at
+ * which the model has the measured exhaust-gas total temperature. It takes the
+ * speed law out of the comparison; what is left is the rest of the model. It is
+ * a diagnosis, not a second chance: the engine is flown by speed.
+ */
+export function compareJ47AtExhaustTemperature(runs: readonly J47Run[], engine: AnchoredEngine): TemperatureMatchedPoint[] {
+  const points: TemperatureMatchedPoint[] = [];
+  for (const run of runs) {
+    const region = regionOfRun(run);
+    if (region === null || !isHighSpeed(run.engineSpeed_rpm) || run.run === ANCHOR_RUN) continue;
+    const si = j47RunToSI(run);
+    const measured: PerQuantity<number> = { netThrust: si.netThrust_N, fuelFlow: si.fuelFlow_kg_s, airflow: si.airflow_kg_s };
+    const at = (speedFraction: number) =>
+      solveOperatingPoint(engine.hardware, {
+        ambientPressure_Pa: si.ambientPressure_Pa,
+        inletTotalPressure_Pa: si.inletTotalPressure_Pa,
+        inletTotalTemperature_K: si.inletTotalTemperature_K,
+        flightSpeed_m_s: si.flightSpeed_m_s,
+        speedFraction,
+      });
+    // Exhaust-gas temperature rises with speed in this range: bisection on the speed fraction.
+    let low = 0.7;
+    let high = 1.2;
+    const lowPoint = at(low);
+    const highPoint = at(high);
+    const target = si.exhaustGasTotalTemperature_K;
+    const base = { run: run.run, regionId: regionId(region.altitude_ft, region.nominalMach), speed_rpm: run.engineSpeed_rpm, measured };
+    if (
+      !lowPoint.ok ||
+      !highPoint.ok ||
+      !(lowPoint.point.turbineOutletTemperature_K <= target && highPoint.point.turbineOutletTemperature_K >= target)
+    ) {
+      points.push({ ...base, modelSpeed_rpm: null, model: null, error: null, withinFraction: null });
+      continue;
+    }
+    for (let i = 0; i < 60; i++) {
+      const mid = 0.5 * (low + high);
+      const solved = at(mid);
+      if (solved.ok && solved.point.turbineOutletTemperature_K < target) low = mid;
+      else high = mid;
+    }
+    const solved = at(0.5 * (low + high));
+    if (!solved.ok) {
+      points.push({ ...base, modelSpeed_rpm: null, model: null, error: null, withinFraction: null });
+      continue;
+    }
+    const model: PerQuantity<number> = {
+      netThrust: solved.point.netThrust_N,
+      fuelFlow: solved.point.fuelFlow_kg_s,
+      airflow: solved.point.airflow_kg_s,
+    };
+    const error = mapQuantities((q) => model[q] - measured[q]);
+    points.push({
+      ...base,
+      modelSpeed_rpm: (0.5 * (low + high)) / j47SpeedFraction(1),
+      model,
+      error,
+      withinFraction: mapQuantities((q) => Math.abs(error[q]) <= HIT_FRACTION[q] * Math.abs(measured[q])),
+    });
+  }
+  return points;
+}

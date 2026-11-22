@@ -25,9 +25,6 @@ import {
   GLENN_MIN_TEMPERATURE_K,
   GLENN_SPECIES,
   assertInFittedRange,
-  cpOverR,
-  enthalpyOverR,
-  entropyOverR,
   type SpeciesName,
 } from "./glenn-coefficients.ts";
 
@@ -148,15 +145,42 @@ function blendCoefficients(moles: Moles, interval: "low" | "high"): readonly num
   return sum;
 }
 
+/**
+ * Cp, H and S of one coefficient row, with the nine coefficients held as locals.
+ * The expressions are those of cpOverR, enthalpyOverR and entropyOverR in
+ * glenn-coefficients.ts, term for term; they are repeated here because reading
+ * the coefficients out of an array on every call made the engine several times
+ * slower than the flight model can afford (check 7 of brief 007).
+ */
+function row(c: readonly number[]): Blend {
+  const a1 = c[0] ?? 0;
+  const a2 = c[1] ?? 0;
+  const a3 = c[2] ?? 0;
+  const a4 = c[3] ?? 0;
+  const a5 = c[4] ?? 0;
+  const a6 = c[5] ?? 0;
+  const a7 = c[6] ?? 0;
+  const b1 = c[7] ?? 0;
+  const b2 = c[8] ?? 0;
+  return {
+    cp: (T) => a1 / (T * T) + a2 / T + a3 + T * (a4 + T * (a5 + T * (a6 + T * a7))),
+    enthalpy: (T) => -a1 / T + a2 * Math.log(T) + T * (a3 + T * (a4 / 2 + T * (a5 / 3 + T * (a6 / 4 + (T * a7) / 5)))) + b1,
+    entropy: (T) =>
+      -a1 / (2 * T * T) - a2 / T + a3 * Math.log(T) + T * (a4 + T * (a5 / 2 + T * (a6 / 3 + (T * a7) / 4))) + b2,
+  };
+}
+
+/** Temperature at which the two fitted intervals of every species meet, K. */
+const JOINT_TEMPERATURE_K = 1000;
+
 /** Properties of a fixed blend of species over the whole fitted range. */
 function blend(moles: Moles): Blend {
-  const low = blendCoefficients(moles, "low");
-  const high = blendCoefficients(moles, "high");
-  const at = (T: number): readonly number[] => (T < 1000 ? low : high);
+  const low = row(blendCoefficients(moles, "low"));
+  const high = row(blendCoefficients(moles, "high"));
   return {
-    cp: (T) => cpOverR(at(T), T),
-    enthalpy: (T) => enthalpyOverR(at(T), T),
-    entropy: (T) => entropyOverR(at(T), T),
+    cp: (T) => (T < JOINT_TEMPERATURE_K ? low.cp(T) : high.cp(T)),
+    enthalpy: (T) => (T < JOINT_TEMPERATURE_K ? low.enthalpy(T) : high.enthalpy(T)),
+    entropy: (T) => (T < JOINT_TEMPERATURE_K ? low.entropy(T) : high.entropy(T)),
   };
 }
 

@@ -17,7 +17,7 @@ import {
   evidenceRule,
   isNearJ47,
 } from "../../src/propulsion/design.ts";
-import { AFTERBURNER_V0, flightInlet, intakeRecovery } from "../../src/propulsion/engine.ts";
+import { AFTERBURNER_V0, createEngineStepper, flightInlet, intakeRecovery } from "../../src/propulsion/engine.ts";
 import { combustionGas } from "../../src/propulsion/gas.ts";
 import { J47_COMPARED_REGIONS, type ComparedRegion } from "../../src/propulsion/j47-compared-regions.generated.ts";
 import { j47AtSeaLevelStatic, j47Engine, j47SpeedFraction } from "../../src/propulsion/j47.ts";
@@ -358,6 +358,23 @@ describe("afterburner", () => {
     expect(on.fuelFlow_kg_s / on.thrust_N).toBeGreaterThan(1.5 * (off.fuelFlow_kg_s / off.thrust_N));
     expect(on.limits[0]?.value).toBe(off.limits[0]?.value);
     expect(on.evidence).toBe("estimated");
+  });
+
+  it("gives less thrust the more total pressure the lit afterburner loses", () => {
+    const basis = designBasis();
+    const withLoss = (pressureLoss: number): number => {
+      const stepper = createEngineStepper({
+        hardware: j47Engine().hardware,
+        idleSpeedFraction: basis.idleSpeedFraction,
+        fullSpeedFraction: 1,
+        turbineLimit: { ...basis.turbineLimit, limit_K: 2000 },
+        afterburner: { ...AFTERBURNER_V0, pressureLoss },
+        evidence: () => "estimated",
+      });
+      return stepper.step(stepper.initialState(), { throttle: 1, afterburner: true }, SEA_LEVEL, DT).output.thrust_N;
+    };
+    expect(withLoss(0.05)).toBeLessThan(withLoss(0));
+    expect(withLoss(0.1)).toBeLessThan(withLoss(0.05));
   });
 
   it("burns what the energy balance asks to reach its outlet temperature", () => {
