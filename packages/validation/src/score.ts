@@ -119,10 +119,22 @@ export const CD0_BANDS = [
   { limit: Number.POSITIVE_INFINITY, label: "worse than the published precedent (above 0.0020)" },
 ] as const;
 
-/** The reliability strip calls a segment validated within this band. */
+/**
+ * The published precedent (0.0020): the largest band half-width (u_input) at
+ * which a strip segment can be validated (decision 0001, point 2), so a wide
+ * band cannot pass by its width alone; and the distance outside the band above
+ * which the screen says the data disagree with the model.
+ */
 export const VALIDATED_BAND = 0.002;
-/** Symbols used for the CD0 comparison and the reliability strip: |CL - CL_sel| within this. */
+/** Symbols used for the CD0 comparison and the lift-curve fit: |CL| within this. */
 export const LOW_LIFT = 0.3;
+/**
+ * Symbols drawn on the drag-against-Mach chart: |CL - CL_sel| within this.
+ * Since decision 0001 (point 3) the reliability strip scores exactly these.
+ */
+export const SYMBOL_WINDOW = 0.06;
+/** Symbols the strip scored before decision 0001: |CL - CL_sel| within this. Kept only for the report's side-by-side count. */
+export const PREVIOUS_STRIP_WINDOW = LOW_LIFT;
 
 export function bandOf(absError: number): number {
   return CD0_BANDS.findIndex((b) => absError <= b.limit);
@@ -145,6 +157,40 @@ export interface PointScore {
   /** Width of the band at the point */
   spread: number;
 }
+
+/**
+ * Model against measurement in the structure of ASME V&V 20, as adapted in
+ * decision 0001 (our adaptation of the standard, not the standard itself):
+ * S is the centre of the model band, D the measured value,
+ * E = S - D the comparison error, u_input the band's half-width, u_D the
+ * point's total uncertainty and u_val = sqrt(u_D^2 + u_input^2). u_num is
+ * zero: the model is algebraic. Not a pass or fail: |E| <= u_val says the
+ * model error cannot be told apart from the noise.
+ */
+export interface Comparison {
+  /** Comparison error E = S - D */
+  e: number;
+  /** Total uncertainty of the measured value, u_D */
+  uD: number;
+  /** Half-width of the model band, u_input */
+  uInput: number;
+  /** Validation uncertainty u_val = sqrt(u_D^2 + u_input^2) */
+  uVal: number;
+  /** |E| / u_val */
+  ratio: number;
+}
+
+export function compare(band: Band, value: number, uD: number): Comparison {
+  if (!Number.isFinite(band.min) || !Number.isFinite(band.max)) return { e: Number.NaN, uD, uInput: Number.NaN, uVal: Number.NaN, ratio: Number.NaN };
+  const s = (band.min + band.max) / 2;
+  const uInput = (band.max - band.min) / 2;
+  const e = s - value;
+  const uVal = Math.sqrt(uD * uD + uInput * uInput);
+  return { e, uD, uInput, uVal, ratio: Math.abs(e) / uVal };
+}
+
+/** |E| <= u_val: the model's error is not distinguishable from the noise (decision 0001). */
+export const withinUval = (c: Comparison): boolean => Math.abs(c.e) <= c.uVal;
 
 export function scorePolarPoint(model: BandModel, wing: WingBody, p: PolarPoint): PointScore {
   const band = model(wing, { mach: p.mach, cl: p.cl });
@@ -301,21 +347,33 @@ export interface Segment {
 export const SEGMENT_EDGES = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0, 1.05, 1.1, 1.15];
 
 /**
+ * The rule that makes a strip segment validated.
+ *
+ * - "decision-0001" (current): every symbol the chart draws in the segment
+ *   (within SYMBOL_WINDOW of the selected CL) has |E| <= u_val, and the band's
+ *   half-width u_input is within 0.0020 at each of them.
+ * - "spike-1" (before decision 0001, kept only for the report's side-by-side
+ *   count): every symbol within 0.3 of the selected CL lies inside the band,
+ *   and the band's half-spread is within 0.0020 at each of them.
+ */
+export type StripRule = "decision-0001" | "spike-1";
+
+/**
  * Reliability strip for a geometry at a selected lift coefficient, computed
- * on the model band (Amendment 3, point 1):
+ * on the model band (Amendment 3, point 1; decision 0001):
  *
  * - outside model range: the model is not valid somewhere in the segment
  *   (above its Mach limit, the transonic range, or an equation outside its
  *   range, such as the attached-flow lift range of the polar);
  * - validated: the geometry is a tested wing, the segment holds measured
- *   symbols within 0.3 of the selected CL, every one of them lies inside the
- *   band (each scored at its own CL and Mach), and the band's half-spread at
- *   each of them is within the published precedent, 0.0020, so a wide band
- *   cannot pass by its width alone;
+ *   symbols drawn on the chart (each scored at its own CL and Mach), every
+ *   one of them has |E| <= u_val, and u_input at each of them is within the
+ *   published precedent, 0.0020, so a wide band cannot pass by its width alone;
  * - estimate: otherwise. `disagrees` is set when a symbol lies more than
  *   0.0020 outside the band.
  */
-export function reliability(model: BandModel, wing: WingBody, tested: TestedWingId | null, data: Dataset | null, clSelected: number): Segment[] {
+export function reliability(model: BandModel, wing: WingBody, tested: TestedWingId | null, data: Dataset | null, clSelected: number, rule: StripRule = "decision-0001"): Segment[] {
+  const window = rule === "decision-0001" ? SYMBOL_WINDOW : PREVIOUS_STRIP_WINDOW;
   const out: Segment[] = [];
   for (let i = 1; i < SEGMENT_EDGES.length; i++) {
     const lo = SEGMENT_EDGES[i - 1]!;
@@ -326,18 +384,28 @@ export function reliability(model: BandModel, wing: WingBody, tested: TestedWing
       out.push({ lo, hi, state: "outside model range", disagrees: false, n: 0, reason: bad.reasons.join("; ") });
       continue;
     }
-    const pts = tested && data ? data.polar.filter((p) => p.wing === tested && p.mach >= lo - 1e-9 && p.mach < hi - 1e-9 && Math.abs(p.cl - clSelected) <= LOW_LIFT) : [];
+    const pts = tested && data ? data.polar.filter((p) => p.wing === tested && p.mach >= lo - 1e-9 && p.mach < hi - 1e-9 && Math.abs(p.cl - clSelected) <= window) : [];
     const scores = pts.map((p) => scorePolarPoint(model, wing, p)).filter((s) => s.band.valid);
     if (!scores.length) {
       out.push({ lo, hi, state: "estimate", disagrees: false, n: 0, reason: "no measured data in this Mach range" });
       continue;
     }
     const worst = Math.max(...scores.map((s) => Math.abs(s.error)));
-    const outside = scores.filter((s) => s.error !== 0).length;
     const half = Math.max(...scores.map((s) => s.spread / 2));
-    const detail = `${scores.length - outside} of ${scores.length} symbols inside the band, largest distance ${worst.toFixed(4)}; band half-spread up to ${half.toFixed(4)}`;
-    if (outside === 0 && half <= VALIDATED_BAND) out.push({ lo, hi, state: "validated", disagrees: false, n: scores.length, reason: detail });
-    else out.push({ lo, hi, state: "estimate", disagrees: worst > VALIDATED_BAND, n: scores.length, reason: detail });
+    const disagrees = worst > VALIDATED_BAND;
+    if (rule === "spike-1") {
+      const outside = scores.filter((s) => s.error !== 0).length;
+      const detail = `${scores.length - outside} of ${scores.length} symbols inside the band, largest distance ${worst.toFixed(4)}; band half-spread up to ${half.toFixed(4)}`;
+      const ok = outside === 0 && half <= VALIDATED_BAND;
+      out.push({ lo, hi, state: ok ? "validated" : "estimate", disagrees: ok ? false : disagrees, n: scores.length, reason: detail });
+      continue;
+    }
+    const cmp = scores.map((s) => compare(s.band, s.point.cd, s.point.uCd));
+    const agree = cmp.filter(withinUval).length;
+    const ratio = Math.max(...cmp.map((c) => c.ratio));
+    const detail = `${agree} of ${scores.length} drawn symbols with |E| <= u_val, largest |E| / u_val ${ratio.toFixed(2)}; u_input up to ${half.toFixed(4)}`;
+    const ok = agree === scores.length && half <= VALIDATED_BAND;
+    out.push({ lo, hi, state: ok ? "validated" : "estimate", disagrees: ok ? false : disagrees, n: scores.length, reason: detail });
   }
   return out;
 }

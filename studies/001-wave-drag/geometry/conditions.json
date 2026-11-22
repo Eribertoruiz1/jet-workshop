@@ -1,0 +1,31 @@
+{
+  "_note": "Planform and test conditions only: no drag or lift value. Held-out entries are transcribed from docs/studies/heldout-geometry.md (sections Configurations, Planform, Test conditions). Open entries are the Mach numbers of the figure 9 samples of NACA RM L52B08 listed in packages/validation/README.md (coverage table) and docs/cp/001.md (each wing's test Mach numbers where the curve is solid).",
+  "planform": {
+    "aspectRatio": 3.5,
+    "taperRatio": 0.2,
+    "spanIn": 24.0,
+    "source": "heldout-geometry.md, Planform: aspect ratio 3.5, taper ratio 0.2, span 24.00 in, root chord 11.430 in, tip chord 2.286 in; the same for the three open wings (packages/validation/README.md, Geometry)"
+  },
+  "open": [
+    { "wing": "10.8deg-t04", "sweepQuarterChordDeg": 10.8, "thicknessRatio": 0.04, "machs": [0.5, 0.7, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0, 1.02, 1.035, 1.085, 1.1, 1.114] },
+    { "wing": "35deg-t04", "sweepQuarterChordDeg": 35, "thicknessRatio": 0.04, "machs": [0.5, 0.7, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0, 1.02, 1.035, 1.1, 1.13] },
+    { "wing": "47deg-t04", "sweepQuarterChordDeg": 47, "thicknessRatio": 0.04, "machs": [0.5, 0.696, 0.843, 0.892, 0.916, 0.941, 0.965, 0.99, 1.01, 1.024, 1.112] }
+  ],
+  "heldout": [
+    { "config": "10.8deg-t04", "sweepQuarterChordDeg": 10.8, "thickness": "0.04", "report": "RM L51K16a", "machs": [1.6] },
+    { "config": "35deg-t04", "sweepQuarterChordDeg": 35, "thickness": "0.04", "report": "RM L51K16a", "machs": [1.6] },
+    { "config": "47deg-t04", "sweepQuarterChordDeg": 47, "thickness": "0.04", "report": "RM L51I04a", "machs": [0.5, 0.696, 0.843, 0.892, 0.916, 0.941, 0.965, 0.99, 1.01, 1.024, 1.088, 1.112] },
+    { "config": "47deg-t04", "sweepQuarterChordDeg": 47, "thickness": "0.04", "report": "RM L51K16a", "machs": [1.6] },
+    { "config": "47deg-t06", "sweepQuarterChordDeg": 47, "thickness": "0.06", "report": "RM L51I04a", "machs": [0.5, 0.7, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0, 1.02, 1.035, 1.088, 1.1, 1.12] },
+    { "config": "47deg-t06", "sweepQuarterChordDeg": 47, "thickness": "0.06", "report": "RM L51K16a", "machs": [1.6] },
+    { "config": "47deg-t09", "sweepQuarterChordDeg": 47, "thickness": "0.09", "report": "RM L51I04a", "machs": [0.5, 0.696, 0.843, 0.892, 0.916, 0.941, 0.965, 0.99, 1.01, 1.024, 1.088, 1.112, 1.122] },
+    { "config": "47deg-t09", "sweepQuarterChordDeg": 47, "thickness": "0.09", "report": "RM L51K16a", "machs": [1.6] },
+    { "config": "47deg-root12-t06", "sweepQuarterChordDeg": 47, "thickness": "0.12 at the centre line to 0.06 at 0.40 semispan, 0.06 outboard", "report": "RM L51I04a", "machs": [0.5, 0.7, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0, 1.02, 1.035, 1.085, 1.1, 1.121] },
+    { "config": "47deg-root12-t06", "sweepQuarterChordDeg": 47, "thickness": "0.12 at the centre line to 0.06 at 0.40 semispan, 0.06 outboard", "report": "RM L51K16a", "machs": [1.6] }
+  ],
+  "replica": {
+    "config": "47deg-t04",
+    "report": "RM L51I04a",
+    "reason": "Same planform, section, body, tunnel and test Mach labels as the open 47 deg wing of RM L52B08 (heldout-geometry.md, Models). Fixed as replica by geometry and tunnel in the PM review of gate 1, whatever lane B finds about the test."
+  }
+}

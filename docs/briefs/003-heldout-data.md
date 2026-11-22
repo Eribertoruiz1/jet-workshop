@@ -107,3 +107,15 @@ Respuestas al dueño en español. Código, commits, CSV y fichas en inglés.
 ## Cierre
 
 Este carril no tiene pantalla. Su valor es que, dentro de unos días, el proyecto pueda decir algo poco habitual: "predijimos estas medidas antes de verlas".
+
+## Enmienda 1 · 15 de noviembre de 2026
+
+Decide el PM, con el OK del dueño, en la compuerta 2. No es `post hoc`: ningún dato reservado se había puntuado.
+
+1. **La figura 11 de RM L51I04a pasa a ser obligatoria.** Es el dato principal del prerregistro del carril C (`studies/001-wave-drag/PREREGISTRATION.md`, regla (a)). Se muestrea, para cada una de las cuatro alas, en los Mach ensayados que da la hoja de geometría, fuera del hueco de Mach 1.04 a 1.08 y solo donde la curva esté dibujada.
+2. **Alcance recortado a lo que la prueba a ciegas puntúa, que es resistencia:**
+   - RM L51I04a: la figura 11 y las figuras (b) de las alas 2, 3 y 4, a cinco Mach cada una.
+   - RM L51K16a: los gráficos de resistencia de las seis configuraciones.
+   - Quedan como Tickets las figuras de ángulo de ataque de los dos informes y la figura 6(a) de RM L51I04a.
+3. **`47deg-t04` en transónico es réplica.** El PM comprobó con código propio que los 32 puntos de la figura 6(b) coinciden con los de la figura 7(b) de RM L52B08: diferencia máxima de 0.0014 en CL y de 0.00014 en CD. Su punto a Mach 1.60 sigue reservado.
+4. **La relectura de diez puntos por el PM** (compuerta 3) pasa a después de que las predicciones del carril C estén en `main`, y antes de puntuar. El PM no abre valores a ciegas antes de ese sello (`docs/PROCESS.md`, regla de evidencia 4).
