@@ -56,9 +56,17 @@ export interface EngineHardware {
   readonly nozzleArea_m2: number;
   /** Compressor work per kilogram of air at shaft speed fraction 1, J/kg. At fraction n it is n^2 times this. */
   readonly compressorWorkAtFullSpeed_J_kg: number;
-  /** Burner pressure loss, as a fraction, per unit of Wair^2 T3 / P3^2 at its inlet */
+  /**
+   * Burner pressure loss, as a fraction, per unit of Wair^2 T3 / P3^2 at its inlet.
+   * That is the form of the friction loss of NACA RM E9L02, equation 7c (PDF page 15).
+   * MODEL: it is applied here to the whole loss. The part due to heat addition, which
+   * that report computes from a chart, does not follow it exactly.
+   */
   readonly burnerLossCoefficient: number;
-  /** Tailpipe pressure loss, as a fraction, per unit of Wgas^2 T5 / P5^2 at its inlet */
+  /**
+   * Tailpipe pressure loss, as a fraction, per unit of Wgas^2 T5 / P5^2 at its inlet.
+   * UNVERIFIED: the same form as the burner's, assumed; no source for the tailpipe.
+   */
   readonly tailpipeLossCoefficient: number;
   /** Turbine inlet temperature at the reference point, K. It only seeds the iteration. */
   readonly referenceTurbineInletTemperature_K: number;
@@ -77,7 +85,14 @@ function turbineFlux(gas: GasModel, inlet_K: number, f: number, pressureRatio: n
   return convergentNozzle(gas, inlet_K, 1, f, pressureRatio).massFlux_kg_s_m2;
 }
 
-/** Sizes an engine at its reference point. */
+/**
+ * Sizes an engine at its reference point.
+ *
+ * UNVERIFIED, both the assumptions of candidate A and neither read in a source:
+ * compressor work per kilogram proportional to the square of the shaft speed, and
+ * the turbine passing the flow of a single nozzle of fixed area at its over-all
+ * pressure ratio (`turbineFlux`), which matters only where it is not choked.
+ */
 export function buildHardware(technology: Technology, reference: HardwareReference): HardwareResult {
   const solved = solveReferencePoint({
     gas: technology.gas,

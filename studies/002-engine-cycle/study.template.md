@@ -122,7 +122,7 @@ Con la temperatura igualada, la mediana del error absoluto es {{n:matchedMedian:
 Sin verificar contra una fuente abierta (`// UNVERIFIED` en el código):
 
 - El rendimiento politrópico escrito con la función de entropía.
-- La pérdida de presión de la cámara y del conducto de salida proporcional al cuadrado del gasto corregido. La forma de la pérdida por fricción de RM E9L02 (ecuación 7c) se leyó solo en la capa de texto.
+- La pérdida de presión de la cámara y del conducto de salida proporcional al cuadrado del gasto corregido. Es la forma de la pérdida por fricción de la cámara (RM E9L02, ecuación 7c, p. 15), aplicada aquí a la pérdida entera; para el conducto de salida no hay fuente.
 - La ley de trabajo del compresor con el cuadrado de las vueltas. No tiene fuente: es el supuesto del candidato A.
 - La turbina tratada como una sola tobera cuando no está bloqueada.
 - La recuperación de la toma por encima de Mach 1, escrita de memoria.
