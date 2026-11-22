@@ -160,6 +160,22 @@ export function convergentNozzle(
   };
 }
 
+/**
+ * Jet thrust of a convergent nozzle: momentum of the jet plus the exit pressure
+ * above ambient acting on the exit area, times the thrust coefficient. The form is
+ * that of equation 7 of NACA RM E9G09 (PDF page 14), and the coefficient multiplies
+ * the whole of it, as that report defines it (PDF page 4).
+ */
+export function jetThrust(
+  thrustCoefficient: number,
+  gasFlow_kg_s: number,
+  nozzle: NozzleFlow,
+  area_m2: number,
+  ambient_Pa: number,
+): number {
+  return thrustCoefficient * (gasFlow_kg_s * nozzle.exitVelocity_m_s + (nozzle.exitPressure_Pa - ambient_Pa) * area_m2);
+}
+
 /** Everything that fixes one operating point of the engine when its geometry is still free. */
 export interface ReferenceInputs {
   readonly gas: GasModel;
@@ -186,10 +202,13 @@ export interface ReferenceInputs {
   readonly mechanicalEfficiency: number;
   /** Total pressure lost between turbine outlet and nozzle inlet, as a fraction */
   readonly tailpipePressureLoss: number;
-  /** Actual over ideal exit velocity */
-  readonly nozzleVelocityCoefficient: number;
-  /** Actual over ideal mass flow for the geometric exit area */
-  readonly nozzleDischargeCoefficient: number;
+  /**
+   * Actual jet thrust over the ideal jet thrust of the convergent nozzle, momentum
+   * plus exit pressure. It is the jet-velocity coefficient of NACA RM E9G09 (PDF
+   * pages 4 and 14): balance-scale jet thrust over the thrust computed from the
+   * nozzle survey rake.
+   */
+  readonly nozzleThrustCoefficient: number;
   /** Lower heating value of the fuel, J/kg */
   readonly fuelHeatingValue_J_kg: number;
 }
@@ -209,7 +228,7 @@ export interface CyclePoint {
   readonly nozzle: NozzleFlow;
   /** Effective flow area of the choked turbine nozzle, m2 */
   readonly turbineThroatArea_m2: number;
-  /** Geometric exit area of the exhaust nozzle, m2 */
+  /** Effective flow area of the exhaust nozzle, m2: the area that passes the flow without losses */
   readonly nozzleArea_m2: number;
   /** Momentum and pressure thrust of the jet, N */
   readonly grossThrust_N: number;
@@ -234,9 +253,8 @@ export function solveReferencePoint(inputs: ReferenceInputs): ReferenceResult {
   const compressor = compress(gas, inputs.inletTotalTemperature_K, inputs.pressureRatio, inputs.compressorEfficiency);
   const T3 = compressor.outletTemperature_K;
   const p3 = inputs.inletTotalPressure_Pa * inputs.pressureRatio;
-  if (!(T4 > T3)) {
-    throw new RangeError(`turbine inlet temperature ${T4} K is not above the compressor outlet, ${T3} K`);
-  }
+  // No heat can be added below the compressor outlet temperature: nothing drives the turbine.
+  if (!(T4 > T3)) return { ok: false, reason: "turbine-cannot-drive-compressor" };
 
   // Burner energy balance, the form of equation 15 of NASA TM 78653 (PDF page 12).
   const f = gas.fuelAirRatioIncrement(T3, 0, T4, inputs.burnerEfficiency * inputs.fuelHeatingValue_J_kg);
@@ -252,14 +270,8 @@ export function solveReferencePoint(inputs: ReferenceInputs): ReferenceResult {
 
   const gasFlow = inputs.airflow_kg_s * (1 + f);
   const nozzle = convergentNozzle(gas, T5, p7, f, inputs.ambientPressure_Pa);
-  // UNVERIFIED: thrust as jet momentum plus exit pressure over the geometric area,
-  // with the velocity coefficient on the momentum term and the discharge coefficient
-  // on the mass flow. Standard form; to be checked against the definitions of the
-  // J47 reports, which may place the coefficients differently.
-  const nozzleArea = gasFlow / (inputs.nozzleDischargeCoefficient * nozzle.massFlux_kg_s_m2);
-  const grossThrust =
-    inputs.nozzleVelocityCoefficient * gasFlow * nozzle.exitVelocity_m_s +
-    (nozzle.exitPressure_Pa - inputs.ambientPressure_Pa) * nozzleArea;
+  const nozzleArea = gasFlow / nozzle.massFlux_kg_s_m2;
+  const grossThrust = jetThrust(inputs.nozzleThrustCoefficient, gasFlow, nozzle, nozzleArea, inputs.ambientPressure_Pa);
 
   // Choked turbine nozzle: W sqrt(T) / (A p) is fixed, equation 16 of NASA TM 78653 (PDF page 12).
   const throat = sonicState(gas, T4, f);

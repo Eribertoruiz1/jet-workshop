@@ -117,8 +117,7 @@ function losslessInputs(overrides: Partial<ReferenceInputs>): ReferenceInputs {
     burnerPressureLoss: 0,
     mechanicalEfficiency: 1,
     tailpipePressureLoss: 0,
-    nozzleVelocityCoefficient: 1,
-    nozzleDischargeCoefficient: 1,
+    nozzleThrustCoefficient: 1,
     fuelHeatingValue_J_kg: 43e6,
     ...overrides,
   };
@@ -237,8 +236,7 @@ describe("reference point with losses, on the combustion gas", () => {
     burnerPressureLoss: 0.05,
     mechanicalEfficiency: 0.99,
     tailpipePressureLoss: 0.02,
-    nozzleVelocityCoefficient: 1,
-    nozzleDischargeCoefficient: 1,
+    nozzleThrustCoefficient: 1,
     fuelHeatingValue_J_kg: 43e6,
   };
   const solved = solveReferencePoint(inputs);

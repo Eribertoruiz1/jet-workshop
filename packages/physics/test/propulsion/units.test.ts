@@ -3,10 +3,12 @@ import {
   btuPerLbToJoulePerKg,
   fahrenheitToKelvin,
   feetToMetres,
+  inchesToMetres,
   lbPerHourPerLbfToKgPerSecondPerNewton,
   lbPerHourToKgPerSecond,
   lbPerSecondToKgPerSecond,
   lbfToNewton,
+  poundsToKilograms,
   psfToPascal,
   rankineToKelvin,
   squareInchesToSquareMetres,
@@ -39,6 +41,14 @@ describe("propulsion units: report units to SI", () => {
 
   it("converts feet to metres", () => {
     expect(feetToMetres(25000)).toBeCloseTo(7620, 9);
+  });
+
+  it("converts inches to metres", () => {
+    expect(inchesToMetres(100)).toBeCloseTo(2.54, 12);
+  });
+
+  it("converts pounds of mass to kilograms", () => {
+    expect(poundsToKilograms(2475)).toBeCloseTo(1122.64111575, 8);
   });
 
   it("converts pounds per square foot to pascals", () => {

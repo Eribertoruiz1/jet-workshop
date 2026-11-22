@@ -46,6 +46,16 @@ export function feetToMetres(feet: number): number {
   return feet * M_PER_FT;
 }
 
+/** Length: inches to metres. */
+export function inchesToMetres(inches: number): number {
+  return (inches * M_PER_FT) / 12;
+}
+
+/** Mass: pounds to kilograms. */
+export function poundsToKilograms(pounds: number): number {
+  return pounds * KG_PER_LB;
+}
+
 /** Pressure: pounds-force per square foot to pascals. */
 export function psfToPascal(psf: number): number {
   return (psf * N_PER_LBF) / (M_PER_FT * M_PER_FT);
