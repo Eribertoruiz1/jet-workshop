@@ -84,6 +84,15 @@ export const J47_REPORT_TEXT = {
   compressorEfficiencyAtRatedSpeed50000ft_percent: 72,
   /** RM E9L02, page 6: combustion efficiency "accurate to approximately +-0.04". */
   combustionEfficiencyAccuracy: 0.04,
+  /** RM E9K10, page 5: maximum error in turbine efficiency "from +-3 percent at high pressure levels to +-8 percent at low". */
+  turbineEfficiencyMaximumErrorHighPressure_percent: 3,
+  turbineEfficiencyMaximumErrorLowPressure_percent: 8,
+  /**
+   * RM E9G09, page 3: at 25,000 feet the internal drag of the windmilling engine "varied from 2 percent of the
+   * available net thrust at a true airspeed of 200 miles per hour to 15 percent at ... 650 miles per hour".
+   */
+  windmillingDragAt200mph_percent: 2,
+  windmillingDragAt650mph_percent: 15,
 } as const;
 
 /** Sea-level static rating. Report text: RM E9G09, page 3, and RM E9L02, page 3 (fuel). Not used by the model. */
@@ -125,8 +134,9 @@ export const J47_ANCHOR_REPORT_UNITS = {
 export const J47_ANCHOR_REPORTED = {
   /** RM E9G28, table I: adiabatic compressor efficiency, percent */
   compressorEfficiency_percent: 78.8,
-  /** RM E9L02, table I */
+  /** RM E9L02, table I: combustion efficiency, and the measured over-all total-pressure-loss ratio of the chamber */
   combustionEfficiency: 0.952,
+  burnerPressureLossRatio: 0.0388,
   /** RM E9K10, table I: adiabatic turbine efficiency, and turbine-inlet temperature from the work balance */
   turbineEfficiency: 0.798,
   turbineInletTotalTemperature_R: 2080,

@@ -10,7 +10,8 @@ Estudio del brief 007 (carril E). **Borrador de la compuerta 2:** contiene el mo
 - **Consecuencia, fijada antes de calcular:** el motor entero queda como `estimated`. Ninguna salida suya lleva `validated`.
 - Mediana del error en valor absoluto (`computed` contra `measured`): empuje neto {{n:median:netThrust}} %, gasto de combustible {{n:median:fuelFlow}} %, gasto de aire {{n:median:airflow}} %. Máximos: {{n:max:netThrust}} %, {{n:max:fuelFlow}} % y {{n:max:airflow}} %.
 - **La forma del error es clara** (sección 6): el modelo da de menos al bajar las vueltas y de más a régimen máximo lejos del ancla.
-- **Lo que sí cuadra:** el área de tobera que el modelo necesita en el ancla está a un {{n:nozzleAreaDifferencePercent}} % de la geométrica del informe, y el motor llevado a nivel del mar da el gasto de aire nominal a un {{n:seaLevelAirflowDifferencePercent}} % y la relación de compresión a un {{n:seaLevelPressureRatioDifferencePercent}} % (secciones 3 y 4).
+- **Lo que sí cuadra:** el área de tobera que el modelo necesita en el ancla está a un {{n:nozzleAreaDifferencePercent}} % de la geométrica del informe, y el motor llevado a nivel del mar da el gasto de aire nominal a un {{n:seaLevelAirflowDifferencePercent}} % y la relación de compresión a un {{n:seaLevelPressureRatioDifferencePercent}} % (secciones 3 y 4). En ese mismo punto el empuje sale un {{n:seaLevelThrustOverPercent}} % por encima del nominal y el gasto de combustible un {{n:seaLevelFuelOverPercent}} %.
+- **El límite de la turbina del motor v0 no es de fiar en altura** (sección 6): en {{n:exhaustModelMissed}} de las {{n:exhaustMeasuredOverLimit}} corridas puntuadas en que el motor real pasó de su límite de temperatura de escape, el modelo se queda por debajo.
 - **Parámetros:** cero ajustados a los puntos puntuados; {{n:anchorMeasuredCount}} valores medidos y {{n:anchorTextCount}} de texto tomados de una sola corrida, el ancla (sección 3).
 
 ## 2. Datos
@@ -25,6 +26,7 @@ Todo es del General Electric J47 ensayado en 1949 en el túnel de altura de Lewi
 | NACA RM E9K10, tabla I (pp. 18 y 19) | Corrida 1: presiones y temperatura de la turbina | `measured` |
 
 - **Son tablas, no curvas.** No se digitalizó nada. Cada tabla se leyó dos veces, por dos lectores independientes que no vieron la lectura del otro. Las dos lecturas coinciden en todas las celdas; una prueba lo comprueba. La ficha está en `packages/physics/data/engines/j47/README.md`.
+- **Qué quiere decir `measured` aquí.** Son los datos de ensayo tal como los tabula el informe. Varias columnas no son lecturas de un instrumento sino reducciones que el informe hace con sus ecuaciones a partir de lecturas: el Mach de vuelo, la temperatura ambiente equivalente y el empuje neto, que es el empuje del chorro de la balanza menos el gasto de aire por la velocidad equivalente. La ficha dice cuál es cada una. Se reserva `computed` para lo que un informe saca con un modelo, como la temperatura de entrada a la turbina.
 - **Las columnas derivadas cuadran.** El Mach, el consumo específico, la relación combustible-aire y la relación de temperaturas del motor, recalculados desde las otras columnas, coinciden con lo impreso en las {{n:runs}} corridas.
 - **Lo que el informe no declara.** No da la precisión del empuje ni del gasto de combustible. Las incertidumbres de la sección 5 son, salvo la del gasto de aire, estimación propia.
 
@@ -49,7 +51,8 @@ El túnel no ensayó ahí. Estas cifras son las del modelo anclado llevado a niv
 {{t:seaLevel}}
 
 - El gasto de aire sale a un {{n:seaLevelAirflowDifferencePercent}} % de su valor nominal y la relación de compresión a un {{n:seaLevelPressureRatioDifferencePercent}} %.
-- **El empuje y el consumo salen por encima del nominal, y no es un fallo del modelo (juicio).** El motor ensayado ya daba más que su cifra de catálogo: en la corrida del ancla, a {{n:anchorAltitude_ft}} pies, midió {{n:anchorJetThrust_lbf}} lbf de empuje del chorro con una presión de entrada que es el {{n:anchorInletPressurePercent}} % de la del nivel del mar.
+- **El empuje sale un {{n:seaLevelThrustOverPercent}} % por encima del nominal (juicio: no es un fallo del modelo).** El motor ensayado ya daba más que su cifra de catálogo: en la corrida del ancla, a {{n:anchorAltitude_ft}} pies, midió {{n:anchorJetThrust_lbf}} lbf de empuje del chorro con una presión de entrada que es el {{n:anchorInletPressurePercent}} % de la del nivel del mar.
+- **El gasto de combustible sale un {{n:seaLevelFuelOverPercent}} % por encima, y eso el argumento anterior no lo explica entero.** El consumo específico del modelo es {{n:seaLevelSfc}} lb/(h·lbf) frente a {{n:nominalSfc}} del nominal: un {{n:seaLevelSfcOverPercent}} % más. No hay medida parada a nivel del mar con que decidir cuánto es del motor ensayado y cuánto del modelo. Queda sin explicar.
 
 Lo que el taller toma de aquí:
 
@@ -64,6 +67,9 @@ Lo que el taller toma de aquí:
 - `u_D`: {{n:uAir}} % del gasto de aire (`report text`: tres métodos coincidieron dentro de un {{n:airFlowAgreementPercent}} %, RM E9G09, p. 14; se toma la mitad); {{n:uJet}} % del empuje del chorro y {{n:uFuel}} % del gasto de combustible, estimación propia. El empuje neto compone el del chorro con el del gasto de aire, por la resistencia de entrada.
 - `u_input`: lo que cambia cada salida al mover cada valor del ancla dentro de su incertidumbre. Mediana de `u_val`: {{n:medianUval:netThrust}} % en empuje, {{n:medianUval:fuelFlow}} % en combustible y {{n:medianUval:airflow}} % en aire.
 - `u_num`: como mucho {{n:maxUnum:netThrust}} % del empuje. No pesa.
+- {{n:uvalRole}}.
+
+**Cuánto pesa el coeficiente de la tobera** (`computed`). El empuje del chorro es proporcional a él, y el neto es el del chorro menos la resistencia de entrada. Un punto de coeficiente mueve el empuje neto entre un {{n:sensitivityMin}} % y un {{n:sensitivityMax}} % según la corrida, con mediana de {{n:sensitivityMedian}} %; pesa más cuanto mayor es el Mach. El modelo usa un solo valor, {{n:thrustCoefficient}}, el del ancla.
 
 **El criterio, fusionado antes de abrir ningún informe** (`PLAN.md`, sección 6). Un punto acierta si `|E| ≤ max(u_val, {{n:threshold:netThrust}} %)` en empuje y en combustible, y con el {{n:threshold:airflow}} % en aire. Una región, que es una altura y un Mach, cuenta como comparada con al menos {{n:minPoints}} puntos puntuados y una mediana de `u_val` no mayor del {{n:maxMedianUvalPercent}} %; y acierta si lo hace al menos el {{n:minHitPercent}} % de sus puntos en las tres magnitudes.
 
@@ -99,11 +105,20 @@ El modelo mantiene constantes el rendimiento del compresor y el cociente entre s
 
 ### La misma comparación a igual temperatura de escape (`computed`)
 
-El plan (riesgo 2) preveía, si fallaba la ley de vueltas, comparar a la temperatura de salida de la turbina en vez de a las vueltas. Aquí cada punto se calcula a las vueltas a las que el modelo da la temperatura de escape medida. Es un diagnóstico: el motor se vuela por vueltas, así que no cambia el resultado de la sección 5.
+El plan (riesgo 2) decía que, si fallaba la ley de vueltas, el motor v0 pasaría a compararse a la temperatura de salida de la turbina en vez de a las vueltas. **Aquí no se ha hecho así, y es una desviación del plan:** la comparación que cuenta sigue siendo la de la sección 5, a iguales vueltas, porque el motor se vuela por vueltas. La de temperatura se da como diagnóstico, sin `u_val`. Cada punto se calcula a las vueltas a las que el modelo da la temperatura de escape medida.
 
 {{t:temperatureMatched}}
 
-Con la temperatura igualada, la mediana del error absoluto es {{n:matchedMedian:netThrust}} % en empuje, {{n:matchedMedian:fuelFlow}} % en combustible y {{n:matchedMedian:airflow}} % en aire, y quedan dentro del umbral a secas {{n:matchedWithin:netThrust}}, {{n:matchedWithin:fuelFlow}} y {{n:matchedWithin:airflow}} de {{n:matchedPoints}} puntos (en {{n:unmatchedPoints}} el modelo no alcanza esa temperatura). A iguales vueltas las medianas eran {{n:median:netThrust}} %, {{n:median:fuelFlow}} % y {{n:median:airflow}} %. {{n:matchedVerdict}}.
+Con la temperatura igualada, la mediana del error absoluto es {{n:matchedMedian:netThrust}} % en empuje, {{n:matchedMedian:fuelFlow}} % en combustible y {{n:matchedMedian:airflow}} % en aire, y quedan dentro del umbral a secas {{n:matchedWithin:netThrust}}, {{n:matchedWithin:fuelFlow}} y {{n:matchedWithin:airflow}} de {{n:matchedPoints}} puntos (en {{n:unmatchedPoints}} el modelo no alcanza esa temperatura). A iguales vueltas las medianas eran {{n:median:netThrust}} %, {{n:median:fuelFlow}} % y {{n:median:airflow}} %. {{n:matchedVerdict}}. Con el criterio de regiones y el umbral a secas, a igual temperatura acertarían {{n:matchedRegionHits}} regiones: la desviación no cambia el resultado.
+
+### La temperatura de escape, que es donde está el límite (`computed` contra `measured`)
+
+El límite del J47 se fijó en la temperatura de salida de la turbina: {{n:exhaustLimit_F}} °F (`report text`). No es una magnitud puntuada, pero es la que decide si el motor se rompe.
+
+{{t:exhaustTemperature}}
+
+- **El modelo no reproduce cómo sube esa temperatura con la altura.** A vueltas fijas, la temperatura del modelo casi no depende de la condición de vuelo. La del motor real sube mucho en altura: las diferencias van de {{n:exhaustWorstLow_K}} K a {{n:exhaustWorstHigh_K}} K.
+- **Consecuencia para el límite.** El motor real pasó de sus {{n:exhaustLimit_F}} °F en {{n:exhaustMeasuredOverLimit}} de las corridas puntuadas. En {{n:exhaustModelMissed}} de ellas el modelo queda por debajo del límite. El motor v0 avisa de la turbina cuando se sube la temperatura de diseño, que es lo que pide la prueba de aceptación del brief, pero **no avisa de lo que le pasaba al J47 de verdad: llegar al límite a menos vueltas cuanto más alto volaba.**
 
 **Lo que este borrador no puede decir (juicio).** Con una sola corrida de las tablas de componentes no se puede repartir el error entre el compresor, la turbina y la ley de vueltas. Hace falta transcribir esas tablas corrida a corrida, que es trabajo de la compuerta 3, y con ellas se medirá cada supuesto por separado.
 
@@ -115,6 +130,8 @@ Con la temperatura igualada, la mediana del error absoluto es {{n:matchedMedian:
 {{t:standardDay}}
 
 - **El despegue no cae en ninguna región:** el túnel no ensayó por debajo de {{n:lowestTestedAltitude_ft}} pies ni de Mach {{n:lowestTestedMach}}.
+- **El J47 calculado va por encima de su propio límite a fondo.** A nivel del mar tiene {{n:j47DesignTurbineInlet_K}} K a la entrada de la turbina, {{n:j47LimitExcess_K}} K más que el límite de {{n:j47LimitExact_K}} K. Con la regla de daño v0, que es `estimated`, se rompe a unos {{n:j47MinutesToFailure}} minutos de gas a fondo. Viene del ancla: el motor ensayado iba a {{n:anchorOutlet_F}} °F a la salida de la turbina, por encima de los {{n:exhaustLimit_F}} °F del texto del informe.
+- **Al cerrar gas en vuelo el motor pasa a molinete.** Por debajo de cierto régimen la presión dinámica sola lo movería más deprisa de lo que se pide, y no hay equilibrio. El motor v0 da ahí una resistencia pequeña y continua con casi nada de combustible: es `estimated` y no usa la medida del informe, que cifra la resistencia en molinete a 25 000 pies entre un {{n:windmillingLow}} % y un {{n:windmillingHigh}} % del empuje disponible (RM E9G09, p. 3).
 - **Qué da el motor v0** con las decisiones del J47: {{n:seaLevelThrust_kN}} kN ({{n:seaLevelThrust_lbf}} lbf) parado a nivel del mar; límite de temperatura de entrada a la turbina de {{n:turbineLimit_K}} K; ralentí al {{n:idlePercent}} % de las vueltas.
 
 ## 8. Fórmulas sin verificar y límites del modelo
@@ -135,4 +152,4 @@ Sin verificar contra una fuente abierta (`// UNVERIFIED` en el código):
 - La masa, el diámetro y la longitud de un diseño que no sea el J47: semejanza geométrica.
 - Los rangos de las tres decisiones.
 
-Lo que el modelo no tiene: sangrados y aire de refrigeración, potencia de accesorios, efecto del número de Reynolds en el compresor, disociación del gas, dilatación de la tobera, resistencia del motor en molinete, bombeo del compresor y apagado de la llama.
+Lo que el modelo no tiene: sangrados y aire de refrigeración, potencia de accesorios, efecto del número de Reynolds en el compresor, disociación del gas, dilatación de la tobera, un modelo del molinete con medida detrás, bombeo del compresor y apagado de la llama.

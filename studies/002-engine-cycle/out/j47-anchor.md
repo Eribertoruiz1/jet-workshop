@@ -27,7 +27,7 @@
 | Rendimiento de combustión | 0.962 | 0.952 | El informe declara ±0.04 |
 | Pérdida de presión de la cámara | 0.0388 | 0.0388, medida | Es el mismo cociente de presiones medidas |
 | Pérdida de presión del conducto de salida | 0.0279 | no la da | De dos presiones medidas |
-| Coeficiente de empuje de la tobera | 0.9973 | figura 3: nube entre 0.96 y 1.00 por encima de 1.8 | Empuje del chorro medido entre el ideal del modelo |
+| Coeficiente de empuje de la tobera | 0.9973 | figura 3 del informe, sin digitalizar | Empuje del chorro medido entre el ideal del modelo |
 | Área efectiva de la tobera | 0.1817 m² | 0.1825 m² (280 in² por 1.01) | Cociente 0.996: el coeficiente de descarga que el informe no da |
 | Área efectiva de paso de la turbina | 0.0746 m² | no la da |  |
 

@@ -561,14 +561,58 @@ describe("no exception ever leaves the engine (PM's condition of 21 November)", 
   });
 
   it("gives no thrust and no failure where the engine has no running point", () => {
-    // Idle at Mach 0.8 and 10 km: the ram pressure pushes more air through the nozzle than the turbine passes.
-    const step = engine.step(engine.initialState(), { throttle: 0, afterburner: false }, CRUISE, DT);
+    // Mach 12: the air reaches the compressor hotter than anything the burner could add to.
+    const step = engine.step(engine.initialState(), DRY_FULL, { ...CRUISE, mach: 12 }, DT);
     expect(step.output.failure).toBeNull();
     expect(step.output.thrust_N).toBe(0);
     expect(step.output.fuelFlow_kg_s).toBe(0);
-    // And it comes back when the throttle is opened.
+    // And it comes back when the flight condition does.
     const again = engine.step(step.state, DRY_FULL, CRUISE, DT);
     expect(again.output.thrust_N).toBeGreaterThan(0);
+  });
+
+  it("keeps the accumulated overheat finite however long the step", () => {
+    const basis = designBasis();
+    const hot = build({ turbineInletTemperature_K: basis.turbineLimit.limit_K + 60 });
+    const step = hot.step(hot.initialState(), DRY_FULL, SEA_LEVEL, 1e308);
+    for (const value of Object.values(step.state)) expect(Number.isFinite(value)).toBe(true);
+    expect(step.output.failure).toEqual({ limitId: TURBINE_INLET_TEMPERATURE_LIMIT_ID });
+  });
+});
+
+describe("closing the throttle at flight speed", () => {
+  // 10 km and Mach 0.8. Below some shaft speed the ram pressure alone turns the engine: it windmills.
+  const engine = build({ afterburner: true });
+  const thrustAt = (throttle: number) => engine.step(engine.initialState(), { throttle, afterburner: false }, CRUISE, DT).output;
+  const full = thrustAt(1).thrust_N;
+
+  it("changes the thrust without jumps from idle up", () => {
+    // Over the lower 60 percent of the throttle, where the engine goes from windmilling to running, one
+    // hundredth of throttle never moves the thrust by more than 1.5 percent of the full thrust. (Near full
+    // throttle the thrust rises faster than that, and rightly so.)
+    let previous = thrustAt(0).thrust_N;
+    for (let i = 1; i <= 60; i++) {
+      const thrust = thrustAt(i / 100).thrust_N;
+      expect(Math.abs(thrust - previous), `throttle ${i / 100}`).toBeLessThan(0.015 * full);
+      previous = thrust;
+    }
+  });
+
+  it("windmills at idle: a small drag, almost no fuel, and no failure", () => {
+    const idle = thrustAt(0);
+    expect(idle.failure).toBeNull();
+    expect(idle.thrust_N).toBeLessThan(0);
+    // NACA RM E9G09 (page 3) measured the drag of the windmilling J47 at 25 000 ft: from 2 to 15 percent
+    // of the available net thrust between 200 and 650 mph. Mach 0.8 here is about 540 mph.
+    expect(-idle.thrust_N).toBeLessThan(0.15 * full);
+    expect(idle.fuelFlow_kg_s).toBeLessThan(0.05 * thrustAt(1).fuelFlow_kg_s);
+    expect(idle.limits[0]?.fraction).toBeLessThan(0.5);
+  });
+
+  it("does not light the afterburner of a windmilling engine", () => {
+    const asked = engine.step(engine.initialState(), { throttle: 0, afterburner: true }, CRUISE, DT).output;
+    expect(asked.afterburnerLit).toBe(false);
+    expect(asked.thrust_N).toBe(thrustAt(0).thrust_N);
   });
 });
 
@@ -604,6 +648,12 @@ describe("public interface of @jet-workshop/physics/propulsion", () => {
     expect(publicApi.designEngine).toBe(designEngine);
     expect(publicApi.ENGINE_DESIGN_RANGES).toBe(ENGINE_DESIGN_RANGES);
     expect(publicApi.j47Design()).toEqual(designBasis().j47Design);
+    // A caller that writes on what it gets cannot change the engine's own copy.
+    const handed = publicApi.j47Design() as { pressureRatio: number };
+    handed.pressureRatio = 99;
+    expect(publicApi.j47Design().pressureRatio).toBe(designBasis().j47Design.pressureRatio);
+    expect(designBasis().j47Design.pressureRatio).not.toBe(99);
+    expect(Object.isFrozen(designBasis().j47Design)).toBe(true);
     expect(publicApi.TURBINE_INLET_TEMPERATURE_LIMIT_ID).toBe("turbine-inlet-temperature");
     expect(publicApi.GAS_MODEL_RANGE_LIMIT_ID).toBe("gas-model-range");
     const j47 = publicApi.j47Design();

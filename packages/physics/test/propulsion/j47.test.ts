@@ -158,6 +158,7 @@ describe("J47 data: the anchor run in the component tables", () => {
     const r = J47_ANCHOR_REPORTED;
     expect(r.compressorEfficiency_percent).toBe(value("E9G28", "compressor_efficiency"));
     expect(r.combustionEfficiency).toBe(value("E9L02", "combustion_efficiency"));
+    expect(r.burnerPressureLossRatio).toBe(value("E9L02", "measured_total_pressure_loss_ratio"));
     expect(r.turbineEfficiency).toBe(value("E9K10", "adiabatic_turbine_efficiency"));
     expect(r.turbineInletTotalTemperature_R).toBe(value("E9K10", "turbine_inlet_total_temperature"));
     expect(r.compressorLeakageAirFlow_lb_s).toBe(value("E9K10", "compressor_leakage_air_flow"));
@@ -210,9 +211,10 @@ describe("J47 anchored on run 1", () => {
     expect(Math.abs(engine.hardware.nozzleArea_m2 / j47NozzleHotArea_m2() - 1)).toBeLessThan(0.01);
   });
 
-  it("has a thrust coefficient between 0.97 and 1.01, the band of the report's figure 3 above a pressure ratio of 1.8", () => {
-    expect(tech.nozzleThrustCoefficient).toBeGreaterThan(0.97);
-    expect(tech.nozzleThrustCoefficient).toBeLessThan(1.01);
+  it("has a thrust coefficient a little under 1, as a real nozzle must", () => {
+    // Bounds of plausibility, not of the report: its figure 3 shows the coefficient as a scatter, and it is not digitized.
+    expect(tech.nozzleThrustCoefficient).toBeGreaterThan(0.95);
+    expect(tech.nozzleThrustCoefficient).toBeLessThan(1.02);
   });
 
   it("comes out at sea-level static near the air flow and pressure ratio of the rating in the report text", () => {
@@ -336,6 +338,19 @@ describe("comparison with the J47 tests", () => {
         expect(point.hit[q]).toBe(Math.abs(point.error[q]) <= threshold);
       }
     }
+  });
+
+  it("carries the exhaust-gas temperature and the weight of the nozzle coefficient of every point, unscored", () => {
+    // Run 1: 1740 R measured at the nozzle. Jet thrust 4880 lbf over net thrust 4237 lbf is 1.152.
+    const anchor = comparison.points.find((point) => point.run === ANCHOR_RUN);
+    if (!anchor) throw new Error("no anchor point");
+    expect(anchor.measuredExhaustTemperature_K).toBeCloseTo(rankineToKelvin(1740), 9);
+    expect(anchor.modelExhaustTemperature_K).toBeCloseTo(rankineToKelvin(1740), 0);
+    expect(anchor.thrustCoefficientSensitivity).toBeCloseTo(4880 / 4237, 2);
+    // Run 59, Mach 0.98: 4795 lbf of jet thrust for 2843 lbf of net thrust. The coefficient weighs more.
+    const fast = comparison.points.find((point) => point.run === 59);
+    expect(fast?.thrustCoefficientSensitivity).toBeGreaterThan(1.5);
+    expect(fast?.measuredExhaustTemperature_K).toBeCloseTo(rankineToKelvin(1705), 9);
   });
 
   it("takes u_D from the declared figures: 1.5 percent of air flow, 2 percent of fuel flow, and jet thrust with ram drag", () => {

@@ -16,5 +16,6 @@ export { GAS_MODEL_RANGE_LIMIT_ID, TURBINE_INLET_TEMPERATURE_LIMIT_ID } from "./
  * at sea-level static and rated speed. Computed, not measured: the tunnel did not test there.
  */
 export function j47Design(): EngineDesign {
-  return designBasis().j47Design;
+  // A copy: whatever the caller does with it cannot reach the engine's own.
+  return { ...designBasis().j47Design };
 }

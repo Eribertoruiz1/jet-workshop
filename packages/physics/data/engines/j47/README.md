@@ -31,27 +31,29 @@ Download: `https://ntrs.nasa.gov/api/citations/<NTRS number>/downloads/<NTRS num
 
 RM E9G09, table I, "Engine performance data", PDF pages 17 and 18: all 97 runs, in report units, as printed. Data class of every row: `measured`.
 
-| Column | Printed title | Unit | Note |
-| --- | --- | --- | --- |
-| `run` | Run | | |
-| `altitude_ft` | Altitude | ft | Nominal altitude of the condition |
-| `ram_pressure_ratio` | Ram-pressure ratio, P1/p0 | | Engine-inlet total pressure over tunnel static pressure |
-| `flight_mach` | Flight Mach number, M | | Computed by the report from the ram pressure ratio, equation 1, gamma 1.4; printed to 0.005 |
-| `tunnel_static_pressure_psf` | Tunnel static pressure, p0 | lb/sq ft abs | |
-| `equivalent_ambient_temperature_R` | Equivalent ambient temperature, te | °R | The ambient temperature that gives the measured inlet total temperature with full ram recovery, equation 3 |
-| `engine_speed_rpm` | Engine speed, N | rpm | Actual speed, not corrected |
-| `compressor_inlet_indicated_temperature_R` | Compressor-inlet indicated temperature, Ti,1 | °R | Indicated, before the recovery correction of equation 2 |
-| `jet_thrust_lbf` | Jet thrust, Fj | lb | **Balance-scale** jet thrust, equation 5 |
-| `net_thrust_lbf` | Net thrust, Fn | lb | Jet thrust minus air flow times equivalent free-stream velocity, equation 6 |
-| `air_flow_lb_s` | Engine-inlet air flow, Wa,1 | lb/sec | From pressures and temperature at the engine inlet, equation 4 |
-| `fuel_flow_lb_h` | Fuel flow, Wf | lb/hr | Rotameter |
-| `sfc_lb_h_lbf` | Specific fuel consumption based on net thrust, Wf/Fn | lb/(hr)(lb thrust) | **Referred to net thrust.** Empty where the table prints dashes (8 runs) |
-| `fuel_air_ratio` | Fuel-air ratio, f/a | | |
-| `exhaust_gas_total_temperature_R` | Exhaust-gas total temperature, T7 | °R | Station 7, one inch upstream of the nozzle outlet |
-| `turbine_outlet_total_pressure_psf` | Turbine-outlet total pressure, P6 | lb/sq ft abs | |
-| `engine_total_pressure_ratio` | Engine total-pressure ratio, P7/P1 | | |
-| `engine_total_temperature_ratio` | Engine total-temperature ratio, T7/T1 | | |
-| `data_class` | | | `measured` |
+**What `measured` means in this folder.** Test data as the report tabulates them. Not every column is the reading of an instrument: several are reductions the report makes from readings with the equations of its appendix, and the "Kind" column below says which. Net thrust is one of them, and it is one of the three quantities the comparison scores: balance-scale jet thrust minus air flow times the equivalent free-stream velocity. `computed` is kept for what a report obtains with a model and not from its instruments alone: the turbine-inlet temperature, which nobody measured, and what depends on it or on a thermodynamic chart. No column of this table is of that kind; several values of `component-tables-run1.csv` are.
+
+| Column | Printed title | Unit | Kind | Note |
+| --- | --- | --- | --- | --- |
+| `run` | Run | | | |
+| `altitude_ft` | Altitude | ft | nominal | Nominal altitude of the condition |
+| `ram_pressure_ratio` | Ram-pressure ratio, P1/p0 | | ratio of two readings | Engine-inlet total pressure over tunnel static pressure |
+| `flight_mach` | Flight Mach number, M | | reduction, equation 1 | From the ram pressure ratio, gamma 1.4, complete ram recovery assumed; printed to 0.005 |
+| `tunnel_static_pressure_psf` | Tunnel static pressure, p0 | lb/sq ft abs | reading | |
+| `equivalent_ambient_temperature_R` | Equivalent ambient temperature, te | °R | reduction, equation 3 | The ambient temperature that gives the measured inlet total temperature with full ram recovery |
+| `engine_speed_rpm` | Engine speed, N | rpm | reading | Actual speed, not corrected |
+| `compressor_inlet_indicated_temperature_R` | Compressor-inlet indicated temperature, Ti,1 | °R | reading | Indicated, before the recovery correction of equation 2 |
+| `jet_thrust_lbf` | Jet thrust, Fj | lb | reduction, equation 5 | **Balance-scale** jet thrust: scale reading plus installation drag and the forces at the inlet slip joint |
+| `net_thrust_lbf` | Net thrust, Fn | lb | reduction, equation 6 | Jet thrust minus air flow times equivalent free-stream velocity |
+| `air_flow_lb_s` | Engine-inlet air flow, Wa,1 | lb/sec | reduction, equation 4 | From pressures and temperature at the engine inlet |
+| `fuel_flow_lb_h` | Fuel flow, Wf | lb/hr | reading | Rotameter |
+| `sfc_lb_h_lbf` | Specific fuel consumption based on net thrust, Wf/Fn | lb/(hr)(lb thrust) | ratio | **Referred to net thrust.** Empty where the table prints dashes (8 runs) |
+| `fuel_air_ratio` | Fuel-air ratio, f/a | | ratio | |
+| `exhaust_gas_total_temperature_R` | Exhaust-gas total temperature, T7 | °R | reduction, equation 2 | Station 7, one inch upstream of the nozzle outlet; total from indicated temperature |
+| `turbine_outlet_total_pressure_psf` | Turbine-outlet total pressure, P6 | lb/sq ft abs | reading | |
+| `engine_total_pressure_ratio` | Engine total-pressure ratio, P7/P1 | | ratio | |
+| `engine_total_temperature_ratio` | Engine total-temperature ratio, T7/T1 | | ratio | |
+| `data_class` | | | | `measured` |
 
 Not transcribed: the seven "Corrected ..." columns of the table. The report derives them from the columns above with its factors delta and theta, and prints them only for the runs at Mach 0.21.
 

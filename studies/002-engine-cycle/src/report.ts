@@ -118,16 +118,26 @@ export function anchorDerivedTable(engine: AnchoredEngine): string {
         "Rendimiento adiabático de la turbina",
         fmt(engine.turbineIsentropicEfficiency, 3),
         fmt(r.turbineEfficiency, 3),
-        "El informe declara un error máximo de ±3 % a presión alta",
+        `El informe declara un error máximo de ±${J47_REPORT_TEXT.turbineEfficiencyMaximumErrorHighPressure_percent} % a presión alta`,
       ],
       ["Rendimiento politrópico de la turbina", fmt(t.turbinePolytropicEfficiency, 3), "no lo da", "El que usa el modelo"],
-      ["Rendimiento de combustión", fmt(t.burnerEfficiency, 3), fmt(r.combustionEfficiency, 3), "El informe declara ±0.04"],
-      ["Pérdida de presión de la cámara", fmt(engine.burnerPressureLoss, 4), "0.0388, medida", "Es el mismo cociente de presiones medidas"],
+      [
+        "Rendimiento de combustión",
+        fmt(t.burnerEfficiency, 3),
+        fmt(r.combustionEfficiency, 3),
+        `El informe declara ±${J47_REPORT_TEXT.combustionEfficiencyAccuracy}`,
+      ],
+      [
+        "Pérdida de presión de la cámara",
+        fmt(engine.burnerPressureLoss, 4),
+        `${fmt(r.burnerPressureLossRatio, 4)}, medida`,
+        "Es el mismo cociente de presiones medidas",
+      ],
       ["Pérdida de presión del conducto de salida", fmt(engine.tailpipePressureLoss, 4), "no la da", "De dos presiones medidas"],
       [
         "Coeficiente de empuje de la tobera",
         fmt(t.nozzleThrustCoefficient, 4),
-        "figura 3: nube entre 0.96 y 1.00 por encima de 1.8",
+        "figura 3 del informe, sin digitalizar",
         "Empuje del chorro medido entre el ideal del modelo",
       ],
       [
@@ -298,6 +308,38 @@ export function temperatureMatchedTable(points: readonly TemperatureMatchedPoint
   );
 }
 
+/** Measured exhaust-gas temperature against the model's, by region, and against the limit of the J47. */
+export function exhaustTemperatureTable(comparison: J47Comparison): string {
+  const limit_K = ((J47_TURBINE_OUTLET_LIMIT_F + 459.67) * 5) / 9;
+  const rows = comparison.regions.map((result) => {
+    const points = result.points.filter((point) => point.modelExhaustTemperature_K !== null);
+    const difference = (point: ComparedPoint): number => (point.modelExhaustTemperature_K ?? Number.NaN) - point.measuredExhaustTemperature_K;
+    const mean = points.reduce((sum, point) => sum + difference(point), 0) / points.length;
+    const worst = points.reduce((most, point) => (Math.abs(difference(point)) > Math.abs(most) ? difference(point) : most), 0);
+    const measuredOver = points.filter((point) => point.measuredExhaustTemperature_K > limit_K);
+    const modelOver = points.filter((point) => (point.modelExhaustTemperature_K ?? 0) > limit_K);
+    return [
+      result.region.id,
+      String(points.length),
+      points.length > 0 ? signed(mean, 0) : "",
+      points.length > 0 ? signed(worst, 0) : "",
+      String(measuredOver.length),
+      String(modelOver.length),
+    ];
+  });
+  return table(
+    [
+      "Región",
+      "Puntos puntuados",
+      "Modelo menos medida, media, K",
+      "Mayor diferencia, K",
+      "Corridas con la medida por encima del límite",
+      "Corridas con el modelo por encima del límite",
+    ],
+    rows,
+  );
+}
+
 /** Which regions a standard-day flight at the nominal altitude and Mach number falls in. */
 export function standardDayTable(regions: readonly J47Region[]): string {
   const rows = regions.map((region) => {
@@ -407,6 +449,7 @@ export function snippets(
     meanThrustErrorLowestSpeed: meanThrustErrorAt(lowestSpeed),
     meanThrustErrorMiddleSpeed: meanThrustErrorAt(middleSpeed),
     meanThrustErrorHighestSpeed: meanThrustErrorAt(highestSpeed),
+    ...extraSnippets(comparison, matched, seaLevel, basis),
   };
   for (const q of QUANTITIES) {
     const relative = withModel.map((point) => Math.abs((point.error?.[q] ?? 0) / point.measured[q]));
@@ -423,6 +466,61 @@ export function snippets(
     out[`name:${q}`] = QUANTITY_NAME[q];
   }
   return out;
+}
+
+/** Numbers for the sentences added after the clean-context review of gate 2. */
+function extraSnippets(
+  comparison: J47Comparison,
+  matched: readonly TemperatureMatchedPoint[],
+  seaLevel: OperatingPoint,
+  basis: DesignBasis,
+): Record<string, string> {
+  const scored = comparison.points.filter((point) => point.scored && point.error);
+  const limit_K = ((J47_TURBINE_OUTLET_LIMIT_F + 459.67) * 5) / 9;
+  const measuredOver = scored.filter((point) => point.measuredExhaustTemperature_K > limit_K);
+  const missed = measuredOver.filter((point) => (point.modelExhaustTemperature_K ?? Number.POSITIVE_INFINITY) <= limit_K);
+  const exhaustDifference = scored.map((point) => (point.modelExhaustTemperature_K ?? Number.NaN) - point.measuredExhaustTemperature_K);
+  const sensitivity = scored.map((point) => point.thrustCoefficientSensitivity ?? Number.NaN);
+  const excess_K = basis.j47Design.turbineInletTemperature_K - basis.turbineLimit.limit_K;
+  const thrust_lbf = seaLevel.netThrust_N / N_PER_LBF;
+  const fuel_lb_h = (seaLevel.fuelFlow_kg_s / KG_PER_LB) * 3600;
+  const modelSfc = fuel_lb_h / thrust_lbf;
+  const nominalSfc = J47_RATING.fuelFlow_lb_h / J47_RATING.thrust_lbf;
+  // Regions that would reach the hit fraction at matched exhaust temperature, by the plain thresholds.
+  const matchedRegionHits = comparison.regions.filter((result) => {
+    const points = matched.filter((point) => point.regionId === result.region.id);
+    const within = points.filter((point) => point.withinFraction && QUANTITIES.every((q) => point.withinFraction?.[q])).length;
+    return points.length >= MIN_SCORED_POINTS && within >= MIN_HIT_FRACTION * points.length;
+  }).length;
+  const hitsEqualPlain = QUANTITIES.every(
+    (q) => scored.filter((point) => point.hit?.[q]).length === scored.filter((point) => point.withinFraction?.[q]).length,
+  );
+  return {
+    exhaustLimit_F: String(J47_TURBINE_OUTLET_LIMIT_F),
+    exhaustMeasuredOverLimit: String(measuredOver.length),
+    exhaustModelMissed: String(missed.length),
+    exhaustWorstLow_K: fmt(Math.min(...exhaustDifference), 0),
+    exhaustWorstHigh_K: signed(Math.max(...exhaustDifference), 0),
+    sensitivityMin: fmt(Math.min(...sensitivity), 2),
+    sensitivityMedian: fmt(median(sensitivity), 2),
+    sensitivityMax: fmt(Math.max(...sensitivity), 2),
+    j47LimitExcess_K: fmt(excess_K, 1),
+    j47DesignTurbineInlet_K: fmt(basis.j47Design.turbineInletTemperature_K, 1),
+    j47LimitExact_K: fmt(basis.turbineLimit.limit_K, 1),
+    j47MinutesToFailure: fmt(DAMAGE_RULE_V0.overheatBudget_K_s / excess_K / 60, 0),
+    anchorOutlet_F: fmt(J47_ANCHOR_REPORT_UNITS.turbineOutletTotalTemperature_R - 459.67, 0),
+    seaLevelThrustOverPercent: fmt(100 * (thrust_lbf / J47_RATING.thrust_lbf - 1), 1),
+    seaLevelFuelOverPercent: fmt(100 * (fuel_lb_h / J47_RATING.fuelFlow_lb_h - 1), 1),
+    seaLevelSfc: fmt(modelSfc, 3),
+    nominalSfc: fmt(nominalSfc, 2),
+    seaLevelSfcOverPercent: fmt(100 * (modelSfc / nominalSfc - 1), 0),
+    matchedRegionHits: String(matchedRegionHits),
+    uvalRole: hitsEqualPlain
+      ? "`u_val` queda por debajo del umbral en todos los puntos, así que no decide ningún acierto: los que aciertan son los que están dentro del umbral a secas"
+      : "`u_val` supera el umbral en algunos puntos y decide parte de los aciertos",
+    windmillingLow: String(J47_REPORT_TEXT.windmillingDragAt200mph_percent),
+    windmillingHigh: String(J47_REPORT_TEXT.windmillingDragAt650mph_percent),
+  };
 }
 
 /** Figure: comparison error against shaft speed, one panel per scored quantity. */

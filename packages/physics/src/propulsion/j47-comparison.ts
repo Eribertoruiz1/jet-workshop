@@ -63,7 +63,11 @@ const LOOSE_TOLERANCE = 1e-6;
 const TIGHT_TOLERANCE = 1e-13;
 
 /** Model output at one run, or null where the model has no running point. */
-function predict(engine: AnchoredEngine, run: J47RunSI, tolerance: number): PerQuantity<number> | null {
+function predict(
+  engine: AnchoredEngine,
+  run: J47RunSI,
+  tolerance: number,
+): (PerQuantity<number> & { readonly exhaustTemperature_K: number; readonly jetThrust_N: number }) | null {
   const solved = solveOperatingPoint(
     engine.hardware,
     {
@@ -76,7 +80,13 @@ function predict(engine: AnchoredEngine, run: J47RunSI, tolerance: number): PerQ
     tolerance,
   );
   if (!solved.ok) return null;
-  return { netThrust: solved.point.netThrust_N, fuelFlow: solved.point.fuelFlow_kg_s, airflow: solved.point.airflow_kg_s };
+  return {
+    netThrust: solved.point.netThrust_N,
+    fuelFlow: solved.point.fuelFlow_kg_s,
+    airflow: solved.point.airflow_kg_s,
+    exhaustTemperature_K: solved.point.turbineOutletTemperature_K,
+    jetThrust_N: solved.point.grossThrust_N,
+  };
 }
 
 export interface ComparedPoint {
@@ -89,6 +99,14 @@ export interface ComparedPoint {
   readonly measured: PerQuantity<number>;
   /** S, or null where the model has no running point */
   readonly model: PerQuantity<number> | null;
+  /**
+   * Exhaust-gas total temperature, K: measured at the nozzle and from the model at its turbine outlet.
+   * Not scored. It is what the turbine limit of the J47 was set on.
+   */
+  readonly measuredExhaustTemperature_K: number;
+  readonly modelExhaustTemperature_K: number | null;
+  /** Jet thrust over net thrust in the model: what one percent of the nozzle thrust coefficient moves the net thrust, in percent */
+  readonly thrustCoefficientSensitivity: number | null;
   /** E = S - D */
   readonly error: PerQuantity<number> | null;
   readonly uD: PerQuantity<number>;
@@ -160,7 +178,11 @@ export function compareJ47(runs: readonly J47Run[], anchor: AnchorState = j47Anc
       fuelFlow: MEASUREMENT_UNCERTAINTY.fuelFlow * si.fuelFlow_kg_s,
       airflow: MEASUREMENT_UNCERTAINTY.airflow * si.airflow_kg_s,
     };
-    const base = { run: run.run, regionId: region ? regionId(region.altitude_ft, region.nominalMach) : null };
+    const base = {
+      run: run.run,
+      regionId: region ? regionId(region.altitude_ft, region.nominalMach) : null,
+      measuredExhaustTemperature_K: si.exhaustGasTotalTemperature_K,
+    };
     const model = predict(engine, si, TIGHT_TOLERANCE);
     const loose = predict(engine, si, LOOSE_TOLERANCE);
     if (model === null || loose === null) {
@@ -170,6 +192,8 @@ export function compareJ47(runs: readonly J47Run[], anchor: AnchorState = j47Anc
         scored,
         measured,
         model: null,
+        modelExhaustTemperature_K: null,
+        thrustCoefficientSensitivity: null,
         error: null,
         uD,
         uInput: null,
@@ -198,7 +222,9 @@ export function compareJ47(runs: readonly J47Run[], anchor: AnchorState = j47Anc
       speed_rpm: run.engineSpeed_rpm,
       scored,
       measured,
-      model,
+      model: { netThrust: model.netThrust, fuelFlow: model.fuelFlow, airflow: model.airflow },
+      modelExhaustTemperature_K: model.exhaustTemperature_K,
+      thrustCoefficientSensitivity: model.jetThrust_N / model.netThrust,
       error,
       uD,
       uInput,

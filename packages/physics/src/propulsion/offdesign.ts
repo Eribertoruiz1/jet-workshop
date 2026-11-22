@@ -173,6 +173,11 @@ export interface OperatingPoint {
   readonly nozzle: NozzleFlow;
   readonly grossThrust_N: number;
   readonly netThrust_N: number;
+  /**
+   * True when ram pressure alone turns the engine at this speed. The burner is at
+   * its lowest and the two flow areas are not in balance: see `solveOperatingPoint`.
+   */
+  readonly windmilling: boolean;
   /** Evaluations of the cycle the matching took */
   readonly evaluations: number;
 }
@@ -184,7 +189,11 @@ export type OperatingResult =
 
 /** The matching never looks for a turbine inlet temperature above this, K. Lean combustion ends near it. */
 const MAX_TURBINE_INLET_K = 2200;
-/** Nor below this, K: the sonic state of colder gas falls under the range of the gas model. */
+/**
+ * Nor below this, K, or 1 K above the compressor outlet if that is higher. Colder
+ * gas has a sonic state under the 200 K at which the gas model starts, once the
+ * turbine has taken its work. It also stands for the least the burner can burn.
+ */
 const MIN_TURBINE_INLET_K = 300;
 const MAX_EVALUATIONS = 80;
 const NO_RUNNING_POINT: OperatingResult = { ok: false, reason: "no-running-point" };
@@ -196,6 +205,15 @@ const NO_RUNNING_POINT: OperatingResult = { ok: false, reason: "no-running-point
  * balance gives the fuel, the shaft balance the turbine work and with it the
  * turbine outlet state, and each of the two areas a gas flow. The running point
  * is the temperature at which the two flows are equal.
+ *
+ * Windmilling. At flight speed and low shaft speed the exhaust nozzle would pass
+ * more than the turbine does even at the lowest turbine inlet temperature: ram
+ * pressure alone would turn the engine faster than asked. No temperature balances
+ * the two areas there. ESTIMATED: the engine is then taken at that lowest
+ * temperature, with the gas flow the turbine passes, and the jet as that flow
+ * expanded through the nozzle. It joins the balanced solution without a jump, and
+ * it is not a model of a windmilling engine: the report measured its drag (NACA
+ * RM E9G09, figures 8 and 9) and those data are not used yet.
  */
 export function solveOperatingPoint(
   hardware: EngineHardware,
@@ -285,13 +303,15 @@ export function solveOperatingPoint(
     b = clamp(b + step);
     fb = residual(b);
   }
-  if (!(fa <= 0 && fb >= 0)) return NO_RUNNING_POINT;
+  // The nozzle passes more than the turbine even at the lowest temperature: the engine windmills.
+  const windmilling = fa > 0 && a === low;
+  if (!windmilling && !(fa <= 0 && fb >= 0)) return NO_RUNNING_POINT;
 
   // Illinois variant of the false-position method: it keeps the bracket and converges fast.
-  let T4 = b;
-  let fT = fb;
+  let T4 = windmilling ? low : b;
+  let fT = windmilling ? residual(low) : fb;
   let side = 0;
-  while (evaluations < MAX_EVALUATIONS) {
+  while (!windmilling && evaluations < MAX_EVALUATIONS) {
     if (b - a <= relativeTolerance * b) break;
     let next = fb === fa ? 0.5 * (a + b) : b - (fb * (b - a)) / (fb - fa);
     if (!(next > a && next < b)) next = 0.5 * (a + b);
@@ -311,15 +331,18 @@ export function solveOperatingPoint(
     }
   }
   // Leave the state of the trial closest to the root: the one with the smaller residual.
-  if (Math.abs(fa) < Math.abs(fT) || Math.abs(fb) < Math.abs(fT)) {
+  if (!windmilling && (Math.abs(fa) < Math.abs(fT) || Math.abs(fb) < Math.abs(fT))) {
     T4 = Math.abs(fa) < Math.abs(fb) ? a : b;
     fT = residual(T4);
   }
-  const exit: NozzleFlow | null = nozzle;
+  // The compiler cannot see that `residual` assigns it.
+  const exit = nozzle as NozzleFlow | null;
   if (exit === null) return NO_RUNNING_POINT;
 
   const airflow = gasFlow / (1 + f);
-  const gross = jetThrust(tech.nozzleThrustCoefficient, gasFlow, exit, hardware.nozzleArea_m2, ambient);
+  // In balance the jet fills the nozzle. Windmilling, it is the area this smaller flow needs.
+  const jetArea = windmilling ? gasFlow / exit.massFlux_kg_s_m2 : hardware.nozzleArea_m2;
+  const gross = jetThrust(tech.nozzleThrustCoefficient, gasFlow, exit, jetArea, ambient);
   return {
     ok: true,
     point: {
@@ -341,6 +364,7 @@ export function solveOperatingPoint(
       nozzle: exit,
       grossThrust_N: gross,
       netThrust_N: gross - airflow * conditions.flightSpeed_m_s,
+      windmilling,
       evaluations,
     },
   };

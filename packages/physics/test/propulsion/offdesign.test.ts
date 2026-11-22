@@ -250,6 +250,53 @@ describe("engine with losses, on the combustion gas", () => {
     expect((slow.nozzle.massFlux_kg_s_m2 * hw.nozzleArea_m2) / slow.gasFlow_kg_s).toBeCloseTo(1, 8);
   });
 
+  it("windmills where ram pressure alone turns it: the flow is the turbine's and the thrust is continuous", () => {
+    // Mach 0.8 at 10 km: total pressure 1.52 times ambient. Find the speed below which the engine windmills.
+    const ram = { ...offDesign, ambientPressure_Pa: 26500, inletTotalPressure_Pa: 26500 * 1.524, inletTotalTemperature_K: 251.8, flightSpeed_m_s: 240 };
+    const at = (n: number): OperatingPoint => run(hw, { ...ram, speedFraction: n });
+    expect(at(1).windmilling).toBe(false);
+    expect(at(0.2).windmilling).toBe(true);
+    let low = 0.2;
+    let high = 1;
+    for (let i = 0; i < 40; i++) {
+      const mid = 0.5 * (low + high);
+      if (at(mid).windmilling) low = mid;
+      else high = mid;
+    }
+    // On the two sides of the boundary the engine is the same to one part in a million.
+    const below = at(low);
+    const above = at(high);
+    expect(below.windmilling).toBe(true);
+    expect(above.windmilling).toBe(false);
+    expect(below.netThrust_N).toBeCloseTo(above.netThrust_N, 0);
+    expect(below.gasFlow_kg_s / above.gasFlow_kg_s).toBeCloseTo(1, 5);
+    expect(below.fuelFlow_kg_s).toBeCloseTo(above.fuelFlow_kg_s, 6);
+    // Windmilling: the nozzle could pass more than the turbine lets through.
+    const slow = at(0.2);
+    expect(slow.nozzle.massFlux_kg_s_m2 * hw.nozzleArea_m2).toBeGreaterThan(slow.gasFlow_kg_s);
+    expect(slow.fuelAirRatio).toBeGreaterThan(0);
+    expect(slow.fuelAirRatio).toBeLessThan(0.002);
+  });
+
+  it("with a choked nozzle while windmilling, counts the exit pressure on the area the jet fills", () => {
+    // Total pressure three times ambient: the nozzle is choked even with the burner at its lowest.
+    const p = run(hw, {
+      ambientPressure_Pa: 20000,
+      inletTotalPressure_Pa: 60000,
+      inletTotalTemperature_K: 330,
+      flightSpeed_m_s: 420,
+      speedFraction: 0.2,
+    });
+    expect(p.windmilling).toBe(true);
+    expect(p.nozzle.choked).toBe(true);
+    // Jet: momentum plus the exit pressure above ambient on the area this flow needs, W / (rho V), times 0.98.
+    const jetArea = p.gasFlow_kg_s / p.nozzle.massFlux_kg_s_m2;
+    const gross = 0.98 * (p.gasFlow_kg_s * p.nozzle.exitVelocity_m_s + (p.nozzle.exitPressure_Pa - 20000) * jetArea);
+    expect(p.grossThrust_N / gross).toBeCloseTo(1, 10);
+    expect(jetArea).toBeLessThan(hw.nozzleArea_m2);
+    expect(p.netThrust_N).toBeCloseTo(p.grossThrust_N - p.airflow_kg_s * 420, 6);
+  });
+
   it("gives more thrust and a hotter turbine as the speed rises", () => {
     let previous = run(hw, { ...staticSeaLevel, speedFraction: 0.3 });
     for (const n of [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.05]) {
@@ -278,6 +325,8 @@ describe("engine with losses, on the combustion gas", () => {
       reason: "no-running-point",
     });
     expect(solveOperatingPoint(hw, { ...staticSeaLevel, speedFraction: 0 })).toEqual({ ok: false, reason: "no-running-point" });
+    // Standing still there is no ram pressure to windmill on: every running point has both flows in balance.
+    for (const n of [0.26, 0.5, 1]) expect(run(hw, { ...staticSeaLevel, speedFraction: n }).windmilling).toBe(false);
   });
 
   it("never throws over a wide sweep of inlet conditions and speeds", () => {

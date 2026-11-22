@@ -21,6 +21,7 @@ import {
   designBasisTable,
   errorBySpeedTable,
   errorFigure,
+  exhaustTemperatureTable,
   pointsCsv,
   pointsTable,
   regionsTable,
@@ -52,13 +53,14 @@ const tables: Record<string, string> = {
   points: pointsTable(comparison),
   errorBySpeed: errorBySpeedTable(comparison),
   temperatureMatched: temperatureMatchedTable(matched),
+  exhaustTemperature: exhaustTemperatureTable(comparison),
   standardDay: standardDayTable(comparison.regions.map((result) => result.region)),
 };
 const numbers = snippets(runs, comparison, matched, seaLevel, basis);
 
 write(`${OUT}j47-anchor.md`, `${tables.anchorInputs}\n\n${tables.anchorDerived}\n\n${tables.seaLevel}\n\n${tables.designBasis}`);
 write(`${OUT}j47-comparison-regions.md`, `${tables.regions}\n\n${tables.errorBySpeed}\n\n${tables.standardDay}`);
-write(`${OUT}j47-comparison-points.md`, `${tables.points}\n\n${tables.temperatureMatched}`);
+write(`${OUT}j47-comparison-points.md`, `${tables.points}\n\n${tables.temperatureMatched}\n\n${tables.exhaustTemperature}`);
 write(`${OUT}j47-comparison-points.csv`, pointsCsv(comparison));
 write(`${OUT}fig-j47-error.svg`, errorFigure(comparison));
 write(path("../../packages/physics/src/propulsion/j47-compared-regions.generated.ts"), renderComparedRegions(comparison));

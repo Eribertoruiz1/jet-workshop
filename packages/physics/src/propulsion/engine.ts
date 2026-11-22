@@ -189,7 +189,8 @@ export function createEngineStepper(definition: EngineDefinition): {
       flightSpeed_m_s: inlet.speed_m_s,
       speedFraction: speedFractionOfFull * definition.fullSpeedFraction,
     });
-    // No running point: the engine gives no thrust and burns no fuel here. It is not a failure.
+    // No running point: the engine gives no thrust and burns no fuel here. It is not a failure. Nothing
+    // burns, so the gas reaches the turbine at about the temperature of the air entering the engine.
     if (!solved.ok) return stopped(0, overheat, inlet.totalTemperature_K);
 
     const point = solved.point;
@@ -197,8 +198,9 @@ export function createEngineStepper(definition: EngineDefinition): {
     const newOverheat = overheatAfter(overheat, T4, turbineLimit, dt_s);
     if (turbineHasFailed(newOverheat, T4, turbineLimit)) return stopped(TURBINE_FAILURE, newOverheat, T4);
 
+    // A windmilling engine does not light its afterburner.
     const lit =
-      definition.afterburner !== null && command?.afterburner === true
+      definition.afterburner !== null && command?.afterburner === true && !point.windmilling
         ? afterburning(hardware, definition.afterburner, point, condition.ambient.pressure_Pa, inlet.speed_m_s)
         : null;
     const thrust = lit ? lit.netThrust_N : point.netThrust_N;

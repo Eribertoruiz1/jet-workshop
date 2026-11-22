@@ -59,7 +59,8 @@ export function overheatAfter(
 ): number {
   const excess = Math.max(0, turbineInletTemperature_K - limit.limit_K);
   const time = Number.isFinite(dt_s) && dt_s > 0 ? dt_s : 0;
-  return overheat_K_s + excess * time;
+  // Capped so that an absurdly long step cannot leave a state that is not a finite number.
+  return Math.min(Number.MAX_VALUE, overheat_K_s + excess * time);
 }
 
 /** Whether the turbine has failed: budget used up, or the temperature at or above the ceiling. */

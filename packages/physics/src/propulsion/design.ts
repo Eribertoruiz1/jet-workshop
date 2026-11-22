@@ -91,12 +91,12 @@ export function designBasis(): DesignBasis {
       ...DAMAGE_RULE_V0,
     },
     idleSpeedFraction: J47_LOWEST_TESTED_SPEED_RPM / J47_RATED_SPEED_RPM,
-    j47Design: {
+    j47Design: Object.freeze({
       designAirflow_kg_s: seaLevel.airflow_kg_s,
       pressureRatio: seaLevel.pressureRatio,
       turbineInletTemperature_K: seaLevel.turbineInletTemperature_K,
       afterburner: false,
-    },
+    }),
     j47Diameter_m: inchesToMetres(J47_SIZE.compressorTipDiameter_in),
     j47Length_m: inchesToMetres(J47_SIZE.length_in),
     j47Mass_kg: poundsToKilograms(J47_SIZE.weight_lb),
