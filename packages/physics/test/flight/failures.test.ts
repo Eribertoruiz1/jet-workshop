@@ -30,16 +30,16 @@ function finite(o: Outcome): boolean {
 
 /** An engine that runs like the placeholder but fails after one second above 90 percent throttle. */
 function fragileEngine(): EngineModel {
-  const ok = (thrust: number): EngineOutput => ({ thrust_N: thrust, fuelFlow_kg_s: 1, limits: [], failure: null, evidence: "estimated" });
+  const ok = (thrust: number): EngineOutput => ({ thrust_N: thrust, fuelFlow_kg_s: 1, afterburnerLit: false, limits: [], failure: null, evidence: "estimated" });
   return {
     id: "test-fragile",
     mass_kg: 1500,
     massEvidence: "estimated",
     initialState: () => ({ hot: 0, failed: 0 }),
     step(s, cmd, _c, dt) {
-      if (s.failed) return { state: s, output: { thrust_N: 0, fuelFlow_kg_s: 0, limits: [], failure: { limitId: "test-overspeed" }, evidence: "estimated" } };
+      if (s.failed) return { state: s, output: { thrust_N: 0, fuelFlow_kg_s: 0, afterburnerLit: false, limits: [], failure: { limitId: "test-overspeed" }, evidence: "estimated" } };
       const hot = cmd.throttle > 0.9 ? (s.hot ?? 0) + dt : 0;
-      if (hot > 1) return { state: { hot, failed: 1 }, output: { thrust_N: 0, fuelFlow_kg_s: 0, limits: [], failure: { limitId: "test-overspeed" }, evidence: "estimated" } };
+      if (hot > 1) return { state: { hot, failed: 1 }, output: { thrust_N: 0, fuelFlow_kg_s: 0, afterburnerLit: false, limits: [], failure: { limitId: "test-overspeed" }, evidence: "estimated" } };
       return { state: { hot, failed: 0 }, output: ok(40000 * cmd.throttle) };
     },
   };

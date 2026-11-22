@@ -189,6 +189,10 @@ describe("the provisional engine", () => {
     const high = e.step(e.initialState(), { throttle: 1, afterburner: false }, { ambient: { pressure_Pa: 22632, temperature_K: 216.65 }, mach: 0.8 }, 1 / 120).output;
     expect(high.thrust_N / sl.thrust_N).toBeCloseTo((22632 / 216.65) / (101325 / 288.15), 9);
     expect(high.fuelFlow_kg_s / high.thrust_N).toBeCloseTo(sl.fuelFlow_kg_s / sl.thrust_N, 15);
+    // Contract version 2: no afterburner, so it is never lit, even when asked for.
+    const ab = e.step(e.initialState(), { throttle: 1, afterburner: true }, { ambient: { pressure_Pa: 101325, temperature_K: 288.15 }, mach: 0 }, 1 / 120).output;
+    expect(ab.afterburnerLit).toBe(false);
+    expect(ab.thrust_N).toBe(sl.thrust_N);
   });
 });
 

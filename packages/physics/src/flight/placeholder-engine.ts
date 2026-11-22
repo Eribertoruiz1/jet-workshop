@@ -9,9 +9,14 @@
  *   fuel flow = TSFC * T
  *   mass = T_static / (g0 * engine thrust-to-weight ratio)
  *
- * It has no afterburner, no limits and never fails. Thrust does not change
- * with Mach number at a given density (no ram effect): a declared
- * simplification.
+ * It has no afterburner (`afterburnerLit` is always false), no limits and
+ * never fails. Thrust does not change with Mach number at a given density
+ * (no ram effect): a declared simplification.
+ *
+ * Contract version 2 makes the throttle a shaft-speed demand, with thrust not
+ * linear in it. This provisional engine has no shaft: it keeps thrust linear
+ * in the demand, a declared simplification. Lane E's engine brings the real
+ * relation.
  */
 
 import type { EngineModel, EngineOutput, EngineStep } from "../propulsion/contract.ts";
@@ -50,7 +55,7 @@ export function makePlaceholderEngine(d: PlaceholderDesign): EngineModel {
       const rho = condition.ambient.pressure_Pa / (R_AIR * condition.ambient.temperature_K);
       const throttle = Math.min(1, Math.max(0, command.throttle));
       const thrust = d.staticThrust_N * throttle * (rho / SEA_LEVEL_DENSITY);
-      const output: EngineOutput = { thrust_N: thrust, fuelFlow_kg_s: PLACEHOLDER_TSFC * thrust, limits: [], failure: null, evidence: "estimated" };
+      const output: EngineOutput = { thrust_N: thrust, fuelFlow_kg_s: PLACEHOLDER_TSFC * thrust, afterburnerLit: false, limits: [], failure: null, evidence: "estimated" };
       return { state: s, output };
     },
   };
