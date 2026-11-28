@@ -1,0 +1,48 @@
+report,pdf_page,quantity,value,unit,data_class
+E9G28,14,altitude,5000,ft,measured
+E9G28,14,exhaust_nozzle_outlet_area,280,sq in,report text
+E9G28,14,flight_mach,0.230,,measured
+E9G28,14,ram_pressure_ratio,1.038,,measured
+E9G28,14,engine_speed,7895,rpm,measured
+E9G28,14,tunnel_static_pressure,1740,lb/sq ft,measured
+E9G28,14,engine_inlet_total_temperature,512,R,measured
+E9G28,14,engine_inlet_total_pressure,1806,lb/sq ft,measured
+E9G28,14,engine_inlet_static_pressure,1618,lb/sq ft,measured
+E9G28,15,compressor_outlet_total_temperature,902,R,measured
+E9G28,15,compressor_outlet_total_pressure,9339,lb/sq ft,measured
+E9G28,15,compressor_pressure_ratio,5.171,,measured
+E9G28,15,corrected_engine_speed,7950,rpm,measured
+E9G28,15,compressor_mach_number,0.896,,measured
+E9G28,15,air_flow,81.08,lb/s,measured
+E9G28,15,corrected_air_flow,94.37,lb/s,measured
+E9G28,15,compressor_efficiency,78.8,percent,computed
+E9L02,18,combustion_chamber_inlet_total_pressure,9339,lb/sq ft,measured
+E9L02,18,combustion_chamber_inlet_total_temperature,900,R,measured
+E9L02,18,combustion_chamber_outlet_total_pressure,8977,lb/sq ft,measured
+E9L02,18,combustion_chamber_outlet_total_temperature,2080,R,computed
+E9L02,18,turbine_outlet_total_pressure,3465,lb/sq ft,measured
+E9L02,18,turbine_outlet_total_temperature,1740,R,measured
+E9L02,18,exhaust_nozzle_outlet_static_pressure,2198,lb/sq ft,measured
+E9L02,19,exhaust_nozzle_outlet_static_temperature,1568,R,measured
+E9L02,19,fuel_flow,5300,lb/h,measured
+E9L02,19,engine_inlet_air_flow,81.08,lb/s,measured
+E9L02,19,combustion_chamber_air_flow,78.92,lb/s,measured
+E9L02,19,combustion_chamber_fuel_air_ratio,0.0187,,measured
+E9L02,19,combustion_efficiency,0.952,,computed
+E9L02,19,measured_total_pressure_loss_ratio,0.0388,,measured
+E9K10,18,compressor_inlet_total_temperature,512,R,measured
+E9K10,18,compressor_outlet_total_temperature,902,R,measured
+E9K10,18,turbine_inlet_total_pressure,8977,lb/sq ft,measured
+E9K10,18,turbine_inlet_total_temperature,2080,R,computed
+E9K10,18,turbine_outlet_total_pressure,3465,lb/sq ft,measured
+E9K10,19,turbine_outlet_total_temperature,1740,R,measured
+E9K10,19,fuel_flow,5300,lb/h,measured
+E9K10,19,engine_inlet_air_flow,81.08,lb/s,measured
+E9K10,19,compressor_leakage_air_flow,1.74,lb/s,measured
+E9K10,19,aft_turbine_cooling_air_flow,0.42,lb/s,measured
+E9K10,19,turbine_gas_flow,80.39,lb/s,measured
+E9K10,19,turbine_pressure_ratio,2.591,,measured
+E9K10,19,turbine_temperature_ratio,1.195,,computed
+E9K10,19,corrected_turbine_speed,4076,rpm,computed
+E9K10,19,corrected_turbine_gas_flow,39.16,lb/s,computed
+E9K10,19,adiabatic_turbine_efficiency,0.798,,computed

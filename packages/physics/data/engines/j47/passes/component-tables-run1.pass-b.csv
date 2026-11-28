@@ -1,0 +1,88 @@
+report,page,column_title,value
+E9G28,14,"Run",1
+E9G28,14,"Altitude (ft)",5000
+E9G28,14,"Exhaust-nozzle-outlet area, (sq in.)",280
+E9G28,14,"Flight Mach number, M0",0.230
+E9G28,14,"Ram pressure ratio, P1/p0",1.038
+E9G28,14,"Engine speed, N (rpm)",7895
+E9G28,14,"Tunnel static pressure, p0 (lb/sq ft abs.)",1740
+E9G28,14,"Engine-inlet total temperature, T1 (°R)",512
+E9G28,14,"Engine-inlet total pressure, P1 (lb/sq ft abs.)",1806
+E9G28,14,"Engine-inlet static pressure, p1 (lb/sq ft abs.)",1618
+E9G28,14,"Compressor-inlet total pressure, P2 (lb/sq ft abs.)",1790
+E9G28,14,"Compressor-inlet static pressure, p2 (lb/sq ft abs.)",1411
+E9G28,14,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 1",
+E9G28,14,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 2",1254
+E9G28,14,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 3",1480
+E9G28,14,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 4",1733
+E9G28,14,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 5",2113
+E9G28,14,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 6",2507
+E9G28,15,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 7",3035
+E9G28,15,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 8",3859
+E9G28,15,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 9",4711
+E9G28,15,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 10",5950
+E9G28,15,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 11",6879
+E9G28,15,"Compressor-rotor-stage static pressure, p2a (lb/sq ft abs.), stage 12",7872
+E9G28,15,"Straightening-vane static pressure, p2a (lb/sq ft abs.)",8808
+E9G28,15,"Compressor-outlet total temperature, T3 (°R)",902
+E9G28,15,"Compressor-outlet total pressure, P3 (lb/sq ft abs.)",9339
+E9G28,15,"Compressor-outlet static pressure, p3 (lb/sq ft abs.)",9066
+E9G28,15,"Compressor pressure ratio, P3/P1",5.171
+E9G28,15,"Corrected engine speed, N/√θ1, (rpm)",7950
+E9G28,15,"Compressor Mach number, Mc",0.896
+E9G28,15,"Air flow, Wa,1 (lb/sec)",81.08
+E9G28,15,"Corrected air flow, Wa,1√θ1/δ1, (lb/sec)",94.37
+E9G28,15,"Compressor efficiency, ηc, (percent)",78.8
+E9G28,15,"Run",1
+E9L02,18,"Run",1
+E9L02,18,"Altitude (ft)",5000
+E9L02,18,"Ram pressure ratio, P1/p0",1.038
+E9L02,18,"Flight Mach number",0.230
+E9L02,18,"Tunnel static pressure, p0, (lb/sq ft abs.)",1740
+E9L02,18,"Engine speed, N (rpm)",7895
+E9L02,18,"Corrected engine speed, N/√θ1, (rpm) [footnote a]",7950
+E9L02,18,"Compressor-inlet total temperature, T1, (°R)",512
+E9L02,18,"Combustion-chamber-inlet total pressure, P3 (lb/sq ft abs.)",9339
+E9L02,18,"Combustion-chamber-inlet total temperature, T3 (°R)",900
+E9L02,18,"Combustion-chamber-outlet total pressure, P4, (lb/sq ft abs.)",8977
+E9L02,18,"Combustion-chamber-outlet total temperature, T4, (°R)",2080
+E9L02,18,"Turbine-outlet total pressure, P6 (lb/sq ft abs.)",3465
+E9L02,18,"Turbine-outlet total temperature, T6, (°R)",1740
+E9L02,18,"Exhaust-nozzle-outlet static pressure, p7 (lb/sq ft abs.)",2198
+E9L02,19,"Exhaust-nozzle-outlet static temperature, t7 (°R)",1568
+E9L02,19,"Fuel flow, Wf (lb/hr)",5300
+E9L02,19,"Engine-inlet air flow, Wa, (lb/sec)",81.08
+E9L02,19,"Combustion-chamber air flow, Wa,b, (lb/sec)",78.92
+E9L02,19,"Combustion-chamber fuel-air ratio, f/a",0.0187
+E9L02,19,"Combustion efficiency, ηb",0.952
+E9L02,19,"Measured over-all total-pressure-loss ratio, ΔPT/P3",0.0388
+E9L02,19,"Calculated over-all total-pressure-loss ratio, ΔPT/P3 [footnote b]",0.0394
+E9L02,19,"Friction pressure-loss ratio, ΔPF/P3 [footnote b]",0.0240
+E9L02,19,"Momentum pressure-loss ratio, ΔPM/P3 [footnote b]",0.0154
+E9L02,19,"Engine-cycle efficiency, η",0.245
+E9L02,19,"Fractional loss in engine-cycle efficiency, Δη/η",0.045
+E9L02,19,"Run",1
+E9K10,18,"Run",1
+E9K10,18,"Altitude (ft)",5000
+E9K10,18,"Ram-pressure ratio P1/p0",1.038
+E9K10,18,"Flight Mach number M0",0.230
+E9K10,18,"Tunnel static pressure p0 (lb/sq ft abs.)",1740
+E9K10,18,"Engine speed N (rpm)",7895
+E9K10,18,"Corrected engine speed N/√θ1 (rpm)",7950
+E9K10,18,"Compressor-inlet total temperature T1 (°R)",512
+E9K10,18,"Compressor-outlet total temperature T3 (°R)",902
+E9K10,18,"Turbine-inlet total pressure P4 (lb/sq ft abs.)",8977
+E9K10,18,"Turbine-inlet total temperature T4 (°R)",2080
+E9K10,18,"Turbine-outlet total pressure P6 (lb/sq ft abs.)",3465
+E9K10,19,"Turbine-outlet total temperature T6 (°R)",1740
+E9K10,19,"Fuel flow Wf (lb/hr)",5300
+E9K10,19,"Engine-inlet air flow Wa (lb/sec)",81.08
+E9K10,19,"Compressor leakage air flow Wy (lb/sec)",1.74
+E9K10,19,"Aft turbine cooling-air flow Wz (lb/sec)",0.42
+E9K10,19,"Turbine gas flow Wg,4 (lb/sec)",80.39
+E9K10,19,"Turbine pressure ratio P4/P6",2.591
+E9K10,19,"Turbine temperature ratio T4/T6",1.195
+E9K10,19,"Corrected turbine speed N/√θ4 (rpm)",4076
+E9K10,19,"Corrected turbine gas flow Wg,4√θ4 / δ4(γ4/1.4) (lb/sec)",39.16
+E9K10,19,"Adiabatic turbine efficiency ηt",0.798
+E9K10,19,"Run",1

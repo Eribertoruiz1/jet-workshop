@@ -1,0 +1,34 @@
+Pass B: uncertain readings
+Format: file | run | column | my reading (written in the CSV) | alternative(s) | note
+All readings were made by eye from the tiles. Nothing was corrected or computed.
+
+== Task 1: e9g09-table1-pass-b.csv ==
+e9g09-table1-pass-b.csv | 2  | air_flow_lb_s | 81.07 | 61.07 | first digit: the upper loop of the 8 is faint, it could be a 6 (tile p17-c2-r1)
+e9g09-table1-pass-b.csv | 2  | fuel_flow_lb_h | 4800 | 4600 | second digit: 8 with a faint upper loop, it could be a 6 (tile p17-c2-r1)
+e9g09-table1-pass-b.csv | 28 | air_flow_lb_s | 38.02 | 36.02 | second digit: 8 or 6, low doubt (tile p17-c2-r2)
+e9g09-table1-pass-b.csv | 35 | turbine_outlet_total_pressure_psf | 790 | 780 | middle digit is overstruck/heavy (tile p17-c2-r2)
+e9g09-table1-pass-b.csv | 39 | exhaust_gas_total_temperature_R | 1359 | 1358 | last digit is overstruck/heavy (tile p17-c2-r2)
+e9g09-table1-pass-b.csv | 39 | turbine_outlet_total_pressure_psf | 1658 | 1638, 1668 | third digit is broken, the row sits on the bottom rule of the table (tile p17-c2-r2)
+e9g09-table1-pass-b.csv | 42 | air_flow_lb_s | 28.06 | 28.08 | last digit: 6 or 8, low doubt (tile p18-c2-r1)
+e9g09-table1-pass-b.csv | 85 | engine_total_pressure_ratio | 1.604 | 1.504, 1.804 | a pen mark or scratch crosses the first decimal digit (tile p18-c3-r3)
+e9g09-table1-pass-b.csv | 88 | flight_mach | 0.528 | 0.525 | last digit looks like an 8; every other Mach value of the table ends in 0 or 5 except run 59 (tile p18-c1-r3)
+e9g09-table1-pass-b.csv | 94 | fuel_air_ratio | 0.0196 | 0.0186 | third decimal is overstruck/heavy (tile p18-c2-r3)
+
+Clearly printed, not doubtful, but unusual next to their neighbours (transcribed as printed):
+e9g09-table1-pass-b.csv | 45 | engine_speed_rpm | 2727 | - | the other low-speed rows show 2046
+e9g09-table1-pass-b.csv | 59 | flight_mach | 0.982 | - | does not end in 0 or 5
+e9g09-table1-pass-b.csv | 59 | tunnel_static_pressure_psf | 746 | - | neighbours are between 774 and 785
+e9g09-table1-pass-b.csv | 76 | engine_speed_rpm | 7800 | - | neighbours show 7895 / 7692
+e9g09-table1-pass-b.csv | 82 | engine_speed_rpm | 5455 | - | neighbours show 5944 / 5024
+
+Note on run 2 (air flow and fuel flow): while reading run 1 in the anchor tiles (E9L02 p19, E9K10 p19, E9G28 p15)
+the second row of those tiles was visible and shows the same digits as my reading. I did not use it to change
+anything; the reading in the CSV is the one made on the E9G09 tile.
+
+== Task 2: anchor-rows-pass-b.csv ==
+anchor-rows-pass-b.csv | 1 (E9L02 p18) | Exhaust-nozzle-outlet static pressure, p7 | 2198 | 2196 | last digit: 8 or 6, low doubt (tile e9l02-p18-c2-r1)
+anchor-rows-pass-b.csv | 1 (E9K10 p19) | Corrected turbine gas flow | 39.16 | 39.18 | last digit is heavy (tile e9k10-p19-c2-r1)
+
+Column titles (symbols, not values):
+anchor-rows-pass-b.csv | - (E9G28 p15) | Straightening-vane static pressure | symbol read as p2a | the subscript is small in the rotated title, the letter after the 2 could be another one (tile e9g28-p15-c1-r1)
+anchor-rows-pass-b.csv | - (E9L02 p18) | Turbine-outlet total temperature | symbol read as T6 | the subscript is overstruck, it could be T8 (tile e9l02-p18-c2-r1)
