@@ -1,0 +1,457 @@
+/* The flight page. Only the colour and type variables of styles.css are used; every rule here is flight-*. */
+
+body.flight-body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+
+.flight-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px 24px;
+  overflow-x: hidden;
+}
+
+.flight-num,
+.flight-svg-num {
+  font-family: var(--num);
+  font-variant-numeric: tabular-nums;
+}
+
+.flight-svg-num {
+  fill: var(--ink-2);
+  font-size: 11px;
+}
+
+/* Top bar */
+.flight-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 16px;
+  padding: 12px 0 10px;
+  border-bottom: 1px solid var(--grid);
+}
+
+.flight-bar h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.flight-bar-right {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 13px;
+}
+
+.flight-bar-right a {
+  color: var(--ink);
+}
+
+.flight-lang {
+  display: inline-flex;
+  gap: 4px;
+  color: var(--ink-2);
+}
+
+.flight-page .flight-lang button {
+  font: inherit;
+  border: 0;
+  background: none;
+  padding: 2px 3px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.flight-page .flight-lang button[aria-pressed="true"] {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.flight-error {
+  border-left: 3px solid var(--stop);
+  padding: 4px 10px;
+  margin: 12px 0;
+}
+
+/* Shared controls */
+.flight-page button {
+  font-family: var(--text);
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--grid);
+  border-radius: 2px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.flight-page button:focus-visible,
+.flight-page input:focus-visible,
+.flight-lever:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.flight-page button.flight-primary {
+  background: var(--ink);
+  color: var(--surface);
+  border-color: var(--ink);
+  font-weight: 700;
+}
+
+.flight-note {
+  margin: 6px 0;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+/* 1 · Hangar */
+.flight-hangar {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.flight-hangar h2,
+.flight-report h2 {
+  margin: 16px 0 8px;
+  font-size: 17px;
+}
+
+.flight-side {
+  display: block;
+  margin: 4px 0 8px;
+}
+
+.flight-wings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.flight-page button.flight-wing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 4px 8px;
+  color: var(--ink-2);
+}
+
+.flight-page button.flight-wing[aria-pressed="true"] {
+  border: 2px solid var(--ink);
+  padding: 5px 3px 7px;
+  color: var(--ink);
+}
+
+.flight-wing svg {
+  display: block;
+}
+
+.flight-control {
+  display: grid;
+  gap: 4px;
+  padding: 9px 0;
+  border-top: 1px solid var(--grid);
+  font-size: 14px;
+}
+
+.flight-control span {
+  font-variant-numeric: tabular-nums;
+}
+
+.flight-control input[type="range"] {
+  width: 100%;
+  margin: 4px 0;
+  accent-color: var(--ink);
+  min-height: 28px;
+}
+
+.flight-readings {
+  border-top: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+  padding: 6px 0;
+  margin-bottom: 6px;
+}
+
+.flight-readings p {
+  margin: 3px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.flight-hangar .flight-primary {
+  width: 100%;
+  margin-top: 10px;
+  padding: 13px;
+}
+
+/* 2 · Flight */
+.flight-flight {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+}
+
+.flight-scene {
+  position: relative;
+  width: 100%;
+  height: clamp(230px, 44vh, 560px);
+  border-top: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+}
+
+.flight-scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.flight-readouts {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px 12px;
+}
+
+.flight-readouts div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.flight-readouts span {
+  font-size: 11.5px;
+  color: var(--ink-2);
+}
+
+.flight-readouts strong {
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.flight-status {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.flight-status h3 {
+  display: inline;
+  margin: 0 6px 0 0;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.flight-status ul {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flight-status li {
+  display: inline;
+}
+
+.flight-status li + li::before {
+  content: " · ";
+}
+
+.flight-status li span {
+  color: var(--ink);
+}
+
+.flight-warnings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  min-height: 1.5em;
+  margin: 0;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.flight-warn {
+  color: var(--warn);
+}
+
+.flight-stop {
+  color: var(--stop);
+}
+
+.flight-controls {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  gap: 8px;
+  height: 210px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.flight-lever,
+.flight-pitch {
+  position: relative;
+  border: 1px solid var(--ink-2);
+  background: var(--surface);
+  touch-action: none;
+  overflow: hidden;
+}
+
+.flight-lever {
+  grid-row: 1 / 3;
+  cursor: ns-resize;
+}
+
+.flight-lever-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--grid);
+  border-top: 2px solid var(--ink);
+}
+
+.flight-lever-label,
+.flight-lever-value,
+.flight-pitch-label,
+.flight-pitch-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flight-lever-label,
+.flight-pitch-label {
+  top: 6px;
+  font-weight: 700;
+}
+
+.flight-lever-value {
+  bottom: 6px;
+}
+
+.flight-pitch {
+  cursor: ns-resize;
+}
+
+.flight-pitch-hint {
+  bottom: 8px;
+  color: var(--ink-2);
+  padding: 0 8px;
+}
+
+.flight-pitch-mark {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  height: 0;
+  border-top: 2px solid var(--ink);
+  pointer-events: none;
+}
+
+.flight-pitch::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  border-top: 1px dashed var(--grid);
+  pointer-events: none;
+}
+
+.flight-page button.flight-pause {
+  grid-column: 2;
+  padding: 9px;
+}
+
+.flight-page button.flight-leave {
+  align-self: flex-start;
+}
+
+.flight-keys {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* 3 · Report */
+.flight-report {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.flight-report-cause {
+  margin: 8px 0;
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+
+.flight-figures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+}
+
+.flight-figures dt {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.flight-figures dd {
+  margin: 2px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.flight-report-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+@media (max-width: 560px) {
+  .flight-readouts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .flight-readouts strong {
+    font-size: 14px;
+    white-space: normal;
+  }
+}
+
+@media (min-width: 900px) {
+  .flight-scene {
+    height: clamp(320px, 56vh, 620px);
+  }
+  .flight-controls {
+    height: 170px;
+    grid-template-columns: 90px minmax(0, 1fr) 160px;
+    grid-template-rows: 1fr;
+  }
+  .flight-lever {
+    grid-row: 1;
+  }
+  .flight-page button.flight-pause {
+    grid-column: 3;
+  }
+}
